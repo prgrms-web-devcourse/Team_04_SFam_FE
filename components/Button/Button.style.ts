@@ -8,24 +8,27 @@ interface Props {
   fontSize: string;
 }
 
-const ButtonContainer = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: ${({ width }: Props) => width};
-  height: ${({ height }: Props) => height};
-  border: none;
-  border-radius: ${({ round, height }: Props) =>
-    round ? `${parseInt(height.replace('px', ''), 10) / 2}px` : '8px'};
-  background-color: ${({ color }: Props) =>
-    color === 'primary' ? '#1FAB89' : '#F19A78'};
-  font-size: ${({ fontSize }: Props) => fontSize};
-  font-weight: bold;
-  color: #fff;
-  &:active {
-    background-color: ${({ color }: Props) =>
-      color === 'primary' ? '#178A6E' : '#ED794C'};
-  }
-`;
+const ButtonContainer = styled.button<Props>(
+  {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: 'none',
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  ({ width, height, round, color, fontSize }) => ({
+    width,
+    height,
+    borderRadius: round
+      ? `${parseInt(height.replace('px', ''), 10) / 2}px`
+      : '8px',
+    backgroundColor: color === 'primary' ? '#1fab89' : '#f19a78',
+    fontSize,
+    '&:active': {
+      backgroundColor: color === 'primary' ? '#178a6e' : '#ed794c',
+    },
+  }),
+);
 
 export default ButtonContainer;
