@@ -6,8 +6,6 @@ const Box = styled.div`
   background-color: rgb(240, 248, 255);
 `;
 
-function HomePage() {
-  return <Box>Welcome to Next.js!</Box>;
-}
+const HomePage = () => <Box>Welcome to Next.js!</Box>;
 
 export default HomePage;
