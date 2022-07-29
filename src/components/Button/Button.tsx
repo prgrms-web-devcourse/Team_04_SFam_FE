@@ -6,7 +6,7 @@ interface Props {
   width?: string;
   height?: string;
   children?: string;
-  round?: boolean;
+  radius?: string;
   fontSize?: string;
   onClick?: ComponentProps<'button'>['onClick'];
 }
@@ -15,7 +15,7 @@ const Button = ({
   color = 'primary',
   width = '384px',
   height = '50px',
-  round = false,
+  radius = '8px',
   fontSize = '20px',
   onClick,
   children,
@@ -25,7 +25,7 @@ const Button = ({
     color={color}
     width={width}
     height={height}
-    round={round}
+    radius={radius}
     fontSize={fontSize}
     onClick={onClick}
     {...props}
