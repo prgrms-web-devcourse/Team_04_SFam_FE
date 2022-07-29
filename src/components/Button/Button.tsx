@@ -1,5 +1,3 @@
-/* eslint-disable react/function-component-definition */
-/* eslint-disable react/require-default-props */
 import { ComponentProps } from 'react';
 import ButtonContainer from './Button.style';
 
@@ -44,7 +42,6 @@ const Button = ({
       round={round}
       fontSize={replacedFontSize}
       onClick={onClick}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       {children}
