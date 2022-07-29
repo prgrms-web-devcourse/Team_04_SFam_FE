@@ -10,9 +10,14 @@
     "next/core-web-vitals",
     "airbnb",
     "airbnb-typescript",
-    "plugin:react/jsx-runtime",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:react/jsx-runtime",
     "prettier"
-  ]
+  ],
+  "rules": {
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/no-floating-promises": "off"
+  }
 }
