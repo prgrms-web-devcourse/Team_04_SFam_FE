@@ -1,6 +1,3 @@
-/* eslint-disable react/require-default-props */
-/* eslint-disable arrow-body-style */
-/* eslint-disable react/function-component-definition */
 import { ComponentProps } from 'react';
 import * as S from './SportsButton.style';
 
