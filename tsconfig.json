@@ -34,7 +34,7 @@
       "@components/*": ["components/*"],
       "@constants/*": ["constants/*"],
       "@hooks/*": ["hooks/*"],
-      "@pages/*": ["src/pages/*"],
+      "@pages/*": ["pages/*"],
       "@recoil/*": ["recoil/*"],
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"],
