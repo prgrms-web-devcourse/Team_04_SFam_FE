@@ -1,3 +1,5 @@
+import { ComponentProps } from 'react';
+import Image from 'next/image';
 import * as S from './Avatar.styles';
 
 interface Props {
@@ -5,7 +7,7 @@ interface Props {
   imgSize?: string;
   imgSrc?: string;
   imgAlt?: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick?: ComponentProps<'div'>['onClick'];
 }
 
 const Avatar = ({ block = true, imgSize = '80px', imgSrc, imgAlt = '', onClick, ...props }: Props) => {
@@ -17,9 +19,12 @@ const Avatar = ({ block = true, imgSize = '80px', imgSrc, imgAlt = '', onClick, 
       {...props}
     >
       {imgSrc && (
-        <S.Img
+        <Image
           src={imgSrc}
           alt={imgAlt}
+          width={imgSize}
+          height={imgSize}
+          {...props}
         />
       )}
     </S.ImageWrapper>
