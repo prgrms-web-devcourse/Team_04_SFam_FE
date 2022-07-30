@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import * as S from './SportsButton.style';
+import * as S from './FilterButton.style';
 
 interface Props {
   color?: string;
@@ -10,7 +10,7 @@ interface Props {
   onClick?: ComponentProps<'button'>['onClick'];
 }
 
-const SportsButton = ({
+const FilterButton = ({
   color = '#62D2A2',
   size = '100px',
   fontSize = '20px',
@@ -36,4 +36,4 @@ const SportsButton = ({
   );
 };
 
-export default SportsButton;
+export default FilterButton;

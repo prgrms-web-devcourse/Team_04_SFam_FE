@@ -1,2 +1,2 @@
 export { Button } from './Button';
-export { SportsButton } from './SportsButton';
+export { FilterButton } from './FilterButton';
