@@ -10,25 +10,23 @@ interface Props {
   onClick?: ComponentProps<'div'>['onClick'];
 }
 
-const Avatar = ({ block = true, imgSize = '80px', imgSrc, imgAlt = '', onClick, ...props }: Props) => {
-  return (
-    <S.ImageWrapper
-      block={block}
-      imgSize={imgSize}
-      onClick={onClick}
-      {...props}
-    >
-      {imgSrc && (
-        <Image
-          src={imgSrc}
-          alt={imgAlt}
-          width={imgSize}
-          height={imgSize}
-          {...props}
-        />
-      )}
-    </S.ImageWrapper>
-  );
-};
+const Avatar = ({ block = true, imgSize = '80px', imgSrc, imgAlt = '', onClick, ...props }: Props) => (
+  <S.ImageWrapper
+    block={block}
+    imgSize={imgSize}
+    onClick={onClick}
+    {...props}
+  >
+    {imgSrc && (
+      <Image
+        src={imgSrc}
+        alt={imgAlt}
+        width={imgSize}
+        height={imgSize}
+        {...props}
+      />
+    )}
+  </S.ImageWrapper>
+);
 
 export default Avatar;
