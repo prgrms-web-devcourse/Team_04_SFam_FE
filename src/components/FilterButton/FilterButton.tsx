@@ -11,29 +11,22 @@ interface Props {
 }
 
 const FilterButton = ({
-  color = '#62D2A2',
+  color = 'primary',
   size = '100px',
   fontSize = '20px',
-  fontColor = '#ffffff',
+  fontColor = 'primary',
   children,
   onClick,
-}: Props) => {
-  const buttonStyle = {
-    width: `${size}`,
-    height: `${size}`,
-    fontSize: `${fontSize}`,
-    color: `${fontColor}`,
-    backgroundColor: `${color}`,
-  };
-
-  return (
-    <S.Container
-      onClick={onClick}
-      style={buttonStyle}
-    >
-      {children}
-    </S.Container>
-  );
-};
+}: Props) => (
+  <S.Container
+    color={color}
+    size={size}
+    fontSize={fontSize}
+    fontColor={fontColor}
+    onClick={onClick}
+  >
+    {children}
+  </S.Container>
+);
 
 export default FilterButton;
