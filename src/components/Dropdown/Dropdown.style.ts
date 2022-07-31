@@ -17,12 +17,12 @@ export const Select = styled.div<Props>`
   align-items: center;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
-  border: ${({ border }) => (border ? '1px solid #cdcdcd' : 'none')};
+  border: ${({ border, theme }) => (border ? `1px solid ${theme.color.gray300}` : 'none')};
   border-radius: ${({ radius }) => radius};
   padding: 0 1rem;
-  color: ${({ color, disabled }) => (disabled ? '#555' : color)};
-  background-color: ${({ backgroundColor, disabled }) => (disabled ? '#cdcdcd' : backgroundColor)};
-  box-sizing: border-box;
+  color: ${({ color, theme, disabled }) => (disabled ? `${theme.color.gray700}` : color)};
+  background-color: ${({ backgroundColor, theme, disabled }) =>
+    disabled ? `${theme.color.gray300}` : backgroundColor};
 `;
 
 export const SelectInner = styled.div`
@@ -49,11 +49,10 @@ export const Container = styled.div<Props>`
   top: 100%;
   left: 0;
   width: 100%;
-  border: 1px solid #cdcdcd;
-  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.color.gray300};
+  border-radius: ${({ theme }) => theme.borderRadius};
   color: #000;
-  background-color: #fff;
-  box-sizing: border-box;
+  background-color: ${({ theme }) => theme.color.background};
   overflow: hidden;
   z-index: 10;
 `;
@@ -64,11 +63,10 @@ export const Item = styled.div<Props>`
   align-items: center;
   width: 100%;
   height: ${({ height }) => height};
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.borderRadius};
   padding-left: 1rem;
-  background-color: #fff;
-  box-sizing: border-box;
+  background-color: ${({ theme }) => theme.color.background};
   &:active {
-    background-color: #d9d9d9;
+    background-color: ${({ theme }) => theme.color.gray200};
   }
 `;
