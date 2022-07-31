@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import theme from '@styles/theme';
 
 interface Props {
   color: string;
@@ -19,6 +18,6 @@ export const Container = styled.div<Props>`
   height: ${({ height }) => height};
   font-size: ${({ fontSize }) => fontSize};
   border-radius: ${({ borderRadius }) => borderRadius};
-  color: ${({ fontColor }) => (fontColor === 'primary' ? `${theme.color.background}` : fontColor)};
-  background-color: ${({ color }) => (color === 'primary' ? `${theme.color.green200}` : color)};
+  color: ${({ fontColor, theme }) => (fontColor === 'primary' ? `${theme.color.background}` : fontColor)};
+  background-color: ${({ color, theme }) => (color === 'primary' ? `${theme.color.green200}` : color)};
 `;
