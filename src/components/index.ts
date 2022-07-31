@@ -7,3 +7,4 @@ export { FilterButton } from './FilterButton';
 export { ReviewGroup } from './ReviewGroup';
 export { TeamBadge } from './TeamBadge';
 export { TeamChart } from './TeamChart';
+export { Dropdown } from './Dropdown';
