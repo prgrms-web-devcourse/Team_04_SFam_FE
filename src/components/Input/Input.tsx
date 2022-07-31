@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react';
 import * as S from './Input.style';
 
 interface Props {
@@ -5,7 +6,7 @@ interface Props {
   name?: string;
   placeholder?: string;
   value?: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: ComponentProps<'input'>['onChange'];
   readOnly?: boolean;
   required?: boolean;
   disabled?: boolean;
