@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import theme from '@styles/theme';
 
 interface Props {
   color: string;
@@ -18,6 +17,6 @@ export const Container = styled.button<Props>`
   height: ${({ size }) => size};
   font-size: ${({ fontSize }) => fontSize};
   margin-right: ${({ margin }) => (margin === 'default' ? '0' : margin)};
-  background-color: ${({ color }) => (color === 'primary' ? `${theme.color.green200}` : color)};
-  color: ${({ fontColor }) => (fontColor === 'primary' ? `${theme.color.background}` : fontColor)};
+  background-color: ${({ color, theme }) => (color === 'primary' ? `${theme.color.green200}` : color)};
+  color: ${({ fontColor, theme }) => (fontColor === 'primary' ? `${theme.color.background}` : fontColor)};
 `;
