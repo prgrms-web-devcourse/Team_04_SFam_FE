@@ -4,3 +4,4 @@ export { Badge } from './Badge';
 export { Input } from './Input';
 export { Avatar } from './Avatar';
 export { SportsButton } from './SportsButton';
+export { FilterButton } from './FilterButton';
