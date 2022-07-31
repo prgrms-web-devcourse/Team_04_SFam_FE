@@ -6,25 +6,29 @@ interface Props {
   height?: string;
   fontSize?: string;
   fontColor?: string;
+  borderRadius?: string;
   children?: string;
 }
 
 const Badge = ({
-  color = '#62D2A2',
+  color = 'primary',
   width = '65px',
   height = '20px',
   fontSize = '12px',
-  fontColor = '#ffffff',
+  fontColor = 'primary',
+  borderRadius = '1rem',
   children,
-}: Props) => {
-  const badgeStyle = {
-    width: `${width}`,
-    height: `${height}`,
-    fontSize: `${fontSize}`,
-    color: `${fontColor}`,
-    backgroundColor: `${color}`,
-  };
-  return <S.Container style={badgeStyle}>{children}</S.Container>;
-};
+}: Props) => (
+  <S.Container
+    color={color}
+    width={width}
+    height={height}
+    fontSize={fontSize}
+    fontColor={fontColor}
+    borderRadius={borderRadius}
+  >
+    {children}
+  </S.Container>
+);
 
 export default Badge;
