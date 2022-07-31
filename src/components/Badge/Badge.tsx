@@ -7,7 +7,7 @@ interface Props {
   fontSize?: string;
   fontColor?: string;
   borderRadius?: string;
-  children?: string;
+  children?: string | JSX.Element;
 }
 
 const Badge = ({
