@@ -12,7 +12,7 @@ export const TextAreaWrapper = styled.div`
 
 export const Text = styled.span`
   color: ${(props) => props.theme.color.gray700};
-  font-size: ${(props) => props.theme.fontSize.b3};
+  font-size: ${(props) => props.theme.fontSize.b2};
   font-weight: bold;
   padding: 20px;
 `;
