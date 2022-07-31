@@ -6,6 +6,7 @@ interface Props {
   size?: string;
   fontSize?: string;
   fontColor?: string;
+  margin?: string;
   children?: string;
   onClick?: ComponentProps<'button'>['onClick'];
 }
@@ -15,8 +16,9 @@ const FilterButton = ({
   size = '100px',
   fontSize = '20px',
   fontColor = 'primary',
-  children,
+  margin = 'default',
   onClick,
+  children,
 }: Props) => (
   <S.Container
     color={color}
@@ -24,6 +26,7 @@ const FilterButton = ({
     fontSize={fontSize}
     fontColor={fontColor}
     onClick={onClick}
+    margin={margin}
   >
     {children}
   </S.Container>

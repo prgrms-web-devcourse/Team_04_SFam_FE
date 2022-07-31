@@ -6,6 +6,7 @@ interface Props {
   size: string;
   fontSize: string;
   fontColor: string;
+  margin: string;
 }
 
 export const Container = styled.button<Props>`
@@ -16,6 +17,7 @@ export const Container = styled.button<Props>`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
   font-size: ${({ fontSize }) => fontSize};
+  margin-right: ${({ margin }) => (margin === 'default' ? '0' : margin)};
   background-color: ${({ color }) => (color === 'primary' ? `${theme.color.green200}` : color)};
   color: ${({ fontColor }) => (fontColor === 'primary' ? `${theme.color.background}` : fontColor)};
 `;
