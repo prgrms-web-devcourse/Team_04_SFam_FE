@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-interface Props {
+export interface Props {
   width?: string;
   height?: string;
   isOpen?: boolean;

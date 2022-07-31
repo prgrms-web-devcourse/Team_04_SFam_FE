@@ -1,17 +1,10 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import * as S from './Dropdown.style';
 
-interface Props {
-  width?: string;
-  height?: string;
+interface Props extends S.Props {
   optionsName?: string[];
   optionsValue?: string[];
   placeholder: string;
-  radius?: string;
-  border?: boolean;
-  color?: string;
-  backgroundColor?: string;
-  disabled?: boolean;
   onChange?: (value: string | undefined) => void;
 }
 
