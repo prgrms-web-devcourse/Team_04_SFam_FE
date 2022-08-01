@@ -1,0 +1,29 @@
+/* eslint-disable react/button-has-type */
+import * as S from './MatchListItem.style';
+
+interface Props {
+  id: number;
+  title: string;
+  category: string;
+  matchType: string; // 개인전 or 팀전
+  content: string;
+  distance: number; // distance 현재 위치에서 글 작성 위치 까지 거리
+  createdAt: string; // 글 작성 일자
+}
+
+const MatchListItem = ({ id, title, category, matchType, content, distance, createdAt }: Props) => (
+  <S.Container id={id.toString()}>
+    <S.Description>
+      <S.Title>
+        <span>{title}</span>
+        {/* 여기 뱃지로 바꿀 예정 */}
+        {/* <button>{category}</button>
+        <button>{matchType}</button> */}
+      </S.Title>
+      <span>{createdAt}</span>
+    </S.Description>
+    <S.Content>{content}</S.Content>
+  </S.Container>
+);
+
+export default MatchListItem;

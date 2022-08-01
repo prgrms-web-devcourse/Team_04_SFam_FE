@@ -1,17 +1,18 @@
+import { FilterButton } from '@components/FilterButton';
 import { categoryData } from './dummyData';
 import * as S from './FilterList.style';
-import { FilterButton } from '..';
 
 const FilterList = () => (
-  <S.SportsContainer>
+  <S.Container>
     {categoryData.map((i) => (
       <FilterButton
         size='70px'
         fontSize='10px'
+        margin='10px'
       >
         {i}
       </FilterButton>
     ))}
-  </S.SportsContainer>
+  </S.Container>
 );
 export default FilterList;
