@@ -12,7 +12,7 @@ export const ParagraphWrapper = styled.div<Props>`
   margin: 20px;
 `;
 
-export const Text = styled.p<Props>`
+export const Paragraph = styled.p<Props>`
   color: ${({ fontColor, theme }) => (fontColor === 'default' ? `${theme.color.gray700}` : fontColor)};
   font-size: ${({ fontSize, theme }) => (fontSize === 'default' ? `${theme.fontSize.b3}` : fontSize)};
   font-weight: bold;

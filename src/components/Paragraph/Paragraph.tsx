@@ -6,12 +6,12 @@ const Paragraph = ({ width, height, fontSize = 'default', fontColor = 'default',
     width={width}
     height={height}
   >
-    <S.Text
+    <S.Paragraph
       fontSize={fontSize}
       fontColor={fontColor}
     >
       {children}
-    </S.Text>
+    </S.Paragraph>
   </S.ParagraphWrapper>
 );
 
