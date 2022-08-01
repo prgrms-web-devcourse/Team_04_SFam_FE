@@ -7,7 +7,7 @@ const FilterList = () => (
     {categoryData.map((i) => (
       <FilterButton
         size='70px'
-        fontSize='10px'
+        fontSize='15px'
         margin='10px'
       >
         {i}

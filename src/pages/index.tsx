@@ -5,6 +5,8 @@ import styled from '@emotion/styled';
 // 이 부분은 header와 navigation컴포넌트 개발 후 수정하겠습니다.
 
 const Header = styled.div`
+  position: fixed;
+  top: 0;
   width: 100%;
   height: 70px;
   border-bottom: 1px solid black;

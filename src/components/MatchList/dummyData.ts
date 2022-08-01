@@ -2,7 +2,7 @@ export const dummyData = [
   {
     data: {
       id: 1,
-      title: 'hello',
+      title: '나랑 놀 사람',
       category: '축구',
       matchType: '개인전', // 개인전 or 팀전
       content: '여기 공고 내용djWdlfjlsdfjlajf;lakdjfl;ajfladjflsdfsfdsfdsfsdffjfal;jflfj',
@@ -13,9 +13,9 @@ export const dummyData = [
   {
     data: {
       id: 2,
-      title: 'bye',
+      title: '여기 붙어라~',
       category: '야구',
-      matchType: '개인전', // 개인전 or 팀전
+      matchType: '팀전', // 팀전 or 팀전
       content: '여기 공고 내용',
       distance: 15, // distance 현재 위치에서 글 작성 위치 까지 거리
       createdAt: '2022.02.13', // 글 작성 일자
@@ -26,7 +26,7 @@ export const dummyData = [
       id: 1,
       title: 'hello',
       category: '축구',
-      matchType: '개인전', // 개인전 or 팀전
+      matchType: '팀전', // 팀전 or 팀전
       content: '여기 공고 내용',
       distance: 15, // distance 현재 위치에서 글 작성 위치 까지 거리
       createdAt: '2022.02.13', // 글 작성 일자
@@ -37,7 +37,7 @@ export const dummyData = [
       id: 1,
       title: 'hello',
       category: '축구',
-      matchType: '개인전', // 개인전 or 팀전
+      matchType: '팀전', // 개인전 or 팀전
       content: '여기 공고 내용',
       distance: 15, // distance 현재 위치에서 글 작성 위치 까지 거리
       createdAt: '2022.02.13', // 글 작성 일자

@@ -15,7 +15,14 @@ export const Description = styled.div`
   justify-content: space-between;
 `;
 
-export const Title = styled.div``;
+export const Info = styled.div`
+  display: flex;
+`;
+
+export const Title = styled.span`
+  font-size: 20px;
+  margin-right: 5px;
+`;
 
 export const Content = styled.div`
   display: block;

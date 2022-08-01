@@ -1,4 +1,6 @@
 /* eslint-disable react/button-has-type */
+import { Badge } from '@components/Badge';
+import theme from '@styles/theme';
 import * as S from './MatchListItem.style';
 
 interface Props {
@@ -14,12 +16,11 @@ interface Props {
 const MatchListItem = ({ id, title, category, matchType, content, distance, createdAt }: Props) => (
   <S.Container id={id.toString()}>
     <S.Description>
-      <S.Title>
-        <span>{title}</span>
-        {/* 여기 뱃지로 바꿀 예정 */}
-        {/* <button>{category}</button>
-        <button>{matchType}</button> */}
-      </S.Title>
+      <S.Info>
+        <S.Title>{title}</S.Title>
+        <Badge>{category}</Badge>
+        {matchType === '개인전' ? <Badge color='pink'>{matchType}</Badge> : <Badge color='skyblue'>{matchType}</Badge>}
+      </S.Info>
       <span>{createdAt}</span>
     </S.Description>
     <S.Content>{content}</S.Content>
