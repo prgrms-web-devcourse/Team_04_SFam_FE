@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { pieData } from '../Pie/Pie';
+import { pieData } from '../Pie/PieDummy';
 import * as S from './TeamChart.style';
 
 const MyPie = dynamic(() => import('../Pie/Pie'), {
