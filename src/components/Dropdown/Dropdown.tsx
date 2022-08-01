@@ -1,101 +1,54 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
-import * as S from './Dropdown.style';
+import styled from '@emotion/styled';
+import React from 'react';
 
-interface Props extends S.Props {
-  optionsName?: string[];
-  optionsValue?: string[];
-  placeholder: string;
-  onChange?: (value: string | undefined) => void;
+interface DropdownItem {
+  id: number;
+  text: string;
+  value: string;
 }
 
-const Dropdown = ({
-  width = '388px',
-  height = '50px',
-  placeholder = '선택해주세요',
-  optionsName = ['옵션을 지정해주세요'],
-  optionsValue = [],
-  radius = '8px',
-  border = true,
-  color = 'inherit',
-  backgroundColor = '#fff',
-  disabled = false,
-  onChange,
-}: Props) => {
-  const replacedOptions =
-    optionsName &&
-    optionsName.map((item, index) => ({
-      id: index,
-      content: item,
-      value: optionsValue[index],
-    }));
+interface Props {
+  dropdownItems: DropdownItem[];
+  onSelect: (value: string) => void;
+}
 
-  const [selected, setSelected] = useState<string | undefined>(placeholder);
-  const [isOpen, setIsOpen] = useState(false);
-  const selectRef = useRef<HTMLDivElement>(null);
+const Div = styled.div``;
+const Li = styled.li``;
 
-  useEffect(() => {
-    if (onChange && !disabled) {
-      onChange(optionsValue[optionsName.indexOf(selected as string)]);
-    }
-  }, [onChange, optionsName, optionsValue, selected, disabled]);
+const Dropdown = ({ dropdownItems, onSelect }: Props) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [selectedItem, setSelectedItem] = React.useState('');
 
-  const handleOuterClick = useCallback((e: MouseEvent) => {
-    if (!(e.target instanceof HTMLElement)) return;
-    if (e.target.closest('[data-name=select]') !== selectRef.current) {
-      setIsOpen(false);
-      document.removeEventListener('click', handleOuterClick);
-    }
-  }, []);
-
-  const handleSelectClick = () => {
-    if (disabled) return;
-    if (isOpen) {
-      document.removeEventListener('click', handleOuterClick);
-    } else {
-      document.addEventListener('click', handleOuterClick);
-    }
-    setIsOpen(!isOpen);
+  const handleToggle = () => {
+    setIsOpen((prev) => !prev);
   };
 
-  const handleItemClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!(e.target instanceof HTMLDivElement)) return;
-    const { innerText } = e.target;
-    setSelected(innerText);
+  const handleSelect = (e: React.MouseEvent) => {
+    const target = e.target as HTMLLIElement;
+    setIsOpen((prev) => !prev);
+    setSelectedItem(() => target.innerText);
+    if (onSelect) onSelect(target.dataset.value || '');
   };
 
   return (
-    <S.Select
-      data-name='select'
-      ref={selectRef}
-      width={width}
-      height={height}
-      radius={radius}
-      border={border}
-      color={color}
-      disabled={disabled}
-      backgroundColor={backgroundColor}
-      onClick={handleSelectClick}
-    >
-      <S.SelectInner>
-        <S.SelectedArea style={{ flex: 1, flexGrow: 1 }}>{selected}</S.SelectedArea>
-        <S.IconArea>
-          <span className='material-symbols-outlined'>expand_more</span>
-        </S.IconArea>
-      </S.SelectInner>
-      <S.Container isOpen={isOpen}>
-        {replacedOptions &&
-          replacedOptions.map((item) => (
-            <S.Item
-              height={height}
-              key={item.id}
-              data-value={item.value}
-              onClick={handleItemClick}
+    <div>
+      <Div onClick={handleToggle}>{selectedItem ? <div>{selectedItem}</div> : <div>선택해주세요.</div>}</Div>
+      {isOpen ? (
+        <ul>
+          {dropdownItems.map((dropdownItem) => (
+            <Li
+              key={dropdownItem.id}
+              data-value={dropdownItem.value}
+              onClick={handleSelect}
             >
-              {item.content}
-            </S.Item>
+              {dropdownItem.text}
+            </Li>
           ))}
-      </S.Container>
-    </S.Select>
+        </ul>
+      ) : (
+        <div />
+      )}
+    </div>
   );
 };
 
