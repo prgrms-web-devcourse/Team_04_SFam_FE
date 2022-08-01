@@ -39,6 +39,7 @@
       "@styles/*": ["styles/*"],
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"],
+      "@assets/*": ["assets/*"],
     },                         
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
@@ -111,6 +112,7 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */,
   },
   "include": [
+    "./src/types/custom.d.ts",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
