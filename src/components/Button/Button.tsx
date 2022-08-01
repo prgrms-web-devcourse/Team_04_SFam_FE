@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import ButtonContainer from './Button.style';
+import ButtonContainer from './Button.styles';
 
 interface Props {
   color?: string;

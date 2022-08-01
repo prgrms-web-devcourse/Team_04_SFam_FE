@@ -1,1 +1,1 @@
-export { default as Divider } from './Divider.style';
+export { default as Divider } from './Divider.styles';

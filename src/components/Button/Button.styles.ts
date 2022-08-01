@@ -16,14 +16,12 @@ const ButtonContainer = styled.button<Props>`
   height: ${({ height }) => height};
   border: none;
   border-radius: ${({ radius }) => radius};
-  background-color: ${({ color }) =>
-    color === 'primary' ? '#1fab89' : '#f19a78'};
+  background-color: ${({ color }) => (color === 'primary' ? '#1fab89' : '#f19a78')};
   font-size: ${({ fontSize }) => fontSize};
   font-weight: bold;
   color: #fff;
   &:active {
-    background-color: ${({ color }) =>
-      color === 'primary' ? '#178a6e' : '#ed794c'};
+    background-color: ${({ color }) => (color === 'primary' ? '#178a6e' : '#ed794c')};
   }
 `;
 

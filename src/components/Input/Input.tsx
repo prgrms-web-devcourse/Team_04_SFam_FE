@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import * as S from './Input.style';
+import * as S from './Input.styles';
 
 interface Props {
   type?: string;

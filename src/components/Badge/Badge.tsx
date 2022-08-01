@@ -1,4 +1,4 @@
-import * as S from './Badge.style';
+import * as S from './Badge.styles';
 
 interface Props {
   color?: string;
