@@ -1,11 +1,25 @@
-import styled from '@emotion/styled';
+import { axiosAuthInstance } from '@api/axiosInstances';
 
-const Box = styled.div`
-  width: 100px;
-  height: 100px;
-  background-color: rgb(240, 248, 255);
-`;
+const HomePage = () => {
+  const handleClick = () => {
+    axiosAuthInstance({
+      method: 'POST',
+      url: '/api/users/signin',
+      data: {
+        username: 'test12',
+        password: 'Qwer1234!',
+      },
+    });
+  };
 
-const HomePage = () => <Box>Welcome to Next.js!</Box>;
+  return (
+    <button
+      type='button'
+      onClick={handleClick}
+    >
+      로그인
+    </button>
+  );
+};
 
 export default HomePage;
