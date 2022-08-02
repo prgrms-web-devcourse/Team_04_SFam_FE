@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import * as S from './FilterButton.style';
+import * as S from './FilterButton.styles';
 
 interface Props {
   color?: string;

@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import { pieData } from '../Pie/PieDummy';
-import * as S from './TeamChart.style';
+import * as S from './TeamChart.styles';
 
 const MyPie = dynamic(() => import('../Pie/Pie'), {
   ssr: false,

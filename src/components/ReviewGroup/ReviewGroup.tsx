@@ -2,7 +2,7 @@ import DislikeIcon from '@assets/icons/dislike.svg';
 import LikeIcon from '@assets/icons/like.svg';
 import GreatIcon from '@assets/icons/great.svg';
 import ReviewItem from './ReviewItem/ReviewItem';
-import * as S from './ReviewGroup.style';
+import * as S from './ReviewGroup.styles';
 
 interface Props {
   greatCount: number;

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import * as S from './ReviewItem.style';
+import * as S from './ReviewItem.styles';
 
 interface Props {
   iconSrc: string;
