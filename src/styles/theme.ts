@@ -18,9 +18,11 @@ const theme: Theme = {
   },
   fontSize: {
     h1: '24px',
+    h2: '22px',
     b1: '20px',
     b2: '18px',
     b3: '16px',
+    b4: '14px',
     c1: '12px',
     c2: '11px',
   },
