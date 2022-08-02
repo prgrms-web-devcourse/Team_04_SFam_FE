@@ -33,7 +33,11 @@ export const useForm = ({ initialValue, onSubmit, validate }: UseFormProps) => {
       }
       setIsLoading(false);
     }
-  }, [errors, isLoading, onSubmit, values]);
+  }, [errors]);
+
+  useEffect(() => {
+    setErrors(validate(values));
+  }, [values]);
 
   return {
     values,
