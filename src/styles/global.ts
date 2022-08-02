@@ -7,6 +7,7 @@ const globalStyles = css`
 
   html {
     box-sizing: border-box;
+    font-size: 16px;
   }
 
   *,
@@ -19,7 +20,6 @@ const globalStyles = css`
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
       'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
       sans-serif;
-    font-size: 16px;
   }
 `;
 
