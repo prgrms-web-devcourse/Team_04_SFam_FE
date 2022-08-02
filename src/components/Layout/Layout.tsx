@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-
+import { Heading } from '@components/Heading';
 import { Navigator } from '@components/Navigator';
 
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
 
 const Layout = ({ children }: Props) => (
   <>
+    <Heading />
     <main>{children}</main>
     <Navigator />
   </>
