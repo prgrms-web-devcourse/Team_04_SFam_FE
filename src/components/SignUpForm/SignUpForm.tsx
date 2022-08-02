@@ -1,29 +1,19 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { FormEvent } from 'react';
 import Link from 'next/link';
 import { axiosDefaultInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { useRouter } from 'next/router';
-import { AxiosError } from 'axios';
+import { useForm } from '@hooks/useForm';
 import { ErrorText, StrongText } from './SignUpForm.styles';
-
-interface SignUpResponse {
-  code: string;
-  message: string;
-}
+import validation from './helper';
+import { Values } from './types';
 
 const SignUpForm = () => {
-  const [state, setState] = useState({
-    username: '',
-    nickname: '',
-    password: '',
-    passwordCheck: '',
-  });
-  const [error, setError] = useState('');
-  const { username, nickname, password, passwordCheck } = state;
   const router = useRouter();
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = (values: Values, e?: FormEvent<HTMLFormElement>) => {
+    const { username, nickname, password } = values;
+    e?.preventDefault();
     const fetch = async () => {
       try {
         const res = await axiosDefaultInstance({
@@ -39,35 +29,25 @@ const SignUpForm = () => {
           router.replace('/signin');
         }
       } catch (err) {
-        const { response } = err as AxiosError;
-        if (response) {
-          if (response.status === 400) {
-            const { code } = response.data as SignUpResponse;
-            switch (code) {
-              // 프론트에서 유효성 검사, 중복 검사 둘 다 하면 여기서 분기하는 건 필요 없을 듯?
-              case 'V0001':
-                setError('아이디, 닉네임 또는 비밀번호가 형식에 맞지 않습니다.');
-                break;
-              case 'V0004':
-                setError('이미 존재하는 아이디거나 닉네임입니다.');
-                break;
-              default:
-                setError('');
-                break;
-            }
-          }
-        }
+        console.log(err);
       }
     };
     fetch();
   };
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setState({
-      ...state,
-      [name]: value,
-    });
-  };
+
+  const { values, errors, isLoading, handleChange, handleSubmit } = useForm({
+    initialValue: {
+      username: '',
+      nickname: '',
+      password: '',
+      passwordCheck: '',
+    },
+    onSubmit,
+    validate: validation,
+  });
+
+  const { username, nickname, password, passwordCheck } = values;
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -77,12 +57,14 @@ const SignUpForm = () => {
           onChange={handleChange}
           placeholder='아이디'
         />
+        <ErrorText>{errors.username}</ErrorText>
         <Input
           name='nickname'
           value={nickname}
           onChange={handleChange}
           placeholder='닉네임'
         />
+        <ErrorText>{errors.nickname}</ErrorText>
         <Input
           name='password'
           value={password}
@@ -90,6 +72,7 @@ const SignUpForm = () => {
           type='password'
           placeholder='비밀번호'
         />
+        <ErrorText>{errors.password}</ErrorText>
         <Input
           name='passwordCheck'
           value={passwordCheck}
@@ -97,7 +80,7 @@ const SignUpForm = () => {
           type='password'
           placeholder='비밀번호 확인'
         />
-        <ErrorText>{error}</ErrorText>
+        <ErrorText>{errors.passwordCheck}</ErrorText>
         <Button width='100%'>회원가입</Button>
       </form>
       <div>
