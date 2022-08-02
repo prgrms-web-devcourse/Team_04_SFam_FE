@@ -16,6 +16,15 @@ const MatchPostCreatePage = () => {
     });
   };
 
+  const handleClickTwo = () => {
+    axiosAuthInstance({
+      method: 'GET',
+      url: '/api/teams/me/leader',
+    }).then((res) => {
+      console.log(res);
+    });
+  };
+
   return (
     <>
       <div>MatchPost</div>
@@ -24,6 +33,12 @@ const MatchPostCreatePage = () => {
         onClick={handleClick}
       >
         매칭 게시글 작성
+      </button>
+      <button
+        type='button'
+        onClick={handleClickTwo}
+      >
+        내가 리더인 팀 조회
       </button>
     </>
   );
