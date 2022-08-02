@@ -7,7 +7,7 @@ export const headingTitle: HeadingTitleProps = {
   '/signin': '로그인',
   '/town': '내 동네 설정',
   '/team/create': '팀 생성',
-  '/invitation': '팀원 초대',
+  '/team/invitation': '팀원 초대',
   '/alarm': '알림',
   '/teams/:id': '팀 프로필',
   '/users/:id': '프로필',
