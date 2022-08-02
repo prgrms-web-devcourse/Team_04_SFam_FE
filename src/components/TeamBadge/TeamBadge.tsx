@@ -2,7 +2,7 @@ import { Badge } from '@components/Badge';
 import { MdSportsSoccer, MdSportsBaseball, MdSportsBasketball, MdSportsTennis } from 'react-icons/md';
 import { FaTableTennis, FaBowlingBall } from 'react-icons/fa';
 import { GiShuttlecock } from 'react-icons/gi';
-import * as S from './TeamBadge.style';
+import * as S from './TeamBadge.styles';
 import { ColorProps, IconsProps } from './types';
 
 interface Props {

@@ -19,9 +19,11 @@ declare module '@emotion/react' {
     };
     fontSize: {
       h1: string;
+      h2: string;
       b1: string;
       b2: string;
       b3: string;
+      b4: string;
       c1: string;
       c2: string;
     };

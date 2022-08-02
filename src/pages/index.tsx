@@ -1,7 +1,12 @@
+import styled from '@emotion/styled';
 import { axiosAuthInstance } from '@api/axiosInstances';
 
-const HomePage = () => {
-  const handleClick = () => {
+import { NextPage } from 'next';
+
+const Button = styled.button``;
+
+const HomePage: NextPage = () => {
+  const handleLogin = () => {
     axiosAuthInstance({
       method: 'POST',
       url: '/api/users/signin',
@@ -12,13 +17,18 @@ const HomePage = () => {
     });
   };
 
+  const handleHealthCheck = () => {
+    axiosAuthInstance({
+      method: 'GET',
+      url: '/health',
+    });
+  };
+
   return (
-    <button
-      type='button'
-      onClick={handleClick}
-    >
-      로그인
-    </button>
+    <>
+      <Button onClick={handleLogin}>로그인</Button>
+      <Button onClick={handleHealthCheck}>헬스 체크</Button>
+    </>
   );
 };
 
