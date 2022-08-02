@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { axiosAuthInstance } from '@api/axiosInstances';
 
 import { NextPage } from 'next';
+import Link from 'next/link';
 
 const Button = styled.button``;
 
@@ -28,6 +29,7 @@ const HomePage: NextPage = () => {
     <>
       <Button onClick={handleLogin}>로그인</Button>
       <Button onClick={handleHealthCheck}>헬스 체크</Button>
+      <Link href='/post/create'>글쓰기</Link>
     </>
   );
 };
