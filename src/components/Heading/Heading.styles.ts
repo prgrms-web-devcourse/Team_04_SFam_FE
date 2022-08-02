@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { HeadingTitleProps } from './types';
 
 export const HeadingWrapper = styled.div`
   display: flex;
@@ -8,7 +7,7 @@ export const HeadingWrapper = styled.div`
   padding: 1rem;
 `;
 
-export const HeadingTitle = styled.h1<HeadingTitleProps>`
+export const HeadingTitle = styled.h1`
   font-size: ${(props) => props.theme.fontSize.b1};
   font-weight: bold;
 `;
