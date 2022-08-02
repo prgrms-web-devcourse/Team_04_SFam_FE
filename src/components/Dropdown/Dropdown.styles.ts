@@ -11,7 +11,7 @@ export interface Props {
   disabled?: boolean;
 }
 
-export const Select = styled.div<Props>`
+export const Wrapper = styled.div<Props>`
   position: relative;
   display: flex;
   align-items: center;
