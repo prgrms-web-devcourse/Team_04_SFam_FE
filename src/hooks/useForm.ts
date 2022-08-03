@@ -1,14 +1,12 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 
-export const useForm = <T>({
-  initialValue,
-  onSubmit,
-  validate,
-}: {
+interface UseFormProps<T> {
   initialValue: T;
   onSubmit: (values: T, e?: FormEvent<HTMLFormElement>) => void;
   validate: (values: T) => T;
-}) => {
+}
+
+export const useForm = <T>({ initialValue, onSubmit, validate }: UseFormProps<T>) => {
   const [values, setValues] = useState<T>(initialValue);
   const [errors, setErrors] = useState<T>(initialValue);
   const [isLoading, setIsLoading] = useState(false);
