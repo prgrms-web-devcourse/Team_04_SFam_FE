@@ -16,21 +16,20 @@ const MatchList = () => {
     } else {
       setSelect(innerText);
     }
-    console.log(e);
   };
   return (
     <S.Container>
       <S.Category>
-        {/* select가 비어있지 않으면 filter를 해야하는듯 */}
         {categoryData.map((item) => (
           <FilterButton
+            key={item.id}
             size='70px'
             fontSize='15px'
             margin='10px'
-            color={select === item ? `${theme.color.primary}` : `${theme.color.green200}`}
+            color={select === item.text ? `${theme.color.primary}` : `${theme.color.green200}`}
             onClick={onClick}
           >
-            {item}
+            {item.text}
           </FilterButton>
         ))}
       </S.Category>
@@ -39,6 +38,7 @@ const MatchList = () => {
           .filter((i) => i.data.category === select || select.length === 0)
           .map((i) => (
             <MatchListItem
+              key={i.data.id}
               id={i.data.id}
               title={i.data.title}
               category={i.data.category}
@@ -53,7 +53,7 @@ const MatchList = () => {
       <S.ButtonContainer>
         <Button
           width='150px'
-          height='53px'
+          height='50px'
           radius='2rem'
         >
           글쓰기

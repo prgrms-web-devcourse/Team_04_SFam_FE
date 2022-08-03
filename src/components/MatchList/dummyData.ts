@@ -111,4 +111,11 @@ export const dummyData = [
   },
 ];
 
-export const categoryData = ['배드민턴', '축구', '야구', '수영', '탁구', '당구', '어쩌구'];
+export const categoryData = [
+  { id: 1, text: '축구' },
+  { id: 2, text: '야구' },
+  { id: 3, text: '배드민턴' },
+  { id: 4, text: '당구' },
+  { id: 5, text: '수영' },
+  { id: 6, text: '어쩌구' },
+];
