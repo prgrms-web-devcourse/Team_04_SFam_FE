@@ -1,16 +1,18 @@
-import { Values } from '@components/SignUpForm/types';
 import React, { useEffect, useState } from 'react';
 
-interface UseFormProps {
-  initialValue: Values;
-  onSubmit: (values: Values, e?: React.FormEvent<HTMLFormElement>) => void;
-  validate: (values: Values) => Values;
-}
-
-export const useForm = ({ initialValue, onSubmit, validate }: UseFormProps) => {
-  const [values, setValues] = useState<Values>(initialValue);
-  const [errors, setErrors] = useState<Values>(initialValue);
+export const useForm = <T>({
+  initialValue,
+  onSubmit,
+  validate,
+}: {
+  initialValue: T;
+  onSubmit: (values: T, e?: React.FormEvent<HTMLFormElement>) => void;
+  validate: (values: T) => T;
+}) => {
+  const [values, setValues] = useState<T>(initialValue);
+  const [errors, setErrors] = useState<T>(initialValue);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFirst, setIsFirst] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -23,6 +25,7 @@ export const useForm = ({ initialValue, onSubmit, validate }: UseFormProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
     e.preventDefault();
+    setIsFirst(true);
     setErrors(validate(values));
   };
 
@@ -36,7 +39,9 @@ export const useForm = ({ initialValue, onSubmit, validate }: UseFormProps) => {
   }, [errors]);
 
   useEffect(() => {
-    setErrors(validate(values));
+    if (isFirst) {
+      setErrors(validate(values));
+    }
   }, [values]);
 
   return {

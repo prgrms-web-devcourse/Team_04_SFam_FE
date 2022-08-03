@@ -35,7 +35,7 @@ const SignUpForm = () => {
     fetch();
   };
 
-  const { values, errors, isLoading, handleChange, handleSubmit } = useForm({
+  const { values, errors, isLoading, handleChange, handleSubmit } = useForm<Values>({
     initialValue: {
       username: '',
       nickname: '',
