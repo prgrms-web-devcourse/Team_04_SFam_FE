@@ -31,7 +31,7 @@ export const InnerWrapper = styled.div<WrapperProps>`
   justify-content: ${(props) => props.justifyContent};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
-  gap: 16px;
+  gap: 8px;
 `;
 
 export const Label = styled.h2`

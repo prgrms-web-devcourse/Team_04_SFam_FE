@@ -10,7 +10,7 @@ export const headingTitle: HeadingTitleProps = {
   '/team/create': '팀 생성',
   '/team/invitation': '팀원 초대',
   '/notification': '알림',
-  '/teams/:id': '팀 프로필',
+  '/team/[id]': '팀 프로필',
   '/user/[id]': '프로필',
   '/user/[id]/profile': '내 정보',
   '/': `송파동`,
