@@ -1,14 +1,13 @@
 import { Avatar } from '@components/Avatar';
+import { Button } from '@components/Button';
 import { Divider } from '@components/Divider';
 import { Paragraph } from '@components/Paragraph';
 import { ReviewGroup } from '@components/ReviewGroup';
-import { TeamBadge } from '@components/TeamBadge';
 import { TeamChart } from '@components/TeamChart';
 import { TeamListItem } from '@components/TeamListItem';
-import { B1, B2, B3, ColWrapper, Container, GrayB3, InnerWrapper, Label, ResetBtn, RowWrapper } from '@styles/common';
-import { Team, TeamInfo, TeamNameProps } from 'interface/team';
+import { B1, B3, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
+import { TeamInfo, TeamNameProps } from 'interface/team';
 import { NextPage } from 'next';
-import Link from 'next/link';
 
 const DummyData: TeamInfo = {
   name: '우주 최강 연승 팀',
@@ -56,6 +55,7 @@ const UserDetailPage: NextPage = () => (
         justifyContent='center'
         margin='0px 16px'
       >
+        {/* TODO: icon 추가 */}
         <B1>{DummyData.name}</B1>
         <GrayB3>{teamName[DummyData.sportsCategory]}</GrayB3>
         <B3>팀원 수: {DummyData.members.length}명</B3>
@@ -80,7 +80,17 @@ const UserDetailPage: NextPage = () => (
     </ColWrapper>
     <Divider />
     <ColWrapper>
-      <Label>팀원 목록</Label>
+      <RowWrapper>
+        <InnerWrapper>
+          <Label>팀원 목록</Label>
+          <Button
+            width='25px'
+            height='25px'
+          >
+            +
+          </Button>
+        </InnerWrapper>
+      </RowWrapper>
       <ColWrapper>
         {DummyData.members.map((member) => (
           <div key={member.userId}>
