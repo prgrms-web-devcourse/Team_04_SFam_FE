@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 
 export const useForm = <T>({
   initialValue,
@@ -6,7 +6,7 @@ export const useForm = <T>({
   validate,
 }: {
   initialValue: T;
-  onSubmit: (values: T, e?: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (values: T, e?: FormEvent<HTMLFormElement>) => void;
   validate: (values: T) => T;
 }) => {
   const [values, setValues] = useState<T>(initialValue);
@@ -14,7 +14,7 @@ export const useForm = <T>({
   const [isLoading, setIsLoading] = useState(false);
   const [isFirst, setIsFirst] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValues({
       ...values,

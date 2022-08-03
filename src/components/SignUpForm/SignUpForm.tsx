@@ -1,9 +1,9 @@
 import { FormEvent } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { axiosDefaultInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
-import { useRouter } from 'next/router';
 import { useForm } from '@hooks/useForm';
 import { ErrorText, StrongText } from './SignUpForm.styles';
 import validation from './helper';
