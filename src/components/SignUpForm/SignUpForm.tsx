@@ -14,7 +14,7 @@ const SignUpForm = () => {
   const onSubmit = (values: Values, e?: FormEvent<HTMLFormElement>) => {
     const { username, nickname, password } = values;
     e?.preventDefault();
-    const fetch = async () => {
+    const signup = async () => {
       try {
         const res = await axiosDefaultInstance({
           method: 'post',
@@ -32,7 +32,7 @@ const SignUpForm = () => {
         console.log(err);
       }
     };
-    fetch();
+    signup();
   };
 
   const { values, errors, isLoading, handleChange, handleSubmit } = useForm<Values>({
