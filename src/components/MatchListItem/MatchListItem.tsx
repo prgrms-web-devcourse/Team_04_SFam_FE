@@ -19,7 +19,8 @@ const MatchListItem = ({ id, title, category, matchType, content, distance, crea
       <S.Info>
         <S.Title>{title}</S.Title>
         <Badge>{category}</Badge>
-        {matchType === '개인전' ? <Badge color='pink'>{matchType}</Badge> : <Badge color='skyblue'>{matchType}</Badge>}
+
+        <Badge color={matchType === '개인전' ? `${theme.color.primary}` : `${theme.color.yellow}`}>{matchType}</Badge>
       </S.Info>
       <span>{createdAt}</span>
     </S.Description>

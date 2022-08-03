@@ -1,4 +1,3 @@
-import { FilterList } from '@components/FilterList';
 import { MatchList } from '@components/MatchList';
 import styled from '@emotion/styled';
 
@@ -25,7 +24,6 @@ const Navi = styled.div`
 const Home = () => (
   <div>
     <Header>헤더 자리</Header>
-    <FilterList />
     <MatchList />
     <Navi>네비게이션 자리</Navi>
   </div>

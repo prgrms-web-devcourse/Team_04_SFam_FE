@@ -23,7 +23,7 @@ export const dummyData = [
   },
   {
     data: {
-      id: 1,
+      id: 3,
       title: 'hello',
       category: '축구',
       matchType: '팀전', // 팀전 or 팀전
@@ -34,7 +34,7 @@ export const dummyData = [
   },
   {
     data: {
-      id: 1,
+      id: 4,
       title: 'hello',
       category: '축구',
       matchType: '팀전', // 개인전 or 팀전
@@ -45,7 +45,7 @@ export const dummyData = [
   },
   {
     data: {
-      id: 1,
+      id: 5,
       title: 'hello',
       category: '축구',
       matchType: '개인전', // 개인전 or 팀전
@@ -56,7 +56,7 @@ export const dummyData = [
   },
   {
     data: {
-      id: 1,
+      id: 6,
       title: 'hello',
       category: '축구',
       matchType: '개인전', // 개인전 or 팀전
@@ -67,9 +67,9 @@ export const dummyData = [
   },
   {
     data: {
-      id: 1,
+      id: 7,
       title: 'hello',
-      category: '축구',
+      category: '배드민턴',
       matchType: '개인전', // 개인전 or 팀전
       content: '여기 공고 내용',
       distance: 15, // distance 현재 위치에서 글 작성 위치 까지 거리
@@ -78,9 +78,9 @@ export const dummyData = [
   },
   {
     data: {
-      id: 1,
+      id: 8,
       title: 'hello',
-      category: '축구',
+      category: '당구',
       matchType: '개인전', // 개인전 or 팀전
       content: '여기 공고 내용',
       distance: 15, // distance 현재 위치에서 글 작성 위치 까지 거리
@@ -89,9 +89,9 @@ export const dummyData = [
   },
   {
     data: {
-      id: 1,
+      id: 9,
       title: 'hello',
-      category: '축구',
+      category: '수영',
       matchType: '개인전', // 개인전 or 팀전
       content: '여기 공고 내용',
       distance: 15, // distance 현재 위치에서 글 작성 위치 까지 거리
@@ -100,13 +100,15 @@ export const dummyData = [
   },
   {
     data: {
-      id: 1,
-      title: 'hello',
-      category: '축구',
+      id: 10,
+      title: '마지막 공고',
+      category: '탁구',
       matchType: '개인전', // 개인전 or 팀전
-      content: '여기 공고 내용',
+      content: '마지막 공고입니다',
       distance: 15, // distance 현재 위치에서 글 작성 위치 까지 거리
       createdAt: '2022.02.13', // 글 작성 일자
     },
   },
 ];
+
+export const categoryData = ['배드민턴', '축구', '야구', '수영', '탁구', '당구', '어쩌구'];
