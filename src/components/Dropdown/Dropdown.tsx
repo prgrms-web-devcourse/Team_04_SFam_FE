@@ -1,5 +1,6 @@
-import styled from '@emotion/styled';
 import React from 'react';
+import { MdKeyboardArrowDown } from 'react-icons/md';
+import * as S from './Dropdown.styles';
 
 interface DropdownItem {
   id: number;
@@ -11,9 +12,6 @@ interface Props {
   dropdownItems: DropdownItem[];
   onSelect: (value: string) => void;
 }
-
-const Div = styled.div``;
-const Li = styled.li``;
 
 const Dropdown = ({ dropdownItems, onSelect }: Props) => {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -49,24 +47,43 @@ const Dropdown = ({ dropdownItems, onSelect }: Props) => {
   }, [ref, handleClickOutSide]);
 
   return (
-    <div ref={ref}>
-      <Div onClick={handleClickToggle}>{selectedItem ? <div>{selectedItem}</div> : <div>선택해주세요.</div>}</Div>
+    <S.Wrapper
+      ref={ref}
+      width='100%'
+      height='33.5px'
+      border
+      radius='8px'
+    >
+      <S.SelectInner onClick={handleClickToggle}>
+        {selectedItem ? (
+          <S.IconArea>
+            <S.SelectedArea>{selectedItem}</S.SelectedArea>
+            <MdKeyboardArrowDown size={20} />
+          </S.IconArea>
+        ) : (
+          <S.IconArea>
+            <S.SelectedArea>활동 종목을 선택해주세요.</S.SelectedArea>
+            <MdKeyboardArrowDown size={20} />
+          </S.IconArea>
+        )}
+      </S.SelectInner>
       {isOpen ? (
-        <ul>
+        <S.Container isOpen={isOpen}>
           {dropdownItems.map((dropdownItem) => (
-            <Li
+            <S.Item
               key={dropdownItem.id}
               data-value={dropdownItem.value}
               onClick={handleClickSelect}
+              height='40px'
             >
               {dropdownItem.text}
-            </Li>
+            </S.Item>
           ))}
-        </ul>
+        </S.Container>
       ) : (
         <div />
       )}
-    </div>
+    </S.Wrapper>
   );
 };
 

@@ -19,8 +19,8 @@ export const Wrapper = styled.div<Props>`
   height: ${({ height }) => height};
   border: ${({ border, theme }) => (border ? `1px solid ${theme.color.gray300}` : 'none')};
   border-radius: ${({ radius }) => radius};
-  padding: 0 1rem;
-  color: ${({ color, theme, disabled }) => (disabled ? `${theme.color.gray700}` : color)};
+  padding: 0 8px;
+  color: ${({ color, theme, disabled }) => (disabled ? `${theme.color.gray300}` : color)};
   background-color: ${({ backgroundColor, theme, disabled }) =>
     disabled ? `${theme.color.gray300}` : backgroundColor};
 `;
@@ -37,10 +37,13 @@ export const SelectInner = styled.div`
 export const SelectedArea = styled.div`
   flex: 1;
   flex-grow: 1;
+  font-size: ${(props) => props.theme.fontSize.b4};
 `;
 
 export const IconArea = styled.div`
-  width: fit-content;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 export const Container = styled.div<Props>`
@@ -63,9 +66,10 @@ export const Item = styled.div<Props>`
   align-items: center;
   width: 100%;
   height: ${({ height }) => height};
-  border-radius: ${({ theme }) => theme.borderRadius};
+  border-radius: 1px solid ${({ theme }) => theme.borderRadius};
   padding-left: 1rem;
   background-color: ${({ theme }) => theme.color.background};
+  border-bottom: ${(props) => props.theme.color.gray300};
   &:active {
     background-color: ${({ theme }) => theme.color.gray200};
   }
