@@ -79,3 +79,14 @@ export const ResetBtn = styled.button`
   background-color: #fff;
   font-size: ${(props) => props.theme.fontSize.b2};
 `;
+
+export const TextArea = styled.textarea`
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.color.gray300};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  padding: 8px;
+  height: 242px;
+  ::placeholder {
+    color: ${({ theme }) => theme.color.gray400};
+  }
+`;
