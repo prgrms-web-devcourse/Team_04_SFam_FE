@@ -3,10 +3,10 @@ import { B2, InnerWrapper } from '@styles/common';
 import { TeamListItemContainer } from './TeamListItem.styles';
 
 interface Props {
-  userName: string;
+  username: string;
 }
 
-const TeamListItem = ({ userName }: Props) => (
+const TeamListItem = ({ username }: Props) => (
   <TeamListItemContainer>
     {/* TODO: 왕관 표시 */}
     <Avatar imgSize='70px' />
@@ -14,7 +14,7 @@ const TeamListItem = ({ userName }: Props) => (
       margin='0 16px'
       alignItems='center'
     >
-      <B2>{userName}</B2>
+      <B2>{username}</B2>
     </InnerWrapper>
   </TeamListItemContainer>
 );
