@@ -1,4 +1,4 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { axiosDefaultInstance } from '@api/axiosInstances';
@@ -11,6 +11,7 @@ import { Values } from './types';
 
 const SignUpForm = () => {
   const router = useRouter();
+  const [checked, setChecked] = useState(false);
   const onSubmit = (values: Values, e?: FormEvent<HTMLFormElement>) => {
     const { username, nickname, password } = values;
     e?.preventDefault();
@@ -48,22 +49,80 @@ const SignUpForm = () => {
 
   const { username, nickname, password, passwordCheck } = values;
 
+  const handleUsernameCheckClick = () => {
+    const usernameCheck = async () => {
+      const res = await axiosDefaultInstance({
+        method: 'get',
+        url: `/api/users/username/duplication?input=${values.username as string}`,
+      });
+      if ((res.data as { data: object }).data) {
+        errors.username = '이미 사용중인 아이디입니다.';
+      } else {
+        errors.username = '사용 가능한 아이디입니다.';
+      }
+      setChecked((state) => !state);
+    };
+    if (username?.length === 0) {
+      errors.username = '아이디를 입력해주세요.';
+      setChecked((state) => !state);
+      return;
+    }
+    usernameCheck();
+  };
+
+  const handleNicknameCheckClick = () => {
+    const nicknameCheck = async () => {
+      const res = await axiosDefaultInstance({
+        method: 'get',
+        url: `/api/users/nickname/duplication?input=${values.nickname as string}`,
+      });
+      if ((res.data as { data: object }).data) {
+        errors.nickname = '이미 사용중인 닉네임입니다.';
+      } else {
+        errors.nickname = '사용 가능한 닉네임입니다.';
+      }
+      setChecked((state) => !state);
+    };
+    if (nickname?.length === 0) {
+      errors.nickname = '닉네임을 입력해주세요.';
+      setChecked((state) => !state);
+      return;
+    }
+    nicknameCheck();
+  };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Input
-          name='username'
-          value={username}
-          onChange={handleChange}
-          placeholder='아이디'
-        />
+        <div>
+          <Input
+            name='username'
+            value={username}
+            onChange={handleChange}
+            placeholder='아이디'
+          />
+          <button
+            type='button'
+            onClick={handleUsernameCheckClick}
+          >
+            중복확인
+          </button>
+        </div>
         <ErrorText>{errors.username}</ErrorText>
-        <Input
-          name='nickname'
-          value={nickname}
-          onChange={handleChange}
-          placeholder='닉네임'
-        />
+        <div>
+          <Input
+            name='nickname'
+            value={nickname}
+            onChange={handleChange}
+            placeholder='닉네임'
+          />
+          <button
+            type='button'
+            onClick={handleNicknameCheckClick}
+          >
+            중복확인
+          </button>
+        </div>
         <ErrorText>{errors.nickname}</ErrorText>
         <Input
           name='password'
