@@ -23,7 +23,7 @@ export const headingTitle: HeadingTitleProps = {
   '/chat': '채팅',
 };
 
-export const noBackIcon = ['/signup', '/signin', '/', '/matches/:id/review', 'users/:id'];
+export const noBackIcon = ['/signup', '/signin', '/matches', '/matches/:id/review', 'users/:id'];
 
 const Heading = () => {
   const router = useRouter();
