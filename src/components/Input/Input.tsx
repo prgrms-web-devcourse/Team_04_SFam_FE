@@ -12,8 +12,8 @@ interface Props {
 const Input = ({ type = 'text', name = '', value = '', height = '', placeholder = '', onChange }: Props) => (
   <S.Input
     type={type}
-    name={name}
     value={value}
+    name={name}
     height={height}
     placeholder={placeholder}
     onChange={onChange}
