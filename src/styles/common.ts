@@ -61,6 +61,13 @@ export const Label = styled.h2`
 export const B1 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b1};
 `;
+export const H1 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.h1};
+`;
+
+export const H2 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.h2};
+`;
 
 export const B2 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b2};
@@ -98,6 +105,11 @@ export const BoldGrayB3 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b3};
   color: ${(props) => props.theme.color.gray400};
   font-weight: bold;
+`;
+
+export const GrayB4 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.b4};
+  color: ${(props) => props.theme.color.gray400};
 `;
 
 export const ResetBtn = styled.button`
