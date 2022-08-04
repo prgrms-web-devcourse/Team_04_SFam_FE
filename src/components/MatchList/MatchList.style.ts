@@ -28,5 +28,6 @@ export const ListContainer = styled.div`
 export const ButtonContainer = styled.div`
   position: fixed;
   bottom: 100px;
-  left: 134px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
