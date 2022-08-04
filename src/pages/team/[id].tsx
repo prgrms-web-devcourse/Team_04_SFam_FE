@@ -67,8 +67,7 @@ const UserDetailPage: NextPage = () => (
     <ColWrapper>
       <Label>팀 후기</Label>
       <ReviewGroup
-        // TODO: 명칭 통일
-        greatCount={DummyData.review.bestCount}
+        bestCount={DummyData.review.bestCount}
         likeCount={DummyData.review.likeCount}
         dislikeCount={DummyData.review.dislikeCount}
       />
