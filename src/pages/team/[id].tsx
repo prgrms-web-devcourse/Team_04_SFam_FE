@@ -81,11 +81,11 @@ const UserDetailPage: NextPage = () => (
     <Divider />
     <ColWrapper>
       <RowWrapper>
-        <InnerWrapper>
+        <InnerWrapper alignItems='center'>
           <Label>팀원 목록</Label>
           <Button
-            width='25px'
-            height='25px'
+            width='20px'
+            height='20px'
           >
             +
           </Button>
