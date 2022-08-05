@@ -15,7 +15,7 @@ export const headingTitle: HeadingTitleProps = {
   '/user/[id]/profile': '내 정보',
   '/user/[id]/location': '내 동네 설정',
   '/post/create': '글쓰기',
-  '/posts/[id]': '상세 페이지',
+  '/matches/[id]': '상세 페이지',
   '/matches/[id]/result': '경기 결과',
   '/matches/[id]/review': '후기 작성',
   '/matches/[id]/proposal': '신청하기',
