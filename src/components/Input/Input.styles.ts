@@ -6,8 +6,9 @@ export const Input = styled.input`
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: 8px;
   height: ${({ height }) => height};
-
+  font-size: ${(props) => props.theme.fontSize.b3};
   ::placeholder {
+    font-size: ${(props) => props.theme.fontSize.b3};
     color: ${({ theme }) => theme.color.gray400};
   }
 `;

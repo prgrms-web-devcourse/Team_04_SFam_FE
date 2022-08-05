@@ -17,7 +17,8 @@ export const ColWrapper = styled.div<WrapperProps>`
   justify-content: ${(props) => props.justifyContent};
   margin: 16px 0;
   padding: ${(props) => props.padding};
-  gap: 8px;
+  /* TODO: 8px랑 16px 2개 쓰고 있는데 props로 받도록 수정 */
+  gap: 16px;
 `;
 
 export const RowWrapper = styled.div<WrapperProps>`
@@ -41,6 +42,34 @@ export const InnerWrapper = styled.div<WrapperProps>`
 export const InlineWrapper = styled.div`
   position: relative;
   display: inline-block;
+`;
+
+export const RadioWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  gap: 8px;
+`;
+
+export const DropdownWrapper = styled.div<WrapperProps>`
+  width: ${(props) => props.width};
+`;
+
+export const RadioInput = styled.input`
+  display: flex;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.theme.color.secondary};
+  margin: 0;
+  &:checked {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+  }
 `;
 
 export const IconSpan = styled.span`
@@ -132,7 +161,9 @@ export const TextArea = styled.textarea`
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: 8px;
   height: 242px;
+  font-size: ${(props) => props.theme.fontSize.b3};
   ::placeholder {
+    font-size: ${(props) => props.theme.fontSize.b3};
     color: ${({ theme }) => theme.color.gray400};
   }
 `;
