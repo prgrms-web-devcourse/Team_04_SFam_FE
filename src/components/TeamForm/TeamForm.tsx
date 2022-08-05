@@ -1,37 +1,41 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
+
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Input } from '@components/Input';
-import { TeamFormDropdown } from '@components/TeamFormDropdown';
-import { teamFormState } from '@recoil/teamForm';
-import { ColWrapper, Container, Label, TextArea } from '@styles/common';
 import { Button } from '@components/Button';
+import { Dropdown, Item } from '@components/Dropdown';
+import { Input } from '@components/Input';
+import { SPORTS_CATEGORY } from '@constants/sports';
+import { ColWrapper, Container, Label, TextArea } from '@styles/common';
 
 const TeamForm = () => {
-  const [teamFormData, setTeamFormData] = useRecoilState(teamFormState);
+  const [state, setState] = React.useState({
+    sportsCategory: '',
+    name: '',
+    description: '',
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setTeamFormData(() => ({
-      ...teamFormData,
+    setState(() => ({
+      ...state,
       [name]: value,
     }));
   };
 
+  const handleSelect = (item: Item<{ sportsCategory: string }>) => {
+    const { sportsCategory } = item.value;
+    setState(() => ({ ...state, sportsCategory }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    console.log(teamFormData);
-
-    // (async () => {
-    //   const res = await axiosAuthInstance({
-    //     method: 'POST',
-    //     url: '/api/teams',
-    //     data: teamForm,
-    //   });
-
-    //   console.log(res);
-    // })();
+    (async () => {
+      await axiosAuthInstance({
+        method: 'POST',
+        url: '/api/teams',
+        data: state,
+      });
+    })();
   };
 
   return (
@@ -41,10 +45,15 @@ const TeamForm = () => {
           <Input
             type='text'
             name='name'
+            value={state.name}
             placeholder='팀 이름'
             onChange={handleChange}
           />
-          <TeamFormDropdown />
+          <Dropdown
+            items={SPORTS_CATEGORY}
+            placeholder='종목 선택'
+            onSelect={handleSelect}
+          />
           <Label>팀 소개글</Label>
           <TextArea
             name='description'
