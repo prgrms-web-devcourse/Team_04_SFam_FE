@@ -34,6 +34,8 @@ export const Text = styled('span')(({ theme }) => ({
   fontSize: theme.fontSize.b3,
 }));
 
+export const TextWhite = styled('span')({ color: '#fff' });
+
 export const TextGray = styled('span')(({ theme }) => ({
   fontSize: theme.fontSize.b3,
   color: theme.color.gray300,
