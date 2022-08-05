@@ -49,8 +49,8 @@ const Proposal: NextPage = () => {
       <form onSubmit={handleSubmit}>
         <ColWrapper>
           <Dropdown
-            dropdownItems={TeamChoiceDummy}
-            onSelect={handleSelect}
+            items={TeamChoiceDummy}
+            onSelect={() => handleSelect}
             placeholder='팀 선택'
           />
           <TextArea

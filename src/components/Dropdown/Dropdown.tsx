@@ -6,7 +6,7 @@ import { Item } from './types';
 interface Props<T> {
   round?: boolean;
   items: Item<T>[];
-  placeholder: string;
+  placeholder?: string;
   onSelect: (item: Item<T>) => void;
 }
 
