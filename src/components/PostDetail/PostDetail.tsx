@@ -24,7 +24,7 @@ const PostDetail = () => {
       <S.Info>
         <S.Description>
           <S.Title>{data.title}</S.Title>
-          {/* TODO: 조건부 렌더링 처리 필요 */}
+          {/* TODO: 공고 작성자와 일반 사용자 조건부 렌더링 처리 필요 */}
           {data.status === 'WAITING' ? (
             <Badge
               width='100px'
