@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -50,5 +51,18 @@ const MatchResult = () => {
     </S.Container>
   );
 };
+=======
+import { Button } from '@components/Button';
+import * as S from './MatchResult.styles';
+
+const MatchResult = () => (
+  <S.Container>
+    <Button>승리</Button>
+    <Button>무승부</Button>
+    <Button>패배</Button>
+    <Button>제출</Button>
+  </S.Container>
+);
+>>>>>>> 16cded9 (feat: 경기 결과 페이지 버튼 생성)
 
 export default MatchResult;
