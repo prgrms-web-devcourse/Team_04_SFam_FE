@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 
@@ -52,8 +53,24 @@ const MatchDetailPage: NextPage = () => {
           신청하기
         </button>
       )}
+=======
+import { useRouter } from 'next/router';
+import { NextPage } from 'next';
+import { PostDetail } from '@components/PostDetail';
+
+const Detail: NextPage = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  return (
+    <div>
+      <PostDetail />;
+>>>>>>> 14975f8 (feat: 경기 결과 페이지 버튼 생성)
     </div>
   );
 };
 
+<<<<<<< HEAD
 export default MatchDetailPage;
+=======
+export default Detail;
+>>>>>>> 14975f8 (feat: 경기 결과 페이지 버튼 생성)
