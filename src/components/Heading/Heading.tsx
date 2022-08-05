@@ -18,7 +18,7 @@ export const headingTitle: HeadingTitleProps = {
   '/posts/[id]': '상세 페이지',
   '/matches/[id]/result': '경기 결과',
   '/matches/[id]/review': '후기 작성',
-  '/proposals': '신청하기',
+  '/matches/[id]/proposal': '신청하기',
   '/chats': `유저 닉네임`,
   '/chat': '채팅',
 };
