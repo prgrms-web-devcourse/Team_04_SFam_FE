@@ -19,6 +19,7 @@ const FilterButton = ({
   margin = 'default',
   onClick,
   children,
+  ...props
 }: Props) => (
   <S.Container
     color={color}
@@ -27,6 +28,7 @@ const FilterButton = ({
     fontColor={fontColor}
     onClick={onClick}
     margin={margin}
+    {...props}
   >
     {children}
   </S.Container>
