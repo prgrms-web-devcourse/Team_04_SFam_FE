@@ -1,23 +1,21 @@
 import React from 'react';
-import { MdKeyboardArrowDown } from 'react-icons/md';
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
+
 import * as S from './Dropdown.styles';
+import { Item } from './types';
 
-interface DropdownItem {
-  id: number;
-  text: string;
-  value: string;
+interface Props<T> {
+  round?: boolean;
+  items: Item<T>[];
+  placeholder: string;
+  onSelect: (item: Item<T>) => void;
 }
 
-interface Props {
-  dropdownItems: DropdownItem[];
-  onSelect: (value: string) => void;
-}
-
-const Dropdown = ({ dropdownItems, onSelect }: Props) => {
+export const Dropdown = <T,>({ items, placeholder, onSelect, round }: Props<T>) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   const [isOpen, setIsOpen] = React.useState(false);
-  const [selectedItem, setSelectedItem] = React.useState('');
+  const [text, setText] = React.useState('');
 
   const handleClickToggle = () => {
     setIsOpen((prev) => !prev);
@@ -26,8 +24,8 @@ const Dropdown = ({ dropdownItems, onSelect }: Props) => {
   const handleClickSelect = (e: React.MouseEvent) => {
     const target = e.target as HTMLLIElement;
     setIsOpen((prev) => !prev);
-    setSelectedItem(() => target.innerText);
-    if (onSelect) onSelect(target.dataset.value || '');
+    setText(() => target.innerText);
+    if (onSelect) onSelect(items[+target.dataset.id!]);
   };
 
   const handleClickOutSide = React.useCallback(
@@ -47,44 +45,33 @@ const Dropdown = ({ dropdownItems, onSelect }: Props) => {
   }, [ref, handleClickOutSide]);
 
   return (
-    <S.Wrapper
-      ref={ref}
-      width='100%'
-      height='33.5px'
-      border
-      radius='8px'
-    >
-      <S.SelectInner onClick={handleClickToggle}>
-        {selectedItem ? (
-          <S.IconArea>
-            <S.SelectedArea>{selectedItem}</S.SelectedArea>
-            <MdKeyboardArrowDown size={20} />
-          </S.IconArea>
-        ) : (
-          <S.IconArea>
-            <S.SelectedArea>활동 종목을 선택해주세요.</S.SelectedArea>
-            <MdKeyboardArrowDown size={20} />
-          </S.IconArea>
-        )}
-      </S.SelectInner>
+    <S.Wrapper ref={ref}>
+      {round ? (
+        <S.RoundSelectedItem onClick={handleClickToggle}>
+          {text ? <S.Text>{text}</S.Text> : <S.TextGray>{placeholder}</S.TextGray>}
+          {isOpen ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}
+        </S.RoundSelectedItem>
+      ) : (
+        <S.SelectedItem onClick={handleClickToggle}>
+          {text ? <S.Text>{text}</S.Text> : <S.TextGray>{placeholder}</S.TextGray>}
+          {isOpen ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}
+        </S.SelectedItem>
+      )}
       {isOpen ? (
-        <S.Container isOpen={isOpen}>
-          {dropdownItems.map((dropdownItem) => (
-            <S.Item
-              key={dropdownItem.id}
-              data-value={dropdownItem.value}
+        <S.List>
+          {items.map((item) => (
+            <S.ListItem
+              key={item.id}
+              data-id={item.id}
               onClick={handleClickSelect}
-              height='40px'
             >
-              {dropdownItem.text}
-            </S.Item>
+              {item.text}
+            </S.ListItem>
           ))}
-        </S.Container>
+        </S.List>
       ) : (
         <div />
       )}
     </S.Wrapper>
   );
 };
-
-export default Dropdown;

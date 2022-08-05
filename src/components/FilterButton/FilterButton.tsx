@@ -1,4 +1,3 @@
-import { ComponentProps } from 'react';
 import * as S from './FilterButton.styles';
 
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
   fontColor?: string;
   margin?: string;
   children?: string;
-  onClick?: ComponentProps<'button'>['onClick'];
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const FilterButton = ({

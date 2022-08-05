@@ -1,76 +1,71 @@
 import styled from '@emotion/styled';
 
-export interface Props {
-  width?: string;
-  height?: string;
-  isOpen?: boolean;
-  radius?: string;
-  border?: boolean;
-  color?: string;
-  backgroundColor?: string;
-  disabled?: boolean;
-}
+export const Wrapper = styled('div')({
+  position: 'relative',
+});
 
-export const Wrapper = styled.div<Props>`
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-  border: ${({ border, theme }) => (border ? `1px solid ${theme.color.gray300}` : 'none')};
-  border-radius: ${({ radius }) => radius};
-  padding: 0 8px;
-  color: ${({ color, theme, disabled }) => (disabled ? `${theme.color.gray300}` : color)};
-  background-color: ${({ backgroundColor, theme, disabled }) =>
-    disabled ? `${theme.color.gray300}` : backgroundColor};
-`;
+export const SelectedItem = styled('div')(
+  {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 8,
+  },
+  ({ theme }) => ({
+    border: `1px solid ${theme.color.gray300}`,
+    borderRadius: theme.borderRadius,
+    backgroundColor: theme.color.background,
+  }),
+);
 
-export const SelectInner = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  top: 0;
-  left: 0;
-`;
+export const RoundSelectedItem = styled(SelectedItem)(
+  {
+    color: '#fff',
+    border: 'none',
+    borderRadius: '24px',
+    padding: '6px 12px',
+  },
+  ({ theme }) => ({
+    backgroundColor: theme.color.secondary,
+  }),
+);
 
-export const SelectedArea = styled.div`
-  flex: 1;
-  flex-grow: 1;
-  font-size: ${(props) => props.theme.fontSize.b4};
-`;
+export const Text = styled('span')({});
 
-export const IconArea = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-`;
+export const TextGray = styled('span')(({ theme }) => ({
+  color: theme.color.gray300,
+}));
 
-export const Container = styled.div<Props>`
-  position: absolute;
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-  top: 100%;
-  left: 0;
-  width: 100%;
-  border: 1px solid ${({ theme }) => theme.color.gray300};
-  border-radius: ${({ theme }) => theme.borderRadius};
-  color: #000;
-  background-color: ${({ theme }) => theme.color.background};
-  overflow: hidden;
-  z-index: 10;
-`;
+export const List = styled('ul')(
+  {
+    width: '100%',
+    position: 'absolute',
+    zIndex: 10,
+    overflow: 'auto',
+    maxHeight: '200px',
+  },
+  ({ theme }) => ({
+    border: `1px solid  ${theme.color.gray300}`,
+    borderRadius: theme.borderRadius,
+    backgroundColor: theme.color.background,
+  }),
+);
 
-export const Item = styled.div<Props>`
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: ${({ height }) => height};
-  border-radius: 1px solid ${({ theme }) => theme.borderRadius};
-  padding-left: 1rem;
-  background-color: ${({ theme }) => theme.color.background};
-  border-bottom: ${(props) => props.theme.color.gray300};
-  &:active {
-    background-color: ${({ theme }) => theme.color.gray200};
-  }
-`;
+export const ListItem = styled('li')(
+  {
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%',
+    padding: '8px',
+  },
+  ({ theme }) => ({
+    backgroundColor: theme.color.background,
+    ':not(:last-of-type)': {
+      borderBottom: `1px solid ${theme.color.gray300}`,
+    },
+    ':active': {
+      backgroundColor: theme.color.gray200,
+    },
+  }),
+);

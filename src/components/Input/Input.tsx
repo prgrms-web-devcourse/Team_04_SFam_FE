@@ -1,3 +1,5 @@
+import React from 'react';
+
 import * as S from './Input.styles';
 
 interface Props {
@@ -5,18 +7,20 @@ interface Props {
   name?: string;
   value?: string;
   height?: string;
+  id?: string;
   placeholder?: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const Input = ({ type = 'text', name = '', value = '', height = '', placeholder = '', onChange }: Props) => (
+const Input = ({ type = 'text', name = '', value = '', id = '', height = '', placeholder = '', onChange }: Props) => (
   <S.Input
     type={type}
     value={value}
     name={name}
-    height={height}
+    id={id}
     placeholder={placeholder}
     onChange={onChange}
+    height={height}
   />
 );
 export default Input;
