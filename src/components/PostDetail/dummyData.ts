@@ -1,7 +1,7 @@
 export const dummyData = {
   data: {
     title: '역삼역 축구짱 구합니다.',
-    status: '모집 중',
+    status: 'WAITING',
     author: {
       id: 1,
       nickname: '연승연',
