@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Container = styled.div`
   width: 100%;
-  padding: 70px 0;
+  padding: 0 0 70px 0;
   z-index: -1;
 `;
 
@@ -22,7 +22,7 @@ export const Category = styled.div`
 
 export const ListContainer = styled.div`
   margin: 0 20px;
-  padding-top: 110px;
+  padding-top: 100px;
 `;
 
 export const ButtonContainer = styled.div`

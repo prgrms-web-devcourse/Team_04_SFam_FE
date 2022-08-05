@@ -1,8 +1,13 @@
 import styled from '@emotion/styled';
 import { WrapperProps } from 'interface/styles';
 
+export const Main = styled.main({
+  paddingTop: '70px',
+});
+
 export const Container = styled.div`
   margin: 0 20px;
+  padding: 0 0 52px 0;
 `;
 
 export const ColWrapper = styled.div<WrapperProps>`
