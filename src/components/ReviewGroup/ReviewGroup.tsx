@@ -1,22 +1,22 @@
-import DislikeIcon from '@assets/icons/dislike.svg';
+import BestIcon from '@assets/icons/great.svg';
 import LikeIcon from '@assets/icons/like.svg';
-import GreatIcon from '@assets/icons/great.svg';
+import DislikeIcon from '@assets/icons/dislike.svg';
 import ReviewItem from './ReviewItem/ReviewItem';
 import * as S from './ReviewGroup.styles';
 
 interface Props {
-  greatCount: number;
+  bestCount: number;
   likeCount: number;
   dislikeCount: number;
 }
 
-const ReviewGroup = ({ greatCount, likeCount, dislikeCount }: Props) => (
+const ReviewGroup = ({ bestCount, likeCount, dislikeCount }: Props) => (
   <S.ReviewGroupWrapper>
     <ReviewItem
-      iconSrc={GreatIcon}
-      iconAlt='GreatIcon'
+      iconSrc={BestIcon}
+      iconAlt='BestIcon'
       reviewText='최고에요'
-      reviewCount={greatCount}
+      reviewCount={bestCount}
     />
     <ReviewItem
       iconSrc={LikeIcon}

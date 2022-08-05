@@ -49,7 +49,7 @@ const UserDetailPage: NextPage = () => (
     <ColWrapper>
       <Label>나에 대한 후기</Label>
       <ReviewGroup
-        greatCount={3}
+        bestCount={3}
         likeCount={1}
         dislikeCount={2}
       />
