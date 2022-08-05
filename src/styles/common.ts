@@ -1,8 +1,13 @@
 import styled from '@emotion/styled';
 import { WrapperProps } from 'interface/styles';
 
+export const Main = styled.main({
+  paddingTop: '70px',
+});
+
 export const Container = styled.div`
   margin: 0 20px;
+  padding: 0 0 52px 0;
 `;
 
 export const ColWrapper = styled.div<WrapperProps>`
@@ -52,9 +57,9 @@ export const Label = styled.h2`
   font-weight: bold;
 `;
 
+// TODO: 리팩토링 시 Text 컴포넌트 만들 것
 export const B1 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b1};
-  font-weight: bold;
 `;
 
 export const B2 = styled.span`
@@ -65,7 +70,31 @@ export const B3 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b3};
 `;
 
+export const BoldB1 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.b1};
+`;
+
+export const BoldB2 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.b2};
+  font-weight: bold;
+`;
+
+export const BoldB3 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.b3};
+  font-weight: bold;
+`;
+
+export const GrayB2 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.b2};
+  color: ${(props) => props.theme.color.gray400};
+`;
+
 export const GrayB3 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.b3};
+  color: ${(props) => props.theme.color.gray400};
+`;
+
+export const BoldGrayB3 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b3};
   color: ${(props) => props.theme.color.gray400};
   font-weight: bold;

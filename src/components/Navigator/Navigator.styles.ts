@@ -28,7 +28,7 @@ export const Anchor = styled.a`
 
   span {
     :first-of-type {
-      font-size: ${({ theme }) => theme.fontSize.b4};
+      font-size: ${({ theme }) => theme.fontSize.b1};
     }
     :last-of-type {
       font-size: ${({ theme }) => theme.fontSize.b4};
