@@ -17,7 +17,7 @@ export const ColWrapper = styled.div<WrapperProps>`
   justify-content: ${(props) => props.justifyContent};
   margin: 16px 0;
   padding: ${(props) => props.padding};
-  gap: 16px;
+  gap: 8px;
 `;
 
 export const RowWrapper = styled.div<WrapperProps>`
@@ -105,6 +105,11 @@ export const BoldGrayB3 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b3};
   color: ${(props) => props.theme.color.gray400};
   font-weight: bold;
+`;
+
+export const BoldGreenB3 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.b3};
+  color: ${(props) => props.theme.color.secondary};
 `;
 
 export const GrayB4 = styled.span`

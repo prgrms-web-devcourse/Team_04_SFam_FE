@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { userState } from '@recoil/atoms';
+import { B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
+import Link from 'next/link';
 import { ErrorResponse, Values } from './types';
 import validation from './helper';
 
@@ -51,24 +53,39 @@ const SignInForm = () => {
     validate: validation,
   });
   return (
-    <form onSubmit={handleSubmit}>
-      <Input
-        name='username'
-        value={values.username}
-        onChange={handleChange}
-        placeholder='아이디'
-      />
-      <span>{errors.username}</span>
-      <Input
-        type='password'
-        name='password'
-        value={values.password}
-        onChange={handleChange}
-        placeholder='비밀번호'
-      />
-      <span>{errors.password}</span>
-      <Button width='100%'>로그인</Button>
-    </form>
+    <Container>
+      <form onSubmit={handleSubmit}>
+        <ColWrapper>
+          <Input
+            name='username'
+            value={values.username}
+            onChange={handleChange}
+            placeholder='아이디'
+            height='50px'
+          />
+          <span>{errors.username}</span>
+          <Input
+            type='password'
+            name='password'
+            value={values.password}
+            onChange={handleChange}
+            placeholder='비밀번호'
+            height='50px'
+          />
+          <span>{errors.password}</span>
+          <Button width='100%'>로그인</Button>
+        </ColWrapper>
+      </form>
+      <InnerWrapper
+        alignItems='center'
+        justifyContent='center'
+      >
+        <B3>회원이 아니신가요?&nbsp;</B3>
+        <Link href='/signup'>
+          <BoldGreenB3>회원가입 하기</BoldGreenB3>
+        </Link>
+      </InnerWrapper>
+    </Container>
   );
 };
 
