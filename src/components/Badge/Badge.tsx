@@ -12,8 +12,8 @@ interface Props {
 
 const Badge = ({
   color = 'primary',
-  width = '65px',
-  height = '20px',
+  width = '60px',
+  height = '18px',
   fontSize = '12px',
   fontColor = 'primary',
   borderRadius = '1rem',

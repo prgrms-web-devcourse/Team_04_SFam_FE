@@ -5,11 +5,7 @@ import { PostDetail } from '@components/PostDetail';
 const Detail: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
-  return (
-    <div>
-      <PostDetail />;
-    </div>
-  );
+  return <PostDetail />;
 };
 
 export default Detail;

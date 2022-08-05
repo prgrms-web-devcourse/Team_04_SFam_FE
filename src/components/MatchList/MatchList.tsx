@@ -4,22 +4,8 @@ import { FilterButton } from '@components/FilterButton';
 import { useState } from 'react';
 import theme from '@styles/theme';
 import Link from 'next/link';
-import { axiosDefaultInstance } from '@api/axiosInstances';
 import { dummyData, categoryData } from './dummyData';
-import * as S from './MatchList.style';
-
-try {
-  const fetch = async () => {
-    const res = await axiosDefaultInstance({
-      method: 'GET',
-      url: '/api/matches',
-    });
-    console.log(res);
-  };
-  fetch();
-} catch (err) {
-  console.log(err);
-}
+import * as S from './MatchList.styles';
 
 const MatchList = () => {
   const [select, setSelect] = useState('');
@@ -35,32 +21,32 @@ const MatchList = () => {
   return (
     <S.Container>
       <S.Category>
-        {categoryData.map((item) => (
+        {categoryData.map((category) => (
           <FilterButton
-            key={item.id}
+            key={category.id}
             size='70px'
             fontSize='15px'
             margin='10px'
-            color={select === item.text ? `${theme.color.primary}` : `${theme.color.green200}`}
+            color={select === category.text ? `${theme.color.primary}` : `${theme.color.green200}`}
             onClick={onClick}
           >
-            {item.text}
+            {category.text}
           </FilterButton>
         ))}
       </S.Category>
       <S.ListContainer>
         {dummyData
-          .filter((i) => i.data.category === select || select.length === 0)
-          .map((i) => (
+          .filter((post) => post.data.category === select || select.length === 0)
+          .map((post) => (
             <MatchListItem
-              key={i.data.id}
-              id={i.data.id}
-              title={i.data.title}
-              category={i.data.category}
-              matchType={i.data.matchType}
-              content={i.data.content}
-              distance={i.data.distance}
-              createdAt={i.data.createdAt}
+              key={post.data.id}
+              id={post.data.id}
+              title={post.data.title}
+              category={post.data.category}
+              matchType={post.data.matchType}
+              content={post.data.content}
+              distance={post.data.distance}
+              createdAt={post.data.createdAt}
             />
           ))}
       </S.ListContainer>

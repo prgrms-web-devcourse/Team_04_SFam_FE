@@ -1,8 +1,7 @@
-/* eslint-disable react/button-has-type */
 import { Badge } from '@components/Badge';
 import theme from '@styles/theme';
 import Link from 'next/link';
-import * as S from './MatchListItem.style';
+import * as S from './MatchListItem.styles';
 
 interface Props {
   id: number;
@@ -25,16 +24,17 @@ const MatchListItem = ({ id, title, category, matchType, content, distance, crea
     as={`matches/${id}`}
   >
     <S.Container id={id.toString()}>
-      <S.Description>
-        <S.Info>
-          <S.Title>{title}</S.Title>
+      <S.Title>{title}</S.Title>
+      <S.Content>
+        <span>{content}</span>
+      </S.Content>
+      <S.Info>
+        <S.BadgeContainer>
           <Badge>{category}</Badge>
-
           <Badge color={matchType === '개인전' ? `${theme.color.primary}` : `${theme.color.yellow}`}>{matchType}</Badge>
-        </S.Info>
+        </S.BadgeContainer>
         <span>{createdAt}</span>
-      </S.Description>
-      <S.Content>{content}</S.Content>
+      </S.Info>
     </S.Container>
   </Link>
 );

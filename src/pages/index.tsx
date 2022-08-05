@@ -1,8 +1,4 @@
 import { Welcome } from '@components/Welcome';
 
-const Start = () => (
-  <div>
-    <Welcome />
-  </div>
-);
+const Start = () => <Welcome />;
 export default Start;
