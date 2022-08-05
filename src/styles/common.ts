@@ -33,6 +33,19 @@ export const InnerWrapper = styled.div<WrapperProps>`
   padding: ${(props) => props.padding};
   gap: 8px;
 `;
+export const InlineWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+export const IconSpan = styled.span`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
+  cursor: pointer;
+  color: ${(props) => props.theme.color.gray300};
+`;
 
 export const Label = styled.h2`
   font-size: ${(props) => props.theme.fontSize.b2};

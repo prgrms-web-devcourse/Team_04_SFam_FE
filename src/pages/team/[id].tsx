@@ -94,7 +94,7 @@ const UserDetailPage: NextPage = () => (
       <ColWrapper>
         {DummyData.members.map((member) => (
           <div key={member.userId}>
-            <TeamListItem userName={member.nickname} />
+            <TeamListItem username={member.nickname} />
           </div>
         ))}
       </ColWrapper>
