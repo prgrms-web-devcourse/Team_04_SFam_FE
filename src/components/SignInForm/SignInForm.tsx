@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 import { AxiosError } from 'axios';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { useForm } from '@hooks/useForm';
 import { useRouter } from 'next/router';
@@ -12,7 +12,7 @@ import validation from './helper';
 
 const SignInForm = () => {
   const router = useRouter();
-  const [, setUser] = useRecoilState(userState);
+  const setUser = useSetRecoilState(userState);
   const onSubmit = (values: Values, e?: FormEvent<HTMLFormElement>) => {
     const { username, password } = values;
     e?.preventDefault();
