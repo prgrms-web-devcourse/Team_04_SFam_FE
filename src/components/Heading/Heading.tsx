@@ -4,7 +4,7 @@ import * as S from './Heading.styles';
 import { HeadingTitleProps } from './types';
 
 export const headingTitle: HeadingTitleProps = {
-  '/': `송파동`,
+  '/matches': `송파동`,
   '/signup': '회원가입',
   '/signin': '로그인',
   '/team/create': '팀 생성',
