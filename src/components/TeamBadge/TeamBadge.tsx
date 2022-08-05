@@ -6,7 +6,6 @@ import * as S from './TeamBadge.styles';
 import { ColorProps, IconsProps } from './types';
 
 interface Props {
-  teamId: number;
   sportsCategory: string;
   name: string;
 }
@@ -21,19 +20,19 @@ const Color: ColorProps = {
 };
 
 const Icons: IconsProps = {
-  soccer: <MdSportsSoccer size='21px' />,
-  baseball: <MdSportsBaseball size='21px' />,
-  basketball: <MdSportsBasketball size='21px' />,
-  tableTennis: <FaTableTennis size='21px' />,
-  bowling: <FaBowlingBall size='21px' />,
-  badminton: <GiShuttlecock size='21px' />,
-  tennis: <MdSportsTennis size='21px' />,
+  SOCCER: <MdSportsSoccer size='21px' />,
+  BASEBALL: <MdSportsBaseball size='21px' />,
+  BASKETBALL: <MdSportsBasketball size='21px' />,
+  TABLETENNIS: <FaTableTennis size='21px' />,
+  BOWLING: <FaBowlingBall size='21px' />,
+  BADMINTON: <GiShuttlecock size='21px' />,
+  TENNIS: <MdSportsTennis size='21px' />,
 };
 
-const TeamBadge = ({ teamId, sportsCategory, name }: Props) => (
+const TeamBadge = ({ sportsCategory, name }: Props) => (
   <S.TeamBadgeWrapper>
     <Badge
-      color={Color[teamId]}
+      color={Color[Math.floor(Math.random() * 6 + 1)]}
       width='100%'
       height='38px'
       borderRadius='5px'
