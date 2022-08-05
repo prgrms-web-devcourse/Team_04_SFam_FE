@@ -89,6 +89,7 @@ export const Label = styled.h2`
 export const B1 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b1};
 `;
+
 export const H1 = styled.span`
   font-size: ${(props) => props.theme.fontSize.h1};
 `;
@@ -165,4 +166,14 @@ export const TextArea = styled.textarea`
     font-size: ${(props) => props.theme.fontSize.b3};
     color: ${({ theme }) => theme.color.gray400};
   }
+`;
+
+export const MessageInput = styled.input`
+  width: 320px;
+  height: 42px;
+  padding: 1rem;
+  font-size: ${(props) => props.theme.fontSize.b3};
+  background-color: #d9d9d9;
+  border: 1px solid ${(props) => props.theme.color.gray200};
+  border-radius: 16px; ;
 `;
