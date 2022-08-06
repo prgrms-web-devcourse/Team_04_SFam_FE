@@ -5,6 +5,7 @@ import { axiosDefaultInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { useForm } from '@hooks/useForm';
+import { B3, ColWrapper, Container, InnerWrapper } from '@styles/common';
 import { ErrorText, StrongText } from './SignUpForm.styles';
 import validation from './helper';
 import { Values } from './types';
@@ -92,63 +93,72 @@ const SignUpForm = () => {
   };
 
   return (
-    <>
+    <Container>
       <form onSubmit={handleSubmit}>
-        <div>
+        <ColWrapper>
+          <InnerWrapper>
+            <Input
+              name='username'
+              value={username}
+              onChange={handleChange}
+              placeholder='아이디'
+            />
+            <Button
+              width='100px'
+              fontSize='16px'
+              onClick={handleUsernameCheckClick}
+            >
+              중복확인
+            </Button>
+          </InnerWrapper>
+          <ErrorText>{errors.username}</ErrorText>
+          <InnerWrapper>
+            <Input
+              name='nickname'
+              value={nickname}
+              onChange={handleChange}
+              placeholder='닉네임'
+            />
+            <Button
+              width='100px'
+              fontSize='16px'
+              onClick={handleNicknameCheckClick}
+            >
+              중복확인
+            </Button>
+          </InnerWrapper>
+          <ErrorText>{errors.nickname}</ErrorText>
           <Input
-            name='username'
-            value={username}
+            name='password'
+            value={password}
             onChange={handleChange}
-            placeholder='아이디'
+            type='password'
+            placeholder='비밀번호'
+            height='50px'
           />
-          <button
-            type='button'
-            onClick={handleUsernameCheckClick}
-          >
-            중복확인
-          </button>
-        </div>
-        <ErrorText>{errors.username}</ErrorText>
-        <div>
+          <ErrorText>{errors.password}</ErrorText>
           <Input
-            name='nickname'
-            value={nickname}
+            name='passwordCheck'
+            value={passwordCheck}
             onChange={handleChange}
-            placeholder='닉네임'
+            type='password'
+            placeholder='비밀번호 확인'
+            height='50px'
           />
-          <button
-            type='button'
-            onClick={handleNicknameCheckClick}
-          >
-            중복확인
-          </button>
-        </div>
-        <ErrorText>{errors.nickname}</ErrorText>
-        <Input
-          name='password'
-          value={password}
-          onChange={handleChange}
-          type='password'
-          placeholder='비밀번호'
-        />
-        <ErrorText>{errors.password}</ErrorText>
-        <Input
-          name='passwordCheck'
-          value={passwordCheck}
-          onChange={handleChange}
-          type='password'
-          placeholder='비밀번호 확인'
-        />
-        <ErrorText>{errors.passwordCheck}</ErrorText>
-        <Button width='100%'>회원가입</Button>
+          <ErrorText>{errors.passwordCheck}</ErrorText>
+          <Button width='100%'>회원가입</Button>
+        </ColWrapper>
       </form>
-      <div>
-        <span>이미 계정이 있으신가요?&nbsp;</span>
+      <InnerWrapper
+        alignItems='center'
+        justifyContent='center'
+      >
+        <B3>이미 계정이 있으신가요?&nbsp;</B3>
         <Link href='/signin'>
           <StrongText>로그인하기</StrongText>
         </Link>
-      </div>
-    </>
+      </InnerWrapper>
+    </Container>
   );
 };
 
