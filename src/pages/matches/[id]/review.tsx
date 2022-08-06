@@ -35,12 +35,12 @@ const Review: NextPage = () => {
   };
   return (
     <Container>
-      <ColWrapper>
+      <ColWrapper gap='16px'>
         <B3>{DummyData.title}</B3>
         <GrayB4>{DummyData.team.name}</GrayB4>
       </ColWrapper>
       <Divider />
-      <ColWrapper>
+      <ColWrapper gap='16px'>
         {/* TODO: 로그인 후 전역 관리된 유저 정보 상태 처리 */}
         <H2>로그인한 사용자님,</H2>
         <H2>{DummyData.team.name}과의 경기는 어떠셨나요?</H2>

@@ -20,7 +20,7 @@ const TeamInvitationPage: NextPage = () => {
 
   return (
     <Container>
-      <ColWrapper>
+      <ColWrapper gap='16px'>
         <InlineWrapper>
           <Input
             placeholder='팀원 검색'

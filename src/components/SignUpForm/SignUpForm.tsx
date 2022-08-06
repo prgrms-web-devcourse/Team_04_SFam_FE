@@ -95,7 +95,7 @@ const SignUpForm = () => {
   return (
     <Container>
       <form onSubmit={handleSubmit}>
-        <ColWrapper>
+        <ColWrapper gap='8px'>
           <InnerWrapper>
             <Input
               name='username'
