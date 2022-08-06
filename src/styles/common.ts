@@ -17,8 +17,7 @@ export const ColWrapper = styled.div<WrapperProps>`
   justify-content: ${(props) => props.justifyContent};
   margin: 16px 0;
   padding: ${(props) => props.padding};
-  /* TODO: 8px랑 16px 2개 쓰고 있는데 props로 받도록 수정 */
-  gap: 16px;
+  gap: ${(props) => props.gap};
 `;
 
 export const RowWrapper = styled.div<WrapperProps>`
