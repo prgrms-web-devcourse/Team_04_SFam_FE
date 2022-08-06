@@ -5,6 +5,19 @@ import { Dropdown, Item } from '@components/Dropdown';
 import { Input } from '@components/Input';
 import { SPORTS_CATEGORY } from '@constants/sports';
 import { DATE, MONTH, YEAR } from '@constants/date';
+import {
+  B3,
+  ColWrapper,
+  Container,
+  DropdownWrapper,
+  InnerWrapper,
+  Label,
+  RadioInput,
+  RadioWrapper,
+  RowWrapper,
+  TextArea,
+} from '@styles/common';
+import { Button } from '@components/Button';
 
 interface Team {
   id: number;
@@ -124,74 +137,95 @@ const PostForm = () => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Input
-        type='text'
-        name='title'
-        placeholder='제목'
-        value={state.title}
-        onChange={handleChange}
-      />
-      <span>개인전</span>
-      <Input
-        type='radio'
-        name='matchType'
-        value='INDIVIDUAL_MATCH'
-        onChange={handleChange}
-      />
-      <span>팀전</span>
-      <Input
-        type='radio'
-        name='matchType'
-        value='TEAM_MATCH'
-        onChange={handleChange}
-      />
-      {state.matchType === 'INDIVIDUAL_MATCH' && (
-        <Dropdown
-          items={SPORTS_CATEGORY}
-          placeholder='종목 선택'
-          onSelect={handleSelectSports}
-        />
-      )}
-      {loading ||
-        (state.matchType === 'TEAM_MATCH' && (
-          <Dropdown
-            items={changeTeamsToDropdownItems(teams)}
-            placeholder='팀 선택'
-            onSelect={handleSelectTeam}
+    <Container>
+      <form onSubmit={handleSubmit}>
+        <ColWrapper>
+          <Input
+            type='text'
+            name='title'
+            placeholder='제목'
+            value={state.title}
+            onChange={handleChange}
+            height='50px'
           />
-        ))}
-      <div>경기 일자</div>
-      <Dropdown
-        items={YEAR}
-        placeholder='년도'
-        onSelect={handleSelectYear}
-      />
-      <Dropdown
-        items={MONTH}
-        placeholder='월'
-        onSelect={handleSelectMonth}
-      />
-      <Dropdown
-        items={DATE}
-        placeholder='일'
-        onSelect={handleSelectDate}
-      />
-      <div>경기 인원</div>
-      <Input
-        type='text'
-        name='participants'
-        placeholder='경기 인원'
-        value={state.participants}
-        onChange={handleChange}
-      />
-      <textarea
-        name='content'
-        placeholder='공고 내용'
-        onChange={handleChange}
-      />
-      <button type='submit'>작성 완료</button>
-    </form>
+          <RowWrapper>
+            <RadioWrapper>
+              <RadioInput
+                type='radio'
+                name='matchType'
+                value='INDIVIDUAL_MATCH'
+                onChange={handleChange}
+              />
+              <B3>개인전</B3>
+            </RadioWrapper>
+            <RadioWrapper>
+              <RadioInput
+                type='radio'
+                name='matchType'
+                value='TEAM_MATCH'
+                onChange={handleChange}
+              />
+              <B3>팀전</B3>
+            </RadioWrapper>
+          </RowWrapper>
+          {state.matchType === 'INDIVIDUAL_MATCH' && (
+            <Dropdown
+              items={SPORTS_CATEGORY}
+              placeholder='종목 선택'
+              onSelect={handleSelectSports}
+            />
+          )}
+          {loading ||
+            (state.matchType === 'TEAM_MATCH' && (
+              <Dropdown
+                items={changeTeamsToDropdownItems(teams)}
+                placeholder='팀 선택'
+                onSelect={handleSelectTeam}
+              />
+            ))}
+          <Label>경기 일자</Label>
+          <InnerWrapper justifyContent='space-between'>
+            <DropdownWrapper width='150px'>
+              <Dropdown
+                items={YEAR}
+                placeholder='년도'
+                onSelect={handleSelectYear}
+              />
+            </DropdownWrapper>
+            <DropdownWrapper width='100px'>
+              <Dropdown
+                items={MONTH}
+                placeholder='월'
+                onSelect={handleSelectMonth}
+              />
+            </DropdownWrapper>
+            <DropdownWrapper width='100px'>
+              <Dropdown
+                items={DATE}
+                placeholder='일'
+                onSelect={handleSelectDate}
+              />
+            </DropdownWrapper>
+          </InnerWrapper>
+          <Label>경기 인원</Label>
+          <Input
+            type='text'
+            name='participants'
+            placeholder='경기 인원'
+            value={state.participants}
+            onChange={handleChange}
+          />
+          <TextArea
+            name='content'
+            placeholder='공고 내용'
+            onChange={handleChange}
+          />
+          <InnerWrapper>
+            <Button>작성 완료</Button>
+          </InnerWrapper>
+        </ColWrapper>
+      </form>
+    </Container>
   );
 };
 

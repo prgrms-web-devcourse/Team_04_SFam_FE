@@ -30,9 +30,12 @@ export const RoundSelectedItem = styled(SelectedItem)(
   }),
 );
 
-export const Text = styled('span')({});
+export const Text = styled('span')(({ theme }) => ({
+  fontSize: theme.fontSize.b3,
+}));
 
 export const TextGray = styled('span')(({ theme }) => ({
+  fontSize: theme.fontSize.b3,
   color: theme.color.gray300,
 }));
 

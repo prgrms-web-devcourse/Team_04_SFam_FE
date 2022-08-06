@@ -4,4 +4,6 @@ export interface WrapperProps {
   justifyContent?: string;
   margin?: string;
   padding?: string;
+  width?: string;
+  gap?: string;
 }
