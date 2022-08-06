@@ -16,7 +16,7 @@ const Button = ({
   children,
 }: Props) => (
   <S.Button
-    color={backgroundColor}
+    backgroundColor={backgroundColor}
     width={width}
     height={height}
     fontSize={fontSize}

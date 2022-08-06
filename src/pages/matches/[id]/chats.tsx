@@ -44,11 +44,12 @@ const DummyData = {
       id: 0,
       content: '저희랑 한판 붙으시죠!',
       target: {
-        nickname: '연승연',
+        nickname: '장규범',
       },
       lastChat: {
         content: '저희랑 한판 붙으시죠!',
       },
+      // TODO: 시간 순으로 배열을 해야될 것 같아서 createdAt 보내달라고 해야할 것 같습니다.
     },
   ],
 };
