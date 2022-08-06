@@ -1,13 +1,14 @@
-import { Input } from '@components/Input/';
-import { TeamListItem } from '@components/TeamListItem';
-import { ColWrapper, Container, IconSpan, InlineWrapper } from '@styles/common';
 import { NextPage } from 'next';
-import { ChangeEvent, MouseEventHandler, useState } from 'react';
+import React from 'react';
 import { MdSearch } from 'react-icons/md';
 
+import { Input } from '@components/Input/';
+import { TeamMember } from '@components/TeamMember';
+import { ColWrapper, Container, IconSpan, InlineWrapper } from '@styles/common';
+
 const TeamInvitationPage: NextPage = () => {
-  const [username, setUsername] = useState('연승연');
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const [username, setUsername] = React.useState('연승연');
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setUsername(value);
   };
@@ -33,7 +34,7 @@ const TeamInvitationPage: NextPage = () => {
           </IconSpan>
         </InlineWrapper>
         {/* TODO: 검색 후 조건부 렌더링 */}
-        <TeamListItem username={username} />
+        {/* <TeamMember info={} /> */}
       </ColWrapper>
     </Container>
   );
