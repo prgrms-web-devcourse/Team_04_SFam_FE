@@ -4,22 +4,8 @@ import { FilterButton } from '@components/FilterButton';
 import { useState } from 'react';
 import theme from '@styles/theme';
 import Link from 'next/link';
-import { axiosDefaultInstance } from '@api/axiosInstances';
 import { dummyData, categoryData } from './dummyData';
-import * as S from './MatchList.style';
-
-try {
-  const fetch = async () => {
-    const res = await axiosDefaultInstance({
-      method: 'GET',
-      url: '/api/matches',
-    });
-    console.log(res);
-  };
-  fetch();
-} catch (err) {
-  console.log(err);
-}
+import * as S from './MatchList.styles';
 
 const MatchList = () => {
   const [select, setSelect] = useState('');
@@ -66,14 +52,19 @@ const MatchList = () => {
       </S.ListContainer>
 
       <S.ButtonContainer>
-        <Link href='/post/create'>
-          <Button
-            width='150px'
-            height='50px'
-            radius='2rem'
-          >
-            글쓰기
-          </Button>
+        <Link
+          href='/post/create'
+          passHref
+        >
+          <S.Anchor>
+            <Button
+              round
+              width='120px'
+              height='35px'
+            >
+              글쓰기
+            </Button>
+          </S.Anchor>
         </Link>
       </S.ButtonContainer>
     </S.Container>
