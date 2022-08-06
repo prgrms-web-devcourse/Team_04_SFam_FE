@@ -27,7 +27,11 @@ export const ListContainer = styled.div`
 
 export const ButtonContainer = styled.div`
   position: fixed;
-  bottom: 100px;
+  bottom: 70px;
   left: 50%;
   transform: translateX(-50%);
+`;
+
+export const Anchor = styled.a`
+  text-decoration: none;
 `;
