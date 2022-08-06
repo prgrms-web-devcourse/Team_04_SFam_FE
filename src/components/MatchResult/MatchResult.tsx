@@ -27,7 +27,7 @@ const MatchResult = () => {
       {results.map((result) => (
         <S.ButtonContainer
           key={result.id}
-          // color={select === result.text ? `${theme.color.primary}` : `${theme.color.gray300}`}
+          color={select === result.text ? 'select' : ''}
           onClick={onClick}
         >
           {result.text}
