@@ -15,4 +15,5 @@ export interface Response {
     createdAt: string;
     id: number | null;
   };
+  category: string;
 }

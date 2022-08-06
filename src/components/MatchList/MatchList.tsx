@@ -18,6 +18,7 @@ const MatchList = () => {
     },
     values: [],
     hasNext: false,
+    category: '',
   });
   const [category, setCategory] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -28,8 +29,16 @@ const MatchList = () => {
     const { value } = dataset;
     if (category === value) {
       setCategory('');
+      setState({
+        ...state,
+        category: '',
+      });
     } else {
       setCategory(value as string);
+      setState({
+        ...state,
+        category: value as string,
+      });
     }
   };
 
@@ -72,6 +81,7 @@ const MatchList = () => {
         values: data.values,
         hasNext: data.hasNext,
         cursor: data.cursor,
+        category: state.category,
       });
 
       setIsLoading(false);
@@ -82,7 +92,7 @@ const MatchList = () => {
   useEffect(() => {
     if (state.values?.length && observerRef.current !== null && state.hasNext) {
       const lastItem = observerRef.current.children[observerRef.current.children.length - 1];
-
+      console.log(lastItem);
       const io = new IntersectionObserver(
         (entries, observer) => {
           entries.forEach((entry) => {
@@ -96,7 +106,7 @@ const MatchList = () => {
       );
       io.observe(lastItem);
     }
-  }, [state.values?.length]);
+  }, [state.values?.length, state.category]);
 
   return (
     <S.Container>
