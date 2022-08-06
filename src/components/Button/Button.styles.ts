@@ -1,28 +1,28 @@
 import styled from '@emotion/styled';
 
-interface Props {
-  color: string;
+export interface StyleProps {
   width: string;
   height: string;
-  radius: string;
   fontSize: string;
+  backgroundColor?: string;
+  round?: boolean;
 }
 
-const ButtonContainer = styled.button<Props>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-  border: none;
-  border-radius: ${({ radius }) => radius};
-  background-color: ${({ color }) => (color === 'primary' ? '#1fab89' : '#f19a78')};
-  font-size: ${({ fontSize }) => fontSize};
-  font-weight: bold;
-  color: #fff;
-  &:active {
-    background-color: ${({ color }) => (color === 'primary' ? '#178a6e' : '#ed794c')};
-  }
-`;
-
-export default ButtonContainer;
+export const Button = styled('button')<StyleProps>(
+  {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: 'none',
+    outline: 'none',
+    fontWeight: 600,
+    color: '#fff',
+  },
+  ({ theme, width, height, fontSize, backgroundColor, round }) => ({
+    width,
+    height,
+    fontSize,
+    borderRadius: round ? 24 : theme.borderRadius,
+    backgroundColor: backgroundColor || theme.color.secondary,
+  }),
+);

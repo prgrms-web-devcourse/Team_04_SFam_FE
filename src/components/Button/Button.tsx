@@ -1,37 +1,30 @@
-import { ComponentProps } from 'react';
-import ButtonContainer from './Button.styles';
+import * as S from './Button.styles';
 
-interface Props {
-  color?: string;
-  width?: string;
-  height?: string;
-  children?: string;
-  radius?: string;
-  fontSize?: string;
-  onClick?: ComponentProps<'button'>['onClick'];
+interface Props extends Partial<S.StyleProps> {
+  children: string;
+  round?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button = ({
-  color = 'primary',
-  width = '384px',
+  width = '100%',
   height = '50px',
-  radius = '8px',
   fontSize = '20px',
+  backgroundColor,
+  round,
   onClick,
   children,
-  ...props
 }: Props) => (
-  <ButtonContainer
-    color={color}
+  <S.Button
+    color={backgroundColor}
     width={width}
     height={height}
-    radius={radius}
     fontSize={fontSize}
     onClick={onClick}
-    {...props}
+    round={round}
   >
     {children}
-  </ButtonContainer>
+  </S.Button>
 );
 
 export default Button;
