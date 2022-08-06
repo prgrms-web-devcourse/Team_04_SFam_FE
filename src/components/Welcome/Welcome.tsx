@@ -22,7 +22,7 @@ const Welcome = () => (
         href='/matches'
         passHref
       >
-        <Button>시작하기</Button>
+        <Button width='400px'>시작하기</Button>
       </Link>
 
       <S.Info>
@@ -31,7 +31,7 @@ const Welcome = () => (
           href='/login'
           passHref
         >
-          <S.Login>로그인하기</S.Login>
+          <S.Login> 로그인하기</S.Login>
         </Link>
       </S.Info>
     </S.ButtonContainer>

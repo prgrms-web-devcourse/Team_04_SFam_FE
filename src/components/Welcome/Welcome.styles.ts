@@ -4,7 +4,6 @@ export const Container = styled.div``;
 
 export const ImageContainer = styled.div`
   width: 100%;
-  padding: 70px 0;
   display: flex;
   flex-direction: column;
   margin-top: 70px;
@@ -31,7 +30,7 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 70px;
 `;
 
 export const Info = styled.div`

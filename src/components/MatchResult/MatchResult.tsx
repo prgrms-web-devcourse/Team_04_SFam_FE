@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import theme from '@styles/theme';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as S from './MatchResult.styles';

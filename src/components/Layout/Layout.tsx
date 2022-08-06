@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { Heading } from '@components/Heading';
 import { Navigator } from '@components/Navigator';
 import { useRouter } from 'next/router';
+import { Main } from '@styles/common';
 
 interface Props {
   children: ReactNode;
@@ -10,13 +11,12 @@ interface Props {
 const Layout = ({ children }: Props) => {
   const router = useRouter();
   if (router.pathname === '/') {
-    return <main>{children}</main>;
+    return <Main>{children}</Main>;
   }
   return (
     <>
       <Heading />
-      <main>{children}</main>
-
+      <Main>{children}</Main>
       <Navigator />
     </>
   );
