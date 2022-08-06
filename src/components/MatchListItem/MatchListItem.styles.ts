@@ -5,9 +5,15 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  height: 85px;
-  border-bottom: 1px solid black;
+  height: 100px;
+  border-bottom: 1px solid #adb5bd;
   padding: 10px;
+`;
+
+export const Description = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 export const Info = styled.div`
