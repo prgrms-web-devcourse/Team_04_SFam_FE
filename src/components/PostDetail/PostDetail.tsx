@@ -66,9 +66,19 @@ const PostDetail = () => {
       </S.Content>
       <S.ButtonContainer>
         {data.status === 'DONE' ? (
-          <Button onClick={handleClick}>후기 작성하기</Button>
+          <Button
+            width='400px'
+            onClick={handleClick}
+          >
+            후기 작성하기
+          </Button>
         ) : (
-          <Button onClick={handleClick}>신청하기</Button>
+          <Button
+            width='400px'
+            onClick={handleClick}
+          >
+            신청하기
+          </Button>
         )}
       </S.ButtonContainer>
     </S.Container>
