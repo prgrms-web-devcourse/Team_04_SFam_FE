@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Button } from '@components/Button/Button.styles';
 
 export const Container = styled.div`
   padding: 50px 20px;
@@ -7,30 +8,12 @@ export const Container = styled.div`
   justify-content: space-evenly;
 `;
 
-export const ButtonContainer = styled.button`
-  display: flex;
-  justify-content: center;
-  border-radius: 8px;
-  align-items: center;
-  border: none;
-  color: ${({ theme }) => theme.color.background};
+export const ButtonContainer = styled(Button)`
   background-color: ${({ color, theme }) => (color === 'select' ? `${theme.color.primary}` : `${theme.color.gray300}`)};
-  font-size: 20px;
-  font-weight: 600;
-  height: 45px;
   margin-bottom: 15px;
 `;
 
-export const SubmitBtn = styled.button`
-  display: flex;
-  justify-content: center;
-  border-radius: 8px;
-  align-items: center;
-  border: none;
-  color: ${({ theme }) => theme.color.background};
+export const SubmitBtn = styled(Button)`
   background-color: ${({ theme }) => theme.color.secondary};
-  font-size: 20px;
-  font-weight: 600;
-  height: 45px;
   margin-top: 20px;
 `;

@@ -25,6 +25,9 @@ const MatchResult = () => {
     <S.Container>
       {results.map((result) => (
         <S.ButtonContainer
+          width=''
+          height='45px'
+          fontSize='20px'
           key={result.id}
           color={select === result.text ? 'select' : ''}
           onClick={onClick}
@@ -36,7 +39,13 @@ const MatchResult = () => {
         href={`/matches/${id as string}/review`}
         passHref
       >
-        <S.SubmitBtn>제출</S.SubmitBtn>
+        <S.SubmitBtn
+          fontSize='20px'
+          width=''
+          height='45px'
+        >
+          제출
+        </S.SubmitBtn>
       </Link>
     </S.Container>
   );
