@@ -55,6 +55,13 @@ export const DropdownWrapper = styled.div<WrapperProps>`
   width: ${(props) => props.width};
 `;
 
+export const BottomFixedWrapper = styled.div<WrapperProps>`
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
 export const RadioInput = styled.input`
   display: flex;
   width: 18px;
@@ -108,6 +115,13 @@ export const B3 = styled.span`
 
 export const BoldB1 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b1};
+  font-weight: bold;
+`;
+
+export const BoldGrayB1 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.b1};
+  color: ${(props) => props.theme.color.gray400};
+  font-weight: bold;
 `;
 
 export const BoldB2 = styled.span`
@@ -123,6 +137,12 @@ export const BoldB3 = styled.span`
 export const GrayB2 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b2};
   color: ${(props) => props.theme.color.gray400};
+`;
+
+export const BoldGrayB2 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.b2};
+  color: ${(props) => props.theme.color.gray400};
+  font-weight: bold;
 `;
 
 export const GrayB3 = styled.span`
