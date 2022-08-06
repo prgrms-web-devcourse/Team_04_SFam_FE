@@ -9,7 +9,7 @@ const Navigator = () => (
     <S.Nav>
       <S.NavItem>
         <Link
-          href='/'
+          href='/matches'
           passHref
         >
           <S.Anchor>

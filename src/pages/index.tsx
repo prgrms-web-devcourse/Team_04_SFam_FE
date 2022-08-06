@@ -1,9 +1,4 @@
-import { MatchList } from '@components/MatchList';
+import { Welcome } from '@components/Welcome';
 
-const Home = () => (
-  <div>
-    <MatchList />
-  </div>
-);
-
-export default Home;
+const Start = () => <Welcome />;
+export default Start;
