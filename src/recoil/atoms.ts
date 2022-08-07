@@ -7,6 +7,7 @@ interface UserState {
   id?: number;
   username?: string;
   nickname?: string;
+  distance?: number;
 }
 
 export const userState = atom<UserState>({
