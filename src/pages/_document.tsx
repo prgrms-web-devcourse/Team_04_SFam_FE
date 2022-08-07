@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import Script from 'next/script';
 
 const Document = () => (
   <Html>
@@ -12,6 +13,12 @@ const Document = () => (
       <link
         rel='stylesheet'
         href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&display=optional'
+      />
+      <Script
+        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${
+          process.env.NEXT_PUBLIC_KAKAO_MAP_JAVASCRIPT_KEY as string
+        }&libraries=services,clusterer&autoload=false`}
+        strategy='beforeInteractive'
       />
     </Head>
     <body>
