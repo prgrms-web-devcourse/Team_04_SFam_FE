@@ -22,7 +22,6 @@ export const Category = styled.div`
 `;
 
 export const ListContainer = styled.div`
-  margin: 0 20px;
   padding-top: 100px;
 `;
 

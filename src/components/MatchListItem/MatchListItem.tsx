@@ -26,15 +26,21 @@ const MatchListItem = ({ id, title, category, matchType, content, distance, crea
   >
     <S.Container id={id.toString()}>
       <S.Description>
-        <S.Info>
+        <S.TitleWrapper>
           <S.Title>{title}</S.Title>
-          <B3>{createdAt}</B3>
-        </S.Info>
+        </S.TitleWrapper>
         <InnerWrapper>
-          <Badge>{category}</Badge>
-          <Badge color={matchType === '개인전' ? `${theme.color.primary}` : `${theme.color.yellow}`}>{matchType}</Badge>
+          <S.Content>{content}</S.Content>
         </InnerWrapper>
-        <S.Content>{content}</S.Content>
+        <S.RowWrapper>
+          <InnerWrapper>
+            <Badge>{category}</Badge>
+            <Badge color={matchType === '개인전' ? `${theme.color.primary}` : `${theme.color.yellow}`}>
+              {matchType}
+            </Badge>
+          </InnerWrapper>
+          <B3>{createdAt}</B3>
+        </S.RowWrapper>
       </S.Description>
     </S.Container>
   </Link>
