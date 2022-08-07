@@ -16,7 +16,6 @@ export const SenderWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 250px;
-  height: 130px;
   padding: 20px;
   border-radius: 30px;
   background-color: #1fab89;

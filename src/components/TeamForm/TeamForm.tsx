@@ -41,7 +41,7 @@ const TeamForm = () => {
   return (
     <Container>
       <form onSubmit={handleSubmit}>
-        <ColWrapper>
+        <ColWrapper gap='16px'>
           <Input
             type='text'
             name='name'

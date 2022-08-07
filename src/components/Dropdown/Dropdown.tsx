@@ -47,7 +47,7 @@ export const Dropdown = <T,>({ items, placeholder, onSelect, round }: Props<T>) 
     <S.Wrapper ref={ref}>
       {round ? (
         <S.RoundSelectedItem onClick={handleClickToggle}>
-          {text ? <S.Text>{text}</S.Text> : <S.TextGray>{placeholder}</S.TextGray>}
+          {text ? <S.TextWhite>{text}</S.TextWhite> : <S.TextWhite>{placeholder}</S.TextWhite>}
           {isOpen ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}
         </S.RoundSelectedItem>
       ) : (

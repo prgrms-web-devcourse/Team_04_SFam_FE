@@ -38,4 +38,5 @@ export const Content = styled.div``;
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+  margin: 0 20px;
 `;

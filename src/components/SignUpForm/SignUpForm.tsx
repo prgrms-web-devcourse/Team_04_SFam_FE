@@ -95,9 +95,10 @@ const SignUpForm = () => {
   return (
     <Container>
       <form onSubmit={handleSubmit}>
-        <ColWrapper>
+        <ColWrapper gap='8px'>
           <InnerWrapper>
             <Input
+              id='username'
               name='username'
               value={username}
               onChange={handleChange}
@@ -114,6 +115,7 @@ const SignUpForm = () => {
           <ErrorText>{errors.username}</ErrorText>
           <InnerWrapper>
             <Input
+              id='nickname'
               name='nickname'
               value={nickname}
               onChange={handleChange}
@@ -129,6 +131,7 @@ const SignUpForm = () => {
           </InnerWrapper>
           <ErrorText>{errors.nickname}</ErrorText>
           <Input
+            id='password'
             name='password'
             value={password}
             onChange={handleChange}
@@ -138,6 +141,7 @@ const SignUpForm = () => {
           />
           <ErrorText>{errors.password}</ErrorText>
           <Input
+            id='passwordCheck'
             name='passwordCheck'
             value={passwordCheck}
             onChange={handleChange}

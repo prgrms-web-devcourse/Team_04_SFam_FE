@@ -17,11 +17,11 @@ export const Category = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
-  background-color: ${({ theme }) => theme.color.background}; ;
+  background-color: ${({ theme }) => theme.color.background};
+  border-bottom: 1px solid #adb5bd;
 `;
 
 export const ListContainer = styled.div`
-  margin: 0 20px;
   padding-top: 100px;
 `;
 

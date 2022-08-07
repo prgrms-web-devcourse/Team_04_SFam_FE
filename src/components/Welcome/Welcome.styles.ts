@@ -1,13 +1,23 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+`;
 
-export const ImageContainer = styled.div`
-  width: 100%;
+export const ImageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 70px;
   align-items: center;
+`;
+
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Box = styled.div`
@@ -18,23 +28,28 @@ export const Box = styled.div`
 
 export const Title = styled.span`
   font-size: ${(props) => props.theme.fontSize.h1};
-  padding-bottom: 15px;
+  font-weight: bold;
+  margin-bottom: 24px;
 `;
 
 export const Text = styled.span`
   font-size: ${(props) => props.theme.fontSize.b2};
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 70px;
+  margin: 70px 20px 0 20px;
 `;
 
 export const Info = styled.div`
   margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 `;
 
 export const Login = styled.span`

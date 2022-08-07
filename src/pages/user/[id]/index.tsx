@@ -57,7 +57,7 @@ const UserDetailPage: NextPage = () => {
         </InnerWrapper>
       </RowWrapper>
       <Divider />
-      <ColWrapper>
+      <ColWrapper gap='16px'>
         <Label>나에 대한 후기</Label>
         <ReviewGroup
           bestCount={userInfo.review.bestCount}
@@ -66,7 +66,7 @@ const UserDetailPage: NextPage = () => {
         />
       </ColWrapper>
       <Divider />
-      <ColWrapper>
+      <ColWrapper gap='16px'>
         <Label>내 팀 목록</Label>
         <div>
           {userInfo.teams.map((team: Team) => (
@@ -80,9 +80,9 @@ const UserDetailPage: NextPage = () => {
       </ColWrapper>
       {/* TODO: 조건부 렌더링 처리: 로그인 사용자 닉네임이 같은 경우 출력하도록 수정 필요 */}
       <Divider />
-      <ColWrapper>
+      <ColWrapper gap='8px'>
         <Label>나의 활동</Label>
-        <ColWrapper>
+        <ColWrapper gap='16px'>
           <Link href='/user/[id]/location'>
             <B2>내 동네 설정하기</B2>
           </Link>

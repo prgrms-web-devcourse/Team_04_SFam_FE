@@ -55,8 +55,9 @@ const SignInForm = () => {
   return (
     <Container>
       <form onSubmit={handleSubmit}>
-        <ColWrapper>
+        <ColWrapper gap='8px'>
           <Input
+            id='username'
             name='username'
             value={values.username}
             onChange={handleChange}
@@ -65,6 +66,7 @@ const SignInForm = () => {
           />
           <span>{errors.username}</span>
           <Input
+            id='password'
             type='password'
             name='password'
             value={values.password}

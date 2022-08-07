@@ -1,4 +1,5 @@
 import { Badge } from '@components/Badge';
+import { B3, ColWrapper, InnerWrapper } from '@styles/common';
 import theme from '@styles/theme';
 import Link from 'next/link';
 import * as S from './MatchListItem.styles';
@@ -24,17 +25,23 @@ const MatchListItem = ({ id, title, category, matchType, content, distance, crea
     as={`matches/${id}`}
   >
     <S.Container id={id.toString()}>
-      <S.Title>{title}</S.Title>
-      <S.Content>
-        <span>{content}</span>
-      </S.Content>
-      <S.Info>
-        <S.BadgeContainer>
-          <Badge>{category}</Badge>
-          <Badge color={matchType === '개인전' ? `${theme.color.primary}` : `${theme.color.yellow}`}>{matchType}</Badge>
-        </S.BadgeContainer>
-        <span>{createdAt}</span>
-      </S.Info>
+      <S.Description>
+        <S.TitleWrapper>
+          <S.Title>{title}</S.Title>
+        </S.TitleWrapper>
+        <InnerWrapper>
+          <S.Content>{content}</S.Content>
+        </InnerWrapper>
+        <S.RowWrapper>
+          <InnerWrapper>
+            <Badge>{category}</Badge>
+            <Badge color={matchType === '개인전' ? `${theme.color.primary}` : `${theme.color.yellow}`}>
+              {matchType}
+            </Badge>
+          </InnerWrapper>
+          <B3>{createdAt}</B3>
+        </S.RowWrapper>
+      </S.Description>
     </S.Container>
   </Link>
 );

@@ -10,7 +10,6 @@ export const ReceiverWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 250px;
-  height: 130px;
   padding: 20px;
   border-radius: 30px;
   background-color: #e6e6e6;

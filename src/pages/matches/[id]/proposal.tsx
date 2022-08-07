@@ -47,7 +47,7 @@ const Proposal: NextPage = () => {
   return (
     <Container>
       <form onSubmit={handleSubmit}>
-        <ColWrapper>
+        <ColWrapper gap='16px'>
           <Dropdown
             items={TeamChoiceDummy}
             onSelect={() => handleSelect}
