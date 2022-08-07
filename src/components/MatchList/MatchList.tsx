@@ -92,7 +92,6 @@ const MatchList = () => {
   useEffect(() => {
     if (state.values?.length && observerRef.current !== null && state.hasNext) {
       const lastItem = observerRef.current.children[observerRef.current.children.length - 1];
-      console.log(lastItem);
       const io = new IntersectionObserver(
         (entries, observer) => {
           entries.forEach((entry) => {
