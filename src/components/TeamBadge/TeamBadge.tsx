@@ -1,11 +1,14 @@
+import Link from 'next/link';
+
 import { Badge } from '@components/Badge';
 import { SportsIcon } from '@components/SportsIcon';
+import { Team } from '@interface/team';
+
 import * as S from './TeamBadge.styles';
 import { ColorProps } from './types';
 
 interface Props {
-  sportsCategory: string;
-  name: string;
+  team: Team;
 }
 
 const Color: ColorProps = {
@@ -17,22 +20,22 @@ const Color: ColorProps = {
   6: '#16785F',
 };
 
-const TeamBadge = ({ sportsCategory, name }: Props) => (
-  <S.TeamBadgeWrapper>
-    <Badge
-      color={Color[Math.floor(Math.random() * 6 + 1)]}
-      width='100%'
-      height='38px'
-      borderRadius='5px'
-    >
-      <S.BadgeInner>
-        <S.IconWrapper>
-          <SportsIcon sportsCategory={sportsCategory} />{' '}
-        </S.IconWrapper>
-        <S.BadgeText>{name}</S.BadgeText>
-      </S.BadgeInner>
-    </Badge>
-  </S.TeamBadgeWrapper>
+const TeamBadge = ({ team }: Props) => (
+  <Link href={`/team/${team.id}`}>
+    <S.TeamBadgeWrapper>
+      <Badge
+        color={Color[Math.floor(Math.random() * 6 + 1)]}
+        width='100%'
+        height='38px'
+        borderRadius='5px'
+      >
+        <S.BadgeInner>
+          <SportsIcon sportsCategory={team.sportsCategory} />
+          <S.BadgeText>{team.name}</S.BadgeText>
+        </S.BadgeInner>
+      </Badge>
+    </S.TeamBadgeWrapper>
+  </Link>
 );
 
 export default TeamBadge;
