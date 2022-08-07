@@ -5,8 +5,8 @@ import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { FilterButton } from '@components/FilterButton';
 import { MatchListItem } from '@components/MatchListItem';
+import { SPORTS_CATEGORY } from '@constants/sports';
 import theme from '@styles/theme';
-import { categoryData } from './dummyData';
 import * as S from './MatchList.styles';
 import { Match, Response } from './types';
 
@@ -111,14 +111,14 @@ const MatchList = () => {
   return (
     <S.Container>
       <S.Category>
-        {categoryData.map((item) => (
+        {SPORTS_CATEGORY.map((item) => (
           <FilterButton
             key={item.id}
             size='70px'
             fontSize='15px'
             margin='10px'
-            data-value={item.value}
-            color={category === item.value ? `${theme.color.primary}` : `${theme.color.green200}`}
+            data-value={item.value.sportsCategory}
+            color={category === item.value.sportsCategory ? `${theme.color.primary}` : `${theme.color.green200}`}
             onClick={onClick}
           >
             {item.text}
