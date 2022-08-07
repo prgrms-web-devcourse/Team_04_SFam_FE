@@ -15,7 +15,7 @@ import {
   RowWrapper,
 } from '@styles/common';
 import { NextPage } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { userState } from '@recoil/atoms';
 import { useRecoilState } from 'recoil';
 
@@ -44,7 +44,7 @@ const DummyData = {
       id: 0,
       content: '저희랑 한판 붙으시죠!',
       target: {
-        nickname: '장규범',
+        nickname: '연승연',
       },
       lastChat: {
         content: '저희랑 한판 붙으시죠!',
@@ -59,8 +59,13 @@ const DummyData = {
 const Chats: NextPage = () => {
   const [status, setStatus] = useState('WAITING');
   const loginUser = useRecoilState(userState);
-  console.log(status);
-  console.log(loginUser);
+  const [author, setAuthor] = useState(false);
+  useEffect(() => {
+    if (loginUser[0].nickname === DummyData.chats[0].target.nickname) {
+      setAuthor(true);
+    }
+  }, [loginUser]);
+
   const handleSelect = (item: Item<{ status: string }>) => {
     setStatus(item.value.status);
   };
@@ -96,23 +101,13 @@ const Chats: NextPage = () => {
           gap='8px'
         >
           <BoldGrayB2>2022년 4월 20일</BoldGrayB2>
-          {loginUser[0].nickname !== DummyData.chats[0].target.nickname ? (
+          {author ? (
             <InnerWrapper
               flexDirection='column'
               alignItems='center'
             >
-              <GrayB3>공고 작성자에게 대화 요청 메시지를 전달했습니다.</GrayB3>
-              <GrayB3>대화를 수락할 경우 채팅을 전송할 수 있습니다.</GrayB3>
-            </InnerWrapper>
-          ) : (
-            <InnerWrapper
-              flexDirection='column'
-              alignItems='center'
-            >
-              {/* <GrayB3>{DummyData.chats[0].target.nickname} 님으로부터 대화 요청이 전송되었습니다.</GrayB3> */}
               <GrayB3>연승연 님으로부터 대화 요청이 전송되었습니다.</GrayB3>
               <GrayB3>요청 내용</GrayB3>
-              {/* <GrayB3>{DummyData.chats[0].content}</GrayB3> */}
               <GrayB3>저희랑 해요!</GrayB3>
               <GrayB3>수락하시겠습니까?</GrayB3>
               <InnerWrapper>
@@ -124,6 +119,14 @@ const Chats: NextPage = () => {
                 </Button>
                 <Button width='184px'>수락</Button>
               </InnerWrapper>
+            </InnerWrapper>
+          ) : (
+            <InnerWrapper
+              flexDirection='column'
+              alignItems='center'
+            >
+              <GrayB3>공고 작성자에게 대화 요청 메시지를 전달했습니다.</GrayB3>
+              <GrayB3>대화를 수락할 경우 채팅을 전송할 수 있습니다.</GrayB3>
             </InnerWrapper>
           )}
           {/* TODO: 조건부 렌더링 */}
