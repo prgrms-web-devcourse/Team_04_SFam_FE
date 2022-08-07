@@ -25,3 +25,5 @@ export const ButtonContainer = styled.div`
 export const RejectButton = styled(Button)`
   background-color: ${({ theme }) => theme.color.primary};
 `;
+
+export const AcceptButton = styled(Button)``;
