@@ -1,48 +1,20 @@
 import { ResponsivePie } from '@nivo/pie';
+import { PieData } from './types';
 
 interface Props {
-  data: PieDataProps[];
+  data: PieData[];
 }
 
-interface PieDataProps {
-  id: string;
-  label: string;
-  value: number;
-}
-
-// TODO: API 연동 시 수정
-const winCount = 10;
-const drawCount = 2;
-const loseCount = 3;
-
-export const pieData: PieDataProps[] = [
-  {
-    id: '승리',
-    label: `승리 ${winCount}회`,
-    value: 10,
-  },
-  {
-    id: '무승부',
-    label: `무승부 ${drawCount}회`,
-    value: 2,
-  },
-  {
-    id: '패배',
-    label: `패배 ${loseCount}회`,
-    value: 3,
-  },
-];
-
-const Pie = ({ data }: Props) => (
+const PieChart = ({ data }: Props) => (
   <ResponsivePie
     data={data}
     colors={['#62d2a2', '#FDCF65', '#F19A78']}
-    margin={{ top: 80, right: 80, bottom: 80, left: 80 }}
+    margin={{ top: 20, right: 110, bottom: 20, left: 10 }}
     innerRadius={0.5}
-    padAngle={0.7}
-    cornerRadius={3}
+    padAngle={4}
+    cornerRadius={4}
     activeOuterRadiusOffset={8}
-    borderWidth={1}
+    borderWidth={2}
     borderColor={{
       from: 'color',
       modifiers: [['darker', 0.2]],
@@ -63,7 +35,7 @@ const Pie = ({ data }: Props) => (
         anchor: 'right',
         direction: 'column',
         justify: false,
-        translateX: 105,
+        translateX: 130,
         translateY: 0,
         itemsSpacing: 16,
         itemWidth: 100,
@@ -86,4 +58,4 @@ const Pie = ({ data }: Props) => (
   />
 );
 
-export default Pie;
+export default PieChart;

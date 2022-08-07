@@ -1,9 +1,7 @@
 import { Badge } from '@components/Badge';
-import { MdSportsSoccer, MdSportsBaseball, MdSportsBasketball, MdSportsTennis } from 'react-icons/md';
-import { FaTableTennis, FaBowlingBall } from 'react-icons/fa';
-import { GiShuttlecock } from 'react-icons/gi';
+import { SportsIcon } from '@components/SportsIcon';
 import * as S from './TeamBadge.styles';
-import { ColorProps, IconsProps } from './types';
+import { ColorProps } from './types';
 
 interface Props {
   sportsCategory: string;
@@ -19,16 +17,6 @@ const Color: ColorProps = {
   6: '#16785F',
 };
 
-const Icons: IconsProps = {
-  SOCCER: <MdSportsSoccer size='21px' />,
-  BASEBALL: <MdSportsBaseball size='21px' />,
-  BASKETBALL: <MdSportsBasketball size='21px' />,
-  TABLETENNIS: <FaTableTennis size='21px' />,
-  BOWLING: <FaBowlingBall size='21px' />,
-  BADMINTON: <GiShuttlecock size='21px' />,
-  TENNIS: <MdSportsTennis size='21px' />,
-};
-
 const TeamBadge = ({ sportsCategory, name }: Props) => (
   <S.TeamBadgeWrapper>
     <Badge
@@ -38,7 +26,9 @@ const TeamBadge = ({ sportsCategory, name }: Props) => (
       borderRadius='5px'
     >
       <S.BadgeInner>
-        <S.IconWrapper>{Icons[sportsCategory]}</S.IconWrapper>
+        <S.IconWrapper>
+          <SportsIcon sportsCategory={sportsCategory} />{' '}
+        </S.IconWrapper>
         <S.BadgeText>{name}</S.BadgeText>
       </S.BadgeInner>
     </Badge>

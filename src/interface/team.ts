@@ -12,7 +12,7 @@ export interface MemberInfo {
   role: string;
 }
 
-export interface MatchRecordInfo {
+export interface MatchRecord {
   win: number;
   draw: number;
   lose: number;
@@ -22,8 +22,8 @@ export interface TeamInfo {
   description: string;
   sportsCategory: string;
   members: MemberInfo[];
-  matchRecord: MatchRecordInfo;
-  review: ReviewInfo;
+  matchRecord: MatchRecord;
+  matchReview: ReviewInfo;
 }
 
 export interface TeamNameProps {
