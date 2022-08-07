@@ -4,12 +4,10 @@ import { Props } from './types';
 export const ParagraphWrapper = styled.div<Props>`
   display: flex;
   align-items: flex-start;
-  justify-content: center;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   background-color: ${(props) => props.theme.color.green100};
   border-radius: ${(props) => props.theme.borderRadius};
-  margin: 20px;
 `;
 
 export const Paragraph = styled.p<Props>`

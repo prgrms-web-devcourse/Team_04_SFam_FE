@@ -3,5 +3,5 @@ export interface Props {
   height?: string;
   fontSize?: string;
   fontColor?: string;
-  children: string | JSX.Element;
+  children?: string | JSX.Element;
 }
