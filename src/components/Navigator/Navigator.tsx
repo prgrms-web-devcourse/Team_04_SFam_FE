@@ -1,14 +1,15 @@
 import Link from 'next/link';
+import React from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { IoNotificationsSharp, IoChatboxSharp, IoHomeSharp, IoPerson } from 'react-icons/io5';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 import { userState } from '@recoil/atoms';
 
 import * as S from './Navigator.styles';
 
 const Navigator = () => {
-  const user = useRecoilValue(userState);
+  const [loginUser] = useRecoilState(userState);
 
   return (
     <S.Container>
@@ -67,7 +68,7 @@ const Navigator = () => {
         </S.NavItem>
         <S.NavItem>
           <Link
-            href={`/user/${user.id?.toString() as string}`}
+            href={`/user/${loginUser.id as number}`}
             passHref
           >
             <S.Anchor>
