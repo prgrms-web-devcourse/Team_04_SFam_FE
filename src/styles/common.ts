@@ -18,6 +18,7 @@ export const ColWrapper = styled.div<WrapperProps>`
   margin: 16px 0;
   padding: ${(props) => props.padding};
   gap: ${(props) => props.gap};
+  height: ${(props) => props.height};
 `;
 
 export const RowWrapper = styled.div<WrapperProps>`
@@ -57,9 +58,11 @@ export const DropdownWrapper = styled.div<WrapperProps>`
 
 export const BottomFixedWrapper = styled.div<WrapperProps>`
   position: fixed;
+  padding: 8px 0 0 0;
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
+  background-color: #fff;
 `;
 
 export const RadioInput = styled.input`
