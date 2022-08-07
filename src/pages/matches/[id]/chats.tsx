@@ -58,10 +58,10 @@ const DummyData = {
 
 const Chats: NextPage = () => {
   const [status, setStatus] = useState('WAITING');
-  const loginUser = useRecoilState(userState);
+  const [loginUser] = useRecoilState(userState);
   const [author, setAuthor] = useState(false);
   useEffect(() => {
-    if (loginUser[0].nickname === DummyData.chats[0].target.nickname) {
+    if (loginUser.nickname === DummyData.chats[0].target.nickname) {
       setAuthor(true);
     }
   }, [loginUser]);
@@ -129,7 +129,7 @@ const Chats: NextPage = () => {
           </InnerWrapper>
         )}
         {/* TODO: 조건부 렌더링 */}
-        {status === 'DONE' && loginUser[0].nickname !== DummyData.chats[0].target.nickname ? (
+        {status === 'DONE' && loginUser.nickname !== DummyData.chats[0].target.nickname ? (
           <InnerWrapper
             flexDirection='column'
             alignItems='center'
@@ -140,7 +140,7 @@ const Chats: NextPage = () => {
         ) : (
           <div />
         )}
-        {status === 'DONE' && loginUser[0].nickname === DummyData.chats[0].target.nickname ? (
+        {status === 'DONE' && loginUser.nickname === DummyData.chats[0].target.nickname ? (
           <InnerWrapper
             flexDirection='column'
             alignItems='center'
