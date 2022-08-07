@@ -15,6 +15,7 @@ import validation from './helper';
 const SignInForm = () => {
   const router = useRouter();
   const setUser = useSetRecoilState(userState);
+
   const onSubmit = (values: Values, e?: FormEvent<HTMLFormElement>) => {
     const { username, password } = values;
     e?.preventDefault();
@@ -30,7 +31,7 @@ const SignInForm = () => {
         });
         if (res.status === 200) {
           setUser((res.data as { data: object }).data);
-          router.replace('/');
+          router.replace('/matches');
         }
       } catch (err) {
         const { response } = err as AxiosError;
