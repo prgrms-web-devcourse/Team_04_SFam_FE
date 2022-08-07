@@ -78,6 +78,7 @@ const UserDetailPage: NextPage = () => {
             <TeamBadge
               team={team}
               key={team.id}
+              id={team.id}
             />
           ))}
         </div>
