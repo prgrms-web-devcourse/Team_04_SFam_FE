@@ -8,3 +8,7 @@ export interface WrapperProps {
   height?: string;
   gap?: string;
 }
+
+export interface OptionalRenderProps {
+  condition: boolean;
+}

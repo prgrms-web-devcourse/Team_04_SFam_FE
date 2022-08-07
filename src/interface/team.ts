@@ -17,9 +17,20 @@ export interface MatchRecord {
   draw: number;
   lose: number;
 }
+
+export interface LeaderInfo {
+  id?: number;
+  location?: {
+    longitude: string;
+    latitude: string;
+  };
+  nickname?: string;
+  username?: string;
+}
 export interface TeamInfo {
   name: string;
   description: string;
+  leader: LeaderInfo;
   sportsCategory: string;
   members: MemberInfo[];
   matchRecord: MatchRecord;

@@ -14,14 +14,19 @@ import { SPORTS_TEXT } from '@constants/text';
 import { Response } from '@interface/response';
 import { TeamInfo } from '@interface/team';
 import { B1, B3, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
+import { useRecoilValue } from 'recoil';
+import { userState } from '@recoil/atoms';
+import { Button } from '@components/Button';
 
 const TeamDetailPage: NextPage = () => {
   const router = useRouter();
+  const user = useRecoilValue(userState);
 
   const [teamInfo, setTeamInfo] = React.useState<TeamInfo>({
     name: '',
     description: '',
     sportsCategory: '',
+    leader: {},
     members: [],
     matchRecord: {
       win: 0,
@@ -34,6 +39,7 @@ const TeamDetailPage: NextPage = () => {
       dislikeCount: 0,
     },
   });
+  const [isLeader, setIsLeader] = React.useState(false);
 
   React.useEffect(() => {
     if (!router.isReady) return;
@@ -45,8 +51,15 @@ const TeamDetailPage: NextPage = () => {
       } = await axiosAuthInstance.get<Response<TeamInfo>>(`/api/teams/${id as string}`);
 
       setTeamInfo(() => data);
+      if (data.leader.id === user.id) {
+        setIsLeader(true);
+      }
     })();
   }, [router.isReady]);
+
+  const handleClick = () => {
+    router.push('/team/invitation');
+  };
 
   return (
     <Container>
@@ -86,7 +99,16 @@ const TeamDetailPage: NextPage = () => {
         <RowWrapper>
           <InnerWrapper alignItems='center'>
             <Label>팀원 목록</Label>
-            {/* TODO: 로그인 유저와 팀의 리더가 일치할 때 보여질 버튼 링크 */}
+            <OptionalRender condition={isLeader}>
+              <Button
+                width='24px'
+                height='24px'
+                round
+                onClick={handleClick}
+              >
+                +
+              </Button>
+            </OptionalRender>
           </InnerWrapper>
         </RowWrapper>
         <ColWrapper gap='16px'>
