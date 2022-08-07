@@ -3,8 +3,8 @@ import React from 'react';
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Dropdown, Item } from '@components/Dropdown';
 import { Input } from '@components/Input';
-import { SPORTS_CATEGORY } from '@constants/sports';
-import { DATE, MONTH, YEAR } from '@constants/date';
+import { Button } from '@components/Button';
+import { DATE, MONTH, SPORTS_CATEGORY, YEAR } from '@constants/dropdown';
 import {
   B3,
   ColWrapper,
@@ -17,7 +17,6 @@ import {
   RowWrapper,
   TextArea,
 } from '@styles/common';
-import { Button } from '@components/Button';
 
 interface Team {
   id: number;

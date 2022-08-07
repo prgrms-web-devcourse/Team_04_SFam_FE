@@ -25,7 +25,3 @@ export interface TeamInfo {
   matchRecord: MatchRecord;
   matchReview: ReviewInfo;
 }
-
-export interface TeamNameProps {
-  [key: string]: string;
-}

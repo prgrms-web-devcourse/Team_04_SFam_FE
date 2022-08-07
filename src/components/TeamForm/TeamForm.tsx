@@ -4,7 +4,7 @@ import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { Dropdown, Item } from '@components/Dropdown';
 import { Input } from '@components/Input';
-import { SPORTS_CATEGORY } from '@constants/sports';
+import { SPORTS_CATEGORY } from '@constants/dropdown';
 import { ColWrapper, Container, Label, TextArea } from '@styles/common';
 
 const TeamForm = () => {

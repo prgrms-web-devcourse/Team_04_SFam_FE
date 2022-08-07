@@ -51,3 +51,20 @@ export const DATE = [
   { id: 29, text: '30', value: { date: '30' } },
   { id: 30, text: '31', value: { date: '31' } },
 ];
+
+export const SPORTS_CATEGORY = [
+  { id: 0, text: '축구', value: { sportsCategory: 'SOCCER' } },
+  { id: 1, text: '야구', value: { sportsCategory: 'BASEBALL' } },
+  { id: 2, text: '배드민턴', value: { sportsCategory: 'BADMINTON' } },
+];
+
+export const MATCH_STATUS_DETAIL = [
+  { id: 0, text: '모집 중', value: { status: 'WAITING' } },
+  { id: 1, text: '모집 완료', value: { status: 'IN_GAME' } },
+];
+
+export const MATCH_STATUS_CHAT = [
+  { id: 0, text: '모집 중', value: { status: 'WAITING' } },
+  { id: 1, text: '모집 완료', value: { status: 'IN_GAME' } },
+  { id: 2, text: '경기 완료', value: { status: 'END' } },
+];
