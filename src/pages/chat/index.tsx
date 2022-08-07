@@ -1,5 +1,5 @@
 import { ChatListItem } from '@components/ChatListItem';
-import { Container } from '@styles/common';
+import { ColWrapper, Container } from '@styles/common';
 import { NextPage } from 'next';
 
 const DummyData = {
@@ -32,13 +32,15 @@ const DummyData = {
 };
 const ChatListPage: NextPage = () => (
   <Container>
-    {DummyData.chats.map((chat) => (
-      <ChatListItem
-        nickname={chat.target.nickname}
-        lastChat={chat.lastChat.content}
-        key={chat.id}
-      />
-    ))}
+    <ColWrapper gap='16px'>
+      {DummyData.chats.map((chat) => (
+        <ChatListItem
+          nickname={chat.target.nickname}
+          lastChat={chat.lastChat.content}
+          key={chat.id}
+        />
+      ))}
+    </ColWrapper>
   </Container>
 );
 
