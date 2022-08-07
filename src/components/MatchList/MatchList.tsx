@@ -53,7 +53,7 @@ const MatchList = () => {
 
       <S.ButtonContainer>
         <Link
-          href='/post/create'
+          href='/matches/create'
           passHref
         >
           <S.Anchor>

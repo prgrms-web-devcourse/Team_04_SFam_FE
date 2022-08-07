@@ -46,9 +46,9 @@ interface State {
   teamId?: number;
   matchDate: string;
   participants: string;
-  year: number;
-  month: number;
-  date: number;
+  year: string;
+  month: string;
+  date: string;
   content: string;
 }
 
@@ -78,9 +78,9 @@ const PostForm = () => {
     sportsCategory: '',
     matchDate: '',
     participants: '',
-    year: 0,
-    month: 0,
-    date: 0,
+    year: '',
+    month: '',
+    date: '',
     content: '',
   });
 
@@ -102,17 +102,17 @@ const PostForm = () => {
     setState({ ...state, teamId: id, sportsCategory });
   };
 
-  const handleSelectYear = (item: Item<{ year: number }>) => {
+  const handleSelectYear = (item: Item<{ year: string }>) => {
     const { year } = item.value;
     setState({ ...state, year });
   };
 
-  const handleSelectMonth = (item: Item<{ month: number }>) => {
+  const handleSelectMonth = (item: Item<{ month: string }>) => {
     const { month } = item.value;
     setState({ ...state, month });
   };
 
-  const handleSelectDate = (item: Item<{ date: number }>) => {
+  const handleSelectDate = (item: Item<{ date: string }>) => {
     const { date } = item.value;
     setState({ ...state, date });
   };
