@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import logo from '@assets/logo/logo.svg';
 import { Button } from '@components/Button';
-import { B3, InnerWrapper } from '@styles/common';
+import { Anchor, InnerWrapper } from '@styles/common';
 
 import * as S from './Welcome.styles';
 
@@ -38,19 +38,12 @@ const Welcome = () => (
           href='/signin'
           passHref
         >
-          <S.Login> 로그인하기</S.Login>
+          <Anchor>
+            <S.Login> 로그인하기</S.Login>
+          </Anchor>
         </Link>
       </S.Info>
     </S.ButtonContainer>
-    <S.Info>
-      <B3>이미 계정이 있으신가요?</B3>
-      <Link
-        href='/signin'
-        passHref
-      >
-        <S.Login> 로그인하기</S.Login>
-      </Link>
-    </S.Info>
   </S.Container>
 );
 
