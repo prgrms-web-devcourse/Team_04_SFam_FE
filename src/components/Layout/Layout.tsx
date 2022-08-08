@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
 
@@ -15,15 +15,25 @@ interface Props {
 const Layout = ({ children }: Props) => {
   const router = useRouter();
   const user = useRecoilValue(userState);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   useEffect(() => {
-    if (!publicPath.includes(router.pathname) && user.id === undefined) {
-      router.replace('/');
-    } else if (publicPath.includes(router.pathname) && user.id !== undefined) {
-      router.back();
-    }
+    const test = async () => {
+      if (!publicPath.includes(router.pathname) && user.id === undefined) {
+        await router.replace('/');
+      } else if (publicPath.includes(router.pathname) && user.id !== undefined) {
+        await new Promise(() => {
+          router.back();
+        });
+      }
+    };
+    (async () => {
+      await test();
+      setIsLoading(false);
+    })();
   }, [router.pathname]);
 
+  if (isLoading) return null;
   if (router.pathname === '/') {
     return <Main>{children}</Main>;
   }
