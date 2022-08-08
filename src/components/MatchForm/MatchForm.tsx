@@ -3,8 +3,8 @@ import React from 'react';
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Dropdown, Item } from '@components/Dropdown';
 import { Input } from '@components/Input';
-import { SPORTS_CATEGORY } from '@constants/sports';
-import { DATE, MONTH, YEAR } from '@constants/date';
+import { Button } from '@components/Button';
+import { DATE, MONTH, SPORTS_CATEGORY, YEAR } from '@constants/dropdown';
 import {
   B3,
   ColWrapper,
@@ -17,7 +17,6 @@ import {
   RowWrapper,
   TextArea,
 } from '@styles/common';
-import { Button } from '@components/Button';
 
 interface Team {
   id: number;
@@ -46,9 +45,9 @@ interface State {
   teamId?: number;
   matchDate: string;
   participants: string;
-  year: number;
-  month: number;
-  date: number;
+  year: string;
+  month: string;
+  date: string;
   content: string;
 }
 
@@ -78,9 +77,9 @@ const PostForm = () => {
     sportsCategory: '',
     matchDate: '',
     participants: '',
-    year: 0,
-    month: 0,
-    date: 0,
+    year: '',
+    month: '',
+    date: '',
     content: '',
   });
 
@@ -102,17 +101,17 @@ const PostForm = () => {
     setState({ ...state, teamId: id, sportsCategory });
   };
 
-  const handleSelectYear = (item: Item<{ year: number }>) => {
+  const handleSelectYear = (item: Item<{ year: string }>) => {
     const { year } = item.value;
     setState({ ...state, year });
   };
 
-  const handleSelectMonth = (item: Item<{ month: number }>) => {
+  const handleSelectMonth = (item: Item<{ month: string }>) => {
     const { month } = item.value;
     setState({ ...state, month });
   };
 
-  const handleSelectDate = (item: Item<{ date: number }>) => {
+  const handleSelectDate = (item: Item<{ date: string }>) => {
     const { date } = item.value;
     setState({ ...state, date });
   };

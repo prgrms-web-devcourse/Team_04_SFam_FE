@@ -10,19 +10,10 @@ import { ReviewGroup } from '@components/ReviewGroup';
 import { SportsIcon } from '@components/SportsIcon';
 import { MatchRecordChart } from '@components/MatchRecordChart';
 import { TeamMember } from '@components/TeamMember';
+import { SPORTS_TEXT } from '@constants/text';
 import { Response } from '@interface/response';
-import { TeamInfo, TeamNameProps } from '@interface/team';
+import { TeamInfo } from '@interface/team';
 import { B1, B3, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
-
-const sportsText: TeamNameProps = {
-  SOCCER: '축구',
-  BASEBALL: '야구',
-  BASKETBALL: '농구',
-  TABLETENNIS: '탁구',
-  BOWLING: '볼링',
-  BADMINTON: '배드민턴',
-  TENNIS: '테니스',
-};
 
 const TeamDetailPage: NextPage = () => {
   const router = useRouter();
@@ -70,7 +61,7 @@ const TeamDetailPage: NextPage = () => {
             <B1>{teamInfo.name}</B1>
             <SportsIcon sportsCategory={teamInfo.sportsCategory} />
           </InnerWrapper>
-          <GrayB3>{sportsText[teamInfo.sportsCategory]}</GrayB3>
+          <GrayB3>{SPORTS_TEXT[teamInfo.sportsCategory]}</GrayB3>
           <B3>팀원 수: {teamInfo.members.length}명</B3>
         </InnerWrapper>
       </RowWrapper>

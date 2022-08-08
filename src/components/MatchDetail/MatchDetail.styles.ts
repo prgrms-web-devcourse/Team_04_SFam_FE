@@ -1,27 +1,24 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
-  width: 100%;
-`;
-
-export const Info = styled.div`
-  height: 235px;
-  width: 100%;
-  padding: 40px 20px 0 20px;
-  padding-right: 20px;
+  padding: 16px 24px;
 `;
 
 export const Description = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 export const Title = styled.span`
-  font-size: 24px;
-  padding-bottom: 25px;
+  font-size: 28px;
+`;
+
+export const Info = styled.div`
+  padding: 24px 0 8px;
 `;
 
 export const Detail = styled.div`
-  margin-bottom: 15px;
+  padding: 8px 0;
 `;
 
 export const DetailItem = styled.span`

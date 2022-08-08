@@ -4,19 +4,21 @@ import * as S from './Dropdown.styles';
 import { Item } from './types';
 
 interface Props<T> {
-  round?: boolean;
   items: Item<T>[];
   placeholder?: string;
   onSelect: (item: Item<T>) => void;
+  round?: boolean;
+  disabled?: boolean;
 }
 
-export const Dropdown = <T,>({ items, placeholder, onSelect, round }: Props<T>) => {
+export const Dropdown = <T,>({ items, placeholder, onSelect, round, disabled }: Props<T>) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   const [isOpen, setIsOpen] = React.useState(false);
   const [text, setText] = React.useState('');
 
   const handleClickToggle = () => {
+    if (disabled) return;
     setIsOpen((prev) => !prev);
   };
 

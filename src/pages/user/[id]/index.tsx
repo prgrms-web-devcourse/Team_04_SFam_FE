@@ -3,18 +3,19 @@ import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import React from 'react';
 
-import { axiosAuthInstance } from '@api/axiosInstances';
 import { Avatar } from '@components/Avatar';
 import { Divider } from '@components/Divider';
 import { ReviewGroup } from '@components/ReviewGroup';
 import { TeamBadge } from '@components/TeamBadge';
-import { B1, B2, ColWrapper, Container, GrayB3, InnerWrapper, Label, ResetBtn, RowWrapper } from '@styles/common';
 import { Team } from '@interface/team';
 import { UserInfo } from '@interface/user';
+import { B1, B2, ColWrapper, Container, GrayB3, InnerWrapper, Label, ResetBtn, RowWrapper } from '@styles/common';
+import { axiosAuthInstance } from '@api/axiosInstances';
 import { Response } from '@interface/response';
 
 const UserDetailPage: NextPage = () => {
   const router = useRouter();
+  const { id } = router.query;
 
   const [userInfo, setUserInfo] = React.useState<UserInfo>({
     nickname: '',
@@ -34,11 +35,15 @@ const UserDetailPage: NextPage = () => {
     if (!router.isReady) return;
 
     (async () => {
-      const {
-        data: { data },
-      } = await axiosAuthInstance.get<Response<UserInfo>>(`/api/users/${router.query.id as string}`);
+      try {
+        const {
+          data: { data },
+        } = await axiosAuthInstance.get<Response<UserInfo>>(`/api/users/${id as string}`);
 
-      setUserInfo(() => data);
+        setUserInfo(() => data);
+      } catch (e) {
+        // 에러 처리 필요
+      }
     })();
   }, [router.isReady]);
 
@@ -71,8 +76,7 @@ const UserDetailPage: NextPage = () => {
         <div>
           {userInfo.teams.map((team: Team) => (
             <TeamBadge
-              sportsCategory={team.sportsCategory}
-              name={team.name}
+              team={team}
               key={team.id}
             />
           ))}
@@ -83,7 +87,7 @@ const UserDetailPage: NextPage = () => {
       <ColWrapper gap='8px'>
         <Label>나의 활동</Label>
         <ColWrapper gap='16px'>
-          <Link href='/user/[id]/location'>
+          <Link href={`/user/${id as string}/location`}>
             <B2>내 동네 설정하기</B2>
           </Link>
           {/* TODO: onClick 이벤트로 로그아웃 API 호출 */}

@@ -1,5 +1,7 @@
-import { PostDetail } from '@components/PostDetail';
 import { NextPage } from 'next';
 
-const MatchDetailPage: NextPage = () => <PostDetail />;
+import { MatchDetail } from '@components/MatchDetail';
+
+const MatchDetailPage: NextPage = () => <MatchDetail />;
+
 export default MatchDetailPage;

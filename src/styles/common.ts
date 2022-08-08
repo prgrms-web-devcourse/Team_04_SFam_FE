@@ -200,3 +200,8 @@ export const MessageInput = styled.input`
   border: 1px solid ${(props) => props.theme.color.gray200};
   border-radius: 16px; ;
 `;
+
+export const Anchor = styled.a`
+  text-decoration: none;
+  color: inherit;
+`;
