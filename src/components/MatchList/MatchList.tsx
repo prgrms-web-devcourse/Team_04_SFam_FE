@@ -5,7 +5,7 @@ import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { FilterButton } from '@components/FilterButton';
 import { MatchListItem } from '@components/MatchListItem';
-import { SPORTS_CATEGORY } from '@constants/sports';
+import { SPORTS_CATEGORY } from '@constants/dropdown';
 import theme from '@styles/theme';
 import * as S from './MatchList.styles';
 import { Match, Response } from './types';
@@ -93,7 +93,7 @@ const MatchList = () => {
     if (state.values?.length && observerRef.current !== null && state.hasNext) {
       const lastItem = observerRef.current.children[observerRef.current.children.length - 1];
       const io = new IntersectionObserver(
-        (entries, observer) => {
+        (entries) => {
           entries.forEach((entry) => {
             if (!isLoading && entry.isIntersecting) {
               getMoreMatchList();
