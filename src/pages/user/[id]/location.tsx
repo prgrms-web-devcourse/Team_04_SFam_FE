@@ -74,7 +74,7 @@ const LocationSetting: NextPage = () => {
           <B2>매칭 가능한 거리를 설정해주세요</B2>
         </ColWrapper>
         <Slider setDistance={setDistance} />
-        <InnerWrapper>
+        <InnerWrapper padding='24px 0'>
           <Button onClick={handleClick}>설정 완료</Button>
         </InnerWrapper>
       </ColWrapper>
