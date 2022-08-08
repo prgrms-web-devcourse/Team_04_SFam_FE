@@ -25,21 +25,15 @@ const NotificationPage: NextPage = () => {
   const [loginUser] = useRecoilState(userState);
   const [invitations, setInvitations] = useState<Invitation>();
 
-  console.log('====================================');
-  console.log(`${new Date().toISOString().split('T')[0]} ${new Date().toISOString().split('T')[1].slice(0, 8)}`);
-  console.log('====================================');
   useEffect(() => {
     if (!router.isReady) return;
-    const currentTime = `${new Date().toISOString().split('T')[0]} ${new Date()
-      .toISOString()
-      .split('T')[1]
-      .slice(0, 8)}`;
+
     const InvitationListApi = async () => {
       await axiosAuthInstance
         .get<Response<Invitation>>('/api/teams/invitations', {
           params: {
-            createdAt: currentTime,
-            // id: loginUser.id,
+            // createdAt: ,
+            // id: ,
             size: 10,
             status: 'WAITING',
           },
