@@ -13,10 +13,11 @@ import { TeamMember } from '@components/TeamMember';
 import { SPORTS_TEXT } from '@constants/text';
 import { Response } from '@interface/response';
 import { TeamInfo } from '@interface/team';
-import { B1, B3, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
+import { Anchor, B1, B3, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
 import { useRecoilValue } from 'recoil';
 import { userState } from '@recoil/atoms';
 import { Button } from '@components/Button';
+import Link from 'next/link';
 
 const TeamDetailPage: NextPage = () => {
   const router = useRouter();
@@ -99,16 +100,23 @@ const TeamDetailPage: NextPage = () => {
         <RowWrapper>
           <InnerWrapper alignItems='center'>
             <Label>팀원 목록</Label>
-            <OptionalRender condition={isLeader}>
-              <Button
-                width='24px'
-                height='24px'
-                round
-                onClick={handleClick}
+            {isLeader && (
+              <Link
+                href='/team/invitation'
+                passHref
               >
-                +
-              </Button>
-            </OptionalRender>
+                <Anchor>
+                  <Button
+                    width='24px'
+                    height='24px'
+                    round
+                    onClick={handleClick}
+                  >
+                    +
+                  </Button>
+                </Anchor>
+              </Link>
+            )}
           </InnerWrapper>
         </RowWrapper>
         <ColWrapper gap='16px'>
