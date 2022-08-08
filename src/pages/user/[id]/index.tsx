@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Avatar } from '@components/Avatar';
@@ -11,12 +12,13 @@ import { TeamBadge } from '@components/TeamBadge';
 import { Response } from '@interface/response';
 import { Team } from '@interface/team';
 import { UserInfo } from '@interface/user';
+import { userState } from '@recoil/atoms';
 import { B1, B2, ColWrapper, Container, GrayB3, InnerWrapper, Label, ResetBtn, RowWrapper } from '@styles/common';
 
 const UserDetailPage: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
-
+  const [user, setUser] = useRecoilState(userState);
   const [userInfo, setUserInfo] = React.useState<UserInfo>({
     nickname: '',
     review: {
@@ -45,7 +47,23 @@ const UserDetailPage: NextPage = () => {
         // 에러 처리 필요
       }
     })();
-  }, [router.isReady]);
+  }, [id, router.isReady]);
+
+  const handleLogout = () => {
+    if (!router.isReady) return;
+    (async () => {
+      try {
+        await axiosAuthInstance.delete<Response<typeof userState>>(`/api/users/signout`).then((res) => {
+          if (res.status === 200) {
+            setUser({});
+            router.push('/');
+          }
+        });
+      } catch (e) {
+        // 에러 처리 필요
+      }
+    })();
+  };
 
   return (
     <Container>
@@ -91,7 +109,12 @@ const UserDetailPage: NextPage = () => {
             <B2>내 동네 설정하기</B2>
           </Link>
           {/* TODO: onClick 이벤트로 로그아웃 API 호출 */}
-          <ResetBtn type='button'>로그아웃</ResetBtn>
+          <ResetBtn
+            type='button'
+            onClick={handleLogout}
+          >
+            로그아웃
+          </ResetBtn>
         </ColWrapper>
       </ColWrapper>
     </Container>
