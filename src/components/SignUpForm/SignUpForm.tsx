@@ -15,8 +15,14 @@ import { Values } from './types';
 const SignUpForm = () => {
   const router = useRouter();
   const [checked, setChecked] = useState(false);
+  const [isDuplicate, setIsDuplicate] = useState({
+    username: false,
+    nickname: false,
+  });
 
   const onSubmit = (values: Values, e?: FormEvent<HTMLFormElement>) => {
+    console.log(isDuplicate);
+    if (!isDuplicate.username || !isDuplicate.nickname) return;
     const { username, nickname, password } = values;
     e?.preventDefault();
     const signup = async () => {
@@ -63,6 +69,10 @@ const SignUpForm = () => {
         errors.username = '이미 사용중인 아이디입니다.';
       } else {
         errors.username = '사용 가능한 아이디입니다.';
+        setIsDuplicate({
+          ...isDuplicate,
+          username: true,
+        });
       }
       setChecked((state) => !state);
     };
@@ -84,6 +94,10 @@ const SignUpForm = () => {
         errors.nickname = '이미 사용중인 닉네임입니다.';
       } else {
         errors.nickname = '사용 가능한 닉네임입니다.';
+        setIsDuplicate({
+          ...isDuplicate,
+          nickname: true,
+        });
       }
       setChecked((state) => !state);
     };
@@ -108,6 +122,7 @@ const SignUpForm = () => {
               placeholder='아이디'
             />
             <Button
+              type='button'
               width='100px'
               fontSize='16px'
               onClick={handleUsernameCheckClick}
@@ -125,6 +140,7 @@ const SignUpForm = () => {
               placeholder='닉네임'
             />
             <Button
+              type='button'
               width='100px'
               fontSize='16px'
               onClick={handleNicknameCheckClick}
