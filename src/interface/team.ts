@@ -7,9 +7,10 @@ export interface Team {
 }
 
 export interface MemberInfo {
-  userId: number;
+  id: number;
+  username: string;
   nickname: string;
-  role: string;
+  profileImageUrl: string;
 }
 
 export interface MatchRecord {
@@ -36,3 +37,5 @@ export interface TeamInfo {
   matchRecord: MatchRecord;
   matchReview: ReviewInfo;
 }
+<<<<<<< HEAD
+=======

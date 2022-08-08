@@ -206,3 +206,8 @@ export const Anchor = styled.a`
   text-decoration: none;
   color: inherit;
 `;
+
+export const UserList = styled.div`
+  margin-top: 25px;
+  margin-left: 10px;
+`;

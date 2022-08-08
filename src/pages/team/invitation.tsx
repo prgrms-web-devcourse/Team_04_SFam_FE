@@ -1,23 +1,28 @@
 import { NextPage } from 'next';
 import React from 'react';
 import { MdSearch } from 'react-icons/md';
-
+import { MemberInfo } from '@interface/team';
 import { Input } from '@components/Input/';
 import { TeamMember } from '@components/TeamMember';
-import { ColWrapper, Container, IconSpan, InlineWrapper } from '@styles/common';
+import { Response } from '@interface/response';
+import { ColWrapper, Container, IconSpan, InlineWrapper, UserList } from '@styles/common';
+import { axiosAuthInstance } from '@api/axiosInstances';
 
 const TeamInvitationPage: NextPage = () => {
-  const [username, setUsername] = React.useState('연승연');
+  const [username, setUsername] = React.useState('');
+  const [result, setResult] = React.useState<MemberInfo[]>([]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setUsername(value);
   };
   const handleClick = () => {
-    // TODO: API 요청
-    // TODO: API로 반환 된 유저 상태 저장 후 반환
+    (async () => {
+      const {
+        data: { data },
+      } = await axiosAuthInstance.get<Response<MemberInfo[]>>(`/api/users`, { params: { nickname: username } });
+      setResult(() => data);
+    })();
   };
-  console.log(username);
-
   return (
     <Container>
       <ColWrapper gap='16px'>
@@ -25,6 +30,7 @@ const TeamInvitationPage: NextPage = () => {
           <Input
             placeholder='팀원 검색'
             onChange={handleChange}
+            value={username}
           />
           <IconSpan>
             <MdSearch
@@ -33,8 +39,14 @@ const TeamInvitationPage: NextPage = () => {
             />
           </IconSpan>
         </InlineWrapper>
-        {/* TODO: 검색 후 조건부 렌더링 */}
-        {/* <TeamMember info={} /> */}
+        <UserList>
+          {result.map((item: MemberInfo) => (
+            <TeamMember
+              key={item.id}
+              info={item}
+            />
+          ))}
+        </UserList>
       </ColWrapper>
     </Container>
   );
