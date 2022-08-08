@@ -2,11 +2,13 @@ import * as S from './Button.styles';
 
 interface Props extends Partial<S.StyleProps> {
   children: string;
+  type?: 'button' | 'submit' | 'reset';
   round?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button = ({
+  type,
   width = '100%',
   height = '50px',
   fontSize = '20px',
@@ -22,6 +24,7 @@ const Button = ({
     fontSize={fontSize}
     onClick={onClick}
     round={round}
+    type={type}
   >
     {children}
   </S.Button>
