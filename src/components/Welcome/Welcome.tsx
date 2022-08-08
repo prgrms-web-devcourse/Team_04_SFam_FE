@@ -27,9 +27,11 @@ const Welcome = () => (
         href='/matches'
         passHref
       >
-        <InnerWrapper>
-          <Button width='300px'>시작하기</Button>
-        </InnerWrapper>
+        <Anchor>
+          <InnerWrapper>
+            <Button width='300px'>시작하기</Button>
+          </InnerWrapper>
+        </Anchor>
       </Link>
 
       <S.Info>
