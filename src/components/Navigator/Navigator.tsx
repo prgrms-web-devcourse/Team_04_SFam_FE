@@ -15,7 +15,7 @@ const Navigator = () => {
 
   React.useEffect(() => {
     setId(user.id);
-  }, []);
+  }, [user.id]);
 
   return (
     <S.Container>
