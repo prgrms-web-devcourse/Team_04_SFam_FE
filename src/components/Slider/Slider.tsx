@@ -1,9 +1,11 @@
-import { ChangeEvent, useState } from 'react';
-import { RowWrapper } from '@styles/common';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import * as S from './Slider.styles';
 
-const Slider = () => {
-  const [distance, setDistance] = useState('');
+interface Props {
+  setDistance: Dispatch<SetStateAction<number>>;
+}
+
+const Slider = ({ setDistance }: Props) => {
   const [min, max] = [5, 40];
   const width = 388;
   const step = 5;
@@ -18,10 +20,8 @@ const Slider = () => {
     { id: 8, value: 40 },
   ];
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    setDistance(e.target.value);
+    setDistance(e.target.valueAsNumber);
   };
-  console.log(distance);
 
   return (
     <S.Container>
