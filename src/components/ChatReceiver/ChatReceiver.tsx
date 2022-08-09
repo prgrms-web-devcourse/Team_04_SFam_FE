@@ -1,6 +1,8 @@
 import { CgProfile } from 'react-icons/cg';
-import { B3, GrayB3, InnerWrapper } from '@styles/common';
+
 import { Paragraph } from '@components/Paragraph';
+import { B3, GrayB3, InnerWrapper } from '@styles/common';
+
 import * as S from './ChatReceiver.styles';
 
 const ChatReceiver = () => (

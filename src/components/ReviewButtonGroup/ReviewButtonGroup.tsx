@@ -1,9 +1,11 @@
+import React from 'react';
+
+import DislikeIcon from '@assets/icons/dislike.svg';
 import BestIcon from '@assets/icons/great.svg';
 import LikeIcon from '@assets/icons/like.svg';
-import DislikeIcon from '@assets/icons/dislike.svg';
-import React from 'react';
-import { ReviewButtonItem } from './ReviewButtonItem';
+
 import * as S from './ReviewButtonGroup.styles';
+import { ReviewButtonItem } from './ReviewButtonItem';
 
 interface Props {
   setReview: (value: string | ((prevVar: string) => string)) => void;

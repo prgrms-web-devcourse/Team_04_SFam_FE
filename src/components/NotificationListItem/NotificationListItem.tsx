@@ -1,7 +1,9 @@
-import { Avatar } from '@components/Avatar';
-import { B1, B3, InnerWrapper } from '@styles/common';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
+import { Avatar } from '@components/Avatar';
+import { B1, B3, InnerWrapper } from '@styles/common';
+
 import * as S from './NotificationListItem.styles';
 
 interface Props {

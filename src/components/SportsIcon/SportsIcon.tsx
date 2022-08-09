@@ -1,6 +1,6 @@
-import { MdSportsSoccer, MdSportsBaseball, MdSportsBasketball, MdSportsTennis } from 'react-icons/md';
 import { FaTableTennis, FaBowlingBall } from 'react-icons/fa';
 import { GiShuttlecock } from 'react-icons/gi';
+import { MdSportsSoccer, MdSportsBaseball, MdSportsBasketball, MdSportsTennis } from 'react-icons/md';
 
 import * as S from './SportsIcon.styles';
 

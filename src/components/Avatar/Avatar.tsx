@@ -1,5 +1,6 @@
-import { ComponentProps } from 'react';
 import Image from 'next/image';
+import { ComponentProps } from 'react';
+
 import * as S from './Avatar.styles';
 
 interface Props {

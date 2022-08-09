@@ -1,7 +1,9 @@
+import Link from 'next/link';
+
 import { Avatar } from '@components/Avatar';
 import { MemberInfo } from '@interface/team';
 import { B2, InnerWrapper } from '@styles/common';
-import Link from 'next/link';
+
 import * as S from './TeamMember.styles';
 
 interface Props {

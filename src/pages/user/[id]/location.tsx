@@ -1,14 +1,15 @@
+import { useRouter } from 'next/router';
+import { NextPage } from 'next/types';
+import { useEffect, useState } from 'react';
 import useGeolocation from 'react-hook-geolocation';
+import { useRecoilState } from 'recoil';
+
+import { axiosAuthInstance } from '@api/axiosInstances';
 import { Address, kakaoMapApi } from '@api/kakaoMapApi';
 import { Button } from '@components/Button';
 import { Slider } from '@components/Slider';
-import { B2, B3, BoldB2, ColWrapper, Container, GrayB2, InnerWrapper } from '@styles/common';
-import { NextPage } from 'next/types';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { userState } from '@recoil/atoms';
-import { useRecoilState } from 'recoil';
-import { axiosAuthInstance } from '@api/axiosInstances';
+import { B2, B3, BoldB2, ColWrapper, Container, GrayB2, InnerWrapper } from '@styles/common';
 
 const LocationSetting: NextPage = () => {
   const [loginUser, setLoginUser] = useRecoilState(userState);

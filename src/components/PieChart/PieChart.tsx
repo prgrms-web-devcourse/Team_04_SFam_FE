@@ -1,4 +1,5 @@
 import { ResponsivePie } from '@nivo/pie';
+
 import { PieData } from './types';
 
 interface Props {

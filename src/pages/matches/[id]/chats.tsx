@@ -1,9 +1,14 @@
+import { NextPage } from 'next';
+import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+
 import { Button } from '@components/Button';
 import { ChatReceiver } from '@components/ChatReceiver';
 import { ChatSender } from '@components/ChatSender';
 import { Divider } from '@components/Divider';
 import { Dropdown, Item } from '@components/Dropdown';
 import { Message } from '@components/Message';
+import { userState } from '@recoil/atoms';
 import {
   B1,
   BoldGrayB2,
@@ -14,10 +19,6 @@ import {
   InnerWrapper,
   RowWrapper,
 } from '@styles/common';
-import { NextPage } from 'next';
-import { useEffect, useState } from 'react';
-import { userState } from '@recoil/atoms';
-import { useRecoilState } from 'recoil';
 
 const DropdownItems = [
   { id: 0, text: '모집 중', value: { status: 'WAITING' } },

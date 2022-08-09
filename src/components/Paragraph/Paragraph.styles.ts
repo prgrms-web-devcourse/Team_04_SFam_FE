@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { Props } from './types';
 
 export const ParagraphWrapper = styled.div<Props>`

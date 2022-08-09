@@ -1,6 +1,7 @@
-import { MdSend } from 'react-icons/md';
-import { Container, InnerWrapper, MessageInput } from '@styles/common';
 import { ChangeEvent, useState } from 'react';
+import { MdSend } from 'react-icons/md';
+
+import { Container, InnerWrapper, MessageInput } from '@styles/common';
 
 const Message = () => {
   const [text, setText] = useState('');

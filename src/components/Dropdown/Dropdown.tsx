@@ -1,5 +1,6 @@
 import React from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
+
 import * as S from './Dropdown.styles';
 import { Item } from './types';
 

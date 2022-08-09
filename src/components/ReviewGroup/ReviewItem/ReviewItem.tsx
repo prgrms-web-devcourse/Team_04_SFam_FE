@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import * as S from './ReviewItem.styles';
 
 interface Props {

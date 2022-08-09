@@ -1,6 +1,6 @@
-import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { FormEvent, useState } from 'react';
 
 import { axiosDefaultInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
@@ -8,8 +8,8 @@ import { Input } from '@components/Input';
 import { useForm } from '@hooks/useForm';
 import { B3, ColWrapper, Container, InnerWrapper } from '@styles/common';
 
-import { ErrorText, StrongText } from './SignUpForm.styles';
 import validation from './helper';
+import { ErrorText, StrongText } from './SignUpForm.styles';
 import { Values } from './types';
 
 const SignUpForm = () => {

@@ -1,4 +1,5 @@
 import { GrayB3 } from '@styles/common';
+
 import * as S from './ChatSender.styles';
 
 const ChatSender = () => {

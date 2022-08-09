@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { IoNotificationsSharp, IoChatboxSharp, IoHomeSharp, IoPerson } from 'react-icons/io5';
-import { FaPlus } from 'react-icons/fa';
-import { useRecoilState } from 'recoil';
 import React from 'react';
+import { FaPlus } from 'react-icons/fa';
+import { IoNotificationsSharp, IoChatboxSharp, IoHomeSharp, IoPerson } from 'react-icons/io5';
+import { useRecoilState } from 'recoil';
 
 import { userState } from '@recoil/atoms';
 

@@ -1,6 +1,7 @@
+import { NextPage } from 'next';
+
 import { NotificationListItem } from '@components/NotificationListItem';
 import { ColWrapper, Container } from '@styles/common';
-import { NextPage } from 'next';
 
 const NotificationPage: NextPage = () => (
   <Container>

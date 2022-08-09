@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
 import { AxiosResponse } from 'axios';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';

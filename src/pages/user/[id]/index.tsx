@@ -1,17 +1,17 @@
+import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { NextPage } from 'next';
 import React from 'react';
 
+import { axiosAuthInstance } from '@api/axiosInstances';
 import { Avatar } from '@components/Avatar';
 import { Divider } from '@components/Divider';
 import { ReviewGroup } from '@components/ReviewGroup';
 import { TeamBadge } from '@components/TeamBadge';
+import { Response } from '@interface/response';
 import { Team } from '@interface/team';
 import { UserInfo } from '@interface/user';
 import { B1, B2, ColWrapper, Container, GrayB3, InnerWrapper, Label, ResetBtn, RowWrapper } from '@styles/common';
-import { axiosAuthInstance } from '@api/axiosInstances';
-import { Response } from '@interface/response';
 
 const UserDetailPage: NextPage = () => {
   const router = useRouter();

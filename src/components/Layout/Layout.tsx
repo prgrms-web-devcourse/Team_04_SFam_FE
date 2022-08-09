@@ -1,12 +1,12 @@
+import { useRouter } from 'next/router';
 import React, { ReactNode, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { useRouter } from 'next/router';
 
 import { Heading } from '@components/Heading';
 import { Navigator } from '@components/Navigator';
-import { Main } from '@styles/common';
-import { userState } from '@recoil/atoms';
 import { publicPath } from '@constants/publicPath';
+import { userState } from '@recoil/atoms';
+import { Main } from '@styles/common';
 
 interface Props {
   children: ReactNode;

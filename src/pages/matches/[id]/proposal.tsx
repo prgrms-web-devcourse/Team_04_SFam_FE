@@ -1,9 +1,10 @@
+import { NextPage } from 'next';
+import { useState } from 'react';
+
 import { Button } from '@components/Button';
 import { Dropdown } from '@components/Dropdown';
 import { Container, ColWrapper, TextArea } from '@styles/common';
 import { Team } from 'interface/team';
-import { NextPage } from 'next';
-import { useState } from 'react';
 
 const MyTeamDummy: Team[] = [
   { id: 1, sportsCategory: 'tableTennis', name: '탁구왕 연승팀' },

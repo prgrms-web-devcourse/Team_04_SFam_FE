@@ -1,4 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+
 import * as S from './Slider.styles';
 
 interface Props {

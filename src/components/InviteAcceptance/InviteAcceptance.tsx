@@ -1,6 +1,7 @@
 import { Avatar } from '@components/Avatar';
-import { B2, RowWrapper, InnerWrapper, B1, GrayB3, B3 } from '@styles/common';
 import { Button } from '@components/Button';
+import { B2, RowWrapper, InnerWrapper, B1, GrayB3, B3 } from '@styles/common';
+
 import * as S from './InviteAcceptance.styles';
 
 const InviteAcceptance = () => (

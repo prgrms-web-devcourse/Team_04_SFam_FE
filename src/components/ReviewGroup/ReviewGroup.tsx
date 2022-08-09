@@ -1,8 +1,9 @@
+import DislikeIcon from '@assets/icons/dislike.svg';
 import BestIcon from '@assets/icons/great.svg';
 import LikeIcon from '@assets/icons/like.svg';
-import DislikeIcon from '@assets/icons/dislike.svg';
-import ReviewItem from './ReviewItem/ReviewItem';
+
 import * as S from './ReviewGroup.styles';
+import ReviewItem from './ReviewItem/ReviewItem';
 
 interface Props {
   bestCount: number;

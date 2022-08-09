@@ -1,8 +1,10 @@
-import logo from '@assets/logo/logo.svg';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+
+import logo from '@assets/logo/logo.svg';
 import { Button } from '@components/Button';
 import { B3, InnerWrapper } from '@styles/common';
+
 import * as S from './Welcome.styles';
 
 const Welcome = () => (

@@ -1,6 +1,7 @@
+import { NextPage } from 'next';
+
 import { ChatListItem } from '@components/ChatListItem';
 import { ColWrapper, Container } from '@styles/common';
-import { NextPage } from 'next';
 
 const DummyData = {
   chats: [

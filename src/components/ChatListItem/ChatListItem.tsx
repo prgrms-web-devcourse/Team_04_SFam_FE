@@ -1,5 +1,6 @@
 import { Avatar } from '@components/Avatar';
 import { InnerWrapper, B1, B3 } from '@styles/common';
+
 import * as S from './ChatListItem.styles';
 
 interface Props {
