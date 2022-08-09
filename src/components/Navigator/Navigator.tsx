@@ -55,7 +55,7 @@ const Navigator = () => {
         </S.NavItem>
         <S.NavItem>
           <Link
-            href='/chat'
+            href='/chatlist'
             passHref
           >
             <S.Anchor>
