@@ -1,6 +1,7 @@
 import * as S from './Badge.styles';
 
 interface Props {
+  matchType?: string;
   color?: string;
   width?: string;
   height?: string;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const Badge = ({
+  matchType,
   color = 'primary',
   width = '60px',
   height = '18px',
@@ -20,6 +22,7 @@ const Badge = ({
   children,
 }: Props) => (
   <S.Container
+    matchType={matchType}
     color={color}
     width={width}
     height={height}
