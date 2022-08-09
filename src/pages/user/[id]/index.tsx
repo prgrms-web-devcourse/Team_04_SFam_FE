@@ -51,6 +51,7 @@ const UserDetailPage: NextPage = () => {
   }, [router.isReady]);
 
   const handleLogout = () => {
+    if (!window.confirm('로그아웃 하시겠습니까?')) return;
     if (!router.isReady) return;
     (async () => {
       try {
@@ -109,8 +110,6 @@ const UserDetailPage: NextPage = () => {
           <Link href={`/user/${id as string}/location`}>
             <B2>내 동네 설정하기</B2>
           </Link>
-          {/* TODO: onClick 이벤트로 로그아웃 API 호출 */}
-          {/* <ResetBtn type='button'>로그아웃</ResetBtn> */}
           <B2 onClick={handleLogout}>로그아웃</B2>
         </ColWrapper>
       </ColWrapper>
