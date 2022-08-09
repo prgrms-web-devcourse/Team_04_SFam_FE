@@ -29,6 +29,7 @@ export const RowWrapper = styled.div<WrapperProps>`
   justify-content: ${(props) => props.justifyContent};
   margin: 16px 0;
   padding: ${(props) => props.padding};
+  gap: ${(props) => props.gap};
 `;
 
 export const InnerWrapper = styled.div<WrapperProps>`
@@ -82,11 +83,16 @@ export const RadioInput = styled.input`
   }
 `;
 
-export const IconSpan = styled.span`
+export const SearchButton = styled.button`
   position: absolute;
-  top: 5px;
+  display: flex;
+  align-items: center;
+  top: 0;
   right: 5px;
-  z-index: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
   cursor: pointer;
   color: ${(props) => props.theme.color.gray300};
 `;
@@ -207,7 +213,4 @@ export const Anchor = styled.a`
   color: inherit;
 `;
 
-export const UserList = styled.div`
-  margin-top: 25px;
-  margin-left: 10px;
-`;
+export const UserList = styled.div``;

@@ -13,3 +13,10 @@ export interface UserInfo {
   };
   teams: Team[];
 }
+
+export interface User {
+  id: number;
+  username: string;
+  nickname: string;
+  profileImageUrl: string | null;
+}

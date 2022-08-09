@@ -1,49 +1,56 @@
 import { NextPage } from 'next';
 import React from 'react';
 import { MdSearch } from 'react-icons/md';
-import { MemberInfo } from '@interface/team';
-import { Input } from '@components/Input/';
-import { TeamMember } from '@components/TeamMember';
-import { Response } from '@interface/response';
-import { ColWrapper, Container, IconSpan, InlineWrapper, UserList } from '@styles/common';
+
 import { axiosAuthInstance } from '@api/axiosInstances';
+import { Input } from '@components/Input/';
+import { UserListItem } from '@components/UserListItem';
+import { Response } from '@interface/response';
+import { User } from '@interface/user';
+import { ColWrapper, Container, InlineWrapper, SearchButton, UserList } from '@styles/common';
 
 const TeamInvitationPage: NextPage = () => {
   const [username, setUsername] = React.useState('');
-  const [result, setResult] = React.useState<MemberInfo[]>([]);
+  const [users, setUsers] = React.useState<User[]>([]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setUsername(value);
   };
-  const handleClick = () => {
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
     (async () => {
       const {
         data: { data },
-      } = await axiosAuthInstance.get<Response<MemberInfo[]>>(`/api/users`, { params: { nickname: username } });
-      setResult(() => data);
+      } = await axiosAuthInstance.get<Response<User[]>>(`/api/users`, { params: { nickname: username } });
+
+      setUsers(() => data);
     })();
   };
+
   return (
     <Container>
-      <ColWrapper gap='16px'>
+      <ColWrapper>
         <InlineWrapper>
-          <Input
-            placeholder='팀원 검색'
-            onChange={handleChange}
-            value={username}
-          />
-          <IconSpan>
-            <MdSearch
-              size={25}
-              onClick={handleClick}
+          <form onSubmit={handleSubmit}>
+            <Input
+              type='text'
+              placeholder='팀원 검색'
+              onChange={handleChange}
+              value={username}
             />
-          </IconSpan>
+            <SearchButton>
+              <MdSearch size={25} />
+            </SearchButton>
+          </form>
         </InlineWrapper>
         <UserList>
-          {result.map((item: MemberInfo) => (
-            <TeamMember
-              key={item.id}
-              info={item}
+          {users.map((user: User) => (
+            <UserListItem
+              key={user.id}
+              user={user}
             />
           ))}
         </UserList>
