@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { MdSearch } from 'react-icons/md';
 
@@ -10,12 +11,25 @@ import { User } from '@interface/user';
 import { ColWrapper, Container, InlineWrapper, SearchButton, UserList } from '@styles/common';
 
 const TeamInvitationPage: NextPage = () => {
+  const router = useRouter();
+
   const [username, setUsername] = React.useState('');
   const [users, setUsers] = React.useState<User[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setUsername(value);
+  };
+
+  const handleClick = (user: User) => {
+    if (window.confirm(`${user.nickname}을 초대하시겠습니까?`)) {
+      const InvitationApi = async () => {
+        await axiosAuthInstance.post(`/api/teams/${router.query.id as string}/invitations`, {
+          targetUserId: user.id,
+        });
+      };
+      InvitationApi();
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -51,6 +65,7 @@ const TeamInvitationPage: NextPage = () => {
             <UserListItem
               key={user.id}
               user={user}
+              onClick={handleClick}
             />
           ))}
         </UserList>
