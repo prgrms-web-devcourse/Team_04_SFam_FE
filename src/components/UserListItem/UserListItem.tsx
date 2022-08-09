@@ -1,27 +1,34 @@
-import Link from 'next/link';
+import React from 'react';
 
 import { Avatar } from '@components/Avatar';
 import { User } from '@interface/user';
-import { Anchor, B2, InnerWrapper, RowWrapper } from '@styles/common';
+import { B2, InnerWrapper, RowWrapper } from '@styles/common';
+
+import * as S from './UserListItem.styles';
 
 interface Props {
   user: User;
+  onClick: (user: User) => void;
 }
 
-const UserListItem = ({ user }: Props) => (
-  <RowWrapper
-    gap='16px'
-    alignItems='center'
-  >
-    <Link href={`/user/${user.id}`}>
-      <Anchor>
+const UserListItem = ({ user, onClick }: Props) => {
+  const handleClick = () => {
+    onClick(user);
+  };
+
+  return (
+    <S.Container onClick={handleClick}>
+      <RowWrapper
+        gap='16px'
+        alignItems='center'
+      >
         <Avatar imgSize='60px' />
-      </Anchor>
-    </Link>
-    <InnerWrapper>
-      <B2>{user.nickname}</B2>
-    </InnerWrapper>
-  </RowWrapper>
-);
+        <InnerWrapper>
+          <B2>{user.nickname}</B2>
+        </InnerWrapper>
+      </RowWrapper>
+    </S.Container>
+  );
+};
 
 export default UserListItem;
