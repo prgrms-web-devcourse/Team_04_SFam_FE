@@ -8,11 +8,12 @@ import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { useForm } from '@hooks/useForm';
+import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
 import { B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
 
 import validation from './helper';
-import { ErrorResponse, Values } from './types';
+import { ErrorResponse, SuccessResponse, Values } from './types';
 
 const SignInForm = () => {
   const router = useRouter();
@@ -23,17 +24,22 @@ const SignInForm = () => {
     e?.preventDefault();
     const signin = async () => {
       try {
-        const res = await axiosAuthInstance({
-          method: 'post',
-          url: '/api/users/signin',
-          data: {
-            username,
-            password,
-          },
+        const res = await axiosAuthInstance.post<Response<SuccessResponse>>('/api/users/signin', {
+          username,
+          password,
         });
         if (res.status === 200) {
+          console.log(res);
           setUser((res.data as { data: object }).data);
-          router.replace('/matches');
+          if (
+            res.data.data.latitude === null ||
+            res.data.data.longitude === null ||
+            res.data.data.searchDistance === null
+          ) {
+            router.replace(`/user/${res.data.data.id}/location`);
+          } else {
+            router.replace('/matches');
+          }
         }
       } catch (err) {
         const { response } = err as AxiosError;

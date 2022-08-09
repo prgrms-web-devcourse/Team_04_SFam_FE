@@ -7,7 +7,9 @@ interface UserState {
   id?: number;
   username?: string;
   nickname?: string;
-  distance?: number;
+  latitude?: number;
+  longitude?: number;
+  searchDistance?: number;
 }
 
 export const userState = atom<UserState>({
