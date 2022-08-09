@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 interface Props {
+  matchType?: string;
   color: string;
   width: string;
   height: string;
@@ -19,5 +20,10 @@ export const Container = styled.div<Props>`
   font-size: ${({ fontSize }) => fontSize};
   border-radius: ${({ borderRadius }) => borderRadius};
   color: ${({ fontColor, theme }) => (fontColor === 'primary' ? `${theme.color.background}` : fontColor)};
-  background-color: ${({ color, theme }) => (color === 'primary' ? `${theme.color.green200}` : color)};
+  background-color: ${({ color, theme, matchType }) => {
+    if (matchType) {
+      return matchType === 'TEAM_MATCH' ? theme.color.primary : theme.color.yellow;
+    }
+    return color === 'primary' ? `${theme.color.green200}` : color;
+  }};
 `;

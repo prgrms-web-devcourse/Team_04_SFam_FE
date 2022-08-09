@@ -7,31 +7,25 @@ export const Container = styled.div`
 `;
 
 export const Category = styled.div`
-  text-align: center;
+  display: flex;
+  gap: 12px;
+  padding: 8px 16px;
   width: 100%;
-  height: 100px;
-  padding: 20px 10px 0 7px;
   overflow: auto;
   position: fixed;
   white-space: nowrap;
+  background-color: ${({ theme }) => theme.color.background};
+  border-bottom: 1px solid ${({ theme }) => theme.color.gray200};
+
   ::-webkit-scrollbar {
     display: none;
   }
-  background-color: ${({ theme }) => theme.color.background};
-  border-bottom: 1px solid #adb5bd;
 `;
 
 export const ListContainer = styled.div`
-  padding-top: 100px;
-`;
-
-export const ButtonContainer = styled.div`
-  position: fixed;
-  bottom: 70px;
-  left: 50%;
-  transform: translateX(-50%);
-`;
-
-export const Anchor = styled.a`
-  text-decoration: none;
+  padding-top: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: ${({ theme }) => theme.color.gray200};
 `;

@@ -1,4 +1,5 @@
 import { Badge } from '@components/Badge';
+import { MATCH_TYPE_TEXT, SPORTS_TEXT } from '@constants/text';
 import { B3, ColWrapper, InnerWrapper } from '@styles/common';
 import theme from '@styles/theme';
 import Link from 'next/link';
@@ -10,11 +11,10 @@ interface Props {
   category: string;
   matchType: string; // 개인전 or 팀전
   content: string;
-  distance: number; // distance 현재 위치에서 글 작성 위치 까지 거리
   createdAt: string; // 글 작성 일자
 }
 
-const MatchListItem = ({ id, title, category, matchType, content, distance, createdAt }: Props) => (
+const MatchListItem = ({ id, title, category, matchType, content, createdAt }: Props) => (
   <Link
     href={{
       pathname: `/matches/${id}`,
@@ -34,12 +34,10 @@ const MatchListItem = ({ id, title, category, matchType, content, distance, crea
         </InnerWrapper>
         <S.RowWrapper>
           <InnerWrapper>
-            <Badge>{category}</Badge>
-            <Badge color={matchType === '개인전' ? `${theme.color.primary}` : `${theme.color.yellow}`}>
-              {matchType}
-            </Badge>
+            <Badge>{SPORTS_TEXT[category]}</Badge>
+            <Badge matchType={matchType}>{MATCH_TYPE_TEXT[matchType]}</Badge>
           </InnerWrapper>
-          <B3>{createdAt}</B3>
+          <B3>{createdAt.slice(0, 10)}</B3>
         </S.RowWrapper>
       </S.Description>
     </S.Container>

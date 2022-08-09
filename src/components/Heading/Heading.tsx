@@ -1,5 +1,10 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { FaPencilAlt } from 'react-icons/fa';
 import { MdArrowBackIos } from 'react-icons/md';
+
+import { Anchor, RowWrapper } from '@styles/common';
+
 import * as S from './Heading.styles';
 import { HeadingTitleProps } from './types';
 
@@ -28,10 +33,27 @@ export const noBackIcon = ['/signup', '/signin', '/matches', '/matches/:id/revie
 const Heading = () => {
   const router = useRouter();
   return (
-    <S.HeadingWrapper>
-      {!noBackIcon.includes(router.pathname) ? <MdArrowBackIos onClick={() => router.back()} /> : <div />}
-      <S.HeadingTitle>{headingTitle[router.pathname]}</S.HeadingTitle>
-    </S.HeadingWrapper>
+    <S.HeadingContainer>
+      <RowWrapper>
+        {!noBackIcon.includes(router.pathname) ? <MdArrowBackIos onClick={() => router.back()} /> : <div />}
+        <S.HeadingTitle>{headingTitle[router.pathname]}</S.HeadingTitle>
+      </RowWrapper>
+      {router.pathname === '/matches' ? (
+        <Link
+          href='/matches/create'
+          passHref
+        >
+          <Anchor>
+            <S.HeadingLinkContainer>
+              <span>글쓰기</span>
+              <FaPencilAlt />
+            </S.HeadingLinkContainer>
+          </Anchor>
+        </Link>
+      ) : (
+        ''
+      )}
+    </S.HeadingContainer>
   );
 };
 
