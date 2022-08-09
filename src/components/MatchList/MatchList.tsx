@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { AxiosResponse } from 'axios';
+
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { FilterButton } from '@components/FilterButton';
 import { MatchListItem } from '@components/MatchListItem';
 import { SPORTS_CATEGORY } from '@constants/dropdown';
-import theme from '@styles/theme';
+
 import * as S from './MatchList.styles';
 import { Match, Response } from './types';
 
@@ -24,7 +25,7 @@ const MatchList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const observerRef = useRef<HTMLDivElement>(null);
 
-  const onClick = (e: React.MouseEvent<HTMLElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const { dataset } = e.target as HTMLElement;
     const { value } = dataset;
     if (category === value) {
@@ -113,12 +114,9 @@ const MatchList = () => {
         {SPORTS_CATEGORY.map((item) => (
           <FilterButton
             key={item.id}
-            size='70px'
-            fontSize='15px'
-            margin='10px'
             data-value={item.value.sportsCategory}
-            color={category === item.value.sportsCategory ? `${theme.color.primary}` : `${theme.color.green200}`}
-            onClick={onClick}
+            active={item.value.sportsCategory === category}
+            onClick={handleClick}
           >
             {item.text}
           </FilterButton>
@@ -133,28 +131,10 @@ const MatchList = () => {
             category={item.category}
             matchType={item.matchType}
             content={item.content}
-            distance={item.distance}
             createdAt={item.createdAt}
           />
         ))}
       </S.ListContainer>
-
-      <S.ButtonContainer>
-        <Link
-          href='/matches/create'
-          passHref
-        >
-          <S.Anchor>
-            <Button
-              round
-              width='120px'
-              height='35px'
-            >
-              글쓰기
-            </Button>
-          </S.Anchor>
-        </Link>
-      </S.ButtonContainer>
     </S.Container>
   );
 };
