@@ -39,13 +39,19 @@ const LocationSetting: NextPage = () => {
   }, [geolocation.latitude, geolocation.longitude]);
 
   const handleClick = () => {
-    setLoginUser({ ...loginUser, distance });
+    setLoginUser({
+      ...loginUser,
+      longitude: geolocation.longitude,
+      latitude: geolocation.latitude,
+      searchDistance: distance,
+    });
     axiosAuthInstance({
       method: 'PUT',
       url: '/api/users/location',
       data: {
         latitude: geolocation.latitude,
         longitude: geolocation.longitude,
+        searchDistance: distance,
       },
     }).then((res) => {
       if (res.status === 200) {
