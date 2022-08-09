@@ -50,6 +50,14 @@ const Layout = ({ children }: Props) => {
   if (router.pathname === '/') {
     return <main>{children}</main>;
   }
+  if (router.pathname === '/signin' || router.pathname === '/signup') {
+    return (
+      <>
+        <Heading />
+        <Main>{children}</Main>
+      </>
+    );
+  }
   return (
     <>
       <Heading />
