@@ -58,10 +58,6 @@ const TeamDetailPage: NextPage = () => {
     })();
   }, [router.isReady]);
 
-  const handleClick = () => {
-    router.push('/team/invitation');
-  };
-
   return (
     <Container>
       <RowWrapper>
@@ -102,7 +98,7 @@ const TeamDetailPage: NextPage = () => {
             <Label>팀원 목록</Label>
             {isLeader && (
               <Link
-                href='/team/invitation'
+                href={`/team/${router.query.id as string}/invitation`}
                 passHref
               >
                 <Anchor>
@@ -110,7 +106,6 @@ const TeamDetailPage: NextPage = () => {
                     width='24px'
                     height='24px'
                     round
-                    onClick={handleClick}
                   >
                     +
                   </Button>
