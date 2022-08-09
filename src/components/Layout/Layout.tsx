@@ -23,7 +23,14 @@ const Layout = ({ children }: Props) => {
         await router.replace('/');
       } else if (publicPath.includes(router.pathname) && user.id !== undefined) {
         await new Promise(() => {
-          router.back();
+          if (
+            document.referrer &&
+            (document.referrer.indexOf('dongkyurami.link') !== -1 || document.referrer.indexOf('localhost'))
+          ) {
+            router.back();
+          } else {
+            router.replace('/matches');
+          }
         });
       }
     };
