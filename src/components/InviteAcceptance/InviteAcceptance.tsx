@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useRecoilState } from 'recoil';
@@ -54,6 +55,7 @@ const InviteAcceptance = () => {
       teamId,
       invitationId,
     });
+    router.push('/notification');
   };
 
   const handleAccept = () => {
@@ -71,6 +73,7 @@ const InviteAcceptance = () => {
     } catch (err) {
       console.log(err);
     }
+    router.push('/notification');
   };
 
   return (
@@ -100,6 +103,7 @@ const InviteAcceptance = () => {
         >
           거절
         </S.RejectButton>
+
         <S.AcceptButton
           height='50px'
           width='160px'
