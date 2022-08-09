@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { Badge } from '@components/Badge';
 import { SportsIcon } from '@components/SportsIcon';

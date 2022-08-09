@@ -1,9 +1,12 @@
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Avatar } from '@components/Avatar';
+import { Button } from '@components/Button';
 import { Divider } from '@components/Divider';
 import { MatchRecordChart } from '@components/MatchRecordChart';
 import { Paragraph } from '@components/Paragraph';
@@ -13,15 +16,18 @@ import { TeamMember } from '@components/TeamMember';
 import { SPORTS_TEXT } from '@constants/text';
 import { Response } from '@interface/response';
 import { TeamInfo } from '@interface/team';
-import { B1, B3, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
+import { userState } from '@recoil/atoms';
+import { Anchor, B1, B3, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
 
 const TeamDetailPage: NextPage = () => {
   const router = useRouter();
+  const user = useRecoilValue(userState);
 
   const [teamInfo, setTeamInfo] = React.useState<TeamInfo>({
     name: '',
     description: '',
     sportsCategory: '',
+    leader: {},
     members: [],
     matchRecord: {
       win: 0,
@@ -34,6 +40,7 @@ const TeamDetailPage: NextPage = () => {
       dislikeCount: 0,
     },
   });
+  const [isLeader, setIsLeader] = React.useState(false);
 
   React.useEffect(() => {
     if (!router.isReady) return;
@@ -45,8 +52,15 @@ const TeamDetailPage: NextPage = () => {
       } = await axiosAuthInstance.get<Response<TeamInfo>>(`/api/teams/${id as string}`);
 
       setTeamInfo(() => data);
+      if (data.leader.id === user.id) {
+        setIsLeader(true);
+      }
     })();
   }, [router.isReady]);
+
+  const handleClick = () => {
+    router.push('/team/invitation');
+  };
 
   return (
     <Container>
@@ -86,7 +100,23 @@ const TeamDetailPage: NextPage = () => {
         <RowWrapper>
           <InnerWrapper alignItems='center'>
             <Label>팀원 목록</Label>
-            {/* TODO: 로그인 유저와 팀의 리더가 일치할 때 보여질 버튼 링크 */}
+            {isLeader && (
+              <Link
+                href='/team/invitation'
+                passHref
+              >
+                <Anchor>
+                  <Button
+                    width='24px'
+                    height='24px'
+                    round
+                    onClick={handleClick}
+                  >
+                    +
+                  </Button>
+                </Anchor>
+              </Link>
+            )}
           </InnerWrapper>
         </RowWrapper>
         <ColWrapper gap='16px'>
