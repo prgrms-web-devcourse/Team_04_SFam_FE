@@ -48,7 +48,7 @@ const Layout = ({ children }: Props) => {
 
   if (isLoading) return null;
   if (router.pathname === '/') {
-    return <Main>{children}</Main>;
+    return <main>{children}</main>;
   }
   return (
     <>
