@@ -24,33 +24,14 @@ const Welcome = () => (
     </S.TextWrapper>
     <S.ButtonContainer>
       <Link
-        href='/matches'
+        href='/signin'
         passHref
       >
         <InnerWrapper>
           <Button width='300px'>시작하기</Button>
         </InnerWrapper>
       </Link>
-
-      <S.Info>
-        이미 계정이 있으신가요?
-        <Link
-          href='/signin'
-          passHref
-        >
-          <S.Login> 로그인하기</S.Login>
-        </Link>
-      </S.Info>
     </S.ButtonContainer>
-    <S.Info>
-      <B3>이미 계정이 있으신가요?</B3>
-      <Link
-        href='/signin'
-        passHref
-      >
-        <S.Login> 로그인하기</S.Login>
-      </Link>
-    </S.Info>
   </S.Container>
 );
 
