@@ -1,9 +1,12 @@
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Avatar } from '@components/Avatar';
+import { Button } from '@components/Button';
 import { Divider } from '@components/Divider';
 import { MatchRecordChart } from '@components/MatchRecordChart';
 import { Paragraph } from '@components/Paragraph';
@@ -13,11 +16,8 @@ import { TeamMember } from '@components/TeamMember';
 import { SPORTS_TEXT } from '@constants/text';
 import { Response } from '@interface/response';
 import { TeamInfo } from '@interface/team';
-import { Anchor, B1, B3, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
-import { useRecoilValue } from 'recoil';
 import { userState } from '@recoil/atoms';
-import { Button } from '@components/Button';
-import Link from 'next/link';
+import { Anchor, B1, B3, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
 
 const TeamDetailPage: NextPage = () => {
   const router = useRouter();

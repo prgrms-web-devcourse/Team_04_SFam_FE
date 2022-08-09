@@ -1,10 +1,10 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { Badge } from '@components/Badge';
 import { SportsIcon } from '@components/SportsIcon';
 import { Team } from '@interface/team';
 
-import { useRouter } from 'next/router';
 import * as S from './TeamBadge.styles';
 import { ColorProps } from './types';
 
