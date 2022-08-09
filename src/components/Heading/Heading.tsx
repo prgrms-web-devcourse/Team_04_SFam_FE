@@ -25,7 +25,8 @@ export const headingTitle: HeadingTitleProps = {
   '/matches/[id]/review': '후기 작성',
   '/matches/[id]/proposal': '신청하기',
   '/matches/[id]/chats': `유저 닉네임`,
-  '/chat': '채팅',
+  '/matches/[id]/chatlist': '매치 채팅',
+  '/chatlist': '전체 채팅',
 };
 
 export const noBackIcon = ['/signup', '/signin', '/matches', '/matches/:id/review', 'users/:id'];

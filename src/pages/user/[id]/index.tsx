@@ -13,7 +13,7 @@ import { Response } from '@interface/response';
 import { Team } from '@interface/team';
 import { UserInfo } from '@interface/user';
 import { userState } from '@recoil/atoms';
-import { B1, B2, ColWrapper, Container, GrayB3, InnerWrapper, Label, ResetBtn, RowWrapper } from '@styles/common';
+import { B1, B2, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
 
 const UserDetailPage: NextPage = () => {
   const router = useRouter();
@@ -48,10 +48,9 @@ const UserDetailPage: NextPage = () => {
         // 에러 처리 필요
       }
     })();
-  }, [router.isReady]);
+  }, [id, router.isReady]);
 
   const handleLogout = () => {
-    if (!window.confirm('로그아웃 하시겠습니까?')) return;
     if (!router.isReady) return;
     (async () => {
       try {
