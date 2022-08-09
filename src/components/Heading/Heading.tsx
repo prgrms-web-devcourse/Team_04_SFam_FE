@@ -13,6 +13,7 @@ export const headingTitle: HeadingTitleProps = {
   '/signup': '회원가입',
   '/signin': '로그인',
   '/notification': '알림',
+  '/notification/[...id]': '팀 초대 수락',
   '/team/create': '팀 생성',
   '/team/[id]': '팀 프로필',
   '/team/[id]/invitation': '팀원 초대',

@@ -18,6 +18,7 @@ interface Invitation {
 interface TeamInvite {
   createdAt: string;
   invitationId: number;
+  teamId: number;
   name: string;
 }
 
@@ -100,6 +101,7 @@ const NotificationPage: NextPage = () => {
               <NotificationListItem
                 name={invitation.name}
                 invitationId={invitation.invitationId}
+                teamId={invitation.teamId}
                 key={invitation.invitationId}
               />
             ))}

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 import { Avatar } from '@components/Avatar';
 import { B1, B3, InnerWrapper } from '@styles/common';
@@ -9,12 +8,12 @@ import * as S from './NotificationListItem.styles';
 interface Props {
   name: string;
   invitationId: number;
+  teamId: number;
 }
 
-const NotificationListItem = ({ name, invitationId }: Props) => (
-  // 여기서 어디로 가야하는건가
+const NotificationListItem = ({ name, invitationId, teamId }: Props) => (
   <Link
-    href={`/notification/${invitationId}`}
+    href={`/notification/${invitationId}/${teamId}`}
     passHref
   >
     <S.NotificationListItemContainer>
