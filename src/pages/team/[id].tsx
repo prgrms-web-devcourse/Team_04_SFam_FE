@@ -121,7 +121,7 @@ const TeamDetailPage: NextPage = () => {
         </RowWrapper>
         <ColWrapper gap='16px'>
           {teamInfo.members.map((member) => (
-            <div key={member.id}>
+            <div key={member.userId}>
               <TeamMember info={member} />
             </div>
           ))}

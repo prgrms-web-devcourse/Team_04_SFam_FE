@@ -12,7 +12,7 @@ interface Props {
 
 const TeamMember = ({ info }: Props) => (
   <Link
-    href={`/user/${info.id as unknown as string}`}
+    href={`/user/${info.userId}`}
     passHref
   >
     <S.Anchor>
