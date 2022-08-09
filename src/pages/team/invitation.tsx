@@ -2,39 +2,58 @@ import { NextPage } from 'next';
 import React from 'react';
 import { MdSearch } from 'react-icons/md';
 
+import { axiosAuthInstance } from '@api/axiosInstances';
 import { Input } from '@components/Input/';
-import { TeamMember } from '@components/TeamMember';
-import { ColWrapper, Container, IconSpan, InlineWrapper } from '@styles/common';
+import { UserListItem } from '@components/UserListItem';
+import { Response } from '@interface/response';
+import { User } from '@interface/user';
+import { ColWrapper, Container, InlineWrapper, SearchButton, UserList } from '@styles/common';
 
 const TeamInvitationPage: NextPage = () => {
-  const [username, setUsername] = React.useState('연승연');
+  const [username, setUsername] = React.useState('');
+  const [users, setUsers] = React.useState<User[]>([]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setUsername(value);
   };
-  const handleClick = () => {
-    // TODO: API 요청
-    // TODO: API로 반환 된 유저 상태 저장 후 반환
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    (async () => {
+      const {
+        data: { data },
+      } = await axiosAuthInstance.get<Response<User[]>>(`/api/users`, { params: { nickname: username } });
+
+      setUsers(() => data);
+    })();
   };
-  console.log(username);
 
   return (
     <Container>
-      <ColWrapper gap='16px'>
+      <ColWrapper>
         <InlineWrapper>
-          <Input
-            placeholder='팀원 검색'
-            onChange={handleChange}
-          />
-          <IconSpan>
-            <MdSearch
-              size={25}
-              onClick={handleClick}
+          <form onSubmit={handleSubmit}>
+            <Input
+              type='text'
+              placeholder='팀원 검색'
+              onChange={handleChange}
+              value={username}
             />
-          </IconSpan>
+            <SearchButton>
+              <MdSearch size={25} />
+            </SearchButton>
+          </form>
         </InlineWrapper>
-        {/* TODO: 검색 후 조건부 렌더링 */}
-        {/* <TeamMember info={} /> */}
+        <UserList>
+          {users.map((user: User) => (
+            <UserListItem
+              key={user.id}
+              user={user}
+            />
+          ))}
+        </UserList>
       </ColWrapper>
     </Container>
   );
