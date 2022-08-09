@@ -37,5 +37,3 @@ export interface TeamInfo {
   matchRecord: MatchRecord;
   matchReview: ReviewInfo;
 }
-<<<<<<< HEAD
-=======
