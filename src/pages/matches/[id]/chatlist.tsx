@@ -1,10 +1,11 @@
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { ChatListItem } from '@components/ChatListItem';
 import { Response } from '@interface/response';
 import { ColWrapper, Container, InnerWrapper } from '@styles/common';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
 interface Chat {
   id: number;

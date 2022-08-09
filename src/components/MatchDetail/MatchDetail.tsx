@@ -38,9 +38,6 @@ const PostDetail = () => {
       const {
         data: { data },
       } = await axiosAuthInstance.get<Response<MatchDetail>>(`/api/matches/${id as string}`);
-
-      console.log(data);
-
       setMatchDetail(data);
       setIsAuthor(data.author.id === user.id);
       setStatus(data.status);
@@ -98,7 +95,7 @@ const PostDetail = () => {
       </RowWrapper>
       {isAuthor && (
         <Link
-          href='/chats'
+          href={`/matches/${id as string}/chatlist`}
           passHref
         >
           <Anchor>
@@ -116,7 +113,6 @@ const PostDetail = () => {
           </Anchor>
         </Link>
       )}
-      {/* TODO: 신청 정보를 받아서 1:1 채팅 페이지로 바로 이동 */}
     </S.Container>
   );
 };
