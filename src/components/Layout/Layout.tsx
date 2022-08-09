@@ -18,7 +18,7 @@ const Layout = ({ children }: Props) => {
   const [isLoading, setIsLoading] = React.useState(true);
 
   useEffect(() => {
-    const test = async () => {
+    const userCheck = async () => {
       if (!publicPath.includes(router.pathname) && user.id === undefined) {
         await router.replace('/');
       } else if (publicPath.includes(router.pathname) && user.id !== undefined) {
@@ -32,17 +32,31 @@ const Layout = ({ children }: Props) => {
             router.replace('/matches');
           }
         });
+      } else if (
+        user.id !== undefined &&
+        router.pathname !== `/user/[id]` &&
+        (user.latitude === null || user.longitude === null || user.searchDistance === null)
+      ) {
+        await router.replace(`/user/${user.id}/location`);
       }
     };
     (async () => {
-      await test();
+      await userCheck();
       setIsLoading(false);
     })();
   }, [router.pathname]);
 
   if (isLoading) return null;
   if (router.pathname === '/') {
-    return <Main>{children}</Main>;
+    return <main>{children}</main>;
+  }
+  if (router.pathname === '/signin' || router.pathname === '/signup') {
+    return (
+      <>
+        <Heading />
+        <Main>{children}</Main>
+      </>
+    );
   }
   return (
     <>

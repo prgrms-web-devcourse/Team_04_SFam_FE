@@ -4,9 +4,13 @@ export interface Values {
 }
 
 export interface SuccessResponse {
+  email: string | null;
   id: number;
   username: string;
   nickname: string;
+  latitude: number | null;
+  longitude: number | null;
+  searchDistance: number | null;
 }
 
 export interface ErrorResponse {
