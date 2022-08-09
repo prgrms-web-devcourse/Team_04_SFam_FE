@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
@@ -17,21 +18,20 @@ interface Chat {
   };
 }
 const ChatListPage: NextPage = () => {
+  const router = useRouter();
   const [chatList, setChatList] = useState<Chat[]>([]);
 
-  // useEffect(() => {
-  //   if (!router.isReady) return;
-  //   const ChatListApi = async () => {
-  //     await axiosAuthInstance
-  //       .get<Response<Chat>>('/api/matches/proposals/')
-  //       .then((res) => {
-  //         if (res.status === 200) {
-  //           setChatList(res.data.data);
-  //         }
-  //       });
-  //   };
-  //   ChatListApi();
-  // }, [router.isReady]);
+  useEffect(() => {
+    if (!router.isReady) return;
+    const ChatListApi = async () => {
+      await axiosAuthInstance.get<Response<Chat[]>>('/api/matches/proposals').then((res) => {
+        if (res.status === 200) {
+          setChatList(res.data.data);
+        }
+      });
+    };
+    ChatListApi();
+  }, [router.isReady]);
 
   return (
     <Container>
@@ -39,7 +39,7 @@ const ChatListPage: NextPage = () => {
         {chatList.map((chat) => (
           <ChatListItem
             nickname={chat.target.nickname}
-            lastChat={chat.lastChat.content}
+            lastChat={chat.content}
             key={chat.id}
           />
         ))}
