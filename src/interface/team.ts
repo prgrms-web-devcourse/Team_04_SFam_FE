@@ -4,6 +4,7 @@ export interface Team {
   id: number;
   sportsCategory: string;
   name: string;
+  logoImageUrl: string | null;
 }
 
 export interface MemberInfo {
