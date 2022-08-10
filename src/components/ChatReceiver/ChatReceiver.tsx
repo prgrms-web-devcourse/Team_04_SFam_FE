@@ -1,20 +1,36 @@
 import { CgProfile } from 'react-icons/cg';
 
-import { Paragraph } from '@components/Paragraph';
-import { B3, GrayB3, InnerWrapper } from '@styles/common';
+import { hourToString } from '@components/ChatSender/ChatSender';
+import { Chat } from '@interface/chat';
+import { GrayB4 } from '@styles/common';
 
 import * as S from './ChatReceiver.styles';
 
-const ChatReceiver = () => (
-  // TODO: API 연동한 데이터 props로 넘겨줄 것
-  <InnerWrapper>
-    <CgProfile size='42px' />
-    <S.ReceiverWrapper>
-      <B3>정기홍 님이 대화를 수락했어요!! 대화를 시작해보세요!</B3>
-    </S.ReceiverWrapper>
-    <S.TimeWrapper>
-      <GrayB3>오전 10:10</GrayB3>
-    </S.TimeWrapper>
-  </InnerWrapper>
-);
+interface Props {
+  chat: Chat;
+}
+
+const ChatReceiver = ({ chat }: Props) => {
+  const curChattedAt = chat.chattedAt.split('T')[1];
+  const curChattedAtToString = `${hourToString(curChattedAt.slice(0, 2))}${curChattedAt.slice(2, 5)}`;
+  return (
+    <S.Container>
+      <S.ChatWrapper>
+        <S.ProfileWrapper>
+          <CgProfile size='42px' />
+        </S.ProfileWrapper>
+        <S.MessageContentWrapper>
+          <S.ProfileText>{chat.writer.id}</S.ProfileText>
+          <S.ReceiverWrapper>
+            <S.ChatText>{chat.content}</S.ChatText>
+          </S.ReceiverWrapper>
+        </S.MessageContentWrapper>
+        <S.TimeWrapper>
+          <GrayB4>{curChattedAtToString}</GrayB4>
+        </S.TimeWrapper>
+      </S.ChatWrapper>
+    </S.Container>
+  );
+};
+
 export default ChatReceiver;
