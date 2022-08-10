@@ -4,6 +4,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
+import { Badge } from '@components/Badge';
 import { Button } from '@components/Button';
 import { Dropdown, Item } from '@components/Dropdown';
 import { Paragraph } from '@components/Paragraph';
@@ -57,13 +58,23 @@ const PostDetail = () => {
         alignItems='center'
       >
         <S.Title>{matchDetail?.title}</S.Title>
-        <Dropdown
-          round
-          placeholder={MATCH_STATUS_TEXT[status]}
-          disabled={!isAuthor}
-          items={MATCH_STATUS_DETAIL}
-          onSelect={handleSelect}
-        />
+        {isAuthor ? (
+          <Dropdown
+            round
+            placeholder={MATCH_STATUS_TEXT[status]}
+            items={MATCH_STATUS_DETAIL}
+            onSelect={handleSelect}
+          />
+        ) : (
+          <Badge
+            fontSize='16px'
+            width='89px'
+            height='32px'
+            color='secondary'
+          >
+            {MATCH_STATUS_TEXT[status]}
+          </Badge>
+        )}
       </RowWrapper>
       <S.Info>
         <S.Detail>

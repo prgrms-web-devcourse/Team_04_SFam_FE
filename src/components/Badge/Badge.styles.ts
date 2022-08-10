@@ -24,6 +24,9 @@ export const Container = styled.div<Props>`
     if (matchType) {
       return matchType === 'TEAM_MATCH' ? theme.color.primary : theme.color.yellow;
     }
-    return color === 'primary' ? `${theme.color.green200}` : color;
+
+    if (color === 'primary') return `${theme.color.green200}`;
+    if (color === 'secondary') return `${theme.color.secondary}`;
+    return color;
   }};
 `;
