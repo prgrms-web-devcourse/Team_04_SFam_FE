@@ -11,7 +11,7 @@ import { Divider } from '@components/Divider';
 import { Dropdown, Item } from '@components/Dropdown';
 import { Message } from '@components/Message';
 import { ChatsProps } from '@interface/chat';
-import { ProposalProps } from '@interface/proposals';
+import { ProposalInfo } from '@interface/proposals';
 import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
 import {
@@ -62,11 +62,11 @@ const Chats: NextPage = () => {
   const { id, matchProposalId } = router.query;
 
   // 신청 및 채팅 정보
-  const [proposal, setProposal] = useState<ProposalProps>();
+  const [proposal, setProposal] = useState<ProposalInfo>();
   const [chatsInfo, setChatsInfo] = useState<ChatsProps>();
   // TODO: 초기 상태를 어떻게 해야할지 proposal API 나오면 status에 넣어줄것(임의로 WAITING 박음)
   // 신청 및 채팅 상태 정보
-  const [proposalStatus, setProposalStatus] = useState('WAITING');
+  const [proposalStatus, setProposalStatus] = useState(proposal?.status);
   const [matchStatus, setMatchStatus] = useState(chatsInfo?.match.status);
 
   // author인지 파악하기 위한 정보
@@ -75,42 +75,25 @@ const Chats: NextPage = () => {
 
   // 매치 신청 정보 API
   useEffect(() => {
-    if (!router.isReady) return;
-    const proposalListApi = async () => {
-      await axiosAuthInstance.get<Response<ProposalProps[]>>(`/api/matches/${id as string}/proposals`).then((res) => {
-        try {
-          if (res.status === 200) {
-            setProposal(res.data.data.find((matchProposal) => matchProposal.id === Number(matchProposalId)));
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      });
-    };
-    proposalListApi();
-  }, [id, matchProposalId, router.isReady]);
+    if (!router.isReady || proposalStatus === 'APPROVED' || proposalStatus === 'REFUSE' || proposalStatus === 'FIXED')
+      return;
 
-  // 초대 수락 거절 API
-  useEffect(() => {
-    if (!router.isReady || proposalStatus === 'WAITING') return;
-    const patchMatchProposalApi = async () => {
+    const proposalApi = async () => {
       await axiosAuthInstance
-        .patch(`/api/matches/${id as string}/proposals/${matchProposalId as string}`, {
-          status: proposalStatus,
-        })
+        .get<Response<ProposalInfo>>(`/api/matches/proposals/${matchProposalId as string}`)
         .then((res) => {
-          console.log(res);
           try {
             if (res.status === 200) {
-              alert(`매치 요청이 ${proposalStatusToString[proposalStatus]}되었습니다.`);
+              setProposal(res.data.data);
+              setProposalStatus(res.data.data.status);
             }
           } catch (error) {
             console.log(error);
           }
         });
     };
-    patchMatchProposalApi();
-  }, [id, matchProposalId, proposalStatus, router.isReady]);
+    proposalApi();
+  }, [router.isReady]);
 
   // 채팅 조회 API
   useEffect(() => {
@@ -129,25 +112,7 @@ const Chats: NextPage = () => {
         });
     };
     getChatsApi();
-  }, [id, loginUser.nickname, matchProposalId, proposalStatus, router.isReady]);
-
-  // 매치 모집 완료 및 취소 API 연동
-  useEffect(() => {
-    if (!router.isReady || matchStatus === undefined || matchStatus === 'END') return;
-    const patchMatchesApi = async () => {
-      await axiosAuthInstance.patch(`/api/matches/${id as string}`, { status: matchStatus }).then((res) => {
-        try {
-          if (res.status === 200) {
-            // TODO: 토스트로 변경
-            alert(`모집 상태가 ${matchStatusToString[matchStatus]}로 설정되었습니다. `);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      });
-    };
-    patchMatchesApi();
-  }, [id, matchStatus, router.isReady]);
+  }, [id, loginUser.nickname, matchProposalId, router.isReady]);
 
   // 매치 종료 시 이벤트
   useEffect(() => {
@@ -160,17 +125,58 @@ const Chats: NextPage = () => {
       }
     }
   }, [id, matchStatus, router]);
+
+  // 초대 수락 거절 API
+  const patchMatchProposalApi = async (status: string) => {
+    await axiosAuthInstance
+      .patch(`/api/matches/${id as string}/proposals/${matchProposalId as string}`, {
+        status,
+      })
+      .then((res) => {
+        console.log(res);
+        try {
+          if (res.status === 200) {
+            alert(`매치 요청이 ${proposalStatusToString[status]}되었습니다.`);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      });
+  };
+
+  // 경기 모집중 모집완료 API
+  const patchMatchesApi = async () => {
+    await axiosAuthInstance.patch(`/api/matches/${id as string}`, { status: matchStatus }).then((res) => {
+      try {
+        if (res.status === 200) {
+          // TODO: 토스트로 변경
+          alert(`모집 상태가 ${matchStatusToString[matchStatus as string]}로 설정되었습니다. `);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  };
+
   // TODO: 채팅 보내기 API 연동
 
   const handleSelect = (item: Item<{ status: string }>) => {
-    setMatchStatus(item.value.status);
+    if (matchStatus === 'END') {
+      setMatchStatus(item.value.status);
+    } else {
+      setMatchStatus(item.value.status);
+      patchMatchesApi();
+    }
   };
+
   const handleRefuse = () => {
     setProposalStatus('REFUSE');
+    patchMatchProposalApi('REFUSE');
   };
 
   const handleApprove = () => {
     setProposalStatus('APPROVED');
+    patchMatchProposalApi('APPROVED');
   };
   // console.log(isAuthor);
   // console.log(proposalStatus);

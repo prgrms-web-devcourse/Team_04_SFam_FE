@@ -12,3 +12,10 @@ export interface Target {
 export interface LastChat {
   content: string;
 }
+
+export interface ProposalInfo {
+  id: number;
+  status: string;
+  content: string;
+  isMatchAuthor: boolean;
+}
