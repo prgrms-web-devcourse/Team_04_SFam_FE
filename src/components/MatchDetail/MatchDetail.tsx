@@ -92,7 +92,9 @@ const PostDetail = () => {
           >
             <S.Detail>
               <S.DetailTitle>팀명 </S.DetailTitle>
-              <S.DetailItem>{matchDetail?.team?.name} </S.DetailItem>
+              <S.DetailItem>
+                {matchDetail?.team?.name} / {matchDetail.participants}명
+              </S.DetailItem>
             </S.Detail>
             <Link
               href={`/team/${matchDetail.team.id}`}
