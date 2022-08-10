@@ -4,6 +4,8 @@ export const Container = styled.div`
   width: 100%;
   padding: 0 0 70px 0;
   z-index: -1;
+  height: calc(100vh - 82px);
+  background-color: ${({ theme }) => theme.color.gray200};
 `;
 
 export const Category = styled.div`
@@ -24,7 +26,6 @@ export const Category = styled.div`
 
 export const ListContainer = styled.div`
   padding-top: 56px;
-  padding-bottom: 8px;
   display: flex;
   flex-direction: column;
   gap: 8px;
