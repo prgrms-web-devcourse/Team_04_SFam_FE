@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useRecoilState } from 'recoil';
@@ -18,6 +17,7 @@ const InviteAcceptance = () => {
   const { id } = router.query;
   const invitationId = id![0];
   const teamId = id![1];
+
   const [user] = useRecoilState(userState);
 
   const [teamInfo, setTeamInfo] = React.useState<TeamInfo>({
@@ -51,29 +51,32 @@ const InviteAcceptance = () => {
   }, [router.isReady]);
 
   const handleReject = () => {
-    axiosAuthInstance.patch(`/api/teams/${teamId}/invitation/${invitationId}`, {
-      teamId,
-      invitationId,
-    });
-    router.push('/notification');
+    (async () => {
+      try {
+        const res = await axiosAuthInstance.patch(`/api/teams/${teamId}/invitation/${invitationId}`, {
+          teamId,
+          invitationId,
+        });
+
+        if (res.status === 200) router.push('/notification');
+      } catch (e) {
+        // 에러 처리
+      }
+    })();
   };
 
   const handleAccept = () => {
-    try {
-      const fetch = async () => {
-        await axiosAuthInstance({
-          method: 'post',
-          url: `/api/teams/${teamId}/members`,
-          data: {
-            userId: user.id,
-          },
+    (async () => {
+      try {
+        const res = await axiosAuthInstance.post(`/api/teams/${teamId}/members`, {
+          userId: user.id,
         });
-      };
-      fetch();
-    } catch (err) {
-      console.log(err);
-    }
-    router.push('/notification');
+
+        if (res.status === 200) router.push('/notification');
+      } catch (err) {
+        console.error(err);
+      }
+    })();
   };
 
   return (
