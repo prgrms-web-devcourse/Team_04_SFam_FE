@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 100%;
   padding: 0 0 70px 0;
   z-index: -1;
-  height: 100vh;
+  height: calc(100vh - 78px);
   background-color: ${({ theme }) => theme.color.gray200};
 `;
 
