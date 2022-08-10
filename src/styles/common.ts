@@ -1,3 +1,4 @@
+import { ThemeContext } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { WrapperProps } from 'interface/styles';
@@ -171,6 +172,11 @@ export const BoldGrayB3 = styled.span`
 export const BoldGreenB3 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b3};
   color: ${(props) => props.theme.color.secondary};
+`;
+
+export const BoldOrangeB3 = styled.span`
+  font-size: ${({ theme }) => theme.fontSize.b3};
+  color: ${({ theme }) => theme.color.primary};
 `;
 
 export const GrayB4 = styled.span`

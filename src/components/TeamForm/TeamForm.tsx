@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { Dropdown, Item } from '@components/Dropdown';
 import { Input } from '@components/Input';
 import { SPORTS_CATEGORY } from '@constants/dropdown';
-import { ColWrapper, Container, Label, TextArea } from '@styles/common';
+import { BoldOrangeB3, ColWrapper, Container, Label, TextArea } from '@styles/common';
+
+import { validation, Values } from './helper';
 
 const TeamForm = () => {
   const [state, setState] = React.useState({
@@ -13,6 +15,8 @@ const TeamForm = () => {
     name: '',
     description: '',
   });
+  const [errors, setErrors] = React.useState<Values>({});
+  const [isFirst, setIsFirst] = React.useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -29,6 +33,13 @@ const TeamForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsFirst(false);
+    const { name, description, sportsCategory } = state;
+    if (Object.keys(validation({ name, description, sportsCategory })).length > 0) {
+      setErrors(validation({ name, description, sportsCategory }));
+      return;
+    }
+
     (async () => {
       await axiosAuthInstance({
         method: 'POST',
@@ -37,6 +48,12 @@ const TeamForm = () => {
       });
     })();
   };
+
+  useEffect(() => {
+    if (!isFirst) {
+      setErrors(validation({ name: state.name, description: state.description, sportsCategory: state.sportsCategory }));
+    }
+  }, [state]);
 
   return (
     <Container>
@@ -49,17 +66,21 @@ const TeamForm = () => {
             placeholder='팀 이름'
             onChange={handleChange}
           />
+          {errors.name && <BoldOrangeB3>{errors.name}</BoldOrangeB3>}
           <Dropdown
             items={SPORTS_CATEGORY}
             placeholder='종목 선택'
             onSelect={handleSelect}
           />
+          {errors.sportsCategory && <BoldOrangeB3>{errors.sportsCategory}</BoldOrangeB3>}
           <Label>팀 소개글</Label>
           <TextArea
             name='description'
             placeholder='팀 소개'
             onChange={handleChange}
+            onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
           />
+          {errors.description && <BoldOrangeB3>{errors.description}</BoldOrangeB3>}
           <Button width='100%'>팀 생성</Button>
         </ColWrapper>
       </form>
