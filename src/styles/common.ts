@@ -194,6 +194,7 @@ export const TextArea = styled.textarea`
   padding: 8px;
   height: 242px;
   font-size: ${(props) => props.theme.fontSize.b3};
+  font-family: inherit;
   ::placeholder {
     font-size: ${(props) => props.theme.fontSize.b3};
     color: ${({ theme }) => theme.color.gray400};
