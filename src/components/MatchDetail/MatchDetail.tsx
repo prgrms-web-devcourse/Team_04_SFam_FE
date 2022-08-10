@@ -9,6 +9,7 @@ import { Dropdown, Item } from '@components/Dropdown';
 import { Paragraph } from '@components/Paragraph';
 import { MATCH_STATUS_DETAIL } from '@constants/dropdown';
 import { MATCH_STATUS_TEXT, MATCH_TYPE_TEXT, SPORTS_TEXT } from '@constants/text';
+import { Proposer } from '@interface/match';
 import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
 import { Anchor, InnerWrapper, RowWrapper } from '@styles/common';
@@ -24,6 +25,7 @@ const PostDetail = () => {
   const [matchDetail, setMatchDetail] = React.useState<MatchDetail>();
   const [status, setStatus] = React.useState('');
   const [isAuthor, setIsAuthor] = React.useState(false);
+  const [proposer, setProposal] = React.useState<Proposer | null>();
 
   const handleSelect = (item: Item<{ status: string }>) => {
     axiosAuthInstance.patch(`/api/matches/${id as string}`, {
@@ -33,15 +35,19 @@ const PostDetail = () => {
 
   React.useEffect(() => {
     if (!router.isReady) return;
-
-    (async () => {
-      const {
-        data: { data },
-      } = await axiosAuthInstance.get<Response<MatchDetail>>(`/api/matches/${id as string}`);
-      setMatchDetail(data);
-      setIsAuthor(data.author.id === user.id);
-      setStatus(data.status);
-    })();
+    try {
+      (async () => {
+        const {
+          data: { data },
+        } = await axiosAuthInstance.get<Response<MatchDetail>>(`/api/matches/${id as string}`);
+        setMatchDetail(data);
+        setIsAuthor(data.author.id === user.id);
+        setStatus(data.status);
+        setProposal(data.proposer);
+      })();
+    } catch (error) {
+      console.log(error);
+    }
   }, [router.isReady]);
 
   return (
@@ -103,16 +109,27 @@ const PostDetail = () => {
           </Anchor>
         </Link>
       )}
-      {!isAuthor && status === 'WAITING' && (
-        <Link
-          href={`/matches/${id as string}/proposal`}
-          passHref
-        >
-          <Anchor>
-            <Button>신청하기</Button>
-          </Anchor>
-        </Link>
-      )}
+      {!isAuthor &&
+        status === 'WAITING' &&
+        (proposer && proposer.status === 'APPROVED' ? (
+          <Link
+            href={`/matches/${id as string}/chatlist/${proposer.id}`}
+            passHref
+          >
+            <Anchor>
+              <Button>채팅 목록</Button>
+            </Anchor>
+          </Link>
+        ) : (
+          <Link
+            href={`/matches/${id as string}/proposal`}
+            passHref
+          >
+            <Anchor>
+              <Button>신청하기</Button>
+            </Anchor>
+          </Link>
+        ))}
     </S.Container>
   );
 };
