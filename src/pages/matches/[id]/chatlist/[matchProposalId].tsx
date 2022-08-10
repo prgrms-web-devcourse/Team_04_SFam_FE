@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, KeyboardEvent, useRef, useCallback } from 'react';
+import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
@@ -9,9 +10,10 @@ import { ChatSender } from '@components/ChatSender';
 import { Divider } from '@components/Divider';
 import { Dropdown, Item } from '@components/Dropdown';
 import { Message } from '@components/Message';
-import { ChatsProps } from '@interface/chat';
+import { ChatsProps, MessageReq } from '@interface/chat';
 import { ProposalInfo } from '@interface/proposals';
 import { Response } from '@interface/response';
+import { userState } from '@recoil/atoms';
 import {
   B1,
   BoldGrayB2,
@@ -50,7 +52,7 @@ const proposalStatusToString: ProposalStatusProps = {
 };
 
 const matchStatusToString: MatchStatusProps = {
-  WAITING: '대기중',
+  WAITING: '모집중',
   IN_GAME: '모집완료',
   END: '경기종료',
 };
@@ -58,50 +60,64 @@ const matchStatusToString: MatchStatusProps = {
 const Chats: NextPage = () => {
   const router = useRouter();
   const { id, matchProposalId } = router.query;
+  const [user] = useRecoilState(userState);
 
   // 신청 및 채팅 정보
-  const [proposal, setProposal] = useState<ProposalInfo>();
+  const [proposal, setProposal] = useState<ProposalInfo>({ id: 0, status: '', content: '', isMatchAuthor: false });
   const [chatsInfo, setChatsInfo] = useState<ChatsProps>();
-  // TODO: 초기 상태를 어떻게 해야할지 proposal API 나오면 status에 넣어줄것(임의로 WAITING 박음)
-  // 신청 및 채팅 상태 정보
-  const [proposalStatus, setProposalStatus] = useState(proposal?.status);
-  const [matchStatus, setMatchStatus] = useState(chatsInfo?.match.status);
+  const matchStatus = chatsInfo?.match.status; // 신청 및 채팅 상태 정보
+  const proposalStatus = proposal?.status;
+
+  // 메시지 정보
+  const [message, setMessage] = useState<MessageReq>({ targetId: 0, content: '', chattedAt: '' });
+  // 스크롤 맨 아래로
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = useCallback(() => {
+    if (scrollRef.current !== null) {
+      scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+    }
+  }, [chatsInfo]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatsInfo]);
+
+  // 채팅 가져오는 API
+  const getChatsApi = async () => {
+    try {
+      const res = await axiosAuthInstance.get<Response<ChatsProps>>(
+        `/api/matches/proposals/${matchProposalId as string}/chats`,
+        { data: { id } },
+      );
+      const chatInfoRes = res.data.data;
+      setChatsInfo(chatInfoRes);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // 매치 신청 정보 API
   useEffect(() => {
-    if (!router.isReady || proposalStatus === 'APPROVED' || proposalStatus === 'REFUSE' || proposalStatus === 'FIXED')
-      return;
+    if (!router.isReady) return;
 
     const proposalApi = async () => {
-      await axiosAuthInstance
-        .get<Response<ProposalInfo>>(`/api/matches/proposals/${matchProposalId as string}`)
-        .then((res) => {
-          try {
-            if (res.status === 200) {
-              setProposal(res.data.data);
-              setProposalStatus(res.data.data.status);
-            }
-          } catch (error) {
-            console.log(error);
-          }
-        });
+      try {
+        const res = await axiosAuthInstance.get<Response<ProposalInfo>>(
+          `/api/matches/proposals/${matchProposalId as string}`,
+        );
+        setProposal(res.data.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
+
     proposalApi();
-  }, [matchProposalId, proposalStatus, router.isReady]);
+  }, [router.isReady]);
 
   // 채팅 조회 API
   useEffect(() => {
     if (!router.isReady) return;
-    const getChatsApi = async () => {
-      await axiosAuthInstance
-        .get<Response<ChatsProps>>(`/api/matches/proposals/${matchProposalId as string}/chats`, { data: { id } })
-        .then((res) => {
-          if (res.status === 200) {
-            setChatsInfo(res.data.data);
-            setMatchStatus(res.data.data.match.status);
-          }
-        });
-    };
     getChatsApi();
   }, [id, matchProposalId, router.isReady]);
 
@@ -111,71 +127,104 @@ const Chats: NextPage = () => {
       // eslint-disable-next-line no-restricted-globals
       if (confirm('경기 후기를 작성하러 가시겠습니까?') === true) {
         router.push(`/matches/${id as string}/result`);
-      } else {
-        setMatchStatus('IN_GAME');
       }
     }
   }, [id, matchStatus, router]);
 
+  // 상대방 아이디 설정
+  useEffect(() => {
+    if (chatsInfo) setMessage({ ...message, targetId: chatsInfo.match.targetProfile.id });
+  }, [chatsInfo]);
+
   // 초대 수락 거절 API
   const patchMatchProposalApi = async (status: string) => {
-    await axiosAuthInstance
-      .patch(`/api/matches/${id as string}/proposals/${matchProposalId as string}`, {
+    try {
+      const res = await axiosAuthInstance.patch(`/api/matches/${id as string}/proposals/${matchProposalId as string}`, {
         status,
-      })
-      .then((res) => {
-        console.log(res);
-        try {
-          if (res.status === 200) {
-            alert(`매치 요청이 ${proposalStatusToString[status]}되었습니다.`);
-          }
-        } catch (error) {
-          console.log(error);
-        }
       });
+      if (res.status === 200) {
+        alert(`매치 요청이 ${proposalStatusToString[status]}되었습니다.`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // 경기 모집중 모집완료 API
-  const patchMatchesApi = async () => {
-    await axiosAuthInstance.patch(`/api/matches/${id as string}`, { status: matchStatus }).then((res) => {
-      try {
-        if (res.status === 200) {
-          // TODO: 토스트로 변경
-          alert(`모집 상태가 ${matchStatusToString[matchStatus as string]}로 설정되었습니다. `);
-        }
-      } catch (error) {
-        console.log(error);
+  const patchMatchesApi = async (status: string) => {
+    try {
+      const res = await axiosAuthInstance.patch(`/api/matches/${id as string}`, { status });
+
+      if (res.status === 200) {
+        // TODO: 토스트로 변경
+        alert(`모집 상태가 ${matchStatusToString[status]}로 설정되었습니다. `);
       }
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // TODO: 채팅 보내기 API 연동
+  const sendMessageApi = async () => {
+    const curChattedAt = new Date().toISOString().split('T');
+    const messageCurChattedAt = `${curChattedAt[0]} ${curChattedAt[1].split('Z')[0].slice(0, 8)}`;
+    try {
+      const res = await axiosAuthInstance.post(`/api/matches/proposals/${matchProposalId as string}/chats`, {
+        targetId: message.targetId,
+        content: message.content,
+        chattedAt: messageCurChattedAt,
+      });
+      if (res.status === 200) {
+        setMessage({ ...message, content: '' });
+        getChatsApi();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSelect = (item: Item<{ status: string }>) => {
     if (matchStatus === 'END') {
-      setMatchStatus(item.value.status);
+      if (chatsInfo) setChatsInfo({ ...chatsInfo, match: { ...chatsInfo.match, status: item.value.status } });
     } else {
-      setMatchStatus(item.value.status);
-      patchMatchesApi();
+      if (chatsInfo) setChatsInfo({ ...chatsInfo, match: { ...chatsInfo.match, status: item.value.status } });
+      patchMatchesApi(item.value.status);
     }
   };
 
   const handleRefuse = () => {
-    setProposalStatus('REFUSE');
+    setProposal({ ...proposal, status: 'REFUSE' });
     patchMatchProposalApi('REFUSE');
   };
 
   const handleApprove = () => {
-    setProposalStatus('APPROVED');
+    setProposal({ ...proposal, status: 'APPROVED' });
     patchMatchProposalApi('APPROVED');
   };
+
+  const handleMessage = () => {
+    sendMessageApi();
+  };
+
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleMessage();
+    }
+  };
+
   // console.log(isAuthor);
   // console.log(proposalStatus);
   // console.log(matchStatus);
+  // console.log(proposal);
   // console.log(chatsInfo);
-  // console.log(matchInfo);
+  // console.log(message);
+
+  if (!chatsInfo) {
+    return <Container>Loading...</Container>;
+  }
+
   return (
-    <Container>
+    <Container ref={scrollRef}>
       <RowWrapper
         alignItems='center'
         justifyContent='space-between'
@@ -277,18 +326,38 @@ const Chats: NextPage = () => {
         gap='16px'
         padding='0 0 70px 0 '
       >
-        {/* TODO: API 연동 후 번갈아 나오게 조건부 렌더링 시간 순 정렬 */}
-        <ChatReceiver />
-        <ChatSender />
-        <ChatReceiver />
-        <ChatSender />
-        <ChatReceiver />
-        <ChatSender />
-        <ChatReceiver />
-        <ChatSender />
+        {chatsInfo.chats.map((chat, idx) =>
+          chat.writer.id === user.id ? (
+            <ChatSender
+              chat={chat}
+              // eslint-disable-next-line react/no-array-index-key
+              key={idx}
+            />
+          ) : (
+            <ChatReceiver
+              chat={chat}
+              // eslint-disable-next-line react/no-array-index-key
+              key={idx}
+            />
+          ),
+        )}
       </ColWrapper>
       <BottomFixedWrapper>
-        <Message />
+        {proposalStatus === 'APPROVED' ? (
+          <Message
+            message={message}
+            setMessage={setMessage}
+            handleMessage={handleMessage}
+            handleKeyPress={handleKeyPress}
+          />
+        ) : (
+          <Message
+            message={message}
+            setMessage={setMessage}
+            handleMessage={handleMessage}
+            disabled
+          />
+        )}
       </BottomFixedWrapper>
     </Container>
   );
