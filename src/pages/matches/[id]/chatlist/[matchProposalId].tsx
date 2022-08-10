@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
@@ -13,7 +12,6 @@ import { Message } from '@components/Message';
 import { ChatsProps } from '@interface/chat';
 import { ProposalInfo } from '@interface/proposals';
 import { Response } from '@interface/response';
-import { userState } from '@recoil/atoms';
 import {
   B1,
   BoldGrayB2,
@@ -69,10 +67,6 @@ const Chats: NextPage = () => {
   const [proposalStatus, setProposalStatus] = useState(proposal?.status);
   const [matchStatus, setMatchStatus] = useState(chatsInfo?.match.status);
 
-  // author인지 파악하기 위한 정보
-  const [loginUser] = useRecoilState(userState);
-  const [isAuthor, setIsAuthor] = useState<boolean>();
-
   // 매치 신청 정보 API
   useEffect(() => {
     if (!router.isReady || proposalStatus === 'APPROVED' || proposalStatus === 'REFUSE' || proposalStatus === 'FIXED')
@@ -93,7 +87,7 @@ const Chats: NextPage = () => {
         });
     };
     proposalApi();
-  }, [router.isReady]);
+  }, [matchProposalId, proposalStatus, router.isReady]);
 
   // 채팅 조회 API
   useEffect(() => {
@@ -105,14 +99,11 @@ const Chats: NextPage = () => {
           if (res.status === 200) {
             setChatsInfo(res.data.data);
             setMatchStatus(res.data.data.match.status);
-            if (loginUser.nickname !== res.data.data.match.targetProfile.nickname) {
-              setIsAuthor(true);
-            }
           }
         });
     };
     getChatsApi();
-  }, [id, loginUser.nickname, matchProposalId, router.isReady]);
+  }, [id, matchProposalId, router.isReady]);
 
   // 매치 종료 시 이벤트
   useEffect(() => {
@@ -180,7 +171,7 @@ const Chats: NextPage = () => {
   };
   // console.log(isAuthor);
   // console.log(proposalStatus);
-  console.log(matchStatus);
+  // console.log(matchStatus);
   // console.log(chatsInfo);
   // console.log(matchInfo);
   return (
@@ -190,8 +181,7 @@ const Chats: NextPage = () => {
         justifyContent='space-between'
       >
         <B1>{chatsInfo?.match.title}</B1>
-        {/* TODO: 매치 status에 따라 조건부 렌더링 API 요청해서 매치 상태 status 받아올 것 */}
-        {matchStatus === 'WAITING' && matchStatus ? (
+        {matchStatus === 'WAITING' ? (
           <Dropdown
             items={dropdownItems}
             onSelect={handleSelect}
@@ -219,7 +209,7 @@ const Chats: NextPage = () => {
             flexDirection='column'
             alignItems='center'
           >
-            {proposalStatus === 'WAITING' && !isAuthor ? (
+            {proposalStatus === 'WAITING' && !proposal.isMatchAuthor ? (
               <InnerWrapper
                 flexDirection='column'
                 alignItems='center'
@@ -230,7 +220,7 @@ const Chats: NextPage = () => {
             ) : (
               <div />
             )}
-            {proposalStatus === 'WAITING' && isAuthor ? (
+            {proposalStatus === 'WAITING' && proposal.isMatchAuthor ? (
               <>
                 <GrayB3>{chatsInfo?.match.targetProfile.nickname}님으로부터 대화 요청이 전송되었습니다.</GrayB3>
                 <GrayB3>요청 내용</GrayB3>
@@ -255,39 +245,39 @@ const Chats: NextPage = () => {
             ) : (
               <div />
             )}
+            {proposalStatus === 'APPROVED' && !proposal.isMatchAuthor ? (
+              <InnerWrapper
+                flexDirection='column'
+                alignItems='center'
+              >
+                <GrayB3>상대방이 대화를 수락했습니다.</GrayB3>
+                <GrayB3>채팅을 전송할 수 있습니다.</GrayB3>
+              </InnerWrapper>
+            ) : (
+              <div />
+            )}
+            {proposalStatus === 'APPROVED' && proposal.isMatchAuthor ? (
+              <InnerWrapper
+                flexDirection='column'
+                alignItems='center'
+              >
+                <GrayB3>대화를 수락했습니다.</GrayB3>
+                <GrayB3>채팅을 전송할 수 있습니다.</GrayB3>
+              </InnerWrapper>
+            ) : (
+              <div />
+            )}
+            {proposalStatus === 'REFUSE' ? <GrayB3>신청이 거절되었습니다.</GrayB3> : <div />}
           </InnerWrapper>
         ) : (
           <div />
         )}
-        {proposalStatus === 'APPROVED' && !isAuthor ? (
-          <InnerWrapper
-            flexDirection='column'
-            alignItems='center'
-          >
-            <GrayB3>상대방이 대화를 수락했습니다.</GrayB3>
-            <GrayB3>채팅을 전송할 수 있습니다.</GrayB3>
-          </InnerWrapper>
-        ) : (
-          <div />
-        )}
-        {proposalStatus === 'APPROVED' && isAuthor ? (
-          <InnerWrapper
-            flexDirection='column'
-            alignItems='center'
-          >
-            <GrayB3>대화를 수락했습니다.</GrayB3>
-            <GrayB3>채팅을 전송할 수 있습니다.</GrayB3>
-          </InnerWrapper>
-        ) : (
-          <div />
-        )}
-        {proposalStatus === 'REFUSE' ? <GrayB3>신청이 거절되었습니다.</GrayB3> : <div />}
       </ColWrapper>
       <ColWrapper
         gap='16px'
         padding='0 0 70px 0 '
       >
-        {/* TODO: API 연동 후 번갈아 나오게 조건부 렌더링 아이디 홀수짝수 여부로 해도 될 듯 */}
+        {/* TODO: API 연동 후 번갈아 나오게 조건부 렌더링 시간 순 정렬 */}
         <ChatReceiver />
         <ChatSender />
         <ChatReceiver />
