@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Avatar } from '@components/Avatar';
@@ -18,8 +18,10 @@ import { B1, B2, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper 
 const UserDetailPage: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
-  const setUser = useSetRecoilState(userState);
 
+  const [user, setUser] = useRecoilState(userState);
+
+  const [isMe, setIsMe] = React.useState<boolean>(false);
   const [userInfo, setUserInfo] = React.useState<UserInfo>({
     nickname: '',
     review: {
@@ -28,27 +30,11 @@ const UserDetailPage: NextPage = () => {
       dislikeCount: 0,
     },
     location: {
-      longitude: '',
-      latitude: '',
+      longitude: 0,
+      latitude: 0,
     },
     teams: [],
   });
-
-  React.useEffect(() => {
-    if (!router.isReady) return;
-
-    (async () => {
-      try {
-        const {
-          data: { data },
-        } = await axiosAuthInstance.get<Response<UserInfo>>(`/api/users/${id as string}`);
-
-        setUserInfo(() => data);
-      } catch (e) {
-        // 에러 처리 필요
-      }
-    })();
-  }, [id, router.isReady]);
 
   const handleLogout = () => {
     if (!router.isReady) return;
@@ -66,6 +52,25 @@ const UserDetailPage: NextPage = () => {
     })();
   };
 
+  React.useEffect(() => {
+    if (!router.isReady) return;
+
+    (async () => {
+      try {
+        const {
+          data: { data },
+        } = await axiosAuthInstance.get<Response<UserInfo>>(`/api/users/${id as string}`);
+
+        setUserInfo(() => data);
+        if (Number(router.query.id) === user.id) {
+          setIsMe(true);
+        }
+      } catch (e) {
+        // 에러 처리 필요
+      }
+    })();
+  }, [id, router.isReady]);
+
   return (
     <Container>
       <RowWrapper>
@@ -82,7 +87,7 @@ const UserDetailPage: NextPage = () => {
       </RowWrapper>
       <Divider />
       <ColWrapper gap='16px'>
-        <Label>나에 대한 후기</Label>
+        <Label>후기</Label>
         <ReviewGroup
           bestCount={userInfo.review.bestCount}
           likeCount={userInfo.review.likeCount}
@@ -91,7 +96,7 @@ const UserDetailPage: NextPage = () => {
       </ColWrapper>
       <Divider />
       <ColWrapper gap='16px'>
-        <Label>내 팀 목록</Label>
+        <Label>팀 목록</Label>
         <div>
           {userInfo.teams.map((team: Team) => (
             <TeamBadge
@@ -101,17 +106,20 @@ const UserDetailPage: NextPage = () => {
           ))}
         </div>
       </ColWrapper>
-      {/* TODO: 조건부 렌더링 처리: 로그인 사용자 닉네임이 같은 경우 출력하도록 수정 필요 */}
-      <Divider />
-      <ColWrapper gap='8px'>
-        <Label>나의 활동</Label>
-        <ColWrapper gap='16px'>
-          <Link href={`/user/${id as string}/location`}>
-            <B2>내 동네 설정하기</B2>
-          </Link>
-          <B2 onClick={handleLogout}>로그아웃</B2>
-        </ColWrapper>
-      </ColWrapper>
+      {isMe && (
+        <>
+          <Divider />
+          <ColWrapper gap='8px'>
+            <Label>나의 활동</Label>
+            <ColWrapper gap='16px'>
+              <Link href={`/user/${id as string}/location`}>
+                <B2>내 동네 설정하기</B2>
+              </Link>
+              <B2 onClick={handleLogout}>로그아웃</B2>
+            </ColWrapper>
+          </ColWrapper>
+        </>
+      )}
     </Container>
   );
 };

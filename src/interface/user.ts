@@ -1,6 +1,7 @@
 import { Team } from './team';
 
 export interface UserInfo {
+  id?: number;
   nickname: string;
   review: {
     bestCount: number;
@@ -8,8 +9,8 @@ export interface UserInfo {
     dislikeCount: number;
   };
   location: {
-    longitude: string;
-    latitude: string;
+    longitude: number;
+    latitude: number;
   };
   teams: Team[];
 }
