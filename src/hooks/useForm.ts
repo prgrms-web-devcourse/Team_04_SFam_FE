@@ -5,7 +5,7 @@ interface UseFormProps<T> {
   initialError: T;
   initialSuccess?: T;
   onSubmit: (values: T, e?: FormEvent<HTMLFormElement>) => void;
-  validate: (values: T) => T;
+  validate?: (values: T) => T;
 }
 
 export const useForm = <T>({ initialValue, initialError, initialSuccess, onSubmit, validate }: UseFormProps<T>) => {
@@ -27,7 +27,11 @@ export const useForm = <T>({ initialValue, initialError, initialSuccess, onSubmi
     setIsLoading(true);
     e.preventDefault();
     setIsFirst(true);
-    setErrors(validate(values));
+    if (validate) {
+      setErrors(validate(values));
+    } else {
+      onSubmit(values);
+    }
   };
 
   useEffect(() => {
@@ -40,7 +44,7 @@ export const useForm = <T>({ initialValue, initialError, initialSuccess, onSubmi
   }, [errors]);
 
   useEffect(() => {
-    if (isFirst) {
+    if (isFirst && validate) {
       setErrors(validate(values));
     }
   }, [values]);
