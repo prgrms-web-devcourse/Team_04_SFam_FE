@@ -17,9 +17,11 @@ import { B1, B2, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper 
 
 const UserDetailPage: NextPage = () => {
   const router = useRouter();
-  const [user, setUser] = useRecoilState(userState);
   const { id } = router.query;
 
+  const [user, setUser] = useRecoilState(userState);
+
+  const [isMe, setIsMe] = React.useState<boolean>(false);
   const [userInfo, setUserInfo] = React.useState<UserInfo>({
     nickname: '',
     review: {
@@ -33,26 +35,6 @@ const UserDetailPage: NextPage = () => {
     },
     teams: [],
   });
-  const [isMe, setIsMe] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    if (!router.isReady) return;
-
-    (async () => {
-      try {
-        const {
-          data: { data },
-        } = await axiosAuthInstance.get<Response<UserInfo>>(`/api/users/${id as string}`);
-
-        setUserInfo(() => data);
-        if (data.id === user.id) {
-          setIsMe(true);
-        }
-      } catch (e) {
-        // 에러 처리 필요
-      }
-    })();
-  }, [id, router.isReady]);
 
   const handleLogout = () => {
     if (!router.isReady) return;
@@ -69,6 +51,25 @@ const UserDetailPage: NextPage = () => {
       }
     })();
   };
+
+  React.useEffect(() => {
+    if (!router.isReady) return;
+
+    (async () => {
+      try {
+        const {
+          data: { data },
+        } = await axiosAuthInstance.get<Response<UserInfo>>(`/api/users/${id as string}`);
+
+        setUserInfo(() => data);
+        if (Number(router.query.id) === user.id) {
+          setIsMe(true);
+        }
+      } catch (e) {
+        // 에러 처리 필요
+      }
+    })();
+  }, [id, router.isReady]);
 
   return (
     <Container>
