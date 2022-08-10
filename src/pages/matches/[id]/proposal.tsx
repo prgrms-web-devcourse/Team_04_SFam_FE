@@ -55,14 +55,35 @@ const Proposal: NextPage = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (matchInfo?.matchType === 'INDIVIDUAL_MATCH') {
+      (async () => {
+        const res = await axiosAuthInstance({
+          method: 'POST',
+          url: `/api/matches/${id as string}/proposals`,
+          data: proposalData,
+        });
+        try {
+          if (res.status === 200) {
+            // TODO: 토스트 나중에 띄울 것
+            alert(`[${matchInfo?.title}] 공고에 신청되었습니다!`);
+            // TODO: 공고 신청 후에 매치 상세로 넘어가면 공고 상세 출력 안되는 버그 발생({"code":"C0004","message":"Runtime error"})
+            router.push(`/matches/${id as string}`);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+    }
+
     if (matchInfo?.matchType === 'TEAM_MATCH' && proposalData.teamId === 0) {
       alert('팀을 선택하세요!');
       return;
     }
+
     (async () => {
       const {
         data: { data },
-      } = await axiosAuthInstance.get<Response<TeamInfo>>(`/api/teams/${proposalData.teamId}`);
+      } = await axiosAuthInstance.get<Response<TeamInfo>>(`/api/teams/${id as string}`);
 
       if (matchInfo?.matchType === 'TEAM_MATCH' && matchInfo?.participants !== data.members.length) {
         alert('참여 인원이 맞지 않습니다!');
