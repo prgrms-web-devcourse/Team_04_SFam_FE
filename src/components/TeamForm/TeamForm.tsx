@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
@@ -5,11 +6,13 @@ import { Button } from '@components/Button';
 import { Dropdown, Item } from '@components/Dropdown';
 import { Input } from '@components/Input';
 import { SPORTS_CATEGORY } from '@constants/dropdown';
+import { Response } from '@interface/response';
 import { BoldOrangeB3, ColWrapper, Container, Label, TextArea } from '@styles/common';
 
 import { validation, Values } from './helper';
 
 const TeamForm = () => {
+  const router = useRouter();
   const [state, setState] = React.useState({
     sportsCategory: '',
     name: '',
@@ -41,11 +44,14 @@ const TeamForm = () => {
     }
 
     (async () => {
-      await axiosAuthInstance({
-        method: 'POST',
-        url: '/api/teams',
-        data: state,
+      const res = await axiosAuthInstance.post<Response<{ data: number }>>('/api/teams', {
+        name: state.name,
+        sportsCategory: state.sportsCategory,
+        description: state.description,
       });
+      if (res.status === 200) {
+        router.replace(`/team/${res.data.data.toString()}`);
+      }
     })();
   };
 
