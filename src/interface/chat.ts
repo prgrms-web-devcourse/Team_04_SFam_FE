@@ -16,9 +16,16 @@ export interface Chat {
 }
 
 export interface TargetProfile {
+  id: number;
   nickname: string;
 }
 
 export interface Writer {
   id: number;
+}
+
+export interface MessageReq {
+  targetId: number;
+  content: string;
+  chattedAt: string;
 }

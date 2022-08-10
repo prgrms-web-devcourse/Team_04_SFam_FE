@@ -11,14 +11,21 @@ interface Team {
 }
 
 export interface MatchDetail {
-  id: number;
-  status: string;
   author: Author;
-  title: string;
+  content: string;
+  id: number;
   matchDate: string;
   matchType: string;
-  team: Team | null;
-  sportsCategory: string;
   participants: number;
+  proposer: Proposer | null;
+  sportsCategory: string;
+  status: string;
+  team: Team | null;
+  title: string;
+}
+
+export interface Proposer {
+  id: number;
+  status: string;
   content: string;
 }
