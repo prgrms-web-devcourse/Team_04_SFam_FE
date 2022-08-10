@@ -197,26 +197,30 @@ const SignUpForm = () => {
             </Button>
           </InnerWrapper>
           {errors.nickname ? <ErrorText>{errors.nickname}</ErrorText> : <BoldGreenB3>{success.nickname}</BoldGreenB3>}
-          <Input
-            id='password'
-            name='password'
-            value={password}
-            onChange={handleChange}
-            type='password'
-            placeholder='비밀번호'
-            height='50px'
-          />
-          {errors.password && <ErrorText>{errors.password}</ErrorText>}
-          <Input
-            id='passwordCheck'
-            name='passwordCheck'
-            value={passwordCheck}
-            onChange={handleChange}
-            type='password'
-            placeholder='비밀번호 확인'
-            height='50px'
-          />
-          {errors.passwordCheck && <ErrorText>{errors.passwordCheck}</ErrorText>}
+          <InnerWrapper>
+            <Input
+              id='password'
+              name='password'
+              value={password}
+              onChange={handleChange}
+              type='password'
+              placeholder='비밀번호'
+              height='50px'
+            />
+          </InnerWrapper>
+          <ErrorText>{errors.password}</ErrorText>
+          <InnerWrapper>
+            <Input
+              id='passwordCheck'
+              name='passwordCheck'
+              value={passwordCheck}
+              onChange={handleChange}
+              type='password'
+              placeholder='비밀번호 확인'
+              height='50px'
+            />
+          </InnerWrapper>
+          <ErrorText>{errors.passwordCheck}</ErrorText>
           <Button width='100%'>회원가입</Button>
         </ColWrapper>
       </form>
