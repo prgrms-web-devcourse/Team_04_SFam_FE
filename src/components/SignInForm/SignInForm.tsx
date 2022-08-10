@@ -12,7 +12,6 @@ import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
 import { B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
 
-import validation from './helper';
 import { ErrorResponse, SuccessResponse, Values } from './types';
 
 const SignInForm = () => {
@@ -29,7 +28,6 @@ const SignInForm = () => {
           password,
         });
         if (res.status === 200) {
-          console.log(res);
           setUser((res.data as { data: object }).data);
           if (
             res.data.data.latitude === null ||
@@ -40,6 +38,8 @@ const SignInForm = () => {
           } else {
             router.replace('/matches');
           }
+        } else {
+          window.alert('아이디/비밀번호가 일치하지 않습니다.');
         }
       } catch (err) {
         const { response } = err as AxiosError;
@@ -53,13 +53,17 @@ const SignInForm = () => {
     };
     signin();
   };
-  const { values, errors, isLoading, handleChange, handleSubmit } = useForm<Values>({
+
+  const { values, isLoading, handleChange, handleSubmit } = useForm<Values>({
     initialValue: {
       username: '',
       password: '',
     },
+    initialError: {
+      username: '',
+      password: '',
+    },
     onSubmit,
-    validate: validation,
   });
   return (
     <Container>
@@ -73,7 +77,6 @@ const SignInForm = () => {
             placeholder='아이디'
             height='50px'
           />
-          <span>{errors.username}</span>
           <Input
             id='password'
             type='password'
@@ -83,7 +86,6 @@ const SignInForm = () => {
             placeholder='비밀번호'
             height='50px'
           />
-          <span>{errors.password}</span>
           <Button width='100%'>로그인</Button>
         </ColWrapper>
       </form>
@@ -93,7 +95,7 @@ const SignInForm = () => {
       >
         <B3>회원이 아니신가요?&nbsp;</B3>
         <Link href='/signup'>
-          <BoldGreenB3>회원가입 하기</BoldGreenB3>
+          <BoldGreenB3>회원가입하기</BoldGreenB3>
         </Link>
       </InnerWrapper>
     </Container>
