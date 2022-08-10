@@ -9,7 +9,7 @@ import { useForm } from '@hooks/useForm';
 import { B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
 
 import validation from './helper';
-import { ErrorText, StrongText } from './SignUpForm.styles';
+import { ErrorText } from './SignUpForm.styles';
 import { Values } from './types';
 
 const SignUpForm = () => {
@@ -226,7 +226,7 @@ const SignUpForm = () => {
       >
         <B3>이미 계정이 있으신가요?&nbsp;</B3>
         <Link href='/signin'>
-          <StrongText>로그인하기</StrongText>
+          <BoldGreenB3>로그인하기</BoldGreenB3>
         </Link>
       </InnerWrapper>
     </Container>
