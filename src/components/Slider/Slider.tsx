@@ -1,12 +1,13 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef } from 'react';
 
 import * as S from './Slider.styles';
 
 interface Props {
   setDistance: Dispatch<SetStateAction<number>>;
+  distance: number;
 }
 
-const Slider = ({ setDistance }: Props) => {
+const Slider = ({ distance, setDistance }: Props) => {
   const [min, max] = [5, 40];
   const width = 388;
   const step = 5;
@@ -20,13 +21,21 @@ const Slider = ({ setDistance }: Props) => {
     { id: 7, value: 35 },
     { id: 8, value: 40 },
   ];
+  const ref = useRef<HTMLInputElement>(null);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDistance(e.target.valueAsNumber);
   };
 
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.valueAsNumber = distance;
+    }
+  });
+
   return (
     <S.Container>
       <S.RangeInput
+        ref={ref}
         type='range'
         width={width}
         min={min}

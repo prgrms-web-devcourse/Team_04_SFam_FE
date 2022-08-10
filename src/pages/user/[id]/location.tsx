@@ -14,7 +14,7 @@ import { B2, B3, BoldB2, ColWrapper, Container, GrayB2, InnerWrapper } from '@st
 const LocationSetting: NextPage = () => {
   const [loginUser, setLoginUser] = useRecoilState(userState);
   const [distance, setDistance] = useState(5);
-  const [kakaoLoading, setKakaoLoading] = useState<boolean>(false);
+  const [kakaoLoading, setKakaoLoading] = useState<boolean>(true);
   const [address, setAddress] = useState<Address>({
     address_name: '',
     region_1depth_name: '',
@@ -36,6 +36,7 @@ const LocationSetting: NextPage = () => {
       }
     }
     fetchAddress();
+    setDistance(loginUser.searchDistance as number);
   }, [geolocation.latitude, geolocation.longitude]);
 
   const handleClick = () => {
@@ -80,9 +81,17 @@ const LocationSetting: NextPage = () => {
           <B2>현 위치를 기준으로</B2>
           <B2>매칭 가능한 거리를 설정해주세요</B2>
         </ColWrapper>
-        <Slider setDistance={setDistance} />
+        <Slider
+          setDistance={setDistance}
+          distance={distance}
+        />
         <InnerWrapper padding='24px 0'>
-          <Button onClick={handleClick}>설정 완료</Button>
+          <Button
+            onClick={handleClick}
+            disabled={kakaoLoading}
+          >
+            설정 완료
+          </Button>
         </InnerWrapper>
       </ColWrapper>
     </Container>
