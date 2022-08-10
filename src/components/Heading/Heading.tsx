@@ -25,9 +25,9 @@ export const headingTitle: HeadingTitleProps = {
   '/matches/[id]/result': '경기 결과',
   '/matches/[id]/review': '후기 작성',
   '/matches/[id]/proposal': '신청하기',
-  '/matches/[id]/chats': `채팅`,
+  '/matches/[id]/chats': `전체 채팅방`,
   '/matches/[id]/chatlist/[matchProposalId]': `개인 채팅`,
-  '/matches/[id]/chatlist': '매치 채팅',
+  '/matches/[id]/chatlist': '매치 채팅방',
   '/chatlist': '전체 채팅',
 };
 
