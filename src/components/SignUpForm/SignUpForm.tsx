@@ -6,10 +6,10 @@ import { axiosDefaultInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { useForm } from '@hooks/useForm';
-import { B3, ColWrapper, Container, InnerWrapper } from '@styles/common';
+import { B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
 
 import validation from './helper';
-import { ErrorText, StrongText } from './SignUpForm.styles';
+import { ErrorText } from './SignUpForm.styles';
 import { Values } from './types';
 
 const SignUpForm = () => {
@@ -20,9 +20,19 @@ const SignUpForm = () => {
     nickname: false,
   });
 
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name } = e.target;
+    setIsDuplicate({
+      ...isDuplicate,
+      [name]: false,
+    });
+  };
+
   const onSubmit = (values: Values, e?: FormEvent<HTMLFormElement>) => {
-    console.log(isDuplicate);
-    if (!isDuplicate.username || !isDuplicate.nickname) return;
+    if (!isDuplicate.username || !isDuplicate.nickname) {
+      window.alert('아이디/닉네임 중복확인을 해주세요.');
+      return;
+    }
     const { username, nickname, password } = values;
     e?.preventDefault();
     const signup = async () => {
@@ -46,12 +56,22 @@ const SignUpForm = () => {
     signup();
   };
 
-  const { values, errors, isLoading, handleChange, handleSubmit } = useForm<Values>({
+  const { values, errors, success, handleChange, handleSubmit } = useForm<Values>({
     initialValue: {
       username: '',
       nickname: '',
       password: '',
       passwordCheck: '',
+    },
+    initialError: {
+      username: '',
+      nickname: '',
+      password: '',
+      passwordCheck: '',
+    },
+    initialSuccess: {
+      username: '',
+      nickname: '',
     },
     onSubmit,
     validate: validation,
@@ -61,14 +81,23 @@ const SignUpForm = () => {
 
   const handleUsernameCheckClick = () => {
     const usernameCheck = async () => {
+      const { username: usernameValidation } = validation({ username });
+      if (usernameValidation) {
+        errors.username = usernameValidation;
+        setChecked((state) => !state);
+        return;
+      }
+
       const res = await axiosDefaultInstance({
         method: 'get',
         url: `/api/users/username/duplication?input=${values.username as string}`,
       });
       if ((res.data as { data: object }).data) {
+        success.username = '';
         errors.username = '이미 사용중인 아이디입니다.';
       } else {
-        errors.username = '사용 가능한 아이디입니다.';
+        errors.username = '';
+        success.username = '사용 가능한 아이디입니다.';
         setIsDuplicate({
           ...isDuplicate,
           username: true,
@@ -77,6 +106,7 @@ const SignUpForm = () => {
       setChecked((state) => !state);
     };
     if (username?.length === 0) {
+      success.username = '';
       errors.username = '아이디를 입력해주세요.';
       setChecked((state) => !state);
       return;
@@ -91,9 +121,11 @@ const SignUpForm = () => {
         url: `/api/users/nickname/duplication?input=${values.nickname as string}`,
       });
       if ((res.data as { data: object }).data) {
+        success.nickname = '';
         errors.nickname = '이미 사용중인 닉네임입니다.';
       } else {
-        errors.nickname = '사용 가능한 닉네임입니다.';
+        errors.nickname = '';
+        success.nickname = '사용 가능한 닉네임입니다.';
         setIsDuplicate({
           ...isDuplicate,
           nickname: true,
@@ -102,6 +134,7 @@ const SignUpForm = () => {
       setChecked((state) => !state);
     };
     if (nickname?.length === 0) {
+      success.nickname = '';
       errors.nickname = '닉네임을 입력해주세요.';
       setChecked((state) => !state);
       return;
@@ -118,7 +151,16 @@ const SignUpForm = () => {
               id='username'
               name='username'
               value={username}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleNameChange(e);
+                handleChange(e);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  handleUsernameCheckClick();
+                }
+              }}
               placeholder='아이디'
             />
             <Button
@@ -130,13 +172,19 @@ const SignUpForm = () => {
               중복확인
             </Button>
           </InnerWrapper>
-          <ErrorText>{errors.username}</ErrorText>
+          {errors.username ? <ErrorText>{errors.username}</ErrorText> : <BoldGreenB3>{success.username}</BoldGreenB3>}
           <InnerWrapper>
             <Input
               id='nickname'
               name='nickname'
               value={nickname}
               onChange={handleChange}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  handleNicknameCheckClick();
+                }
+              }}
               placeholder='닉네임'
             />
             <Button
@@ -148,26 +196,30 @@ const SignUpForm = () => {
               중복확인
             </Button>
           </InnerWrapper>
-          <ErrorText>{errors.nickname}</ErrorText>
-          <Input
-            id='password'
-            name='password'
-            value={password}
-            onChange={handleChange}
-            type='password'
-            placeholder='비밀번호'
-            height='50px'
-          />
+          {errors.nickname ? <ErrorText>{errors.nickname}</ErrorText> : <BoldGreenB3>{success.nickname}</BoldGreenB3>}
+          <InnerWrapper>
+            <Input
+              id='password'
+              name='password'
+              value={password}
+              onChange={handleChange}
+              type='password'
+              placeholder='비밀번호'
+              height='50px'
+            />
+          </InnerWrapper>
           <ErrorText>{errors.password}</ErrorText>
-          <Input
-            id='passwordCheck'
-            name='passwordCheck'
-            value={passwordCheck}
-            onChange={handleChange}
-            type='password'
-            placeholder='비밀번호 확인'
-            height='50px'
-          />
+          <InnerWrapper>
+            <Input
+              id='passwordCheck'
+              name='passwordCheck'
+              value={passwordCheck}
+              onChange={handleChange}
+              type='password'
+              placeholder='비밀번호 확인'
+              height='50px'
+            />
+          </InnerWrapper>
           <ErrorText>{errors.passwordCheck}</ErrorText>
           <Button width='100%'>회원가입</Button>
         </ColWrapper>
@@ -178,7 +230,7 @@ const SignUpForm = () => {
       >
         <B3>이미 계정이 있으신가요?&nbsp;</B3>
         <Link href='/signin'>
-          <StrongText>로그인하기</StrongText>
+          <BoldGreenB3>로그인하기</BoldGreenB3>
         </Link>
       </InnerWrapper>
     </Container>

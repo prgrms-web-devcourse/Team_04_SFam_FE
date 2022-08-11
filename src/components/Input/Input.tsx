@@ -10,9 +10,19 @@ interface Props {
   id?: string;
   placeholder?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
-const Input = ({ type = 'text', name = '', value = '', id = '', height = '', placeholder = '', onChange }: Props) => (
+const Input = ({
+  type = 'text',
+  name = '',
+  value = '',
+  id = '',
+  height = '',
+  placeholder = '',
+  onChange,
+  onKeyDown,
+}: Props) => (
   <S.Input
     type={type}
     value={value}
@@ -20,6 +30,7 @@ const Input = ({ type = 'text', name = '', value = '', id = '', height = '', pla
     id={id}
     placeholder={placeholder}
     onChange={onChange}
+    onKeyDown={onKeyDown}
     height={height}
   />
 );
