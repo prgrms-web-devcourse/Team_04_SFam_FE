@@ -194,21 +194,25 @@ const PostForm = () => {
                   placeholder='팀 선택'
                   onSelect={handleSelectTeam}
                 />
-                <BoldOrangeB3>내가 속한 팀이 없습니다. 새로운 팀을 만들어보세요.</BoldOrangeB3>
-                <Link
-                  href='/team/create'
-                  passHref
-                  replace
-                >
-                  <Anchor>
-                    <Button
-                      type='button'
-                      backgroundColor='#F19A78'
+                {teams.length === 0 && (
+                  <>
+                    <BoldOrangeB3>내가 속한 팀이 없습니다. 새로운 팀을 만들어보세요.</BoldOrangeB3>
+                    <Link
+                      href='/team/create'
+                      passHref
+                      replace
                     >
-                      새 팀 만들기
-                    </Button>
-                  </Anchor>
-                </Link>
+                      <Anchor>
+                        <Button
+                          type='button'
+                          backgroundColor='#F19A78'
+                        >
+                          새 팀 만들기
+                        </Button>
+                      </Anchor>
+                    </Link>
+                  </>
+                )}
               </>
             ))}
           <Label>경기 일자</Label>
