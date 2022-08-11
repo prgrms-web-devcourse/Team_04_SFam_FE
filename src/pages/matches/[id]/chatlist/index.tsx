@@ -7,13 +7,13 @@ import { axiosAuthInstance } from '@api/axiosInstances';
 import { ChatListItem } from '@components/ChatListItem';
 import { ProposalProps } from '@interface/proposals';
 import { Response } from '@interface/response';
-import { Anchor, ColWrapper, Container, InnerWrapper } from '@styles/common';
+import { Anchor, ColWrapper, Container } from '@styles/common';
 
 const ChatListPage: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const [loading, setLoading] = useState(false);
-  const [proposalList, setPropsalList] = useState<ProposalProps[]>([]);
+  const [proposalList, setProposalList] = useState<ProposalProps[]>([]);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -22,7 +22,7 @@ const ChatListPage: NextPage = () => {
       await axiosAuthInstance.get<Response<ProposalProps[]>>(`/api/matches/${id as string}/proposals`).then((res) => {
         try {
           if (res.status === 200) {
-            setPropsalList(res.data.data);
+            setProposalList(res.data.data);
             setLoading(false);
           }
         } catch (error) {
@@ -42,8 +42,7 @@ const ChatListPage: NextPage = () => {
           const matchProposalId = chat.id;
           return (
             <Link
-              // href={`/matches/${id as string}/chats`}
-              href={`/matches/${id as string}/chatlist/${matchProposalId}`}
+              href={`/chatlist/${matchProposalId}`}
               passHref
               key={chat.id}
             >

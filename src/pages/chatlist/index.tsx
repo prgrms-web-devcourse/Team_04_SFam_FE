@@ -1,11 +1,12 @@
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { ChatListItem } from '@components/ChatListItem';
 import { Response } from '@interface/response';
-import { ColWrapper, Container } from '@styles/common';
+import { Anchor, ColWrapper, Container } from '@styles/common';
 
 interface Chat {
   id: number;
@@ -36,13 +37,35 @@ const ChatListPage: NextPage = () => {
   return (
     <Container>
       <ColWrapper gap='16px'>
-        {chatList.map((chat) => (
-          <ChatListItem
-            nickname={chat.target.nickname}
-            lastChat={chat.content}
-            key={chat.id}
-          />
-        ))}
+        {chatList.map((chat) =>
+          chat.lastChat.content !== null ? (
+            <Link
+              href={`/chatlist/${chat.id}`}
+              passHref
+              key={chat.id}
+            >
+              <Anchor>
+                <ChatListItem
+                  nickname={chat.target.nickname}
+                  lastChat={chat.lastChat.content}
+                />
+              </Anchor>
+            </Link>
+          ) : (
+            <Link
+              href={`/chatlist/${chat.id}`}
+              passHref
+              key={chat.id}
+            >
+              <Anchor>
+                <ChatListItem
+                  nickname={chat.target.nickname}
+                  lastChat={chat.content}
+                />
+              </Anchor>
+            </Link>
+          ),
+        )}
       </ColWrapper>
     </Container>
   );
