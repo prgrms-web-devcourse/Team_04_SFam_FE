@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const hourToString = (hourString: string) => {
-  const hour = Number(hourString) + 9;
+  const hour = Number(hourString);
   if (hour > 12 && hour < 24) {
     return `오후 ${hour - 12}`;
   }
