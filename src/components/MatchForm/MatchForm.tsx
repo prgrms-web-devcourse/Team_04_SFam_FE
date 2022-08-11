@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
@@ -6,6 +7,7 @@ import { Button } from '@components/Button';
 import { Dropdown, Item } from '@components/Dropdown';
 import { Input } from '@components/Input';
 import { DATE, MONTH, SPORTS_CATEGORY, YEAR } from '@constants/dropdown';
+import { Response } from '@interface/response';
 import {
   Anchor,
   B3,
@@ -72,6 +74,7 @@ const changeStateToRequestBody = (state: State) => {
 };
 
 const PostForm = () => {
+  const router = useRouter();
   const [loading, setLoading] = React.useState(false);
   const [teams, setTeams] = React.useState<Team[]>([]);
   const [state, setState] = React.useState<State>({
@@ -121,9 +124,14 @@ const PostForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    const data = changeStateToRequestBody(state);
-    axiosAuthInstance.post<RequestBody>('/api/matches', data);
+    const submit = async () => {
+      const data = changeStateToRequestBody(state);
+      const res = await axiosAuthInstance.post<Response<{ data: number }>>('/api/matches', data);
+      if (res.status === 200) {
+        router.replace(`/matches/${res.data.data.toString()}`);
+      }
+    };
+    submit();
   };
 
   React.useEffect(() => {
