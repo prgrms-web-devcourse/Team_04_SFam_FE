@@ -55,7 +55,7 @@ const MatchList = () => {
           size: 10,
           category,
           status: 'WAITING',
-          distance: user.searchDistance, // TODO: 거리는 사용자가 설정한 값으로 적용해야 함.
+          distance: user.searchDistance,
         },
       });
       const data = (res.data as AxiosResponse).data as Response;
