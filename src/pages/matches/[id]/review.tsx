@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Button } from '@components/Button';
 import { Divider } from '@components/Divider';
 import { ReviewButtonGroup } from '@components/ReviewButtonGroup';
-import { B3, ColWrapper, Container, GrayB4, H2, InnerWrapper, RowWrapper } from '@styles/common';
+import { Anchor, B3, ColWrapper, Container, GrayB4, H2, InnerWrapper, RowWrapper } from '@styles/common';
 
 // TODO: 공고글에 대한 Data를 전역으로 관리를 해야하는가에 대한 논의 필요, 아니라면 이 데이터를 어떻게 가져올 것인지 논의 필요
 const DummyData = {
@@ -46,14 +46,14 @@ const Review: NextPage = () => {
         <H2>로그인한 사용자님,</H2>
         <H2>{DummyData.team.name}과의 경기는 어떠셨나요?</H2>
         <ReviewButtonGroup setReview={setReview} />
-        <InnerWrapper>
-          <Link
-            href='/matches'
-            passHref
-          >
+        <Link
+          href='/matches'
+          passHref
+        >
+          <Anchor>
             <Button onClick={handleClick}>제출</Button>
-          </Link>
-        </InnerWrapper>
+          </Anchor>
+        </Link>
       </ColWrapper>
     </Container>
   );
