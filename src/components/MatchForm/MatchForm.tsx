@@ -125,8 +125,8 @@ const PostForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const { title, matchType, year, month, date, participants, content, sportsCategory } = state;
-    const error = validation({ title, matchType, participants, content, sportsCategory, year, month, date });
+    const { title, matchType, year, month, date, participants, content, sportsCategory, teamId } = state;
+    const error = validation({ title, matchType, participants, content, sportsCategory, year, month, date, teamId });
     if (Object.keys(error).length > 0) {
       setErrors(error);
       return;
