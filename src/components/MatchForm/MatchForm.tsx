@@ -84,6 +84,14 @@ const PostForm = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    if (name === 'matchType') {
+      setState({
+        ...state,
+        [name]: value,
+        participants: value === 'INDIVIDUAL_MATCH' ? '1' : '',
+      });
+      return;
+    }
     setState({
       ...state,
       [name]: value,
@@ -245,15 +253,20 @@ const PostForm = () => {
             </DropdownWrapper>
           </InnerWrapper>
           {errors.matchDate && <BoldOrangeB3>{errors.matchDate}</BoldOrangeB3>}
-          <Label>경기 인원</Label>
-          <Input
-            type='text'
-            name='participants'
-            placeholder='경기 인원'
-            value={state.participants as string}
-            onChange={handleChange}
-          />
-          {errors.participants && <BoldOrangeB3>{errors.participants}</BoldOrangeB3>}
+          {state.matchType === 'TEAM_MATCH' && (
+            <>
+              <Label>경기 인원</Label>
+              <Input
+                type='text'
+                name='participants'
+                placeholder='경기 인원'
+                value={state.participants as string}
+                onChange={handleChange}
+              />
+              {errors.participants && <BoldOrangeB3>{errors.participants}</BoldOrangeB3>}
+            </>
+          )}
+
           <TextArea
             name='content'
             placeholder='공고 내용'
