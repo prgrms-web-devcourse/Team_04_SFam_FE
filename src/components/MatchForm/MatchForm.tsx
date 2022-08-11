@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
@@ -6,7 +7,9 @@ import { Dropdown, Item } from '@components/Dropdown';
 import { Input } from '@components/Input';
 import { DATE, MONTH, SPORTS_CATEGORY, YEAR } from '@constants/dropdown';
 import {
+  Anchor,
   B3,
+  BoldOrangeB3,
   ColWrapper,
   Container,
   DropdownWrapper,
@@ -176,11 +179,29 @@ const PostForm = () => {
           )}
           {loading ||
             (state.matchType === 'TEAM_MATCH' && (
-              <Dropdown
-                items={changeTeamsToDropdownItems(teams)}
-                placeholder='팀 선택'
-                onSelect={handleSelectTeam}
-              />
+              <>
+                <Dropdown
+                  disabled={teams.length === 0}
+                  items={changeTeamsToDropdownItems(teams)}
+                  placeholder='팀 선택'
+                  onSelect={handleSelectTeam}
+                />
+                <BoldOrangeB3>내가 속한 팀이 없습니다. 새로운 팀을 만들어보세요.</BoldOrangeB3>
+                <Link
+                  href='/team/create'
+                  passHref
+                  replace
+                >
+                  <Anchor>
+                    <Button
+                      type='button'
+                      backgroundColor='#F19A78'
+                    >
+                      새 팀 만들기
+                    </Button>
+                  </Anchor>
+                </Link>
+              </>
             ))}
           <Label>경기 일자</Label>
           <InnerWrapper justifyContent='space-between'>
