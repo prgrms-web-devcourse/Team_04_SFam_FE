@@ -3,6 +3,12 @@ interface Author {
   nickname: string;
 }
 
+interface Proposer {
+  id: number;
+  status: string;
+  content: string;
+}
+
 interface Team {
   id: number;
   name: string;
@@ -22,10 +28,4 @@ export interface MatchDetail {
   status: string;
   team: Team | null;
   title: string;
-}
-
-export interface Proposer {
-  id: number;
-  status: string;
-  content: string;
 }

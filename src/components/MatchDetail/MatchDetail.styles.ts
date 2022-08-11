@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { Button } from '@components/Button/Button.styles';
+
 export const Container = styled.div`
   padding: 16px 24px;
 `;
@@ -30,10 +32,10 @@ export const DetailTitle = styled.span`
   font-size: 16px;
 `;
 
-export const Content = styled.div``;
+export const RefuseButton = styled(Button)`
+  background-color: ${({ theme }) => theme.color.primary};
+`;
 
-export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 0 20px;
+export const WaitingButton = styled(Button)`
+  background-color: ${({ theme }) => theme.color.yellow};
 `;

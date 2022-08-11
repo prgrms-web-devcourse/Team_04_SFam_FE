@@ -78,6 +78,8 @@ const PostDetail = () => {
       </RowWrapper>
       <S.Info>
         <S.Detail>
+          <S.DetailTitle>작성자 </S.DetailTitle>
+          <S.DetailTitle> {matchDetail?.author.nickname}</S.DetailTitle>
           <S.DetailTitle>종목 </S.DetailTitle>
           <S.DetailItem>{SPORTS_TEXT[matchDetail?.sportsCategory as string]} </S.DetailItem>
         </S.Detail>
@@ -122,27 +124,44 @@ const PostDetail = () => {
           </Anchor>
         </Link>
       )}
-      {!isAuthor &&
-        status === 'WAITING' &&
-        (proposer && proposer.status === 'APPROVED' ? (
-          <Link
-            href={`/chatlist/${proposer.id}`}
-            passHref
-          >
-            <Anchor>
-              <Button>채팅 하기</Button>
-            </Anchor>
-          </Link>
-        ) : (
-          <Link
-            href={`/matches/${id as string}/proposal`}
-            passHref
-          >
-            <Anchor>
-              <Button>신청하기</Button>
-            </Anchor>
-          </Link>
-        ))}
+      {!isAuthor && matchDetail?.proposer === null && (
+        <Link
+          href={`/matches/${id as string}/proposal`}
+          passHref
+        >
+          <Anchor>
+            <Button>신청하기</Button>
+          </Anchor>
+        </Link>
+      )}
+      {!isAuthor && matchDetail?.proposer?.status === 'WAITING' && (
+        <S.WaitingButton
+          width='100%'
+          height='50px'
+          fontSize='20px'
+        >
+          승인 대기
+        </S.WaitingButton>
+      )}
+      {!isAuthor && matchDetail?.proposer?.status === 'REFUSE' && (
+        <S.RefuseButton
+          width='100%'
+          height='50px'
+          fontSize='20px'
+        >
+          대화가 거절되었습니다
+        </S.RefuseButton>
+      )}
+      {!isAuthor && matchDetail?.proposer?.status === 'APPROVED' && proposer && (
+        <Link
+          href={`/chatlist/${proposer.id}`}
+          passHref
+        >
+          <Anchor>
+            <Button>채팅 하기</Button>
+          </Anchor>
+        </Link>
+      )}
     </S.Container>
   );
 };
