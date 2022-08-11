@@ -12,7 +12,7 @@ interface Props {
 }
 
 const ChatReceiver = ({ chat, nickname }: Props) => {
-  const curChattedAt = chat.chattedAt.split('T')[1];
+  const curChattedAt = chat.chattedAt.slice(11);
   const curChattedAtToString = `${hourToString(curChattedAt.slice(0, 2))}${curChattedAt.slice(2, 5)}`;
   return (
     <S.Container>

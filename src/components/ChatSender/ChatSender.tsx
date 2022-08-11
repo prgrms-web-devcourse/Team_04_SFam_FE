@@ -17,9 +17,9 @@ export const hourToString = (hourString: string) => {
   }
   return `오전 ${hour}`;
 };
-
+// yyyy-MM-hh hh:mm:ss
 const ChatSender = ({ chat }: Props) => {
-  const curChattedAt = chat.chattedAt.split('T')[1];
+  const curChattedAt = chat.chattedAt.slice(11);
   const curChattedAtToString = `${hourToString(curChattedAt.slice(0, 2))}${curChattedAt.slice(2, 5)}`;
 
   // TODO: 상태(시간, Message Input에 있는 내용) 데이터 Props로 받아서 뿌려줄 것
