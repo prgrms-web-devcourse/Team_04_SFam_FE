@@ -56,7 +56,7 @@ const SignUpForm = () => {
     signup();
   };
 
-  const { values, errors, success, isLoading, handleChange, handleSubmit } = useForm<Values>({
+  const { values, errors, success, handleChange, handleSubmit } = useForm<Values>({
     initialValue: {
       username: '',
       nickname: '',

@@ -3,16 +3,19 @@ import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
-interface UserState {
-  id?: number;
-  username?: string;
-  nickname?: string;
-  latitude?: number;
-  longitude?: number;
-  searchDistance?: number;
+export interface User {
+  email: string | null;
+  id: number;
+  latitude: number;
+  longitude: number;
+  nickname: string;
+  profileImageUrl: string | null;
+  role: string;
+  searchDistance: number;
+  username: string;
 }
 
-export const userState = atom<UserState>({
+export const userState = atom<Partial<User>>({
   key: 'userState',
   default: {},
   effects_UNSTABLE: [persistAtom],

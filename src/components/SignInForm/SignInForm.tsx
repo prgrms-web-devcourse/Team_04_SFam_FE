@@ -9,10 +9,10 @@ import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { useForm } from '@hooks/useForm';
 import { Response } from '@interface/response';
-import { userState } from '@recoil/atoms';
+import { User, userState } from '@recoil/atoms';
 import { B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
 
-import { ErrorResponse, SuccessResponse, Values } from './types';
+import { ErrorResponse, Values } from './types';
 
 const SignInForm = () => {
   const router = useRouter();
@@ -23,38 +23,32 @@ const SignInForm = () => {
     e?.preventDefault();
     const signin = async () => {
       try {
-        const res = await axiosAuthInstance.post<Response<SuccessResponse>>('/api/users/signin', {
+        const {
+          data: { data: user },
+        } = await axiosAuthInstance.post<Response<User>>('/api/users/signin', {
           username,
           password,
         });
-        if (res.status === 200) {
-          setUser((res.data as { data: object }).data);
-          if (
-            res.data.data.latitude === null ||
-            res.data.data.longitude === null ||
-            res.data.data.searchDistance === null
-          ) {
-            router.replace(`/user/${res.data.data.id}/location`);
-          } else {
-            router.replace('/matches');
-          }
+
+        setUser(user);
+        if (user.searchDistance === null) {
+          router.replace(`/user/${user.id}/location`);
         } else {
-          window.alert('아이디/비밀번호가 일치하지 않습니다.');
+          router.replace('/matches');
         }
-      } catch (err) {
-        const { response } = err as AxiosError;
-        if (response) {
-          const errorCode = (response.data as ErrorResponse).code;
-          if (errorCode === 'A0001') {
-            window.alert('아이디 또는 비밀번호가 일치하지 않습니다.');
-          }
+      } catch (error) {
+        // TODO: AxiosInstance Interceptor에서 response 바로 반환하도록 변환 고려
+        const { response } = error as AxiosError;
+        const errorCode = (response?.data as ErrorResponse).code;
+        if (errorCode === 'A0001' || errorCode === 'V0001') {
+          window.alert('아이디 또는 비밀번호가 일치하지 않습니다.');
         }
       }
     };
     signin();
   };
 
-  const { values, isLoading, handleChange, handleSubmit } = useForm<Values>({
+  const { values, handleChange, handleSubmit } = useForm<Values>({
     initialValue: {
       username: '',
       password: '',
