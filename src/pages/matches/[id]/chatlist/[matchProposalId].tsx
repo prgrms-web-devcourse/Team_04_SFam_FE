@@ -233,6 +233,7 @@ const Chats: NextPage = () => {
         {matchStatus === 'WAITING' ? (
           <Dropdown
             items={dropdownItems}
+            disabled={!proposal.isMatchAuthor}
             onSelect={handleSelect}
             placeholder='모집 중'
             round
@@ -240,6 +241,7 @@ const Chats: NextPage = () => {
         ) : (
           <Dropdown
             items={dropdownMatchDoneItems}
+            disabled={!proposal.isMatchAuthor}
             onSelect={handleSelect}
             placeholder={`${matchStatusToString[matchStatus as string]}`}
             round
