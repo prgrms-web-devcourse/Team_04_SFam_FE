@@ -53,8 +53,8 @@ const proposalStatusToString: ProposalStatusProps = {
 
 const matchStatusToString: MatchStatusProps = {
   WAITING: '모집중',
-  IN_GAME: '모집완료',
-  END: '경기종료',
+  IN_GAME: '모집 완료',
+  END: '경기 완료',
 };
 
 const Chats: NextPage = () => {
@@ -66,7 +66,8 @@ const Chats: NextPage = () => {
   // 신청 및 채팅 정보
   const [proposal, setProposal] = useState<ProposalInfo>({ id: 0, status: '', content: '', isMatchAuthor: false });
   const [chatsInfo, setChatsInfo] = useState<ChatsProps>();
-  const matchStatus = chatsInfo?.match.status; // 신청 및 채팅 상태 정보
+  const [matchStatus, setMatchStatus] = useState('');
+  // const matchStatus = chatsInfo?.match.status; // 신청 및 채팅 상태 정보
   const proposalStatus = proposal?.status;
 
   // 메시지 정보
@@ -92,6 +93,7 @@ const Chats: NextPage = () => {
       );
       const chatInfoRes = res.data.data;
       setChatsInfo(chatInfoRes);
+      setMatchStatus(chatInfoRes.match.status);
     } catch (error) {
       console.log(error);
     }
@@ -124,12 +126,9 @@ const Chats: NextPage = () => {
   // 매치 종료 시 이벤트
   useEffect(() => {
     if (matchStatus === 'END') {
-      // eslint-disable-next-line no-restricted-globals
-      if (confirm('경기 후기를 작성하러 가시겠습니까?') === true) {
-        if (chatsInfo) router.push(`/matches/${chatsInfo.match.id}/result`);
-      }
+      if (chatsInfo) router.push(`/matches/${chatsInfo.match.id}/result`);
     }
-  }, [chatsInfo, matchStatus, router]);
+  }, [matchStatus]);
 
   // 상대방 아이디 설정
   useEffect(() => {
@@ -194,12 +193,9 @@ const Chats: NextPage = () => {
   };
 
   const handleSelect = (item: Item<{ status: string }>) => {
-    if (matchStatus === 'END') {
-      if (chatsInfo) setChatsInfo({ ...chatsInfo, match: { ...chatsInfo.match, status: item.value.status } });
-    } else {
-      if (chatsInfo) setChatsInfo({ ...chatsInfo, match: { ...chatsInfo.match, status: item.value.status } });
-      patchMatchesApi(item.value.status);
-    }
+    const { status } = item.value;
+    setMatchStatus(() => status);
+    if (status !== 'END') patchMatchesApi(item.value.status);
   };
 
   const handleRefuse = () => {
@@ -246,7 +242,7 @@ const Chats: NextPage = () => {
             items={dropdownMatchDoneItems}
             disabled={!proposal.isMatchAuthor}
             onSelect={handleSelect}
-            placeholder={`${matchStatusToString[matchStatus as string]}`}
+            placeholder={`${matchStatusToString[matchStatus]}`}
             round
           />
         )}
