@@ -8,19 +8,20 @@ import * as S from './ChatReceiver.styles';
 
 interface Props {
   chat: Chat;
+  nickname: string;
 }
 
-const ChatReceiver = ({ chat }: Props) => {
+const ChatReceiver = ({ chat, nickname }: Props) => {
   const curChattedAt = chat.chattedAt.split('T')[1];
   const curChattedAtToString = `${hourToString(curChattedAt.slice(0, 2))}${curChattedAt.slice(2, 5)}`;
   return (
     <S.Container>
       <S.ChatWrapper>
         <S.ProfileWrapper>
-          <CgProfile size='42px' />
+          <CgProfile size='32px' />
         </S.ProfileWrapper>
         <S.MessageContentWrapper>
-          <S.ProfileText>{chat.writer.id}</S.ProfileText>
+          <S.ProfileText>{nickname}</S.ProfileText>
           <S.ReceiverWrapper>
             <S.ChatText>{chat.content}</S.ChatText>
           </S.ReceiverWrapper>

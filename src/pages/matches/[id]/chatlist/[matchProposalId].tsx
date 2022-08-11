@@ -75,7 +75,7 @@ const Chats: NextPage = () => {
 
   const scrollToBottom = useCallback(() => {
     if (scrollRef.current !== null) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+      scrollRef.current.scrollIntoView({ block: 'end', inline: 'nearest' });
     }
   }, [chatsInfo]);
 
@@ -164,7 +164,7 @@ const Chats: NextPage = () => {
     }
   };
 
-  // TODO: 채팅 보내기 API 연동
+  // 채팅 보내기 API 연동
   const sendMessageApi = async () => {
     const curChattedAt = new Date().toISOString().split('T');
     const messageCurChattedAt = `${curChattedAt[0]} ${curChattedAt[1].split('Z')[0].slice(0, 8)}`;
@@ -212,15 +212,8 @@ const Chats: NextPage = () => {
     }
   };
 
-  // console.log(isAuthor);
-  // console.log(proposalStatus);
-  // console.log(matchStatus);
-  // console.log(proposal);
-  // console.log(chatsInfo);
-  // console.log(message);
-
   if (!chatsInfo) {
-    return <Container>Loading...</Container>;
+    return <Container />;
   }
 
   return (
@@ -338,6 +331,7 @@ const Chats: NextPage = () => {
           ) : (
             <ChatReceiver
               chat={chat}
+              nickname={chatsInfo.match.targetProfile.nickname}
               // eslint-disable-next-line react/no-array-index-key
               key={idx}
             />

@@ -34,7 +34,7 @@ const ChatListPage: NextPage = () => {
   }, [id, router.isReady]);
 
   return loading ? (
-    <Container>loading...</Container>
+    <Container />
   ) : (
     <Container>
       <ColWrapper gap='16px'>

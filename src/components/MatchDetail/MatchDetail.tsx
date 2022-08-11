@@ -117,7 +117,7 @@ const PostDetail = () => {
             passHref
           >
             <Anchor>
-              <Button>채팅 목록</Button>
+              <Button>채팅 하기</Button>
             </Anchor>
           </Link>
         ) : (

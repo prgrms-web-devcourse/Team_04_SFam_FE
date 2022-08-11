@@ -15,6 +15,7 @@ export const ChatWrapper = styled.div`
 export const MessageContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: flex-end;
 `;
 
@@ -22,7 +23,7 @@ export const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 export const ReceiverWrapper = styled.div`
