@@ -29,6 +29,7 @@ export const headingTitle: HeadingTitleProps = {
   '/matches/[id]/chatlist/[matchProposalId]': `개인 채팅`,
   '/matches/[id]/chatlist': '매치 채팅방',
   '/chatlist': '전체 채팅',
+  '/chatlist/[matchProposalId]': '개인 채팅',
 };
 
 export const noBackIcon = ['/signup', '/signin', '/matches', '/matches/:id/review', 'users/:id'];
