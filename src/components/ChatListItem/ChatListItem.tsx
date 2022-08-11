@@ -1,5 +1,5 @@
 import { Avatar } from '@components/Avatar';
-import { InnerWrapper, B1, B3 } from '@styles/common';
+import { InnerWrapper, B1, B3, GrayB3 } from '@styles/common';
 
 import * as S from './ChatListItem.styles';
 
@@ -17,9 +17,10 @@ const ChatListItem = ({ nickname, lastChat }: Props) => (
       flexDirection='column'
       padding='0 16px'
       justifyContent='center'
+      gap='16px'
     >
       <B1>{nickname}</B1>
-      <B3>{lastChat}</B3>
+      <S.GrayB3>{lastChat}</S.GrayB3>
     </InnerWrapper>
   </S.ChatListItemContainer>
 );

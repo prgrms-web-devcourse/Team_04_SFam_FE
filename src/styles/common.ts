@@ -39,8 +39,9 @@ export const InnerWrapper = styled.div<WrapperProps>`
   justify-content: ${(props) => props.justifyContent};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
-  gap: 8px;
+  gap: ${(props) => props.gap || '8px'};
 `;
+
 export const InlineWrapper = styled.div`
   position: relative;
   display: inline-block;

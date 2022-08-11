@@ -48,11 +48,19 @@ const ChatListPage: NextPage = () => {
               key={chat.id}
             >
               <Anchor>
-                <ChatListItem
-                  nickname={chat.target.nickname}
-                  lastChat={chat.content}
-                  key={chat.id}
-                />
+                {chat.lastChat !== null ? (
+                  <ChatListItem
+                    nickname={chat.target.nickname}
+                    lastChat={chat.lastChat.content}
+                    key={chat.id}
+                  />
+                ) : (
+                  <ChatListItem
+                    nickname={chat.target.nickname}
+                    lastChat={chat.content}
+                    key={chat.id}
+                  />
+                )}
               </Anchor>
             </Link>
           );
