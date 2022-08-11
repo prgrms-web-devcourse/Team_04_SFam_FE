@@ -79,7 +79,9 @@ const PostDetail = () => {
       <S.Info>
         <S.Detail>
           <S.DetailTitle>작성자 </S.DetailTitle>
-          <S.DetailTitle> {matchDetail?.author.nickname}</S.DetailTitle>
+          <S.DetailItem> {matchDetail?.author.nickname}</S.DetailItem>
+        </S.Detail>
+        <S.Detail>
           <S.DetailTitle>종목 </S.DetailTitle>
           <S.DetailItem>{SPORTS_TEXT[matchDetail?.sportsCategory as string]} </S.DetailItem>
         </S.Detail>
