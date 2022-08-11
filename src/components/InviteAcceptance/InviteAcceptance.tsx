@@ -54,8 +54,7 @@ const InviteAcceptance = () => {
     (async () => {
       try {
         const res = await axiosAuthInstance.patch(`/api/teams/${teamId}/invitation/${invitationId}`, {
-          teamId,
-          invitationId,
+          userId: user.id,
         });
 
         if (res.status === 200) router.push('/notification');
@@ -70,6 +69,7 @@ const InviteAcceptance = () => {
       try {
         const res = await axiosAuthInstance.post(`/api/teams/${teamId}/members`, {
           userId: user.id,
+          invitationId,
         });
 
         if (res.status === 200) router.push('/notification');
