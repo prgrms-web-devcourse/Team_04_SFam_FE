@@ -34,6 +34,7 @@ export const headingTitle: HeadingTitleProps = {
 
 export const noBackIcon = ['/signup', '/signin', '/matches', '/matches/:id/review', 'users/:id'];
 
+// TODO: prop으로 뒤로 가기 버튼 조절해야 함
 const Heading = () => {
   const router = useRouter();
   return (
