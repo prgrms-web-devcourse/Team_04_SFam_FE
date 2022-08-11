@@ -59,7 +59,8 @@ const matchStatusToString: MatchStatusProps = {
 
 const Chats: NextPage = () => {
   const router = useRouter();
-  const { id, matchProposalId } = router.query;
+  const { matchProposalId } = router.query;
+
   const [user] = useRecoilState(userState);
 
   // 신청 및 채팅 정보
@@ -88,7 +89,6 @@ const Chats: NextPage = () => {
     try {
       const res = await axiosAuthInstance.get<Response<ChatsProps>>(
         `/api/matches/proposals/${matchProposalId as string}/chats`,
-        { data: { id } },
       );
       const chatInfoRes = res.data.data;
       setChatsInfo(chatInfoRes);
@@ -119,17 +119,17 @@ const Chats: NextPage = () => {
   useEffect(() => {
     if (!router.isReady) return;
     getChatsApi();
-  }, [id, matchProposalId, router.isReady]);
+  }, [matchProposalId, router.isReady]);
 
   // 매치 종료 시 이벤트
   useEffect(() => {
     if (matchStatus === 'END') {
       // eslint-disable-next-line no-restricted-globals
       if (confirm('경기 후기를 작성하러 가시겠습니까?') === true) {
-        router.push(`/matches/${id as string}/result`);
+        if (chatsInfo) router.push(`/matches/${chatsInfo.match.id}/result`);
       }
     }
-  }, [id, matchStatus, router]);
+  }, [chatsInfo, matchStatus, router]);
 
   // 상대방 아이디 설정
   useEffect(() => {
@@ -139,11 +139,16 @@ const Chats: NextPage = () => {
   // 초대 수락 거절 API
   const patchMatchProposalApi = async (status: string) => {
     try {
-      const res = await axiosAuthInstance.patch(`/api/matches/${id as string}/proposals/${matchProposalId as string}`, {
-        status,
-      });
-      if (res.status === 200) {
-        alert(`매치 요청이 ${proposalStatusToString[status]}되었습니다.`);
+      if (chatsInfo) {
+        const res = await axiosAuthInstance.patch(
+          `/api/matches/${chatsInfo.match.id}/proposals/${matchProposalId as string}`,
+          {
+            status,
+          },
+        );
+        if (res.status === 200) {
+          alert(`매치 요청이 ${proposalStatusToString[status]}되었습니다.`);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -153,11 +158,13 @@ const Chats: NextPage = () => {
   // 경기 모집중 모집완료 API
   const patchMatchesApi = async (status: string) => {
     try {
-      const res = await axiosAuthInstance.patch(`/api/matches/${id as string}`, { status });
+      if (chatsInfo) {
+        const res = await axiosAuthInstance.patch(`/api/matches/${chatsInfo.match.id}`, { status });
 
-      if (res.status === 200) {
-        // TODO: 토스트로 변경
-        alert(`모집 상태가 ${matchStatusToString[status]}로 설정되었습니다. `);
+        if (res.status === 200) {
+          // TODO: 토스트로 변경
+          alert(`모집 상태가 ${matchStatusToString[status]}로 설정되었습니다. `);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -166,8 +173,11 @@ const Chats: NextPage = () => {
 
   // 채팅 보내기 API 연동
   const sendMessageApi = async () => {
-    const curChattedAt = new Date().toISOString().split('T');
+    const date = new Date();
+    date.setHours(date.getHours() + 9);
+    const curChattedAt = date.toISOString().split('T');
     const messageCurChattedAt = `${curChattedAt[0]} ${curChattedAt[1].split('Z')[0].slice(0, 8)}`;
+
     try {
       const res = await axiosAuthInstance.post(`/api/matches/proposals/${matchProposalId as string}/chats`, {
         targetId: message.targetId,

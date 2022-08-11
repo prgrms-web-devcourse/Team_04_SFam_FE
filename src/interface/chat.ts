@@ -4,6 +4,7 @@ export interface ChatsProps {
 }
 
 export interface MatchChat {
+  id: number;
   title: string;
   status: string;
   targetProfile: TargetProfile;

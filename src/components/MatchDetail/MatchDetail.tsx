@@ -113,7 +113,7 @@ const PostDetail = () => {
         status === 'WAITING' &&
         (proposer && proposer.status === 'APPROVED' ? (
           <Link
-            href={`/matches/${id as string}/chatlist/${proposer.id}`}
+            href={`/chatlist/${proposer.id}`}
             passHref
           >
             <Anchor>
