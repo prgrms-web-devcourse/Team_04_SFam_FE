@@ -5,6 +5,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
+import { Address, kakaoMapApi } from '@api/kakaoMapApi';
 import { Avatar } from '@components/Avatar';
 import { Divider } from '@components/Divider';
 import { ReviewGroup } from '@components/ReviewGroup';
@@ -20,7 +21,7 @@ const UserDetailPage: NextPage = () => {
   const { id } = router.query;
 
   const [user, setUser] = useRecoilState(userState);
-
+  const [kakaoLoading, setKakaoLoading] = React.useState(true);
   const [isMe, setIsMe] = React.useState<boolean>(false);
   const [userInfo, setUserInfo] = React.useState<UserInfo>({
     nickname: '',
@@ -34,6 +35,15 @@ const UserDetailPage: NextPage = () => {
       latitude: 0,
     },
     teams: [],
+  });
+  const [address, setAddress] = React.useState<Address>({
+    address_name: '',
+    region_1depth_name: '',
+    region_2depth_name: '',
+    region_3depth_name: '',
+    mountain_yn: '',
+    main_address_no: '',
+    sub_address_no: '',
   });
 
   React.useEffect(() => {
@@ -70,6 +80,16 @@ const UserDetailPage: NextPage = () => {
       }
     })();
   };
+  React.useEffect(() => {
+    setKakaoLoading(true);
+    async function fetchAddress() {
+      if (user.latitude && user.longitude) {
+        await kakaoMapApi(user.latitude, user.longitude, setAddress);
+        setKakaoLoading(false);
+      }
+    }
+    fetchAddress();
+  }, []);
 
   return (
     <Container>
@@ -81,8 +101,7 @@ const UserDetailPage: NextPage = () => {
           margin='0px 16px'
         >
           <B1>{userInfo.nickname}</B1>
-          {/* TODO: 위도 경도 기반 지역구 출력 */}
-          <GrayB3>송파구</GrayB3>
+          <GrayB3>{address.region_3depth_name}</GrayB3>
         </InnerWrapper>
       </RowWrapper>
       <Divider />
