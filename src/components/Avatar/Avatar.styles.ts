@@ -10,7 +10,7 @@ export const ImageWrapper = styled.div<Props>`
   width: ${({ imgSize }) => imgSize};
   height: ${({ imgSize }) => imgSize};
   position: relative;
-  border-radius: 50%;
+  border-radius: 8px;
   background-color: ${(props) => props.theme.color.green200};
   overflow: hidden;
   cursor: default;

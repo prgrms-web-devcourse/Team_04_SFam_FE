@@ -18,7 +18,7 @@ const NotificationListItem = ({ name, invitationId, teamId }: Props) => (
   >
     <S.NotificationListItemContainer>
       <div>
-        <Avatar />
+        <Avatar imgSize='60px' />
       </div>
       <InnerWrapper
         flexDirection='column'

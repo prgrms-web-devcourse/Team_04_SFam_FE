@@ -11,7 +11,7 @@ interface Props {
 const ChatListItem = ({ nickname, lastChat }: Props) => (
   <S.ChatListItemContainer>
     <div>
-      <Avatar />
+      <Avatar imgSize='60px' />
     </div>
     <InnerWrapper
       flexDirection='column'
