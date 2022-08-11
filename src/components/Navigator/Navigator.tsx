@@ -9,7 +9,13 @@ import { userState } from '@recoil/atoms';
 import * as S from './Navigator.styles';
 
 const Navigator = () => {
-  const [loginUser] = useRecoilState(userState);
+  const [user] = useRecoilState(userState);
+
+  const [id, setId] = React.useState<number>();
+
+  React.useEffect(() => {
+    setId(user.id);
+  }, [user.id]);
 
   return (
     <S.Container>
@@ -68,7 +74,7 @@ const Navigator = () => {
         </S.NavItem>
         <S.NavItem>
           <Link
-            href={`/user/${loginUser.id as number}`}
+            href={`/user/${user.id as number}`}
             passHref
           >
             <S.Anchor>

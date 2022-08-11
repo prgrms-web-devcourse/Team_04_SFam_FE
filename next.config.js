@@ -15,7 +15,7 @@ const nextConfig = {
 
     return config;
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   env: {
     NEXT_PUBLIC_KAKAO_MAP_REST_API_KEY: process.env.NEXT_PUBLIC_KAKAO_MAP_REST_API_KEY,
     NEXT_PUBLIC_KAKAO_MAP_JAVASCRIPT_KEY: process.env.NEXT_PUBLIC_KAKAO_MAP_JAVASCRIPT_KEY,
