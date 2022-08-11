@@ -23,6 +23,8 @@ import {
   TextArea,
 } from '@styles/common';
 
+import { validation } from './helper';
+
 interface Team {
   id: number;
   name: string;
@@ -33,23 +35,13 @@ interface SuccessResponse<T> {
   data: T;
 }
 
-interface RequestBody {
-  title: string;
-  matchDate: string;
-  matchType: string;
-  teamId?: number;
-  partcipants: number;
-  sportsCategory: string;
-  content: string;
-}
-
 interface State {
   title: string;
   matchType: string;
   sportsCategory: string;
-  teamId?: number;
+  teamId?: number | string;
   matchDate: string;
-  participants: string;
+  participants: string | number;
   year: string;
   month: string;
   date: string;
@@ -88,6 +80,7 @@ const PostForm = () => {
     date: '',
     content: '',
   });
+  const [errors, setErrors] = React.useState<Partial<State>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -124,6 +117,12 @@ const PostForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const { title, matchType, year, month, date, participants, content, sportsCategory } = state;
+    const error = validation({ title, matchType, participants, content, sportsCategory, year, month, date });
+    if (Object.keys(error).length > 0) {
+      setErrors(error);
+      return;
+    }
     const submit = async () => {
       const data = changeStateToRequestBody(state);
       const res = await axiosAuthInstance.post<Response<{ data: number }>>('/api/matches', data);
@@ -158,6 +157,7 @@ const PostForm = () => {
             onChange={handleChange}
             height='50px'
           />
+          {errors.title && <BoldOrangeB3>{errors.title}</BoldOrangeB3>}
           <RowWrapper>
             <RadioWrapper>
               <RadioInput
@@ -178,12 +178,16 @@ const PostForm = () => {
               <B3>팀전</B3>
             </RadioWrapper>
           </RowWrapper>
+          {errors.matchType && <BoldOrangeB3>{errors.matchType}</BoldOrangeB3>}
           {state.matchType === 'INDIVIDUAL_MATCH' && (
-            <Dropdown
-              items={SPORTS_CATEGORY}
-              placeholder='종목 선택'
-              onSelect={handleSelectSports}
-            />
+            <>
+              <Dropdown
+                items={SPORTS_CATEGORY}
+                placeholder='종목 선택'
+                onSelect={handleSelectSports}
+              />
+              {errors.sportsCategory && <BoldOrangeB3>{errors.sportsCategory}</BoldOrangeB3>}
+            </>
           )}
           {loading ||
             (state.matchType === 'TEAM_MATCH' && (
@@ -194,6 +198,7 @@ const PostForm = () => {
                   placeholder='팀 선택'
                   onSelect={handleSelectTeam}
                 />
+                {state.matchType === 'TEAM_MATCH' && errors.teamId && <BoldOrangeB3>{errors.teamId}</BoldOrangeB3>}
                 {teams.length === 0 && (
                   <>
                     <BoldOrangeB3>내가 속한 팀이 없습니다. 새로운 팀을 만들어보세요.</BoldOrangeB3>
@@ -239,19 +244,22 @@ const PostForm = () => {
               />
             </DropdownWrapper>
           </InnerWrapper>
+          {errors.matchDate && <BoldOrangeB3>{errors.matchDate}</BoldOrangeB3>}
           <Label>경기 인원</Label>
           <Input
             type='text'
             name='participants'
             placeholder='경기 인원'
-            value={state.participants}
+            value={state.participants as string}
             onChange={handleChange}
           />
+          {errors.participants && <BoldOrangeB3>{errors.participants}</BoldOrangeB3>}
           <TextArea
             name='content'
             placeholder='공고 내용'
             onChange={handleChange}
           />
+          {errors.content && <BoldOrangeB3>{errors.content}</BoldOrangeB3>}
           <InnerWrapper>
             <Button>작성 완료</Button>
           </InnerWrapper>
