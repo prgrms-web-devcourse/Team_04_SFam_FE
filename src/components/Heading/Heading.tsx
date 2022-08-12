@@ -80,8 +80,8 @@ const Heading = () => {
         >
           <Anchor>
             <S.HeadingLinkContainer>
-              <span>글쓰기</span>
               <FaPencilAlt />
+              <span>글쓰기</span>
             </S.HeadingLinkContainer>
           </Anchor>
         </Link>

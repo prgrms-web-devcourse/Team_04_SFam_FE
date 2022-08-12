@@ -5,7 +5,7 @@ export const HeadingContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  height: 70px;
+  height: 64px;
   top: 0;
   left: 0;
   right: 0;
