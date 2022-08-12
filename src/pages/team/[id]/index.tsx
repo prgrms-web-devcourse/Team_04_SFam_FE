@@ -21,13 +21,15 @@ import { Anchor, B1, B3, ColWrapper, Container, GrayB3, InnerWrapper, Label, Row
 
 const TeamDetailPage: NextPage = () => {
   const router = useRouter();
+  const { id } = router.query;
+
   const user = useRecoilValue(userState);
 
   const [teamInfo, setTeamInfo] = React.useState<TeamInfo>({
+    id: 0,
     name: '',
     description: '',
     sportsCategory: '',
-    leader: {},
     members: [],
     matchRecord: {
       win: 0,
@@ -39,13 +41,13 @@ const TeamDetailPage: NextPage = () => {
       likeCount: 0,
       dislikeCount: 0,
     },
+    leader: {},
+    logoImageUrl: '',
   });
   const [isLeader, setIsLeader] = React.useState(false);
 
   React.useEffect(() => {
     if (!router.isReady) return;
-    const { id } = router.query;
-
     (async () => {
       const {
         data: { data },
@@ -61,7 +63,7 @@ const TeamDetailPage: NextPage = () => {
   return (
     <Container>
       <RowWrapper>
-        <Avatar />
+        {teamInfo && teamInfo.logoImageUrl ? <Avatar imgSrc={teamInfo.logoImageUrl} /> : <Avatar />}
         <InnerWrapper
           flexDirection='column'
           justifyContent='center'
@@ -75,7 +77,22 @@ const TeamDetailPage: NextPage = () => {
           <B3>팀원 수: {teamInfo.members.length}명</B3>
         </InnerWrapper>
       </RowWrapper>
-      <Divider />
+      <ColWrapper>
+        {isLeader && (
+          <Link href={`/team/${id as string}/edit`}>
+            <Anchor>
+              <Button
+                height='40px'
+                fontSize='16px'
+                outline
+              >
+                팀 프로필 편집
+              </Button>
+            </Anchor>
+          </Link>
+        )}
+      </ColWrapper>
+
       <Paragraph>{teamInfo.description}</Paragraph>
       <Divider />
       <ColWrapper>
