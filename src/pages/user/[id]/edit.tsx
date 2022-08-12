@@ -116,6 +116,7 @@ const UserEditPage: NextPage = () => {
           />
         ) : (
           <Avatar
+            imgSize='100px'
             edit
             user
             handleFileChange={handleUserFileChange}
