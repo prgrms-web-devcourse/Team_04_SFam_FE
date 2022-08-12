@@ -12,7 +12,7 @@ export interface Values {
   memberCount?: string | number;
 }
 
-const regexTitle = /^.{2,10}$/;
+const regexTitle = /^.{2,50}$/;
 const regexContent = /^.{2,100}$/;
 const regexParticipants = /\d/;
 
@@ -49,7 +49,7 @@ export const validation = ({
   if (!title) {
     errors.title = '제목을 입력해주세요.';
   } else if (!regexTitle.test(title)) {
-    errors.title = '제목은 2자 이상 10자 이하입니다.';
+    errors.title = '제목은 2자 이상 50자 이하입니다.';
   }
 
   if (!year && !month && !date) {
