@@ -2,19 +2,19 @@ import styled from '@emotion/styled';
 
 export const Container = styled.div`
   width: 100%;
-  padding: 0 0 70px 0;
-  z-index: -1;
-  height: calc(100vh - 78px);
+  min-height: calc(100vh - 120px);
+  position: relative;
+  padding: 0 0 64px 0;
   background-color: ${({ theme }) => theme.color.gray200};
 `;
 
 export const Category = styled.div`
+  position: fixed;
+  width: 100%;
+  padding: 8px 16px;
   display: flex;
   gap: 12px;
-  padding: 8px 16px;
-  width: 100%;
   overflow: auto;
-  position: fixed;
   white-space: nowrap;
   background-color: ${({ theme }) => theme.color.background};
   border-bottom: 1px solid ${({ theme }) => theme.color.gray200};
