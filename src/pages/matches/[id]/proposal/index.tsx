@@ -9,8 +9,8 @@ import { Dropdown, Item } from '@components/Dropdown';
 import { SPORTS_TEXT } from '@constants/text';
 import { Match } from '@interface/match';
 import { Response } from '@interface/response';
-import { Team } from '@interface/team';
 import { Container, ColWrapper, TextArea, BoldOrangeB3, Anchor } from '@styles/common';
+import { Team } from 'interface/team';
 
 import { validation } from './helper';
 import { ProposalData } from './types';
