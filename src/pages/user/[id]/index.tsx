@@ -177,6 +177,12 @@ const UserDetailPage: NextPage = () => {
           <ColWrapper gap='16px'>
             <Label>나의 활동</Label>
             <Link
+              href='/team/create'
+              passHref
+            >
+              <B2>팀 생성하기</B2>
+            </Link>
+            <Link
               href={`/user/${id as string}/location`}
               passHref
             >
@@ -184,12 +190,7 @@ const UserDetailPage: NextPage = () => {
                 <B2>내 동네 설정하기</B2>
               </Anchor>
             </Link>
-            <B2
-              onClick={handleLogout}
-              pointer
-            >
-              로그아웃
-            </B2>
+            <B2 onClick={handleLogout}>로그아웃</B2>
           </ColWrapper>
         </>
       )}
