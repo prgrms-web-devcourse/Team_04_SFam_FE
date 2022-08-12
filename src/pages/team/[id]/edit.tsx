@@ -36,6 +36,7 @@ const UserEditPage: NextPage = () => {
         data: { data },
       } = await axiosAuthInstance.get<Response<TeamInfo>>(`/api/teams/${id as string}`);
       setTeamInfo(() => data);
+      setEditTeamProfile({ ...editTeamProfile, logoImageUrl: data.logoImageUrl });
       if (data.leader.id === user.id) {
         setIsLeader(true);
       }
