@@ -14,7 +14,7 @@ import { BoldB3, ColWrapper, Container, InnerWrapper, RowWrapper } from '@styles
 
 interface EditProfile {
   nickname?: string;
-  profileImageUrl?: string;
+  profileImageUrl?: string | null;
 }
 
 const UserEditPage: NextPage = () => {
@@ -106,7 +106,7 @@ const UserEditPage: NextPage = () => {
         alignItems='center'
         justifyContent='center'
       >
-        {user && userInfo && userInfo.profileImageUrl !== null ? (
+        {user && userInfo && editProfile.profileImageUrl !== null ? (
           <Avatar
             imgSrc={editProfile.profileImageUrl}
             imgSize='100px'

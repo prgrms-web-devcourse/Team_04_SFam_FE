@@ -351,6 +351,7 @@ const Chats: NextPage = () => {
               />
             ) : (
               <ChatReceiver
+                imgSrc={chatsInfo.match.targetProfile.profileImageUrl}
                 chat={chat}
                 nickname={chatsInfo.match.targetProfile.nickname}
                 // eslint-disable-next-line react/no-array-index-key
