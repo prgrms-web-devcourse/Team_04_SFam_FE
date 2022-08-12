@@ -1,20 +1,28 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import React from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
+import { Heading } from '@components/Heading';
+import { Navigator } from '@components/Navigator';
+import { ProposalInfo } from '@interface/proposals';
+import { Response } from '@interface/response';
 
 import * as S from './MatchResult.styles';
 
+const results = [
+  { id: 1, text: '승리', value: 'WIN' },
+  { id: 2, text: '패배', value: 'LOSE' },
+  { id: 3, text: '무승부', value: 'DRAW' },
+];
+
 const MatchResult = () => {
-  const [select, setSelect] = useState('');
   const router = useRouter();
-  const { id } = router.query;
-  const results = [
-    { id: 1, text: '승리', value: 'WIN' },
-    { id: 2, text: '패배', value: 'LOSE' },
-    { id: 3, text: '무승부', value: 'DRAW' },
-  ];
+  const { id, proposalId } = router.query;
+
+  const [loading, setLoading] = React.useState(true);
+  const [select, setSelect] = React.useState('');
+
   const handleResult = (e: React.MouseEvent<HTMLElement>, value: string) => {
     if (select === value) {
       setSelect('');
@@ -22,6 +30,7 @@ const MatchResult = () => {
       setSelect(value);
     }
   };
+
   const handleSubmit = () => {
     try {
       const fetch = async () => {
@@ -29,45 +38,85 @@ const MatchResult = () => {
           method: 'post',
           url: `/api/matches/${id as string}/records`,
           data: {
-            proposalId: id,
+            proposalId,
             result: select,
           },
         });
-        console.log(res);
+        if (res.status === 200) {
+          await router.replace({
+            pathname: `/matches/${id as string}/review`,
+            query: { proposalId },
+          });
+        }
       };
       fetch();
     } catch (err) {
       console.log(err);
     }
   };
+
+  React.useEffect(() => {
+    if (!router.isReady) return;
+
+    const getProposal = async () => {
+      const {
+        data: { data },
+      } = await axiosAuthInstance.get<Response<ProposalInfo>>(`/api/matches/proposals/${proposalId as string}`);
+
+      if (!data.isMatchAuthor) {
+        await router.replace({
+          pathname: `/matches/${id as string}/review`,
+          query: { proposalId },
+        });
+      }
+
+      if (data.status === 'FIXED') {
+        await router.replace({
+          pathname: `/matches/${id as string}/review`,
+          query: { proposalId },
+        });
+      }
+    };
+
+    (async () => {
+      await getProposal();
+      setLoading(false);
+    })();
+  }, [router.isReady]);
+
+  if (loading) return null;
   return (
-    <S.Container>
-      {results.map((result) => (
-        <S.ButtonContainer
-          width=''
-          height='45px'
-          fontSize='20px'
-          key={result.id}
-          color={select === result.value ? 'select' : ''}
-          onClick={(e) => handleResult(e, result.value)}
+    <>
+      <Heading />
+      <S.Container>
+        {results.map((result) => (
+          <S.ButtonContainer
+            width=''
+            height='45px'
+            fontSize='20px'
+            key={result.id}
+            color={select === result.value ? 'select' : ''}
+            onClick={(e) => handleResult(e, result.value)}
+          >
+            {result.text}
+          </S.ButtonContainer>
+        ))}
+        <Link
+          href={`/matches/${id as string}/review`}
+          passHref
         >
-          {result.text}
-        </S.ButtonContainer>
-      ))}
-      <Link
-        href={`/matches/${id as string}/review`}
-        passHref
-      >
-        <S.SubmitBtn
-          onClick={handleSubmit}
-          fontSize='20px'
-          width=''
-          height='45px'
-        >
-          제출
-        </S.SubmitBtn>
-      </Link>
-    </S.Container>
+          <S.SubmitBtn
+            onClick={handleSubmit}
+            fontSize='20px'
+            width=''
+            height='45px'
+          >
+            제출
+          </S.SubmitBtn>
+        </Link>
+      </S.Container>
+      <Navigator />
+    </>
   );
 };
 

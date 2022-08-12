@@ -50,6 +50,9 @@ const Layout = ({ children }: Props) => {
   if (router.pathname === '/') {
     return <main>{children}</main>;
   }
+  if (router.pathname === '/chatlist/[matchProposalId]' || router.pathname === '/matches/[id]/result') {
+    return <Main>{children}</Main>;
+  }
   if (router.pathname === '/signin' || router.pathname === '/signup') {
     return (
       <>
