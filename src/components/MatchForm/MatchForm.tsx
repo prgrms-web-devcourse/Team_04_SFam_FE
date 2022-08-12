@@ -218,7 +218,7 @@ const PostForm = () => {
                       <Anchor>
                         <Button
                           type='button'
-                          backgroundColor='#F19A78'
+                          backgroundColor='primary'
                         >
                           새 팀 만들기
                         </Button>

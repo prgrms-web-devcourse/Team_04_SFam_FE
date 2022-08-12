@@ -3,7 +3,11 @@ import { Theme } from '@emotion/react';
 const theme: Theme = {
   color: {
     primary: '#F19A78',
+    primaryHover: '#d88a6c',
+    primaryActive: '#c07b60',
     secondary: '#1FAB89',
+    secondaryHover: '#1b997b',
+    secondaryActive: '#18886d',
     background: '#fff',
     yellow: '#FDCF65',
     gray700: '#212529',
