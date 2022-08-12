@@ -116,14 +116,17 @@ const UserDetailPage: NextPage = () => {
       <Divider />
       <ColWrapper gap='16px'>
         <Label>팀 목록</Label>
-        <div>
+        <InnerWrapper
+          gap='8px'
+          wrap
+        >
           {userInfo.teams.map((team: Team) => (
             <TeamBadge
               team={team}
               key={team.id}
             />
           ))}
-        </div>
+        </InnerWrapper>
       </ColWrapper>
       {isMe && (
         <>

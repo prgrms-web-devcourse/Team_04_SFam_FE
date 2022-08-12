@@ -2,8 +2,7 @@ import Link from 'next/link';
 
 import { Badge } from '@components/Badge';
 import { MATCH_TYPE_TEXT, SPORTS_TEXT } from '@constants/text';
-import { B3, ColWrapper, InnerWrapper } from '@styles/common';
-import theme from '@styles/theme';
+import { B3, InnerWrapper } from '@styles/common';
 
 import * as S from './MatchListItem.styles';
 

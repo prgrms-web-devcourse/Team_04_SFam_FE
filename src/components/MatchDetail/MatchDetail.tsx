@@ -13,7 +13,7 @@ import { MATCH_STATUS_TEXT, MATCH_TYPE_TEXT, SPORTS_TEXT } from '@constants/text
 import { Proposer } from '@interface/match';
 import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
-import { Anchor, InnerWrapper, RowWrapper } from '@styles/common';
+import { Anchor, ColWrapper, InnerWrapper, RowWrapper } from '@styles/common';
 
 import * as S from './MatchDetail.styles';
 import { MatchDetail } from './types';
@@ -53,66 +53,68 @@ const PostDetail = () => {
 
   return (
     <S.Container>
-      <RowWrapper
-        justifyContent='space-between'
-        alignItems='center'
-      >
+      <RowWrapper>
         <S.Title>{matchDetail?.title}</S.Title>
-        {isAuthor ? (
-          <Dropdown
-            round
-            placeholder={MATCH_STATUS_TEXT[status]}
-            items={MATCH_STATUS_DETAIL}
-            onSelect={handleSelect}
-          />
-        ) : (
-          <Badge
-            fontSize='16px'
-            width='89px'
-            height='32px'
-            color='secondary'
-          >
-            {MATCH_STATUS_TEXT[status]}
-          </Badge>
-        )}
       </RowWrapper>
-      <S.Info>
-        <S.Detail>
-          <S.DetailTitle>작성자 </S.DetailTitle>
-          <S.DetailItem> {matchDetail?.author.nickname}</S.DetailItem>
-        </S.Detail>
-        <S.Detail>
-          <S.DetailTitle>종목 </S.DetailTitle>
-          <S.DetailItem>{SPORTS_TEXT[matchDetail?.sportsCategory as string]} </S.DetailItem>
-        </S.Detail>
-        <S.Detail>
-          <S.DetailTitle>개인전/팀전 </S.DetailTitle>
-          <S.DetailItem>{MATCH_TYPE_TEXT[matchDetail?.matchType as string]} </S.DetailItem>
-        </S.Detail>
-        {matchDetail?.team && (
-          <InnerWrapper
-            alignItems='center'
-            justifyContent='space-between'
-          >
-            <S.Detail>
-              <S.DetailTitle>팀명 </S.DetailTitle>
-              <S.DetailItem>
-                {matchDetail?.team?.name} / {matchDetail.participants}명
-              </S.DetailItem>
-            </S.Detail>
-            <Link
-              href={`/team/${matchDetail.team.id}`}
-              passHref
+      <RowWrapper justifyContent='space-between'>
+        <ColWrapper>
+          <S.Detail>
+            <S.DetailTitle>작성자 </S.DetailTitle>
+            <S.DetailItem> {matchDetail?.author.nickname}</S.DetailItem>
+          </S.Detail>
+          <S.Detail>
+            <S.DetailTitle>종목 </S.DetailTitle>
+            <S.DetailItem>{SPORTS_TEXT[matchDetail?.sportsCategory as string]} </S.DetailItem>
+          </S.Detail>
+          <S.Detail>
+            <S.DetailTitle>개인전/팀전 </S.DetailTitle>
+            <S.DetailItem>{MATCH_TYPE_TEXT[matchDetail?.matchType as string]} </S.DetailItem>
+          </S.Detail>
+          {matchDetail?.team && (
+            <InnerWrapper
+              alignItems='center'
+              justifyContent='space-between'
             >
-              <Anchor>팀 정보 보러 가기</Anchor>
-            </Link>
-          </InnerWrapper>
-        )}
-        <S.Detail>
-          <S.DetailTitle>경기일자 </S.DetailTitle>
-          <S.DetailItem>{matchDetail?.matchDate} </S.DetailItem>
-        </S.Detail>
-      </S.Info>
+              <S.Detail>
+                <S.DetailTitle>팀명 </S.DetailTitle>
+                <S.DetailItem>
+                  {matchDetail?.team?.name} / {matchDetail.participants}명
+                </S.DetailItem>
+              </S.Detail>
+              <Link
+                href={`/team/${matchDetail.team.id}`}
+                passHref
+              >
+                <Anchor>팀 정보 보러 가기</Anchor>
+              </Link>
+            </InnerWrapper>
+          )}
+          <S.Detail>
+            <S.DetailTitle>경기일자 </S.DetailTitle>
+            <S.DetailItem>{matchDetail?.matchDate} </S.DetailItem>
+          </S.Detail>
+        </ColWrapper>
+        <ColWrapper>
+          {isAuthor ? (
+            <Dropdown
+              round
+              placeholder={MATCH_STATUS_TEXT[status]}
+              items={MATCH_STATUS_DETAIL}
+              onSelect={handleSelect}
+            />
+          ) : (
+            <Badge
+              fontSize='16px'
+              width='auto'
+              height='32px'
+              color='secondary'
+              padding
+            >
+              {MATCH_STATUS_TEXT[status]}
+            </Badge>
+          )}
+        </ColWrapper>
+      </RowWrapper>
       <RowWrapper>
         <Paragraph width='100%'>{matchDetail?.content}</Paragraph>
       </RowWrapper>
@@ -132,27 +134,13 @@ const PostDetail = () => {
           passHref
         >
           <Anchor>
-            <Button>신청하기</Button>
+            <Button>대결 신청</Button>
           </Anchor>
         </Link>
       )}
-      {!isAuthor && matchDetail?.proposer?.status === 'WAITING' && (
-        <S.WaitingButton
-          width='100%'
-          height='50px'
-          fontSize='20px'
-        >
-          승인 대기
-        </S.WaitingButton>
-      )}
+      {!isAuthor && matchDetail?.proposer?.status === 'WAITING' && <Button backgroundColor='yellow'>승인 대기</Button>}
       {!isAuthor && matchDetail?.proposer?.status === 'REFUSE' && (
-        <S.RefuseButton
-          width='100%'
-          height='50px'
-          fontSize='20px'
-        >
-          대화가 거절되었습니다
-        </S.RefuseButton>
+        <Button backgroundColor='primary'>신청이 거절되었습니다</Button>
       )}
       {!isAuthor && matchDetail?.proposer?.status === 'APPROVED' && proposer && (
         <Link
@@ -160,7 +148,7 @@ const PostDetail = () => {
           passHref
         >
           <Anchor>
-            <Button>채팅 하기</Button>
+            <Button>채팅</Button>
           </Anchor>
         </Link>
       )}
