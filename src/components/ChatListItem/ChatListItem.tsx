@@ -1,17 +1,26 @@
 import { Avatar } from '@components/Avatar';
-import { InnerWrapper, B1, B3, GrayB3 } from '@styles/common';
+import { InnerWrapper, B1 } from '@styles/common';
 
 import * as S from './ChatListItem.styles';
 
 interface Props {
   nickname: string;
   lastChat: string;
+  imgSrc?: string;
 }
 
-const ChatListItem = ({ nickname, lastChat }: Props) => (
+const ChatListItem = ({ nickname, lastChat, imgSrc }: Props) => (
   <S.ChatListItemContainer>
     <div>
-      <Avatar imgSize='60px' />
+      {imgSrc !== null ? (
+        <Avatar
+          imgSrc={imgSrc}
+          imgSize='60px'
+          borderRadius='50%'
+        />
+      ) : (
+        <Avatar imgSize='60px' />
+      )}
     </div>
     <InnerWrapper
       flexDirection='column'

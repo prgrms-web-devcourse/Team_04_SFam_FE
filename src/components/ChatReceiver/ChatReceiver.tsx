@@ -1,5 +1,4 @@
-import { CgProfile } from 'react-icons/cg';
-
+import { Avatar } from '@components/Avatar';
 import { hourToString } from '@components/ChatSender/ChatSender';
 import { Chat } from '@interface/chat';
 import { GrayB4 } from '@styles/common';
@@ -9,16 +8,20 @@ import * as S from './ChatReceiver.styles';
 interface Props {
   chat: Chat;
   nickname: string;
+  imgSrc?: string;
 }
 
-const ChatReceiver = ({ chat, nickname }: Props) => {
+const ChatReceiver = ({ chat, nickname, imgSrc }: Props) => {
   const curChattedAt = chat.chattedAt.slice(11);
   const curChattedAtToString = `${hourToString(curChattedAt.slice(0, 2))}${curChattedAt.slice(2, 5)}`;
   return (
     <S.Container>
       <S.ChatWrapper>
         <S.ProfileWrapper>
-          <CgProfile size='32px' />
+          <Avatar
+            imgSrc={imgSrc}
+            imgSize='45px'
+          />
         </S.ProfileWrapper>
         <S.MessageContentWrapper>
           <S.ProfileText>{nickname}</S.ProfileText>

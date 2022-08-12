@@ -21,10 +21,10 @@ const InviteAcceptance = () => {
   const [user] = useRecoilState(userState);
 
   const [teamInfo, setTeamInfo] = React.useState<TeamInfo>({
+    id: 0,
     name: '',
     description: '',
     sportsCategory: '',
-    leader: {},
     members: [],
     matchRecord: {
       win: 0,
@@ -36,6 +36,8 @@ const InviteAcceptance = () => {
       likeCount: 0,
       dislikeCount: 0,
     },
+    leader: {},
+    logoImageUrl: null,
   });
 
   React.useEffect(() => {
@@ -82,7 +84,7 @@ const InviteAcceptance = () => {
   return (
     <S.Container>
       <RowWrapper>
-        <Avatar />
+        {teamInfo && teamInfo.logoImageUrl !== null ? <Avatar imgSrc={teamInfo.logoImageUrl} /> : <Avatar />}
         <InnerWrapper
           flexDirection='column'
           justifyContent='center'

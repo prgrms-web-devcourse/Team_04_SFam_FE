@@ -22,7 +22,14 @@ const UserListItem = ({ user, onClick }: Props) => {
         gap='16px'
         alignItems='center'
       >
-        <Avatar imgSize='60px' />
+        {user.profileImageUrl ? (
+          <Avatar
+            imgSize='60px'
+            imgSrc={user.profileImageUrl}
+          />
+        ) : (
+          <Avatar imgSize='60px' />
+        )}
         <InnerWrapper>
           <B2>{user.nickname}</B2>
         </InnerWrapper>

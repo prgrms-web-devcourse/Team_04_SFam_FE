@@ -9,16 +9,21 @@ interface Props {
   name: string;
   invitationId: number;
   teamId: number;
+  imgSrc?: string;
 }
 
-const NotificationListItem = ({ name, invitationId, teamId }: Props) => (
+const NotificationListItem = ({ name, invitationId, teamId, imgSrc }: Props) => (
   <Link
     href={`/notification/${invitationId}/${teamId}`}
     passHref
   >
     <S.NotificationListItemContainer>
       <div>
-        <Avatar imgSize='60px' />
+        <Avatar
+          imgSrc={imgSrc}
+          imgSize='60px'
+          borderRadius='50%'
+        />
       </div>
       <InnerWrapper
         flexDirection='column'
