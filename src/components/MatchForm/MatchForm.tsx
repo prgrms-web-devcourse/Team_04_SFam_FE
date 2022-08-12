@@ -29,6 +29,7 @@ interface Team {
   id: number;
   name: string;
   sportsCategory: string;
+  memberCount: string | number;
 }
 
 interface SuccessResponse<T> {
@@ -81,6 +82,8 @@ const PostForm = () => {
     content: '',
   });
   const [errors, setErrors] = React.useState<Partial<State>>({});
+  const [selectedMemberCount, setSelectedMemberCount] = React.useState<number>();
+  const [isFirstSubmit, setIsFirstSubmit] = React.useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -106,6 +109,7 @@ const PostForm = () => {
   const handleSelectTeam = (item: Item<{ id: number; sportsCategory: string }>) => {
     const { id, sportsCategory } = item.value;
     setState({ ...state, teamId: id, sportsCategory });
+    setSelectedMemberCount(teams.filter((team) => team.id === id)[0].memberCount as number);
   };
 
   const handleSelectYear = (item: Item<{ year: string }>) => {
@@ -125,8 +129,8 @@ const PostForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const { title, matchType, year, month, date, participants, content, sportsCategory, teamId } = state;
-    const error = validation({ title, matchType, participants, content, sportsCategory, year, month, date, teamId });
+    setIsFirstSubmit(false);
+    const error = validation({ ...state, memberCount: selectedMemberCount });
     if (Object.keys(error).length > 0) {
       setErrors(error);
       return;
@@ -152,6 +156,12 @@ const PostForm = () => {
       setLoading(false);
     })();
   }, []);
+
+  React.useEffect(() => {
+    if (!isFirstSubmit) {
+      setErrors(validation({ ...state, memberCount: selectedMemberCount }));
+    }
+  }, [state]);
 
   return (
     <Container>

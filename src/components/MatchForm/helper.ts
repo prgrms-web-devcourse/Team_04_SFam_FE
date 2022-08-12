@@ -9,10 +9,12 @@ export interface Values {
   participants?: number | string;
   sportsCategory?: string;
   content?: string;
+  memberCount?: string | number;
 }
 
 const regexTitle = /^.{2,10}$/;
 const regexContent = /^.{2,100}$/;
+const regexParticipants = /\d/;
 
 const checkDate = ({ year, month, date }: { year: string; month: string; date: string }) => {
   const numberYear = parseInt(year, 10);
@@ -40,6 +42,7 @@ export const validation = ({
   year,
   month,
   date,
+  memberCount,
 }: Values) => {
   const errors: Values = {};
 
@@ -68,6 +71,10 @@ export const validation = ({
     errors.participants = '인원을 입력해주세요.';
   } else if (participants < 1 || participants > 15) {
     errors.participants = '인원은 1명 이상 15명 이하입니다.';
+  } else if (!regexParticipants.test(participants.toString())) {
+    errors.participants = '숫자를 입력해주세요.';
+  } else if (memberCount && memberCount < participants) {
+    errors.participants = '팀원 수 보다 모집 인원이 많습니다.';
   }
   if (!content) {
     errors.content = '내용을 입력해주세요.';
