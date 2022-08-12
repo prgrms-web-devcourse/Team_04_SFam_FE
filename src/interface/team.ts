@@ -5,6 +5,7 @@ export interface Team {
   sportsCategory: string;
   name: string;
   logoImageUrl: string | null;
+  memberCount: number;
 }
 
 export interface MemberInfo {
