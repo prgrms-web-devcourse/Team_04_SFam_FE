@@ -5,7 +5,7 @@
 const nextConfig = {
   images: {
     // TODO: domains 변경 필요
-    domains: ['images.unsplash.com'],
+    domains: ['images.unsplash.com', 'sfam-bucket.s3.ap-northeast-2.amazonaws.com'],
   },
   webpack(config) {
     config.module.rules.push({
