@@ -1,8 +1,12 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
 import { FaPencilAlt } from 'react-icons/fa';
 import { MdArrowBackIos } from 'react-icons/md';
+import { useRecoilValue } from 'recoil';
 
+import { Address, kakaoMapApi } from '@api/kakaoMapApi';
+import { userState } from '@recoil/atoms';
 import { Anchor, RowWrapper } from '@styles/common';
 
 import * as S from './Heading.styles';
@@ -37,11 +41,37 @@ export const noBackIcon = ['/signup', '/signin', '/matches', '/matches/:id/revie
 // TODO: prop으로 뒤로 가기 버튼 조절해야 함
 const Heading = () => {
   const router = useRouter();
+  const user = useRecoilValue(userState);
+  const [kakaoLoading, setKakaoLoading] = React.useState(true);
+  const [address, setAddress] = React.useState<Address>({
+    address_name: '',
+    region_1depth_name: '',
+    region_2depth_name: '',
+    region_3depth_name: '',
+    mountain_yn: '',
+    main_address_no: '',
+    sub_address_no: '',
+  });
+  React.useEffect(() => {
+    if (router.pathname !== '/matches') return;
+    setKakaoLoading(true);
+    async function fetchAddress() {
+      if (user.latitude && user.longitude) {
+        await kakaoMapApi(user.latitude, user.longitude, setAddress);
+        setKakaoLoading(false);
+      }
+    }
+    fetchAddress();
+  }, [router.pathname]);
   return (
     <S.HeadingContainer>
       <RowWrapper>
         {!noBackIcon.includes(router.pathname) ? <MdArrowBackIos onClick={() => router.back()} /> : <div />}
-        <S.HeadingTitle>{headingTitle[router.pathname]}</S.HeadingTitle>
+        <Link href={`/user/${user.id?.toString() as string}/location`}>
+          <S.HeadingTitle>
+            {router.pathname === '/matches' ? address.region_3depth_name : headingTitle[router.pathname]}
+          </S.HeadingTitle>
+        </Link>
       </RowWrapper>
       {router.pathname === '/matches' ? (
         <Link

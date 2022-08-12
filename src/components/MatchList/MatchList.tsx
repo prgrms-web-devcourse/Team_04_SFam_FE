@@ -1,12 +1,14 @@
 import { AxiosResponse } from 'axios';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { FilterButton } from '@components/FilterButton';
 import { MatchListItem } from '@components/MatchListItem';
 import { SPORTS_CATEGORY } from '@constants/dropdown';
+import { userState } from '@recoil/atoms';
 
 import * as S from './MatchList.styles';
 import { Match, Response } from './types';
@@ -24,6 +26,7 @@ const MatchList = () => {
   const [category, setCategory] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const observerRef = useRef<HTMLDivElement>(null);
+  const user = useRecoilValue(userState);
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const { dataset } = e.target as HTMLElement;
@@ -52,7 +55,7 @@ const MatchList = () => {
           size: 10,
           category,
           status: 'WAITING',
-          distance: 30, // TODO: 거리는 사용자가 설정한 값으로 적용해야 함.
+          distance: user.searchDistance,
         },
       });
       const data = (res.data as AxiosResponse).data as Response;
@@ -74,7 +77,7 @@ const MatchList = () => {
           size: 10,
           category,
           status: 'WAITING',
-          distance: 30,
+          distance: user.searchDistance,
         },
       });
       const data = (res.data as AxiosResponse).data as Response;
