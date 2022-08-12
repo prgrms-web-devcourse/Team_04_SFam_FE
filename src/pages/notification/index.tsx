@@ -18,6 +18,7 @@ interface Invitation {
 interface TeamInvite {
   createdAt: string;
   invitationId: number;
+  logoImageUrl: string;
   teamId: number;
   name: string;
 }
@@ -99,6 +100,7 @@ const NotificationPage: NextPage = () => {
           >
             {state.values.map((invitation: TeamInvite) => (
               <NotificationListItem
+                imgSrc={invitation.logoImageUrl}
                 name={invitation.name}
                 invitationId={invitation.invitationId}
                 teamId={invitation.teamId}

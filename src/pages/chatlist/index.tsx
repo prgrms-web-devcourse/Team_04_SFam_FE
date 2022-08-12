@@ -12,7 +12,9 @@ interface Chat {
   id: number;
   content: string;
   target: {
+    id: number;
     nickname: string;
+    profileImageUrl: string;
   };
   lastChat: {
     content: string;
@@ -46,6 +48,7 @@ const ChatListPage: NextPage = () => {
             >
               <Anchor>
                 <ChatListItem
+                  imgSrc={chat.target.profileImageUrl}
                   nickname={chat.target.nickname}
                   lastChat={chat.lastChat.content}
                 />
@@ -59,6 +62,7 @@ const ChatListPage: NextPage = () => {
             >
               <Anchor>
                 <ChatListItem
+                  imgSrc={chat.target.profileImageUrl}
                   nickname={chat.target.nickname}
                   lastChat={chat.content}
                 />

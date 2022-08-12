@@ -2,7 +2,9 @@ import styled from '@emotion/styled';
 
 interface Props {
   block: boolean;
+  imgSrc: string;
   imgSize: string;
+  borderRadius: string;
 }
 
 export const ImageWrapper = styled.div<Props>`
@@ -10,8 +12,9 @@ export const ImageWrapper = styled.div<Props>`
   width: ${({ imgSize }) => imgSize};
   height: ${({ imgSize }) => imgSize};
   position: relative;
-  border-radius: 8px;
-  background-color: ${(props) => props.theme.color.green200};
+  border: ${(props) => props.imgSrc && `1px solid ${props.theme.color.gray200}`};
+  border-radius: ${({ borderRadius }) => borderRadius || '8px'};
+  background-color: ${(props) => (props.imgSrc ? 'none' : props.theme.color.green200)};
   overflow: hidden;
   cursor: default;
   > img {

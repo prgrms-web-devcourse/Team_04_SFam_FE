@@ -3,6 +3,7 @@ import { Team } from './team';
 export interface UserInfo {
   id?: number;
   nickname: string;
+  profileImageUrl: string | null;
   review: {
     bestCount: number;
     likeCount: number;

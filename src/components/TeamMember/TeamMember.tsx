@@ -17,7 +17,10 @@ const TeamMember = ({ info }: Props) => (
   >
     <S.Anchor>
       {/* TODO: 왕관 표시 */}
-      <Avatar imgSize='70px' />
+      <Avatar
+        imgSize='70px'
+        imgSrc={info.profileImageUrl}
+      />
       <InnerWrapper
         margin='0 16px'
         alignItems='center'

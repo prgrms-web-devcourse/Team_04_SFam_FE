@@ -7,6 +7,7 @@ export interface StyleProps {
   backgroundColor?: string;
   round?: boolean;
   disabled?: boolean;
+  outline?: boolean;
 }
 
 export const Button = styled('button')<StyleProps>(
@@ -19,7 +20,7 @@ export const Button = styled('button')<StyleProps>(
     fontWeight: 600,
     color: '#fff',
   },
-  ({ theme, width, height, fontSize, backgroundColor, round, disabled }) => {
+  ({ theme, width, height, fontSize, backgroundColor, round, disabled, outline }) => {
     const getColor = () => {
       if (disabled) return theme.color.gray200;
       // FIXME: 컬러가 아닌 테마로(불린 값)으로 변경
@@ -34,7 +35,9 @@ export const Button = styled('button')<StyleProps>(
       height,
       fontSize,
       borderRadius: round ? 24 : theme.borderRadius,
-      backgroundColor: getColor(),
+      backgroundColor: outline ? '#fff' : getColor(),
+      outline: outline ? `1px solid ${theme.color.gray300}` : 'none',
+      color: outline ? `${theme.color.gray700}` : '#fff',
     };
   },
 );
