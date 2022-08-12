@@ -10,6 +10,7 @@ export interface Team {
 export interface MemberInfo {
   userId: number;
   nickname: string;
+  profileImageUrl: string;
   role: string;
 }
 
@@ -29,11 +30,13 @@ export interface LeaderInfo {
   username?: string;
 }
 export interface TeamInfo {
+  id: number;
   name: string;
   description: string;
-  leader: LeaderInfo;
   sportsCategory: string;
   members: MemberInfo[];
   matchRecord: MatchRecord;
   matchReview: ReviewInfo;
+  leader: LeaderInfo;
+  logoImageUrl: string | null;
 }

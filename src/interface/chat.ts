@@ -19,6 +19,7 @@ export interface Chat {
 export interface TargetProfile {
   id: number;
   nickname: string;
+  profileImageUrl: string;
 }
 
 export interface Writer {
