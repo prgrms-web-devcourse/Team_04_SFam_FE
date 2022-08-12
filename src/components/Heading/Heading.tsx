@@ -65,7 +65,10 @@ const Heading = () => {
   }, [router.pathname]);
   return (
     <S.HeadingContainer>
-      <RowWrapper>
+      <RowWrapper
+        alignItems='center'
+        gap='4px'
+      >
         {!noBackIcon.includes(router.pathname) ? <MdArrowBackIos onClick={() => router.back()} /> : <div />}
         <Link href={`/user/${user.id?.toString() as string}/location`}>
           <S.HeadingTitle>
