@@ -62,9 +62,16 @@ const UserEditPage: NextPage = () => {
                 'Content-Type': 'multipart/form-data',
               },
             });
+
             alert(`${files[0].name} 팀 로고 이미지가 업로드 되었습니다.`);
+            if (teamInfo.logoImageUrl) {
+              const date = new Date().toTimeString();
+              console.log(date, '1');
+              setEditTeamProfile({ ...editTeamProfile, logoImageUrl: `${teamInfo.logoImageUrl}?date=${date}` });
+            }
+
             // TODO: API 수정 이후 확인할 것 res에 이미지 URL 요청드림
-            // setEditTeamProfile({ ...editTeamProfile, teamLogoFile: res.data.data.logoImageUrl });
+            // setEditTeamProfile({ ...editTeamProfile, logoImageUrl: res.data.data.logoImageUrl });
           }
         }
       } catch (error) {

@@ -59,6 +59,12 @@ const UserEditPage: NextPage = () => {
           });
 
           alert(`${files[0].name} 프로필 이미지가 업로드 되었습니다.`);
+          const date = new Date().toTimeString();
+          if (user.profileImageUrl) {
+            console.log(date, 12);
+            setEditProfile({ ...editProfile, profileImageUrl: `${user.profileImageUrl}?date=${date}` });
+          }
+
           // TODO: API 수정 이후 확인할 것 res에 이미지 URL 요청드림
           // setEditProfile({ ...editProfile, profileFile: res.data.data.profileImageUrl });
         }
@@ -106,9 +112,9 @@ const UserEditPage: NextPage = () => {
         alignItems='center'
         justifyContent='center'
       >
-        {user && userInfo && editProfile.profileImageUrl !== null ? (
+        {user && userInfo && user.profileImageUrl ? (
           <Avatar
-            imgSrc={editProfile.profileImageUrl}
+            imgSrc={`${user.profileImageUrl}?date=${new Date().toTimeString()}`}
             imgSize='100px'
             edit
             user
