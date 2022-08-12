@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { FaPencilAlt } from 'react-icons/fa';
 import { IoNotificationsSharp, IoChatboxSharp, IoHomeSharp, IoPerson } from 'react-icons/io5';
 import { useRecoilState } from 'recoil';
 
@@ -42,20 +42,20 @@ const Navigator = () => {
               <span>
                 <IoNotificationsSharp />
               </span>
-              <span>알림</span>
+              <span>초대 알림</span>
             </S.Anchor>
           </Link>
         </S.NavItem>
         <S.NavItem>
           <Link
-            href='/team/create'
+            href='/matches/create'
             passHref
           >
             <S.Anchor>
               <span>
-                <FaPlus />
+                <FaPencilAlt size='17px' />
               </span>
-              <span>팀 생성</span>
+              <span>글쓰기</span>
             </S.Anchor>
           </Link>
         </S.NavItem>

@@ -117,7 +117,11 @@ const UserDetailPage: NextPage = () => {
   return (
     <Container>
       <RowWrapper>
-        {userInfo && userInfo.profileImageUrl ? <Avatar imgSrc={userInfo.profileImageUrl} /> : <Avatar />}
+        {userInfo && userInfo.profileImageUrl ? (
+          <Avatar imgSrc={`${userInfo.profileImageUrl}?date=${new Date().toTimeString()}`} />
+        ) : (
+          <Avatar />
+        )}
         <InnerWrapper
           flexDirection='column'
           justifyContent='center'
