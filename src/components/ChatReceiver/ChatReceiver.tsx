@@ -8,20 +8,26 @@ import * as S from './ChatReceiver.styles';
 interface Props {
   chat: Chat;
   nickname: string;
-  imgSrc?: string;
+  imgSrc?: string | null;
 }
 
 const ChatReceiver = ({ chat, nickname, imgSrc }: Props) => {
+  console.log(imgSrc);
+
   const curChattedAt = chat.chattedAt.slice(11);
   const curChattedAtToString = `${hourToString(curChattedAt.slice(0, 2))}${curChattedAt.slice(2, 5)}`;
   return (
     <S.Container>
       <S.ChatWrapper>
         <S.ProfileWrapper>
-          <Avatar
-            imgSrc={imgSrc}
-            imgSize='45px'
-          />
+          {imgSrc !== null ? (
+            <Avatar
+              imgSrc={imgSrc}
+              imgSize='45px'
+            />
+          ) : (
+            <Avatar imgSize='45px' />
+          )}
         </S.ProfileWrapper>
         <S.MessageContentWrapper>
           <S.ProfileText>{nickname}</S.ProfileText>

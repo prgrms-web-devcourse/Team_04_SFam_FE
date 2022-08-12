@@ -70,11 +70,11 @@ const Chats: NextPage = () => {
   const [proposal, setProposal] = useState<ProposalInfo>({ id: 0, status: '', content: '', isMatchAuthor: false });
   const [chatsInfo, setChatsInfo] = useState<ChatsProps>();
   const [matchStatus, setMatchStatus] = useState('');
-  // const matchStatus = chatsInfo?.match.status; // 신청 및 채팅 상태 정보
   const proposalStatus = proposal?.status;
 
   // 메시지 정보
   const [message, setMessage] = useState<MessageReq>({ targetId: 0, content: '', chattedAt: '' });
+
   // 스크롤 맨 아래로
   const scrollRef = useRef<HTMLDivElement>(null);
 
