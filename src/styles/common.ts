@@ -213,6 +213,7 @@ export const TextArea = styled.textarea`
     font-size: ${(props) => props.theme.fontSize.b3};
     color: ${({ theme }) => theme.color.gray400};
   }
+  resize: none;
 `;
 
 export const MessageInput = styled.input`
