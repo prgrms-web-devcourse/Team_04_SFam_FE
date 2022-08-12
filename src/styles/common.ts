@@ -1,4 +1,3 @@
-import { ThemeContext } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { WrapperProps } from 'interface/styles';
