@@ -12,8 +12,6 @@ interface Props {
 }
 
 const ChatReceiver = ({ chat, nickname, imgSrc }: Props) => {
-  console.log(imgSrc);
-
   const curChattedAt = chat.chattedAt.slice(11);
   const curChattedAtToString = `${hourToString(curChattedAt.slice(0, 2))}${curChattedAt.slice(2, 5)}`;
   return (

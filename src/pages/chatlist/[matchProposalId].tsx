@@ -69,6 +69,8 @@ const Chats: NextPage = () => {
   // 신청 및 채팅 정보
   const [proposal, setProposal] = useState<ProposalInfo>({ id: 0, status: '', content: '', isMatchAuthor: false });
   const [chatsInfo, setChatsInfo] = useState<ChatsProps>();
+
+  // 매치 상태, 신청 상태
   const [matchStatus, setMatchStatus] = useState('');
   const proposalStatus = proposal?.status;
 
