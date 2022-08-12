@@ -16,6 +16,7 @@ const Button = ({
   round,
   onClick,
   children,
+  disabled = false,
 }: Props) => (
   <S.Button
     backgroundColor={backgroundColor}
@@ -25,6 +26,7 @@ const Button = ({
     onClick={onClick}
     round={round}
     type={type}
+    disabled={disabled}
   >
     {children}
   </S.Button>

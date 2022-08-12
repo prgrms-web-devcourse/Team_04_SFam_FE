@@ -6,6 +6,7 @@ export interface StyleProps {
   fontSize: string;
   backgroundColor?: string;
   round?: boolean;
+  disabled?: boolean;
 }
 
 export const Button = styled('button')<StyleProps>(
@@ -18,11 +19,11 @@ export const Button = styled('button')<StyleProps>(
     fontWeight: 600,
     color: '#fff',
   },
-  ({ theme, width, height, fontSize, backgroundColor, round }) => ({
+  ({ theme, width, height, fontSize, backgroundColor, round, disabled }) => ({
     width,
     height,
     fontSize,
     borderRadius: round ? 24 : theme.borderRadius,
-    backgroundColor: backgroundColor || theme.color.secondary,
+    backgroundColor: disabled ? theme.color.gray200 : backgroundColor || theme.color.secondary,
   }),
 );
