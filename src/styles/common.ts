@@ -69,6 +69,15 @@ export const BottomFixedWrapper = styled.div<WrapperProps>`
   background-color: #fff;
 `;
 
+export const IconBadgeWrapper = styled.div<WrapperProps>`
+  position: absolute;
+  top: 150px;
+  right: 150px;
+  background: ${(props) => props.theme.color.gray300};
+  border-radius: 50%;
+  padding: 6px;
+`;
+
 export const RadioInput = styled.input`
   display: flex;
   width: 18px;
