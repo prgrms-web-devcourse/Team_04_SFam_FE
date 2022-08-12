@@ -7,18 +7,18 @@ interface Props {
   height: string;
   fontSize: string;
   fontColor: string;
-  borderRadius: string;
+  padding?: boolean;
 }
 
-export const Container = styled.div<Props>`
+export const Container = styled.span<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 1rem;
+  padding: ${({ padding }) => padding && '0 12px'};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   font-size: ${({ fontSize }) => fontSize};
-  border-radius: ${({ borderRadius }) => borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   color: ${({ fontColor, theme }) => (fontColor === 'primary' ? `${theme.color.background}` : fontColor)};
   background-color: ${({ color, theme, matchType }) => {
     if (matchType) {
