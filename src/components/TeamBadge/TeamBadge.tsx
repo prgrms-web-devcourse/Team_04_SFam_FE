@@ -23,19 +23,17 @@ const Color: ColorProps = {
 
 const TeamBadge = ({ team }: Props) => (
   <Link href={`/team/${team.id}`}>
-    <S.TeamBadgeWrapper>
-      <Badge
-        color={Color[Math.floor(Math.random() * 6 + 1)]}
-        width='100%'
-        height='38px'
-        borderRadius='5px'
-      >
-        <S.BadgeInner>
-          <SportsIcon sportsCategory={team.sportsCategory} />
-          <S.BadgeText>{team.name}</S.BadgeText>
-        </S.BadgeInner>
-      </Badge>
-    </S.TeamBadgeWrapper>
+    <Badge
+      color={Color[Math.floor(Math.random() * 6 + 1)]}
+      width='fit-content'
+      height='32px'
+      padding
+    >
+      <S.BadgeInner>
+        <SportsIcon sportsCategory={team.sportsCategory} />
+        <S.BadgeText>{team.name}</S.BadgeText>
+      </S.BadgeInner>
+    </Badge>
   </Link>
 );
 

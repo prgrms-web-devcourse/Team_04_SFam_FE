@@ -20,10 +20,11 @@ export const SelectedItem = styled('div')(
 
 export const RoundSelectedItem = styled(SelectedItem)(
   {
+    height: '32px',
     color: '#fff',
     border: 'none',
-    borderRadius: '24px',
-    padding: '6px 12px',
+    borderRadius: '8px',
+    padding: '0 6px 0 12px',
   },
   ({ theme }) => ({
     backgroundColor: theme.color.secondary,

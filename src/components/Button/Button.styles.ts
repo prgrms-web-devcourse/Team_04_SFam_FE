@@ -19,11 +19,22 @@ export const Button = styled('button')<StyleProps>(
     fontWeight: 600,
     color: '#fff',
   },
-  ({ theme, width, height, fontSize, backgroundColor, round, disabled }) => ({
-    width,
-    height,
-    fontSize,
-    borderRadius: round ? 24 : theme.borderRadius,
-    backgroundColor: disabled ? theme.color.gray200 : backgroundColor || theme.color.secondary,
-  }),
+  ({ theme, width, height, fontSize, backgroundColor, round, disabled }) => {
+    const getColor = () => {
+      if (disabled) return theme.color.gray200;
+      // FIXME: 컬러가 아닌 테마로(불린 값)으로 변경
+      if (backgroundColor === 'primary') return theme.color.primary;
+      if (backgroundColor === 'yellow') return theme.color.yellow;
+      if (backgroundColor) return backgroundColor;
+      return theme.color.secondary;
+    };
+
+    return {
+      width,
+      height,
+      fontSize,
+      borderRadius: round ? 24 : theme.borderRadius,
+      backgroundColor: getColor(),
+    };
+  },
 );

@@ -7,18 +7,18 @@ interface Props {
   height?: string;
   fontSize?: string;
   fontColor?: string;
-  borderRadius?: string;
+  padding?: boolean;
   children?: string | JSX.Element;
 }
 
 const Badge = ({
   matchType,
   color = 'primary',
-  width = '60px',
-  height = '18px',
+  width = '64px',
+  height = '20px',
   fontSize = '12px',
   fontColor = 'primary',
-  borderRadius = '1rem',
+  padding,
   children,
 }: Props) => (
   <S.Container
@@ -28,7 +28,7 @@ const Badge = ({
     height={height}
     fontSize={fontSize}
     fontColor={fontColor}
-    borderRadius={borderRadius}
+    padding={padding}
   >
     {children}
   </S.Container>

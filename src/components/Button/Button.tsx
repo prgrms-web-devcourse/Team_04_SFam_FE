@@ -10,7 +10,7 @@ interface Props extends Partial<S.StyleProps> {
 const Button = ({
   type,
   width = '100%',
-  height = '50px',
+  height = '40px',
   fontSize = '20px',
   backgroundColor,
   round,

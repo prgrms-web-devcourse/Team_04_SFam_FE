@@ -28,9 +28,11 @@ export const TitleWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export const Title = styled.span`
+export const Title = styled.div`
   font-size: 20px;
-  margin-right: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Content = styled.div`

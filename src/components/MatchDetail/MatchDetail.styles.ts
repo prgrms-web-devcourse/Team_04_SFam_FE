@@ -13,10 +13,6 @@ export const Title = styled.span`
   font-size: 28px;
 `;
 
-export const Info = styled.div`
-  padding: 24px 0 8px;
-`;
-
 export const Detail = styled.div`
   padding: 8px 0;
 `;
@@ -28,12 +24,4 @@ export const DetailItem = styled.span`
 
 export const DetailTitle = styled.span`
   font-size: 16px;
-`;
-
-export const Content = styled.div``;
-
-export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 0 20px;
 `;

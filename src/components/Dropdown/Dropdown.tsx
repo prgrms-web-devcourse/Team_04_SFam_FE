@@ -14,12 +14,15 @@ interface Props<T> {
 
 export const Dropdown = <T,>({ items, placeholder, onSelect, round, disabled }: Props<T>) => {
   const ref = React.useRef<HTMLDivElement>(null);
+  const toggleRef = React.useRef<HTMLDivElement>(null);
 
   const [isOpen, setIsOpen] = React.useState(false);
   const [text, setText] = React.useState('');
 
+  // FIXME: 드롭다운 닫힌 상태에서 아이콘 클릭 시 작동 안 함
   const handleClickToggle = () => {
     if (disabled) return;
+    // console.log(e.target.closest('div') === toggleRef.current); // true all
     setIsOpen((prev) => !prev);
   };
 
@@ -49,12 +52,18 @@ export const Dropdown = <T,>({ items, placeholder, onSelect, round, disabled }: 
   return (
     <S.Wrapper ref={ref}>
       {round ? (
-        <S.RoundSelectedItem onClick={handleClickToggle}>
+        <S.RoundSelectedItem
+          onClick={handleClickToggle}
+          ref={toggleRef}
+        >
           {text ? <S.TextWhite>{text}</S.TextWhite> : <S.TextWhite>{placeholder}</S.TextWhite>}
           {isOpen ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}
         </S.RoundSelectedItem>
       ) : (
-        <S.SelectedItem onClick={handleClickToggle}>
+        <S.SelectedItem
+          onClick={handleClickToggle}
+          ref={toggleRef}
+        >
           {text ? <S.Text>{text}</S.Text> : <S.TextGray>{placeholder}</S.TextGray>}
           {isOpen ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}
         </S.SelectedItem>
