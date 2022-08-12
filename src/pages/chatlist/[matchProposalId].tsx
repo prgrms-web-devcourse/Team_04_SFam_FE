@@ -9,7 +9,9 @@ import { ChatReceiver } from '@components/ChatReceiver';
 import { ChatSender } from '@components/ChatSender';
 import { Divider } from '@components/Divider';
 import { Dropdown, Item } from '@components/Dropdown';
+import { Heading } from '@components/Heading';
 import { Message } from '@components/Message';
+import { Navigator } from '@components/Navigator';
 import { ChatsProps, MessageReq } from '@interface/chat';
 import { ProposalInfo } from '@interface/proposals';
 import { Response } from '@interface/response';
@@ -63,6 +65,7 @@ const Chats: NextPage = () => {
 
   const [user] = useRecoilState(userState);
 
+  const [loading, setLoading] = useState(true);
   // 신청 및 채팅 정보
   const [proposal, setProposal] = useState<ProposalInfo>({ id: 0, status: '', content: '', isMatchAuthor: false });
   const [chatsInfo, setChatsInfo] = useState<ChatsProps>();
@@ -94,6 +97,12 @@ const Chats: NextPage = () => {
       const chatInfoRes = res.data.data;
       setChatsInfo(chatInfoRes);
       setMatchStatus(chatInfoRes.match.status);
+      if (chatInfoRes.match.status === 'END') {
+        await router.replace({
+          pathname: `/matches/${chatInfoRes.match.id}/review`,
+          query: { proposalId: matchProposalId },
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -120,15 +129,11 @@ const Chats: NextPage = () => {
   // 채팅 조회 API
   useEffect(() => {
     if (!router.isReady) return;
-    getChatsApi();
+    (async () => {
+      await getChatsApi();
+      setLoading(false);
+    })();
   }, [matchProposalId, router.isReady]);
-
-  // 매치 종료 시 이벤트
-  useEffect(() => {
-    if (matchStatus === 'END') {
-      if (chatsInfo) router.push(`/matches/${chatsInfo.match.id}/result`);
-    }
-  }, [matchStatus]);
 
   // 상대방 아이디 설정
   useEffect(() => {
@@ -193,7 +198,15 @@ const Chats: NextPage = () => {
   };
 
   const handleSelect = (item: Item<{ status: string }>) => {
+    if (!chatsInfo) return;
     const { status } = item.value;
+    if (status === 'END') {
+      router.push({
+        pathname: `/matches/${chatsInfo.match.id}/result`,
+        query: { proposalId: matchProposalId },
+      });
+      return;
+    }
     setMatchStatus(() => status);
     if (status !== 'END') patchMatchesApi(item.value.status);
   };
@@ -218,150 +231,154 @@ const Chats: NextPage = () => {
     }
   };
 
+  if (loading) return null;
   if (!chatsInfo) {
     return <Container />;
   }
-
   return (
-    <Container ref={scrollRef}>
-      <RowWrapper
-        alignItems='center'
-        justifyContent='space-between'
-      >
-        <B1>{chatsInfo?.match.title}</B1>
-        {matchStatus === 'WAITING' ? (
-          <Dropdown
-            items={dropdownItems}
-            disabled={!proposal.isMatchAuthor}
-            onSelect={handleSelect}
-            placeholder='모집 중'
-            round
-          />
-        ) : (
-          <Dropdown
-            items={dropdownMatchDoneItems}
-            disabled={!proposal.isMatchAuthor}
-            onSelect={handleSelect}
-            placeholder={`${matchStatusToString[matchStatus]}`}
-            round
-          />
-        )}
-      </RowWrapper>
-      <Divider />
-      <ColWrapper
-        alignItems='center'
-        justifyContent='center'
-        gap='8px'
-      >
-        <BoldGrayB2>2022년 4월 20일</BoldGrayB2>
-        {proposal ? (
-          <InnerWrapper
-            flexDirection='column'
-            alignItems='center'
-          >
-            {proposalStatus === 'WAITING' && !proposal.isMatchAuthor ? (
-              <InnerWrapper
-                flexDirection='column'
-                alignItems='center'
-              >
-                <GrayB3>공고 작성자에게 대화 요청 메시지를 전달했습니다.</GrayB3>
-                <GrayB3>대화를 수락할 경우 채팅을 전송할 수 있습니다.</GrayB3>
-              </InnerWrapper>
-            ) : (
-              <div />
-            )}
-            {proposalStatus === 'WAITING' && proposal.isMatchAuthor ? (
-              <>
-                <GrayB3>{chatsInfo?.match.targetProfile.nickname}님으로부터 대화 요청이 전송되었습니다.</GrayB3>
-                <GrayB3>요청 내용</GrayB3>
-                <GrayB3>{proposal.content}</GrayB3>
-                <GrayB3>수락하시겠습니까?</GrayB3>
-                <InnerWrapper>
-                  <Button
-                    backgroundColor='#F19A78'
-                    width='184px'
-                    onClick={handleRefuse}
-                  >
-                    거절
-                  </Button>
-                  <Button
-                    width='184px'
-                    onClick={handleApprove}
-                  >
-                    수락
-                  </Button>
-                </InnerWrapper>
-              </>
-            ) : (
-              <div />
-            )}
-            {proposalStatus === 'APPROVED' && !proposal.isMatchAuthor ? (
-              <InnerWrapper
-                flexDirection='column'
-                alignItems='center'
-              >
-                <GrayB3>상대방이 대화를 수락했습니다.</GrayB3>
-                <GrayB3>채팅을 전송할 수 있습니다.</GrayB3>
-              </InnerWrapper>
-            ) : (
-              <div />
-            )}
-            {proposalStatus === 'APPROVED' && proposal.isMatchAuthor ? (
-              <InnerWrapper
-                flexDirection='column'
-                alignItems='center'
-              >
-                <GrayB3>대화를 수락했습니다.</GrayB3>
-                <GrayB3>채팅을 전송할 수 있습니다.</GrayB3>
-              </InnerWrapper>
-            ) : (
-              <div />
-            )}
-            {proposalStatus === 'REFUSE' ? <GrayB3>신청이 거절되었습니다.</GrayB3> : <div />}
-          </InnerWrapper>
-        ) : (
-          <div />
-        )}
-      </ColWrapper>
-      <ColWrapper
-        gap='16px'
-        padding='0 0 70px 0 '
-      >
-        {chatsInfo.chats.map((chat, idx) =>
-          chat.writer.id === user.id ? (
-            <ChatSender
-              chat={chat}
-              // eslint-disable-next-line react/no-array-index-key
-              key={idx}
+    <>
+      <Heading />
+      <Container ref={scrollRef}>
+        <RowWrapper
+          alignItems='center'
+          justifyContent='space-between'
+        >
+          <B1>{chatsInfo?.match.title}</B1>
+          {matchStatus === 'WAITING' ? (
+            <Dropdown
+              items={dropdownItems}
+              disabled={!proposal.isMatchAuthor}
+              onSelect={handleSelect}
+              placeholder='모집 중'
+              round
             />
           ) : (
-            <ChatReceiver
-              chat={chat}
-              nickname={chatsInfo.match.targetProfile.nickname}
-              // eslint-disable-next-line react/no-array-index-key
-              key={idx}
+            <Dropdown
+              items={dropdownMatchDoneItems}
+              disabled={!proposal.isMatchAuthor}
+              onSelect={handleSelect}
+              placeholder={`${matchStatusToString[matchStatus]}`}
+              round
             />
-          ),
-        )}
-      </ColWrapper>
-      <BottomFixedWrapper>
-        {proposalStatus === 'APPROVED' ? (
-          <Message
-            message={message}
-            setMessage={setMessage}
-            handleMessage={handleMessage}
-            handleKeyPress={handleKeyPress}
-          />
-        ) : (
-          <Message
-            message={message}
-            setMessage={setMessage}
-            handleMessage={handleMessage}
-            disabled
-          />
-        )}
-      </BottomFixedWrapper>
-    </Container>
+          )}
+        </RowWrapper>
+        <Divider />
+        <ColWrapper
+          alignItems='center'
+          justifyContent='center'
+          gap='8px'
+        >
+          <BoldGrayB2>2022년 4월 20일</BoldGrayB2>
+          {proposal ? (
+            <InnerWrapper
+              flexDirection='column'
+              alignItems='center'
+            >
+              {proposalStatus === 'WAITING' && !proposal.isMatchAuthor ? (
+                <InnerWrapper
+                  flexDirection='column'
+                  alignItems='center'
+                >
+                  <GrayB3>공고 작성자에게 대화 요청 메시지를 전달했습니다.</GrayB3>
+                  <GrayB3>대화를 수락할 경우 채팅을 전송할 수 있습니다.</GrayB3>
+                </InnerWrapper>
+              ) : (
+                <div />
+              )}
+              {proposalStatus === 'WAITING' && proposal.isMatchAuthor ? (
+                <>
+                  <GrayB3>{chatsInfo?.match.targetProfile.nickname}님으로부터 대화 요청이 전송되었습니다.</GrayB3>
+                  <GrayB3>요청 내용</GrayB3>
+                  <GrayB3>{proposal.content}</GrayB3>
+                  <GrayB3>수락하시겠습니까?</GrayB3>
+                  <InnerWrapper>
+                    <Button
+                      backgroundColor='#F19A78'
+                      width='184px'
+                      onClick={handleRefuse}
+                    >
+                      거절
+                    </Button>
+                    <Button
+                      width='184px'
+                      onClick={handleApprove}
+                    >
+                      수락
+                    </Button>
+                  </InnerWrapper>
+                </>
+              ) : (
+                <div />
+              )}
+              {proposalStatus === 'APPROVED' && !proposal.isMatchAuthor ? (
+                <InnerWrapper
+                  flexDirection='column'
+                  alignItems='center'
+                >
+                  <GrayB3>상대방이 대화를 수락했습니다.</GrayB3>
+                  <GrayB3>채팅을 전송할 수 있습니다.</GrayB3>
+                </InnerWrapper>
+              ) : (
+                <div />
+              )}
+              {proposalStatus === 'APPROVED' && proposal.isMatchAuthor ? (
+                <InnerWrapper
+                  flexDirection='column'
+                  alignItems='center'
+                >
+                  <GrayB3>대화를 수락했습니다.</GrayB3>
+                  <GrayB3>채팅을 전송할 수 있습니다.</GrayB3>
+                </InnerWrapper>
+              ) : (
+                <div />
+              )}
+              {proposalStatus === 'REFUSE' ? <GrayB3>신청이 거절되었습니다.</GrayB3> : <div />}
+            </InnerWrapper>
+          ) : (
+            <div />
+          )}
+        </ColWrapper>
+        <ColWrapper
+          gap='16px'
+          padding='0 0 70px 0 '
+        >
+          {chatsInfo.chats.map((chat, idx) =>
+            chat.writer.id === user.id ? (
+              <ChatSender
+                chat={chat}
+                // eslint-disable-next-line react/no-array-index-key
+                key={idx}
+              />
+            ) : (
+              <ChatReceiver
+                chat={chat}
+                nickname={chatsInfo.match.targetProfile.nickname}
+                // eslint-disable-next-line react/no-array-index-key
+                key={idx}
+              />
+            ),
+          )}
+        </ColWrapper>
+        <BottomFixedWrapper>
+          {proposalStatus === 'APPROVED' ? (
+            <Message
+              message={message}
+              setMessage={setMessage}
+              handleMessage={handleMessage}
+              handleKeyPress={handleKeyPress}
+            />
+          ) : (
+            <Message
+              message={message}
+              setMessage={setMessage}
+              handleMessage={handleMessage}
+              disabled
+            />
+          )}
+        </BottomFixedWrapper>
+      </Container>
+      <Navigator />
+    </>
   );
 };
 
