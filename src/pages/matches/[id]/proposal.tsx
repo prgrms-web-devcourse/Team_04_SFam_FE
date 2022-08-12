@@ -18,7 +18,6 @@ const changeTeamsToDropdownItems = (teams: Team[]) =>
 const Proposal: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [loading, setLoading] = useState(false);
   const [teams, setTeams] = useState<Team[]>([]);
   const [matchInfo, setMatchInfo] = useState<Match>();
   const [proposalData, setProposalData] = useState({ teamId: 0, content: '' });
@@ -30,12 +29,10 @@ const Proposal: NextPage = () => {
       setMatchInfo(res.data.data);
       console.log(res.data.data);
       (async () => {
-        setLoading(true);
         const {
           data: { data },
         } = await axiosAuthInstance.get<Response<Team[]>>('/api/teams/me/leader');
         setTeams(data.filter((item) => item.sportsCategory === res.data.data.sportsCategory));
-        setLoading(false);
       })();
     };
     getMatchInfoApi();
