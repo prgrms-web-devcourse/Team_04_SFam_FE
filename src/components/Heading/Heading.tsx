@@ -16,7 +16,7 @@ export const headingTitle: HeadingTitleProps = {
   '/matches': `송파동`,
   '/signup': '회원가입',
   '/signin': '로그인',
-  '/notification': '알림',
+  '/notification': '초대 알림',
   '/notification/[...id]': '팀 초대 수락',
   '/team/create': '팀 생성',
   '/team/[id]': '팀 프로필',
@@ -53,6 +53,13 @@ const Heading = () => {
     main_address_no: '',
     sub_address_no: '',
   });
+
+  const handleTitleClick = () => {
+    if (router.pathname === '/matches') {
+      router.push(`/user/${user.id?.toString() as string}/location`);
+    }
+  };
+
   React.useEffect(() => {
     if (router.pathname !== '/matches') return;
     setKakaoLoading(true);
@@ -78,11 +85,12 @@ const Heading = () => {
         ) : (
           <div />
         )}
-        <Link href={`/user/${user.id?.toString() as string}/location`}>
-          <S.HeadingTitle pointer={router.pathname === '/matches'}>
-            {router.pathname === '/matches' ? address.region_3depth_name : headingTitle[router.pathname]}
-          </S.HeadingTitle>
-        </Link>
+        <S.HeadingTitle
+          pointer={router.pathname === '/matches'}
+          onClick={handleTitleClick}
+        >
+          {router.pathname === '/matches' ? address.region_3depth_name : headingTitle[router.pathname]}
+        </S.HeadingTitle>
       </RowWrapper>
       {router.pathname === '/matches' ? (
         <Link
