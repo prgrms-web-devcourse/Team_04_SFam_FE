@@ -52,13 +52,13 @@ export const validation = ({
     errors.title = '제목은 2자 이상 50자 이하입니다.';
   }
 
-  if (!year && !month && !date) {
+  if (!year || !month || !date) {
     errors.matchDate = '대결 날짜를 입력해주세요.';
   } else if (year && month && date && !checkDate({ year, month, date })) {
     errors.matchDate = '존재하지 않는 날짜입니다.';
   } else {
     const nowDate = new Date();
-    const selectedDate = new Date(`${year as string}-${month as string}-${date as string}`);
+    const selectedDate = new Date(`${year }-${month }-${date }`);
     if (nowDate > selectedDate) {
       errors.matchDate = '날짜를 오늘 이후로 설정해주세요.';
     }
