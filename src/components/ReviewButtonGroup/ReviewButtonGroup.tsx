@@ -20,19 +20,19 @@ const ReviewButtonGroup = ({ setReview }: Props) => {
       <ReviewButtonItem
         id='best'
         iconSrc={BestIcon}
-        iconAlt='best'
+        iconAlt='BEST'
         reviewText='최고에요'
         onClick={handleClick}
       />
       <ReviewButtonItem
-        id='like'
+        id='LIKE'
         iconSrc={LikeIcon}
         iconAlt='like'
         reviewText='좋아요'
         onClick={handleClick}
       />
       <ReviewButtonItem
-        id='dislike'
+        id='DISLIKE'
         iconSrc={DislikeIcon}
         iconAlt='dislike'
         reviewText='별로에요'

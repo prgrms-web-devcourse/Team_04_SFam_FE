@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
@@ -14,19 +14,19 @@ import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
 import { Anchor, B3, ColWrapper, Container, GrayB4, H2 } from '@styles/common';
 
-// TODO: 공고글에 대한 Data를 전역으로 관리를 해야하는가에 대한 논의 필요, 아니라면 이 데이터를 어떻게 가져올 것인지 논의 필요
-
 const Review: NextPage = () => {
-  const user = useRecoilValue(userState);
   const router = useRouter();
   const { id, proposalId } = router.query;
-  const [review, setReview] = useState('');
-  const [match, setMatch] = useState({
+
+  const user = useRecoilValue(userState);
+
+  const [review, setReview] = React.useState('');
+  const [match, setMatch] = React.useState({
     title: '',
     name: '',
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!router.isReady) return;
     const getMatch = async () => {
       const res = await axiosAuthInstance.get<Response<Match>>(`/api/matches/${id as string}`);
@@ -61,8 +61,22 @@ const Review: NextPage = () => {
   }, [router.isReady]);
 
   const handleClick = () => {
-    // TODO: API 연동(review 상태 저장까지 확인 그대로 request body에 넘겨주면 됨)
+    try {
+      const fetch = async () => {
+        await axiosAuthInstance({
+          method: 'post',
+          url: `/api/matches/${id as string}/review`,
+          data: {
+            review,
+          },
+        });
+      };
+      fetch();
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   return (
     <Container>
       <ColWrapper gap='16px'>
