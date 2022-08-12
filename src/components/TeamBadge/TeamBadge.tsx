@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { Badge } from '@components/Badge';
 import { SportsIcon } from '@components/SportsIcon';
 import { Team } from '@interface/team';
+import { Anchor } from '@styles/common';
 
 import * as S from './TeamBadge.styles';
 import { ColorProps } from './types';
@@ -23,17 +24,19 @@ const Color: ColorProps = {
 
 const TeamBadge = ({ team }: Props) => (
   <Link href={`/team/${team.id}`}>
-    <Badge
-      color={Color[Math.floor(Math.random() * 6 + 1)]}
-      width='fit-content'
-      height='32px'
-      padding
-    >
-      <S.BadgeInner>
-        <SportsIcon sportsCategory={team.sportsCategory} />
-        <S.BadgeText>{team.name}</S.BadgeText>
-      </S.BadgeInner>
-    </Badge>
+    <Anchor>
+      <Badge
+        color={Color[Math.floor(Math.random() * 6 + 1)]}
+        width='fit-content'
+        height='32px'
+        padding
+      >
+        <S.BadgeInner>
+          <SportsIcon sportsCategory={team.sportsCategory} />
+          <S.BadgeText>{team.name}</S.BadgeText>
+        </S.BadgeInner>
+      </Badge>
+    </Anchor>
   </Link>
 );
 

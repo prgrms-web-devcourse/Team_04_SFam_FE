@@ -40,7 +40,7 @@ export const InnerWrapper = styled.div<WrapperProps>`
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   gap: ${(props) => props.gap || '8px'};
-  flex-wrap: ${(props) => (props.wrap ? 'wrap' : 'nowrap')};
+  flex-wrap: ${(props) => props.flexWrap};
 `;
 
 export const InlineWrapper = styled.div`

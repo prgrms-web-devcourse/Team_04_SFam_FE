@@ -7,7 +7,7 @@ export interface WrapperProps {
   width?: string;
   height?: string;
   gap?: string;
-  wrap?: boolean;
+  flexWrap?: string;
 }
 
 export interface OptionalRenderProps {

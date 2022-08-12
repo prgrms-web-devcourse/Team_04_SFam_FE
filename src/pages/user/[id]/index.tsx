@@ -118,7 +118,7 @@ const UserDetailPage: NextPage = () => {
         <Label>팀 목록</Label>
         <InnerWrapper
           gap='8px'
-          wrap
+          flexWrap='wrap'
         >
           {userInfo.teams.map((team: Team) => (
             <TeamBadge
