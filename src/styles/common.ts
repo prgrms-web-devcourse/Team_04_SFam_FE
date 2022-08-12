@@ -1,3 +1,4 @@
+import { ThemeContext } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { WrapperProps } from 'interface/styles';
@@ -173,6 +174,11 @@ export const BoldGreenB3 = styled.span`
   color: ${(props) => props.theme.color.secondary};
 `;
 
+export const BoldOrangeB3 = styled.span`
+  font-size: ${({ theme }) => theme.fontSize.b3};
+  color: ${({ theme }) => theme.color.primary};
+`;
+
 export const GrayB4 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b4};
   color: ${(props) => props.theme.color.gray400};
@@ -194,6 +200,7 @@ export const TextArea = styled.textarea`
   padding: 8px;
   height: 242px;
   font-size: ${(props) => props.theme.fontSize.b3};
+  font-family: inherit;
   ::placeholder {
     font-size: ${(props) => props.theme.fontSize.b3};
     color: ${({ theme }) => theme.color.gray400};
