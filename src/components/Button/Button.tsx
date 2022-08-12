@@ -4,6 +4,7 @@ interface Props extends Partial<S.StyleProps> {
   children: string;
   type?: 'button' | 'submit' | 'reset';
   round?: boolean;
+  outline?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -14,6 +15,7 @@ const Button = ({
   fontSize = '20px',
   backgroundColor,
   round,
+  outline,
   onClick,
   children,
   disabled = false,
@@ -25,6 +27,7 @@ const Button = ({
     fontSize={fontSize}
     onClick={onClick}
     round={round}
+    outline={outline}
     type={type}
     disabled={disabled}
   >
