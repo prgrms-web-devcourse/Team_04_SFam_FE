@@ -7,6 +7,7 @@ export interface WrapperProps {
   width?: string;
   height?: string;
   gap?: string;
+  wrap?: boolean;
 }
 
 export interface OptionalRenderProps {
