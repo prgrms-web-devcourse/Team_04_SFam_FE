@@ -1,7 +1,7 @@
 import * as S from './Button.styles';
 
 interface Props extends Partial<S.StyleProps> {
-  children: string;
+  children: string | JSX.Element;
   type?: 'button' | 'submit' | 'reset';
   round?: boolean;
   outline?: boolean;

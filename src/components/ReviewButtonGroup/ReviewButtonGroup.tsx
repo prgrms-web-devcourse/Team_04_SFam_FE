@@ -18,7 +18,7 @@ const ReviewButtonGroup = ({ setReview }: Props) => {
   return (
     <S.Container>
       <ReviewButtonItem
-        id='best'
+        id='BEST'
         iconSrc={BestIcon}
         iconAlt='BEST'
         reviewText='최고에요'

@@ -12,7 +12,7 @@ import { ChatsProps } from '@interface/chat';
 import { Match } from '@interface/match';
 import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
-import { Anchor, B3, ColWrapper, Container, GrayB4, H2 } from '@styles/common';
+import { Anchor, B2, ColWrapper, Container, H2 } from '@styles/common';
 
 const Review: NextPage = () => {
   const router = useRouter();
@@ -80,14 +80,13 @@ const Review: NextPage = () => {
   return (
     <Container>
       <ColWrapper gap='16px'>
-        <B3>{match.title}</B3>
-        <GrayB4>{match.name}</GrayB4>
+        <H2>{match.title}</H2>
       </ColWrapper>
       <Divider />
       <ColWrapper gap='16px'>
         {/* TODO: 로그인 후 전역 관리된 유저 정보 상태 처리 */}
-        <H2>{user.nickname} 님,</H2>
-        <H2>{match.name} 과의 경기는 어떠셨나요?</H2>
+        <B2>{user.nickname} 님,</B2>
+        <B2>{match.name} 님과의 경기는 어떠셨나요?</B2>
         <ReviewButtonGroup setReview={setReview} />
         <Link
           href='/matches'
