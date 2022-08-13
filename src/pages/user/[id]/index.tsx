@@ -180,7 +180,9 @@ const UserDetailPage: NextPage = () => {
               href='/team/create'
               passHref
             >
-              <B2>팀 생성하기</B2>
+              <Anchor>
+                <B2>팀 생성하기</B2>
+              </Anchor>
             </Link>
             <Link
               href={`/user/${id as string}/location`}

@@ -167,49 +167,65 @@ const PostForm = () => {
     <Container>
       <form onSubmit={handleSubmit}>
         <ColWrapper gap='16px'>
-          <Input
-            type='text'
-            name='title'
-            placeholder='제목'
-            value={state.title}
-            onChange={handleChange}
-            height='40px'
-          />
-          {errors.title && <BoldOrangeB3>{errors.title}</BoldOrangeB3>}
-          <InnerWrapper>
-            <RadioWrapper>
-              <RadioInput
-                type='radio'
-                name='matchType'
-                value='INDIVIDUAL_MATCH'
-                onChange={handleChange}
-              />
-              <B3>개인전</B3>
-            </RadioWrapper>
-            <RadioWrapper>
-              <RadioInput
-                type='radio'
-                name='matchType'
-                value='TEAM_MATCH'
-                onChange={handleChange}
-              />
-              <B3>팀전</B3>
-            </RadioWrapper>
+          <InnerWrapper
+            flexDirection='column'
+            gap='8px'
+          >
+            <Input
+              type='text'
+              name='title'
+              placeholder='제목'
+              value={state.title}
+              onChange={handleChange}
+              height='40px'
+            />
+            {errors.title && <BoldOrangeB3>{errors.title}</BoldOrangeB3>}
           </InnerWrapper>
-          {errors.matchType && <BoldOrangeB3>{errors.matchType}</BoldOrangeB3>}
+          <InnerWrapper
+            flexDirection='column'
+            gap='8px'
+          >
+            <InnerWrapper>
+              <RadioWrapper>
+                <RadioInput
+                  type='radio'
+                  name='matchType'
+                  value='INDIVIDUAL_MATCH'
+                  onChange={handleChange}
+                />
+                <B3>개인전</B3>
+              </RadioWrapper>
+              <RadioWrapper>
+                <RadioInput
+                  type='radio'
+                  name='matchType'
+                  value='TEAM_MATCH'
+                  onChange={handleChange}
+                />
+                <B3>팀전</B3>
+              </RadioWrapper>
+            </InnerWrapper>
+            {errors.matchType && <BoldOrangeB3>{errors.matchType}</BoldOrangeB3>}
+          </InnerWrapper>
           {state.matchType === 'INDIVIDUAL_MATCH' && (
-            <>
+            <InnerWrapper
+              flexDirection='column'
+              gap='8px'
+            >
               <Dropdown
                 items={SPORTS_CATEGORY}
                 placeholder='종목 선택'
                 onSelect={handleSelectSports}
               />
               {errors.sportsCategory && <BoldOrangeB3>{errors.sportsCategory}</BoldOrangeB3>}
-            </>
+            </InnerWrapper>
           )}
           {loading ||
             (state.matchType === 'TEAM_MATCH' && (
-              <>
+              <InnerWrapper
+                flexDirection='column'
+                gap='8px'
+              >
                 <Dropdown
                   disabled={teams.length === 0}
                   items={changeTeamsToDropdownItems(teams)}
@@ -236,35 +252,43 @@ const PostForm = () => {
                     </Link>
                   </>
                 )}
-              </>
+              </InnerWrapper>
             ))}
-          <Label>경기 일자</Label>
-          <InnerWrapper justifyContent='space-between'>
-            <DropdownWrapper width='150px'>
-              <Dropdown
-                items={YEAR}
-                placeholder='년도'
-                onSelect={handleSelectYear}
-              />
-            </DropdownWrapper>
-            <DropdownWrapper width='100px'>
-              <Dropdown
-                items={MONTH}
-                placeholder='월'
-                onSelect={handleSelectMonth}
-              />
-            </DropdownWrapper>
-            <DropdownWrapper width='100px'>
-              <Dropdown
-                items={DATE}
-                placeholder='일'
-                onSelect={handleSelectDate}
-              />
-            </DropdownWrapper>
+          <InnerWrapper
+            flexDirection='column'
+            gap='8px'
+          >
+            <Label>경기 일자</Label>
+            <InnerWrapper justifyContent='space-between'>
+              <DropdownWrapper width='150px'>
+                <Dropdown
+                  items={YEAR}
+                  placeholder='년도'
+                  onSelect={handleSelectYear}
+                />
+              </DropdownWrapper>
+              <DropdownWrapper width='100px'>
+                <Dropdown
+                  items={MONTH}
+                  placeholder='월'
+                  onSelect={handleSelectMonth}
+                />
+              </DropdownWrapper>
+              <DropdownWrapper width='100px'>
+                <Dropdown
+                  items={DATE}
+                  placeholder='일'
+                  onSelect={handleSelectDate}
+                />
+              </DropdownWrapper>
+            </InnerWrapper>
+            {errors.matchDate && <BoldOrangeB3>{errors.matchDate}</BoldOrangeB3>}
           </InnerWrapper>
-          {errors.matchDate && <BoldOrangeB3>{errors.matchDate}</BoldOrangeB3>}
           {state.matchType === 'TEAM_MATCH' && (
-            <>
+            <InnerWrapper
+              flexDirection='column'
+              gap='8px'
+            >
               <Label>경기 인원</Label>
               <Input
                 type='text'
@@ -275,15 +299,19 @@ const PostForm = () => {
                 height='40px'
               />
               {errors.participants && <BoldOrangeB3>{errors.participants}</BoldOrangeB3>}
-            </>
+            </InnerWrapper>
           )}
-
-          <TextArea
-            name='content'
-            placeholder='공고 내용'
-            onChange={handleChange}
-          />
-          {errors.content && <BoldOrangeB3>{errors.content}</BoldOrangeB3>}
+          <InnerWrapper
+            flexDirection='column'
+            gap='8px'
+          >
+            <TextArea
+              name='content'
+              placeholder='공고 내용'
+              onChange={handleChange}
+            />
+            {errors.content && <BoldOrangeB3>{errors.content}</BoldOrangeB3>}
+          </InnerWrapper>
           <InnerWrapper>
             <Button>작성 완료</Button>
           </InnerWrapper>

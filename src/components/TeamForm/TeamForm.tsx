@@ -7,7 +7,7 @@ import { Dropdown, Item } from '@components/Dropdown';
 import { Input } from '@components/Input';
 import { SPORTS_CATEGORY } from '@constants/dropdown';
 import { Response } from '@interface/response';
-import { BoldOrangeB3, ColWrapper, Container, Label, TextArea } from '@styles/common';
+import { BoldOrangeB3, ColWrapper, Container, InnerWrapper, Label, TextArea } from '@styles/common';
 
 import { validation, Values } from './helper';
 
@@ -65,28 +65,43 @@ const TeamForm = () => {
     <Container>
       <form onSubmit={handleSubmit}>
         <ColWrapper gap='16px'>
-          <Input
-            type='text'
-            name='name'
-            value={state.name}
-            placeholder='팀 이름'
-            onChange={handleChange}
-          />
-          {errors.name && <BoldOrangeB3>{errors.name}</BoldOrangeB3>}
-          <Dropdown
-            items={SPORTS_CATEGORY}
-            placeholder='종목 선택'
-            onSelect={handleSelect}
-          />
-          {errors.sportsCategory && <BoldOrangeB3>{errors.sportsCategory}</BoldOrangeB3>}
-          <Label>팀 소개글</Label>
-          <TextArea
-            name='description'
-            placeholder='팀 소개'
-            onChange={handleChange}
-            onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
-          />
-          {errors.description && <BoldOrangeB3>{errors.description}</BoldOrangeB3>}
+          <InnerWrapper
+            flexDirection='column'
+            gap='8px'
+          >
+            <Input
+              type='text'
+              name='name'
+              value={state.name}
+              placeholder='팀 이름'
+              onChange={handleChange}
+            />
+            {errors.name && <BoldOrangeB3>{errors.name}</BoldOrangeB3>}
+          </InnerWrapper>
+          <InnerWrapper
+            flexDirection='column'
+            gap='8px'
+          >
+            <Dropdown
+              items={SPORTS_CATEGORY}
+              placeholder='종목 선택'
+              onSelect={handleSelect}
+            />
+            {errors.sportsCategory && <BoldOrangeB3>{errors.sportsCategory}</BoldOrangeB3>}
+          </InnerWrapper>
+          <InnerWrapper
+            flexDirection='column'
+            gap='8px'
+          >
+            <Label>팀 소개글</Label>
+            <TextArea
+              name='description'
+              placeholder='팀 소개'
+              onChange={handleChange}
+              onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
+            />
+            {errors.description && <BoldOrangeB3>{errors.description}</BoldOrangeB3>}
+          </InnerWrapper>
           <Button width='100%'>팀 생성</Button>
         </ColWrapper>
       </form>
