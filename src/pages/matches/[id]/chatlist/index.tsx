@@ -51,11 +51,13 @@ const ChatListPage: NextPage = () => {
                   <ChatListItem
                     nickname={chat.target.nickname}
                     lastChat={chat.lastChat.content}
+                    match={chat.match}
                     key={chat.id}
                   />
                 ) : (
                   <ChatListItem
                     nickname={chat.target.nickname}
+                    match={chat.match}
                     lastChat={chat.content}
                     key={chat.id}
                   />
