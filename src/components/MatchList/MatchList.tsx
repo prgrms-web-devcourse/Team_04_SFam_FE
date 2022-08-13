@@ -1,10 +1,8 @@
 import { AxiosResponse } from 'axios';
-import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Button } from '@components/Button';
 import { FilterButton } from '@components/FilterButton';
 import { MatchListItem } from '@components/MatchListItem';
 import { SPORTS_CATEGORY } from '@constants/dropdown';
@@ -58,6 +56,7 @@ const MatchList = () => {
           distance: user.searchDistance,
         },
       });
+
       const data = (res.data as AxiosResponse).data as Response;
 
       setState({
