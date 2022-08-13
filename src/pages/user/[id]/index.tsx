@@ -130,17 +130,19 @@ const UserDetailPage: NextPage = () => {
           <GrayB3>{address.region_3depth_name}</GrayB3>
         </InnerWrapper>
       </RowWrapper>
-      <Link href={`/user/${id as string}/edit`}>
-        <Anchor>
-          <Button
-            height='40px'
-            fontSize='16px'
-            outline
-          >
-            프로필 편집
-          </Button>
-        </Anchor>
-      </Link>
+      {isMe && (
+        <Link href={`/user/${id as string}/edit`}>
+          <Anchor>
+            <Button
+              height='40px'
+              fontSize='16px'
+              outline
+            >
+              프로필 편집
+            </Button>
+          </Anchor>
+        </Link>
+      )}
       <Divider />
       <ColWrapper gap='16px'>
         <Label>후기</Label>
