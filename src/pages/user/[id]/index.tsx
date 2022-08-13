@@ -190,7 +190,12 @@ const UserDetailPage: NextPage = () => {
                 <B2>내 동네 설정하기</B2>
               </Anchor>
             </Link>
-            <B2 onClick={handleLogout}>로그아웃</B2>
+            <B2
+              onClick={handleLogout}
+              pointer
+            >
+              로그아웃
+            </B2>
           </ColWrapper>
         </>
       )}
