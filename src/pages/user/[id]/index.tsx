@@ -9,10 +9,11 @@ import { Address, kakaoMapApi } from '@api/kakaoMapApi';
 import { Avatar } from '@components/Avatar';
 import { Button } from '@components/Button';
 import { Divider } from '@components/Divider';
+import { MatchRecordChart } from '@components/MatchRecordChart';
 import { ReviewGroup } from '@components/ReviewGroup';
 import { TeamBadge } from '@components/TeamBadge';
 import { Response } from '@interface/response';
-import { Team } from '@interface/team';
+import { MatchRecord, Team } from '@interface/team';
 import { UserInfo } from '@interface/user';
 import { userState } from '@recoil/atoms';
 import { Anchor, B1, B2, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
@@ -22,6 +23,7 @@ const UserDetailPage: NextPage = () => {
   const { id } = router.query;
 
   const [user, setUser] = useRecoilState(userState);
+
   const [kakaoLoading, setKakaoLoading] = React.useState(true);
   const [isMe, setIsMe] = React.useState<boolean>(false);
   const [userInfo, setUserInfo] = React.useState<UserInfo>({
@@ -47,6 +49,11 @@ const UserDetailPage: NextPage = () => {
     main_address_no: '',
     sub_address_no: '',
   });
+  const [matchRecord, setMatchRecord] = React.useState<MatchRecord>({
+    win: 0,
+    draw: 0,
+    lose: 0,
+  });
 
   React.useEffect(() => {
     if (!router.isReady) return;
@@ -63,6 +70,20 @@ const UserDetailPage: NextPage = () => {
         }
       } catch (e) {
         // 에러 처리 필요
+      }
+    })();
+
+    (async () => {
+      try {
+        const {
+          data: { data },
+        } = await axiosAuthInstance.get<Response<MatchRecord>>(`/api/matches/records`, {
+          params: { userId: id },
+        });
+
+        setMatchRecord(() => data);
+      } catch (e) {
+        // 에러 처리
       }
     })();
   }, [id, router.isReady]);
@@ -117,6 +138,7 @@ const UserDetailPage: NextPage = () => {
           </Button>
         </Anchor>
       </Link>
+      <Divider />
       <ColWrapper gap='16px'>
         <Label>후기</Label>
         <ReviewGroup
@@ -124,6 +146,11 @@ const UserDetailPage: NextPage = () => {
           likeCount={userInfo.review.likeCount}
           dislikeCount={userInfo.review.dislikeCount}
         />
+      </ColWrapper>
+      <Divider />
+      <ColWrapper>
+        <Label>전적</Label>
+        <MatchRecordChart matchRecord={matchRecord} />
       </ColWrapper>
       <Divider />
       <ColWrapper gap='16px'>

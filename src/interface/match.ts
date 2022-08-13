@@ -1,3 +1,9 @@
+export interface MatchRecord {
+  win: number;
+  draw: number;
+  lose: number;
+}
+
 export interface Author {
   id: number;
   nickname: string;
