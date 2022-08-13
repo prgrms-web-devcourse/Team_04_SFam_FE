@@ -8,36 +8,43 @@ import * as S from './ReviewButtonGroup.styles';
 import { ReviewButtonItem } from './ReviewButtonItem';
 
 interface Props {
+  review: string;
   setReview: (value: string | ((prevVar: string) => string)) => void;
 }
 
-const ReviewButtonGroup = ({ setReview }: Props) => {
+const ReviewButtonGroup = ({ review, setReview }: Props) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setReview(e.currentTarget.id);
   };
   return (
     <S.Container>
-      <ReviewButtonItem
-        id='BEST'
-        iconSrc={BestIcon}
-        iconAlt='BEST'
-        reviewText='최고에요'
-        onClick={handleClick}
-      />
-      <ReviewButtonItem
-        id='LIKE'
-        iconSrc={LikeIcon}
-        iconAlt='like'
-        reviewText='좋아요'
-        onClick={handleClick}
-      />
-      <ReviewButtonItem
-        id='DISLIKE'
-        iconSrc={DislikeIcon}
-        iconAlt='dislike'
-        reviewText='별로에요'
-        onClick={handleClick}
-      />
+      <S.BestWrapper review={review}>
+        <ReviewButtonItem
+          id='BEST'
+          iconSrc={BestIcon}
+          iconAlt='BEST'
+          reviewText='최고에요'
+          onClick={handleClick}
+        />
+      </S.BestWrapper>
+      <S.LikeWrapper review={review}>
+        <ReviewButtonItem
+          id='LIKE'
+          iconSrc={LikeIcon}
+          iconAlt='like'
+          reviewText='좋아요'
+          onClick={handleClick}
+        />
+      </S.LikeWrapper>
+      <S.DislikeWrapper review={review}>
+        <ReviewButtonItem
+          id='DISLIKE'
+          iconSrc={DislikeIcon}
+          iconAlt='dislike'
+          reviewText='별로에요'
+          onClick={handleClick}
+        />
+      </S.DislikeWrapper>
     </S.Container>
   );
 };
