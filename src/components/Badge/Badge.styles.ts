@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 interface Props {
   matchType?: string;
+  matchStatus?: string;
   color: string;
   width: string;
   height: string;
@@ -20,9 +21,21 @@ export const Container = styled.span<Props>`
   font-size: ${({ fontSize }) => fontSize};
   border-radius: ${({ theme }) => theme.borderRadius};
   color: ${({ fontColor, theme }) => (fontColor === 'primary' ? `${theme.color.background}` : fontColor)};
-  background-color: ${({ color, theme, matchType }) => {
+  background-color: ${({ color, theme, matchType, matchStatus }) => {
     if (matchType) {
       return matchType === 'TEAM_MATCH' ? theme.color.primary : theme.color.yellow;
+    }
+    if (matchStatus) {
+      switch (matchStatus) {
+        case 'WAITING':
+          return theme.color.yellow;
+        case 'IN_GAME':
+          return theme.color.secondary;
+        case 'END':
+          return theme.color.primary;
+        default:
+          return '#000';
+      }
     }
 
     if (color === 'primary') return `${theme.color.green200}`;
