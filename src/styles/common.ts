@@ -14,8 +14,8 @@ export const MobileLayout = styled('div')(
 );
 
 export const Main = styled.main({
-  height: '100%',
-  paddingTop: '64px',
+  height: 'calc(100% - 120px)',
+  margin: '64px 0 56px 0',
   overflow: 'auto',
 });
 
