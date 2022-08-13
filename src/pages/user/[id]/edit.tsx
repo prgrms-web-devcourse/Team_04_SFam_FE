@@ -21,12 +21,13 @@ const UserEditPage: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const [user] = useRecoilState(userState);
+  const [user, setUser] = useRecoilState(userState);
   const [userInfo, setUserInfo] = useState<UserInfo>();
   const [editProfile, setEditProfile] = useState<EditProfile>({
     nickname: user.nickname,
     profileImageUrl: user.profileImageUrl,
   });
+  const [nicknameCheck, setNicknameCheck] = useState<boolean>(false);
 
   const date = new Date().toTimeString();
 
@@ -47,6 +48,16 @@ const UserEditPage: NextPage = () => {
     })();
   }, [id, router.isReady]);
 
+  const patchUserNickname = async () => {
+    try {
+      await axiosAuthInstance.patch('/api/users', { nickname: editProfile.nickname });
+      setUser({ ...user, nickname: editProfile.nickname });
+      alert(`닉네임이 ${editProfile.nickname as string}로 변경되었습니다.`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleUserFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     const patchUserProfileAPi = async () => {
@@ -57,7 +68,7 @@ const UserEditPage: NextPage = () => {
           const formData = new FormData();
           formData.append('file', files[0]);
 
-          const res = await axiosAuthInstance.patch('/api/users/profile', formData, {
+          await axiosAuthInstance.patch('/api/users/profile', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
@@ -91,8 +102,10 @@ const UserEditPage: NextPage = () => {
       );
       if (res.data.data) {
         alert('이미 사용중인 닉네임입니다.');
+        setNicknameCheck(false);
       } else {
         alert('사용 가능한 닉네임입니다.');
+        setNicknameCheck(true);
       }
     };
     if (editProfile.nickname?.length === 0) {
@@ -103,11 +116,14 @@ const UserEditPage: NextPage = () => {
   };
 
   const handleClick = () => {
-    if (editProfile.nickname !== user.nickname) {
-      console.log('이름 수정 API 연동');
+    if (editProfile.nickname !== user.nickname && nicknameCheck) {
+      patchUserNickname();
+      router.push(`/user/${id as string}`);
+    } else if (editProfile.nickname !== user.nickname && !nicknameCheck) {
+      alert('닉네임 중복확인을 해주세요.');
+    } else {
+      router.push(`/user/${id as string}`);
     }
-    router.push(`/user/${id as string}`);
-    // TODO: 닉네임 변경 PUT API 연동
   };
 
   return (
@@ -135,7 +151,7 @@ const UserEditPage: NextPage = () => {
         )}
       </InnerWrapper>
       <ColWrapper gap='8px'>
-        <BoldB3>닉네임(현재 수정 불가)</BoldB3>
+        <BoldB3>닉네임</BoldB3>
         <RowWrapper gap='8px'>
           <Input
             type='text'
@@ -153,7 +169,7 @@ const UserEditPage: NextPage = () => {
           </Button>
         </RowWrapper>
       </ColWrapper>
-      <Button onClick={handleClick}>완료</Button>
+      {nicknameCheck ? <Button onClick={handleClick}>변경하기</Button> : <Button onClick={handleClick}>완료</Button>}
     </Container>
   );
 };
