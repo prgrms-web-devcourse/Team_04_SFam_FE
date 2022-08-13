@@ -1,14 +1,18 @@
 import styled from '@emotion/styled';
 
 interface Props {
-  fontSize?: number;
+  size?: number;
 }
 
 export const Wrapper = styled('div')<Props>(
   {
-    fontSize: 21,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  ({ fontSize }) => ({
-    fontSize,
+  ({ size }) => ({
+    fontSize: size,
+    width: size,
+    height: size,
   }),
 );

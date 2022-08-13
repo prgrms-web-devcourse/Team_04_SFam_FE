@@ -23,6 +23,6 @@ const ICONS: Icons = {
   TENNIS: <MdSportsTennis />,
 };
 
-const SportsIcon = ({ sportsCategory, size }: Props) => <S.Wrapper fontSize={size}>{ICONS[sportsCategory]}</S.Wrapper>;
+const SportsIcon = ({ sportsCategory, size = 21 }: Props) => <S.Wrapper size={size}>{ICONS[sportsCategory]}</S.Wrapper>;
 
 export default SportsIcon;

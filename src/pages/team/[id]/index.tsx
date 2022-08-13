@@ -63,12 +63,11 @@ const TeamDetailPage: NextPage = () => {
 
   return (
     <Container>
-      <RowWrapper>
+      <RowWrapper gap='16px'>
         {teamInfo && teamInfo.logoImageUrl ? <Avatar imgSrc={teamInfo.logoImageUrl} /> : <Avatar />}
         <InnerWrapper
           flexDirection='column'
           justifyContent='center'
-          margin='0px 16px'
         >
           <InnerWrapper>
             <B1>{teamInfo.name}</B1>
@@ -78,7 +77,7 @@ const TeamDetailPage: NextPage = () => {
           <B3>팀원 수 : {teamInfo.members.length}명</B3>
         </InnerWrapper>
       </RowWrapper>
-      <ColWrapper>
+      <ColWrapper gap='16px'>
         {isLeader && (
           <Link href={`/team/${id as string}/edit`}>
             <Anchor>
@@ -95,7 +94,7 @@ const TeamDetailPage: NextPage = () => {
       </ColWrapper>
       <Paragraph>{teamInfo.description}</Paragraph>
       <Divider />
-      <ColWrapper>
+      <ColWrapper gap='16px'>
         <Label>팀 후기</Label>
         <ReviewGroup
           bestCount={teamInfo.matchReview.bestCount}
@@ -104,12 +103,12 @@ const TeamDetailPage: NextPage = () => {
         />
       </ColWrapper>
       <Divider />
-      <ColWrapper>
+      <ColWrapper gap='16px'>
         <Label>팀 전적</Label>
         <MatchRecordChart matchRecord={teamInfo.matchRecord} />
       </ColWrapper>
       <Divider />
-      <ColWrapper>
+      <ColWrapper gap='16px'>
         <InnerWrapper
           gap='8px'
           alignItems='center'
@@ -132,7 +131,7 @@ const TeamDetailPage: NextPage = () => {
             </Link>
           )}
         </InnerWrapper>
-        <ColWrapper gap='8px'>
+        <ColWrapper gap='16px'>
           {teamInfo.members.map((member) => (
             <div key={member.userId}>
               <TeamMember info={member} />

@@ -2,7 +2,7 @@ import { Avatar } from '@components/Avatar';
 import { Badge } from '@components/Badge';
 import { MATCH_STATUS_TEXT } from '@constants/text';
 import { Match } from '@interface/match';
-import { InnerWrapper, B1, B3, TitleWrapper, ContentWrapper, BadgeWrapper } from '@styles/common';
+import { InnerWrapper, B1, TitleWrapper, ContentWrapper, BadgeWrapper, B4 } from '@styles/common';
 
 import * as S from './ChatListItem.styles';
 
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const ChatListItem = ({ imgSrc, nickname, lastChat, match }: Props) => (
-  <S.ChatListItemContainer>
+  <S.Container>
     <div>
       {imgSrc !== null ? (
         <Avatar
@@ -28,27 +28,25 @@ const ChatListItem = ({ imgSrc, nickname, lastChat, match }: Props) => (
     </div>
     <InnerWrapper
       flexDirection='column'
-      padding='0 16px'
       justifyContent='center'
-      gap='8px'
+      flexGrow={1}
     >
+      <TitleWrapper>
+        <B1>{match?.title}</B1>
+      </TitleWrapper>
+      <ContentWrapper>
+        <S.GrayB3>{lastChat}</S.GrayB3>
+      </ContentWrapper>
       <InnerWrapper
-        flexDirection='row'
         alignItems='center'
         justifyContent='space-between'
       >
-        <TitleWrapper>
-          <B1>{match?.title}</B1>
-        </TitleWrapper>
+        <B4>{nickname}</B4>
         <BadgeWrapper>
           {match && <Badge matchStatus={match.status}>{MATCH_STATUS_TEXT[match.status]}</Badge>}
         </BadgeWrapper>
       </InnerWrapper>
-      <B3>{nickname}</B3>
-      <ContentWrapper>
-        <S.GrayB3>{lastChat}</S.GrayB3>
-      </ContentWrapper>
     </InnerWrapper>
-  </S.ChatListItemContainer>
+  </S.Container>
 );
 export default ChatListItem;

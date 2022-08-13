@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { NotificationListItem } from '@components/NotificationListItem';
 import { Response } from '@interface/response';
-import { BoldB1, ColWrapper, Container } from '@styles/common';
+import { BoldB1, ColWrapper, Container, InnerWrapper } from '@styles/common';
 
 interface Invitation {
   values: [];
@@ -90,12 +90,15 @@ const NotificationPage: NextPage = () => {
     }
   }, [state.values?.length]);
 
+  console.log(state.values);
+
   return (
     <Container>
       <ColWrapper gap='16px'>
         {state ? (
-          <ColWrapper
+          <InnerWrapper
             ref={observerRef}
+            flexDirection='column'
             gap='16px'
           >
             {state.values.map((invitation: TeamInvite) => (
@@ -107,7 +110,7 @@ const NotificationPage: NextPage = () => {
                 key={invitation.invitationId}
               />
             ))}
-          </ColWrapper>
+          </InnerWrapper>
         ) : (
           <BoldB1>알림이 없습니다!</BoldB1>
         )}

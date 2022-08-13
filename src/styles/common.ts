@@ -53,6 +53,7 @@ export const InnerWrapper = styled.div<WrapperProps>`
   padding: ${(props) => props.padding};
   gap: ${(props) => props.gap || '8px'};
   flex-wrap: ${(props) => props.flexWrap};
+  flex-grow: ${(props) => props.flexGrow};
 `;
 
 export const InlineWrapper = styled.div`
@@ -76,10 +77,10 @@ export const BadgeWrapper = styled.div`
 
 export const TitleWrapper = styled.div`
   font-size: 20px;
-  max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 262px;
 `;
 
 export const ContentWrapper = styled.div`
@@ -147,9 +148,6 @@ export const Label = styled.h2`
 `;
 
 // TODO: 리팩토링 시 Text 컴포넌트 만들 것
-export const B1 = styled.span`
-  font-size: ${(props) => props.theme.fontSize.b1};
-`;
 
 export const H1 = styled.span`
   font-size: ${(props) => props.theme.fontSize.h1};
@@ -163,6 +161,10 @@ interface Props {
   pointer?: boolean;
 }
 
+export const B1 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.b1};
+`;
+
 export const B2 = styled.span<Props>`
   font-size: ${(props) => props.theme.fontSize.b2};
   cursor: ${(props) => props.pointer && 'pointer'};
@@ -170,6 +172,10 @@ export const B2 = styled.span<Props>`
 
 export const B3 = styled.span`
   font-size: ${(props) => props.theme.fontSize.b3};
+`;
+
+export const B4 = styled.span`
+  font-size: ${(props) => props.theme.fontSize.b4};
 `;
 
 export const BoldB1 = styled.span`
@@ -254,14 +260,39 @@ export const TextArea = styled.textarea`
   resize: none;
 `;
 
+export const ChatMatchHeader = styled.div`
+  width: 100%;
+  position: absolute;
+  top: 64px;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-bottom: ${(props) => `1px solid ${props.theme.color.gray200}`};
+  background-color: ${(props) => props.theme.color.background};
+  z-index: 10;
+`;
+
+export const ChatMatchTitleWrapper = styled.div`
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const ChatContainer = styled.div`
+  padding: 48px 8px 64px 16px;
+`;
+
 export const MessageInput = styled.input`
-  width: 320px;
-  height: 42px;
-  padding: 1rem;
+  flex-grow: 1;
+  height: 40px;
+  padding: 16px;
   font-size: ${(props) => props.theme.fontSize.b3};
-  background-color: #d9d9d9;
   border: 1px solid ${(props) => props.theme.color.gray200};
-  border-radius: 16px; ;
+  border-radius: 8px;
 `;
 
 export const Anchor = styled.a`
