@@ -9,7 +9,9 @@ export interface ProposalProps {
 }
 
 export interface Target {
+  id: number;
   nickname: string;
+  profileImageUrl: string | null;
 }
 
 export interface LastChat {
