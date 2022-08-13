@@ -66,6 +66,7 @@ const UserEditPage: NextPage = () => {
           alert(`${files[0].name} 프로필 이미지가 업로드 되었습니다.`);
 
           if (editProfile.profileImageUrl) {
+            // TODO: 백엔드에게 요청하기 URL 변경하도록
             setEditProfile({ ...editProfile, profileImageUrl: `${editProfile.profileImageUrl}?date=${date}` });
           }
 

@@ -70,6 +70,7 @@ const UserEditPage: NextPage = () => {
             alert(`${files[0].name} 팀 로고 이미지가 업로드 되었습니다.`);
 
             if (teamInfo.logoImageUrl) {
+              // TODO: 백엔드에게 요청하기 URL 변경하도록
               setEditTeamProfile({ ...editTeamProfile, logoImageUrl: `${teamInfo.logoImageUrl}?date=${date}` });
             }
 
