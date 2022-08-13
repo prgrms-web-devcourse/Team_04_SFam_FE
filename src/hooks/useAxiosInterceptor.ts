@@ -13,7 +13,7 @@ export const useAxiosInterceptor = () => {
     (error: AxiosError) => {
       if (error.response?.status === 401) {
         resetUser();
-        router.push('/signin');
+        router.push('/');
       }
       return Promise.reject(error);
     },
