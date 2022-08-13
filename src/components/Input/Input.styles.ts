@@ -7,6 +7,7 @@ export const Input = styled.input`
   padding: 8px;
   height: ${({ height }) => height};
   font-size: ${(props) => props.theme.fontSize.b3};
+  font-family: inherit;
   ::placeholder {
     font-size: ${(props) => props.theme.fontSize.b3};
     color: ${({ theme }) => theme.color.gray400};

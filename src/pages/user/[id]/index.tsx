@@ -143,14 +143,22 @@ const UserDetailPage: NextPage = () => {
       {isMe && (
         <>
           <Divider />
-          <ColWrapper gap='8px'>
+          <ColWrapper gap='16px'>
             <Label>나의 활동</Label>
-            <ColWrapper gap='16px'>
-              <Link href={`/user/${id as string}/location`}>
+            <Link
+              href={`/user/${id as string}/location`}
+              passHref
+            >
+              <Anchor>
                 <B2>내 동네 설정하기</B2>
-              </Link>
-              <B2 onClick={handleLogout}>로그아웃</B2>
-            </ColWrapper>
+              </Anchor>
+            </Link>
+            <B2
+              onClick={handleLogout}
+              pointer
+            >
+              로그아웃
+            </B2>
           </ColWrapper>
         </>
       )}

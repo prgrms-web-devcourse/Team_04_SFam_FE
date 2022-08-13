@@ -9,6 +9,8 @@ export const FilterButton = styled('button')<StyleProps>(
     height: 32,
     outline: 'none',
     padding: '4px 12px',
+    cursor: 'pointer',
+    fontFamily: 'inherit',
   },
   ({ theme, active }) => ({
     fontSize: theme.fontSize.b3,

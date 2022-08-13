@@ -10,6 +10,7 @@ export const SelectedItem = styled('div')(
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 8,
+    cursor: 'pointer',
   },
   ({ theme }) => ({
     border: `1px solid ${theme.color.gray300}`,
@@ -64,6 +65,7 @@ export const ListItem = styled('li')(
     alignItems: 'center',
     width: '100%',
     padding: '8px',
+    cursor: 'pointer',
   },
   ({ theme }) => ({
     backgroundColor: theme.color.background,

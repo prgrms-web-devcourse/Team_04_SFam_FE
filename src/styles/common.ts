@@ -126,8 +126,13 @@ export const H2 = styled.span`
   font-size: ${(props) => props.theme.fontSize.h2};
 `;
 
-export const B2 = styled.span`
+interface Props {
+  pointer?: boolean;
+}
+
+export const B2 = styled.span<Props>`
   font-size: ${(props) => props.theme.fontSize.b2};
+  cursor: ${(props) => props.pointer && 'pointer'};
 `;
 
 export const B3 = styled.span`
@@ -232,3 +237,7 @@ export const Anchor = styled.a`
 `;
 
 export const UserList = styled.div``;
+
+export const Icon = styled.div`
+  cursor: pointer;
+`;

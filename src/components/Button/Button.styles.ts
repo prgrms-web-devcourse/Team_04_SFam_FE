@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { MdBrightness1 } from 'react-icons/md';
 
 export interface StyleProps {
   width: string;
@@ -9,6 +8,7 @@ export interface StyleProps {
   round?: boolean;
   disabled?: boolean;
   outline?: boolean;
+  noPointer?: boolean;
 }
 
 export const Button = styled('button')<StyleProps>(
@@ -20,8 +20,9 @@ export const Button = styled('button')<StyleProps>(
     outline: 'none',
     fontWeight: 600,
     color: '#fff',
+    fontFamily: 'inherit',
   },
-  ({ theme, width, height, fontSize, backgroundColor, round, disabled, outline }) => {
+  ({ theme, width, height, fontSize, backgroundColor, round, disabled, outline, noPointer }) => {
     const getColor = () => {
       if (disabled) return theme.color.gray200;
       // FIXME: 컬러가 아닌 테마로(불린 값)으로 변경
@@ -56,12 +57,15 @@ export const Button = styled('button')<StyleProps>(
       borderRadius: round ? 24 : theme.borderRadius,
       backgroundColor: outline ? '#fff' : getColor(),
       outline: outline ? `1px solid ${theme.color.gray300}` : 'none',
-      color: outline ? `${theme.color.gray700}` : '#fff',
+      color: outline ? theme.color.gray700 : '#fff',
+      cursor: noPointer ? '' : 'pointer',
       '&:hover': {
-        backgroundColor: getHoverColor(),
+        backgroundColor: outline ? theme.color.gray300 : getHoverColor(),
+        color: '#fff',
       },
       '&:active': {
-        backgroundColor: getActiveColor(),
+        backgroundColor: outline ? theme.color.gray400 : getActiveColor(),
+        color: '#fff',
       },
     };
   },
