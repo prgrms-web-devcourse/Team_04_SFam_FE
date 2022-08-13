@@ -16,6 +16,10 @@ export const Nav = styled.ul`
 
 export const NavItem = styled.li`
   width: 20%;
+
+  :hover {
+    background-color: ${(props) => props.theme.color.gray100};
+  }
 `;
 
 export const Anchor = styled.a`

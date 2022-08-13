@@ -138,9 +138,21 @@ const PostDetail = () => {
           </Anchor>
         </Link>
       )}
-      {!isAuthor && matchDetail?.proposer?.status === 'WAITING' && <Button backgroundColor='yellow'>승인 대기</Button>}
+      {!isAuthor && matchDetail?.proposer?.status === 'WAITING' && (
+        <Button
+          noPointer
+          backgroundColor='yellow'
+        >
+          승인 대기
+        </Button>
+      )}
       {!isAuthor && matchDetail?.proposer?.status === 'REFUSE' && (
-        <Button backgroundColor='primary'>신청이 거절되었습니다</Button>
+        <Button
+          noPointer
+          backgroundColor='primary'
+        >
+          신청이 거절되었습니다
+        </Button>
       )}
       {!isAuthor && matchDetail?.proposer?.status === 'APPROVED' && proposer && (
         <Link

@@ -19,6 +19,7 @@ const Button = ({
   onClick,
   children,
   disabled = false,
+  noPointer = false,
 }: Props) => (
   <S.Button
     backgroundColor={backgroundColor}
@@ -30,6 +31,7 @@ const Button = ({
     outline={outline}
     type={type}
     disabled={disabled}
+    noPointer={noPointer}
   >
     {children}
   </S.Button>

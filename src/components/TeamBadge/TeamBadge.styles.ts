@@ -5,6 +5,7 @@ export const BadgeInner = styled.div`
   align-items: center;
   justify-content: center;
   gap: 4px;
+  cursor: pointer;
 `;
 
 export const IconWrapper = styled.div`

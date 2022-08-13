@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil';
 
 import { Address, kakaoMapApi } from '@api/kakaoMapApi';
 import { userState } from '@recoil/atoms';
-import { Anchor, RowWrapper } from '@styles/common';
+import { Anchor, Icon, RowWrapper } from '@styles/common';
 
 import * as S from './Heading.styles';
 import { HeadingTitleProps } from './types';
@@ -70,9 +70,16 @@ const Heading = () => {
         alignItems='center'
         gap='4px'
       >
-        {!noBackIcon.includes(router.pathname) ? <MdArrowBackIos onClick={() => router.back()} /> : <div />}
+        {!noBackIcon.includes(router.pathname) ? (
+          <MdArrowBackIos
+            style={{ cursor: 'pointer' }}
+            onClick={() => router.back()}
+          />
+        ) : (
+          <div />
+        )}
         <Link href={`/user/${user.id?.toString() as string}/location`}>
-          <S.HeadingTitle>
+          <S.HeadingTitle pointer={router.pathname === '/matches'}>
             {router.pathname === '/matches' ? address.region_3depth_name : headingTitle[router.pathname]}
           </S.HeadingTitle>
         </Link>

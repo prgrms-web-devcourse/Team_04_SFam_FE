@@ -15,9 +15,14 @@ export const HeadingContainer = styled.div`
   z-index: 1;
 `;
 
-export const HeadingTitle = styled.h1`
+interface Props {
+  pointer?: boolean;
+}
+
+export const HeadingTitle = styled.h1<Props>`
   font-size: ${(props) => props.theme.fontSize.b1};
   font-weight: bold;
+  cursor: ${(props) => props.pointer && 'pointer'};
 `;
 
 export const HeadingLinkContainer = styled.div`
