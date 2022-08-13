@@ -4,7 +4,7 @@ export const BadgeInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 6px;
   cursor: pointer;
 `;
 

@@ -1,15 +1,13 @@
 import Link from 'next/link';
 
 import { Avatar } from '@components/Avatar';
-import { B1, GrayB3, InnerWrapper } from '@styles/common';
-
-import * as S from './NotificationListItem.styles';
+import { Anchor, B1, GrayB3, InnerWrapper } from '@styles/common';
 
 interface Props {
   name: string;
   invitationId: number;
   teamId: number;
-  imgSrc?: string;
+  imgSrc?: string | null;
 }
 
 const NotificationListItem = ({ name, invitationId, teamId, imgSrc }: Props) => (
@@ -17,24 +15,28 @@ const NotificationListItem = ({ name, invitationId, teamId, imgSrc }: Props) => 
     href={`/notification/${invitationId}/${teamId}`}
     passHref
   >
-    <S.NotificationListItemContainer>
-      <div>
-        <Avatar
-          imgSrc={imgSrc}
-          imgSize='60px'
-          borderRadius='50%'
-        />
-      </div>
-      <InnerWrapper
-        flexDirection='column'
-        padding='0 16px'
-        justifyContent='center'
-      >
-        <B1>{name}</B1>
-        {/* TODO: 알림 타임에 따라 조건부 렌더링 */}
-        <GrayB3>{name}에서 회원님을 초대했습니다.</GrayB3>
+    <Anchor>
+      <InnerWrapper gap='16px'>
+        <div>
+          {imgSrc === null ? (
+            <Avatar imgSize='64px' />
+          ) : (
+            <Avatar
+              imgSrc={imgSrc as string}
+              imgSize='64px'
+            />
+          )}
+        </div>
+        <InnerWrapper
+          flexDirection='column'
+          justifyContent='center'
+        >
+          <B1>{name}</B1>
+          {/* TODO: 알림 타임에 따라 조건부 렌더링 */}
+          <GrayB3>{name}에서 회원님을 초대했습니다.</GrayB3>
+        </InnerWrapper>
       </InnerWrapper>
-    </S.NotificationListItemContainer>
+    </Anchor>
   </Link>
 );
 

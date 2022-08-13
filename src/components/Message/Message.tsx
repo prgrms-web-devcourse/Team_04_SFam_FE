@@ -4,6 +4,8 @@ import { MdSend } from 'react-icons/md';
 import { MessageReq } from '@interface/chat';
 import { Container, InnerWrapper, MessageInput, ResetBtn } from '@styles/common';
 
+import * as S from './Message.styles';
+
 interface Props {
   message: MessageReq;
   setMessage: Dispatch<SetStateAction<MessageReq>>;
@@ -19,7 +21,7 @@ const Message = ({ message, setMessage, handleMessage, handleKeyPress, disabled 
   };
 
   return (
-    <Container>
+    <S.Container>
       <InnerWrapper
         alignItems='center'
         justifyContent='center'
@@ -38,7 +40,7 @@ const Message = ({ message, setMessage, handleMessage, handleKeyPress, disabled 
           <MdSend size='25px' />
         </ResetBtn>
       </InnerWrapper>
-    </Container>
+    </S.Container>
   );
 };
 

@@ -116,7 +116,7 @@ const UserDetailPage: NextPage = () => {
 
   return (
     <Container>
-      <RowWrapper>
+      <RowWrapper gap='16px'>
         {userInfo && userInfo.profileImageUrl ? (
           <Avatar imgSrc={`${userInfo.profileImageUrl}?date=${new Date().toTimeString()}`} />
         ) : (
@@ -125,7 +125,6 @@ const UserDetailPage: NextPage = () => {
         <InnerWrapper
           flexDirection='column'
           justifyContent='center'
-          margin='0px 16px'
         >
           <B1>{userInfo.nickname}</B1>
           <GrayB3>{address.region_3depth_name}</GrayB3>
@@ -152,7 +151,7 @@ const UserDetailPage: NextPage = () => {
         />
       </ColWrapper>
       <Divider />
-      <ColWrapper>
+      <ColWrapper gap='16px'>
         <Label>전적</Label>
         <MatchRecordChart matchRecord={matchRecord} />
       </ColWrapper>

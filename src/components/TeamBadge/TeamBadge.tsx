@@ -32,7 +32,10 @@ const TeamBadge = ({ team }: Props) => (
         padding
       >
         <S.BadgeInner>
-          <SportsIcon sportsCategory={team.sportsCategory} />
+          <SportsIcon
+            sportsCategory={team.sportsCategory}
+            size={18}
+          />
           <S.BadgeText>{team.name}</S.BadgeText>
         </S.BadgeInner>
       </Badge>

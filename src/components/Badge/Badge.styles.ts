@@ -11,11 +11,11 @@ interface Props {
   padding?: boolean;
 }
 
-export const Container = styled.span<Props>`
+export const Container = styled.div<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: ${({ padding }) => padding && '0 12px'};
+  padding: ${({ padding }) => padding && '0 8px'};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   font-size: ${({ fontSize }) => fontSize};

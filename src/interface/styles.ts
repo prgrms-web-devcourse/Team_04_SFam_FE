@@ -8,6 +8,8 @@ export interface WrapperProps {
   height?: string;
   gap?: string;
   flexWrap?: string;
+  backgroundColor?: string;
+  flexGrow?: number;
 }
 
 export interface OptionalRenderProps {

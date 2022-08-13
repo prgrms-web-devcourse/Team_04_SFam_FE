@@ -33,6 +33,7 @@ export const ReceiverWrapper = styled.div`
   padding: 10px;
   border-radius: 8px;
   background-color: #e6e6e6;
+  max-width: 200px;
 `;
 
 export const TimeWrapper = styled.div`

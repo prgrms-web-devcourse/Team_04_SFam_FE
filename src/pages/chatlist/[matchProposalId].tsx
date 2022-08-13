@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState, KeyboardEvent, useRef, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
@@ -7,24 +8,27 @@ import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { ChatReceiver } from '@components/ChatReceiver';
 import { ChatSender } from '@components/ChatSender';
-import { Divider } from '@components/Divider';
 import { Dropdown, Item } from '@components/Dropdown';
 import { Heading } from '@components/Heading';
 import { Message } from '@components/Message';
 import { Navigator } from '@components/Navigator';
+import { Paragraph } from '@components/Paragraph';
 import { ChatsProps, MessageReq } from '@interface/chat';
 import { ProposalInfo } from '@interface/proposals';
 import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
 import {
+  Anchor,
   B1,
   BoldGrayB2,
-  BottomFixedWrapper,
+  ChatContainer,
+  ChatMatchHeader,
+  ChatMatchTitleWrapper,
   ColWrapper,
   Container,
+  DropdownWrapper,
   GrayB3,
   InnerWrapper,
-  RowWrapper,
 } from '@styles/common';
 
 const dropdownItems = [
@@ -240,43 +244,52 @@ const Chats: NextPage = () => {
   return (
     <>
       <Heading />
-      <Container ref={scrollRef}>
-        <RowWrapper
-          alignItems='center'
-          justifyContent='space-between'
-        >
-          <B1>{chatsInfo?.match.title}</B1>
-          {matchStatus === 'WAITING' ? (
-            <Dropdown
-              items={dropdownItems}
-              disabled={!proposal.isMatchAuthor}
-              onSelect={handleSelect}
-              placeholder='모집 중'
-              round
-            />
-          ) : (
-            <Dropdown
-              items={dropdownMatchDoneItems}
-              disabled={!proposal.isMatchAuthor}
-              onSelect={handleSelect}
-              placeholder={`${matchStatusToString[matchStatus]}`}
-              round
-            />
-          )}
-        </RowWrapper>
-        <Divider />
+      <ChatContainer ref={scrollRef}>
+        <ChatMatchHeader>
+          <ChatMatchTitleWrapper>
+            <Link
+              href={`/matches/${chatsInfo.match.id}`}
+              passHref
+            >
+              <Anchor>
+                <B1>{chatsInfo?.match.title}</B1>
+              </Anchor>
+            </Link>
+          </ChatMatchTitleWrapper>
+          <DropdownWrapper>
+            {matchStatus === 'WAITING' ? (
+              <Dropdown
+                items={dropdownItems}
+                disabled={!proposal.isMatchAuthor}
+                onSelect={handleSelect}
+                placeholder='모집 중'
+                round
+              />
+            ) : (
+              <Dropdown
+                items={dropdownMatchDoneItems}
+                disabled={!proposal.isMatchAuthor}
+                onSelect={handleSelect}
+                placeholder={`${matchStatusToString[matchStatus]}`}
+                round
+              />
+            )}
+          </DropdownWrapper>
+        </ChatMatchHeader>
         <ColWrapper
           alignItems='center'
           justifyContent='center'
-          gap='8px'
+          gap='16px'
+          padding='0 16px'
         >
           <BoldGrayB2>2022년 4월 20일</BoldGrayB2>
-          {proposal ? (
+          {proposal && (
             <InnerWrapper
               flexDirection='column'
               alignItems='center'
+              width='100%'
             >
-              {proposalStatus === 'WAITING' && !proposal.isMatchAuthor ? (
+              {proposalStatus === 'WAITING' && !proposal.isMatchAuthor && (
                 <InnerWrapper
                   flexDirection='column'
                   alignItems='center'
@@ -284,35 +297,27 @@ const Chats: NextPage = () => {
                   <GrayB3>공고 작성자에게 대화 요청 메시지를 전달했습니다.</GrayB3>
                   <GrayB3>대화를 수락할 경우 채팅을 전송할 수 있습니다.</GrayB3>
                 </InnerWrapper>
-              ) : (
-                <div />
               )}
-              {proposalStatus === 'WAITING' && proposal.isMatchAuthor ? (
-                <>
-                  <GrayB3>{chatsInfo?.match.targetProfile.nickname}님으로부터 대화 요청이 전송되었습니다.</GrayB3>
-                  <GrayB3>요청 내용</GrayB3>
-                  <GrayB3>{proposal.content}</GrayB3>
+              {proposalStatus === 'WAITING' && proposal.isMatchAuthor && (
+                <InnerWrapper
+                  width='100%'
+                  flexDirection='column'
+                >
+                  <GrayB3>{chatsInfo?.match.targetProfile.nickname}님으로부터 대화 요청이 있습니다.</GrayB3>
                   <GrayB3>수락하시겠습니까?</GrayB3>
-                  <InnerWrapper>
+                  <Paragraph width='100%'>{proposal.content}</Paragraph>
+                  <InnerWrapper width='100%'>
                     <Button
-                      backgroundColor='#F19A78'
-                      width='184px'
+                      backgroundColor='primary'
                       onClick={handleRefuse}
                     >
                       거절
                     </Button>
-                    <Button
-                      width='184px'
-                      onClick={handleApprove}
-                    >
-                      수락
-                    </Button>
+                    <Button onClick={handleApprove}>수락</Button>
                   </InnerWrapper>
-                </>
-              ) : (
-                <div />
+                </InnerWrapper>
               )}
-              {proposalStatus === 'APPROVED' && !proposal.isMatchAuthor ? (
+              {proposalStatus === 'APPROVED' && !proposal.isMatchAuthor && (
                 <InnerWrapper
                   flexDirection='column'
                   alignItems='center'
@@ -320,10 +325,8 @@ const Chats: NextPage = () => {
                   <GrayB3>상대방이 대화를 수락했습니다.</GrayB3>
                   <GrayB3>채팅을 전송할 수 있습니다.</GrayB3>
                 </InnerWrapper>
-              ) : (
-                <div />
               )}
-              {proposalStatus === 'APPROVED' && proposal.isMatchAuthor ? (
+              {proposalStatus === 'APPROVED' && proposal.isMatchAuthor && (
                 <InnerWrapper
                   flexDirection='column'
                   alignItems='center'
@@ -331,19 +334,12 @@ const Chats: NextPage = () => {
                   <GrayB3>대화를 수락했습니다.</GrayB3>
                   <GrayB3>채팅을 전송할 수 있습니다.</GrayB3>
                 </InnerWrapper>
-              ) : (
-                <div />
               )}
-              {proposalStatus === 'REFUSE' ? <GrayB3>신청이 거절되었습니다.</GrayB3> : <div />}
+              {proposalStatus === 'REFUSE' && <GrayB3>신청이 거절되었습니다.</GrayB3>}
             </InnerWrapper>
-          ) : (
-            <div />
           )}
         </ColWrapper>
-        <ColWrapper
-          gap='16px'
-          padding='0 0 70px 0 '
-        >
+        <ColWrapper gap='16px'>
           {chatsInfo.chats.map((chat, idx) =>
             chat.writer.id === user.id ? (
               <ChatSender
@@ -362,24 +358,22 @@ const Chats: NextPage = () => {
             ),
           )}
         </ColWrapper>
-        <BottomFixedWrapper>
-          {proposalStatus === 'APPROVED' ? (
-            <Message
-              message={message}
-              setMessage={setMessage}
-              handleMessage={handleMessage}
-              handleKeyPress={handleKeyPress}
-            />
-          ) : (
-            <Message
-              message={message}
-              setMessage={setMessage}
-              handleMessage={handleMessage}
-              disabled
-            />
-          )}
-        </BottomFixedWrapper>
-      </Container>
+      </ChatContainer>
+      {proposalStatus === 'APPROVED' && message.content.length !== 0 ? (
+        <Message
+          message={message}
+          setMessage={setMessage}
+          handleMessage={handleMessage}
+          handleKeyPress={handleKeyPress}
+        />
+      ) : (
+        <Message
+          message={message}
+          setMessage={setMessage}
+          handleMessage={handleMessage}
+          disabled
+        />
+      )}
       <Navigator />
     </>
   );

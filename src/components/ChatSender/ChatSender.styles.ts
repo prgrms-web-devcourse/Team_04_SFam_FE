@@ -19,6 +19,7 @@ export const SenderWrapper = styled.div`
   padding: 10px;
   border-radius: 8px;
   background-color: #1fab89;
+  max-width: 200px;
 `;
 
 export const TimeWrapper = styled.div`
