@@ -3,6 +3,7 @@ import Script from 'next/script';
 
 const Document = () => (
   <Html>
+    <title>운동 메이트가 필요할 땐 SFAM</title>
     <Head>
       <link
         rel='stylesheet'
