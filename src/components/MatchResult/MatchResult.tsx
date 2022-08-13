@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -32,6 +31,11 @@ const MatchResult = () => {
   };
 
   const handleSubmit = () => {
+    if (!select) {
+      // TODO: 변경 예정
+      alert('경기 결과 선택 후 제출해주세요.');
+      return;
+    }
     try {
       const fetch = async () => {
         const res = await axiosAuthInstance({
@@ -101,19 +105,14 @@ const MatchResult = () => {
             {result.text}
           </S.ButtonContainer>
         ))}
-        <Link
-          href={`/matches/${id as string}/review`}
-          passHref
+        <S.SubmitBtn
+          onClick={handleSubmit}
+          fontSize='20px'
+          width=''
+          height='45px'
         >
-          <S.SubmitBtn
-            onClick={handleSubmit}
-            fontSize='20px'
-            width=''
-            height='45px'
-          >
-            제출
-          </S.SubmitBtn>
-        </Link>
+          제출
+        </S.SubmitBtn>
       </S.Container>
       <Navigator />
     </>
