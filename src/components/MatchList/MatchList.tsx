@@ -71,23 +71,27 @@ const MatchList = () => {
 
   useEffect(() => {
     const getMatchList = async () => {
-      const res = await axiosAuthInstance.get('/api/matches', {
-        params: {
-          size: 10,
-          category,
-          status: 'WAITING',
-          distance: user.searchDistance,
-        },
-      });
-      const data = (res.data as AxiosResponse).data as Response;
-      setState({
-        values: data.values,
-        hasNext: data.hasNext,
-        cursor: data.cursor,
-        category: state.category,
-      });
+      try {
+        const res = await axiosAuthInstance.get('/api/matches', {
+          params: {
+            size: 10,
+            category,
+            status: 'WAITING',
+            distance: user.searchDistance,
+          },
+        });
+        const data = (res.data as AxiosResponse).data as Response;
+        setState({
+          values: data.values,
+          hasNext: data.hasNext,
+          cursor: data.cursor,
+          category: state.category,
+        });
 
-      setIsLoading(false);
+        setIsLoading(false);
+      } catch (e) {
+        console.log(e);
+      }
     };
     getMatchList();
   }, [category]);
