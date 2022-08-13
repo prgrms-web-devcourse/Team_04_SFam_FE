@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { FaPlus } from 'react-icons/fa';
 import { useRecoilValue } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
@@ -74,7 +75,7 @@ const TeamDetailPage: NextPage = () => {
             <SportsIcon sportsCategory={teamInfo.sportsCategory} />
           </InnerWrapper>
           <GrayB3>{SPORTS_TEXT[teamInfo.sportsCategory]}</GrayB3>
-          <B3>팀원 수: {teamInfo.members.length}명</B3>
+          <B3>팀원 수 : {teamInfo.members.length}명</B3>
         </InnerWrapper>
       </RowWrapper>
       <ColWrapper>
@@ -92,7 +93,6 @@ const TeamDetailPage: NextPage = () => {
           </Link>
         )}
       </ColWrapper>
-
       <Paragraph>{teamInfo.description}</Paragraph>
       <Divider />
       <ColWrapper>
@@ -110,27 +110,28 @@ const TeamDetailPage: NextPage = () => {
       </ColWrapper>
       <Divider />
       <ColWrapper>
-        <RowWrapper>
-          <InnerWrapper alignItems='center'>
-            <Label>팀원 목록</Label>
-            {isLeader && (
-              <Link
-                href={`/team/${router.query.id as string}/invitation`}
-                passHref
-              >
-                <Anchor>
-                  <Button
-                    width='24px'
-                    height='24px'
-                    round
-                  >
-                    +
-                  </Button>
-                </Anchor>
-              </Link>
-            )}
-          </InnerWrapper>
-        </RowWrapper>
+        <InnerWrapper
+          gap='8px'
+          alignItems='center'
+        >
+          <Label>팀원 목록</Label>
+          {isLeader && (
+            <Link
+              href={`/team/${router.query.id as string}/invitation`}
+              passHref
+            >
+              <Anchor>
+                <Button
+                  width='32px'
+                  height='32px'
+                  round
+                >
+                  <FaPlus size='16px' />
+                </Button>
+              </Anchor>
+            </Link>
+          )}
+        </InnerWrapper>
         <ColWrapper gap='16px'>
           {teamInfo.members.map((member) => (
             <div key={member.userId}>

@@ -54,7 +54,7 @@ export const Button = styled('button')<StyleProps>(
       width,
       height,
       fontSize,
-      borderRadius: round ? 24 : theme.borderRadius,
+      borderRadius: round ? '50%' : theme.borderRadius,
       backgroundColor: outline ? '#fff' : getColor(),
       outline: outline ? `1px solid ${theme.color.gray300}` : 'none',
       color: outline ? theme.color.gray700 : '#fff',
