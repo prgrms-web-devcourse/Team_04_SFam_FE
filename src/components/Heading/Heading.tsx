@@ -42,7 +42,9 @@ export const noBackIcon = ['/signup', '/signin', '/matches', '/matches/:id/revie
 // TODO: prop으로 뒤로 가기 버튼 조절해야 함
 const Heading = () => {
   const router = useRouter();
+
   const user = useRecoilValue(userState);
+
   const [kakaoLoading, setKakaoLoading] = React.useState(true);
   const [address, setAddress] = React.useState<Address>({
     address_name: '',
@@ -71,6 +73,7 @@ const Heading = () => {
     }
     fetchAddress();
   }, [router.pathname]);
+
   return (
     <S.HeadingContainer>
       <RowWrapper
@@ -92,21 +95,6 @@ const Heading = () => {
           {router.pathname === '/matches' ? address.region_3depth_name : headingTitle[router.pathname]}
         </S.HeadingTitle>
       </RowWrapper>
-      {router.pathname === '/matches' ? (
-        <Link
-          href='/matches/create'
-          passHref
-        >
-          <Anchor>
-            <S.HeadingLinkContainer>
-              <FaPen />
-              <span>글쓰기</span>
-            </S.HeadingLinkContainer>
-          </Anchor>
-        </Link>
-      ) : (
-        ''
-      )}
     </S.HeadingContainer>
   );
 };

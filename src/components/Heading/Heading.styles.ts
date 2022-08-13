@@ -25,8 +25,7 @@ export const HeadingTitle = styled.h1<Props>`
   cursor: ${(props) => props.pointer && 'pointer'};
 `;
 
-export const HeadingLinkContainer = styled.div`
-  display: flex;
-  gap: 4px;
+export const MyMatch = styled.div`
+  cursor: pointer;
   font-size: ${({ theme }) => theme.fontSize.b3};
 `;
