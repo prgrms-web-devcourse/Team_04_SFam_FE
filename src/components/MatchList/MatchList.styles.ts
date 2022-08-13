@@ -2,18 +2,18 @@ import styled from '@emotion/styled';
 
 export const Container = styled.div`
   width: 100%;
-  min-height: calc(100vh - 120px);
+  min-height: 722px;
   position: relative;
-  padding: 0 0 64px 0;
   background-color: ${({ theme }) => theme.color.gray200};
 `;
 
 export const Category = styled.div`
-  position: absolute;
+  position: sticky;
+  top: 0;
   width: 100%;
   padding: 8px 16px;
   display: flex;
-  gap: 12px;
+  gap: 8px;
   overflow: auto;
   white-space: nowrap;
   background-color: ${({ theme }) => theme.color.background};
@@ -25,9 +25,13 @@ export const Category = styled.div`
 `;
 
 export const ListContainer = styled.div`
-  padding-top: 56px;
+  padding: 8px 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
   background-color: ${({ theme }) => theme.color.gray200};
+`;
+
+export const DropdownWrapper = styled.div<{ width: string }>`
+  width: ${(props) => props.width};
 `;

@@ -21,7 +21,6 @@ export const Main = styled.main({
 
 export const Container = styled.div`
   margin: 0 20px;
-  padding: 0 0 56px 0;
 `;
 
 export const ColWrapper = styled.div<WrapperProps>`

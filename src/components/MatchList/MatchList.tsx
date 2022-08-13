@@ -21,6 +21,8 @@ const MatchList = () => {
     hasNext: false,
     category: '',
   });
+
+  const [filter, setFilter] = useState('WHOLE');
   const [category, setCategory] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const observerRef = useRef<HTMLDivElement>(null);
@@ -44,6 +46,12 @@ const MatchList = () => {
     }
   };
 
+  const handleFilterSelect = (e: React.MouseEvent<HTMLElement>) => {
+    const { dataset } = e.target as HTMLElement;
+    const { value } = dataset;
+    setFilter(() => value as string);
+  };
+
   const getMoreMatchList = () => {
     const getMore = async () => {
       const res = await axiosAuthInstance.get('/api/matches', {
@@ -54,6 +62,7 @@ const MatchList = () => {
           category,
           status: 'WAITING',
           distance: user.searchDistance,
+          userId: filter === 'MY' ? user.id : '',
         },
       });
 
@@ -78,6 +87,7 @@ const MatchList = () => {
             category,
             status: 'WAITING',
             distance: user.searchDistance,
+            userId: filter === 'MY' ? user.id : '',
           },
         });
         const data = (res.data as AxiosResponse).data as Response;
@@ -94,7 +104,7 @@ const MatchList = () => {
       }
     };
     getMatchList();
-  }, [category]);
+  }, [category, filter]);
 
   useEffect(() => {
     if (state.values?.length && observerRef.current !== null && state.hasNext) {
@@ -112,11 +122,26 @@ const MatchList = () => {
       );
       io.observe(lastItem);
     }
-  }, [state.values?.length, state.category]);
+  }, [state.values?.length, category, filter]);
 
   return (
     <S.Container>
       <S.Category>
+        <FilterButton
+          data-value='WHOLE'
+          active={filter === 'WHOLE'}
+          onClick={handleFilterSelect}
+        >
+          전체
+        </FilterButton>
+        <FilterButton
+          data-value='MY'
+          active={filter === 'MY'}
+          onClick={handleFilterSelect}
+        >
+          내 글
+        </FilterButton>
+        <div style={{ border: '1px solid #E9ECEF' }} />
         {SPORTS_CATEGORY.map((item) => (
           <FilterButton
             key={item.id}
