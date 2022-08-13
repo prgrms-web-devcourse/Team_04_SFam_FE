@@ -36,7 +36,9 @@ const LocationSetting: NextPage = () => {
       }
     }
     fetchAddress();
-    setDistance(loginUser.searchDistance as number);
+    if (loginUser.searchDistance) {
+      setDistance(loginUser.searchDistance);
+    }
   }, [geolocation.latitude, geolocation.longitude]);
 
   const handleClick = () => {
