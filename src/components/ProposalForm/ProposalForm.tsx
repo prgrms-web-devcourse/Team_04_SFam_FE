@@ -22,7 +22,7 @@ const changeTeamsToDropdownItems = (teams: Team[]) =>
     value: { id, sportsCategory, memberCount },
   }));
 
-const Proposal: NextPage = () => {
+const ProposalForm = () => {
   const router = useRouter();
   const { id } = router.query;
   const [teams, setTeams] = useState<Team[]>([]);
@@ -144,4 +144,4 @@ const Proposal: NextPage = () => {
   );
 };
 
-export default Proposal;
+export default ProposalForm;
