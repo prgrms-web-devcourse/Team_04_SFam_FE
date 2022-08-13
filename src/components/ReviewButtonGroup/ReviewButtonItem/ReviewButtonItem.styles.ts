@@ -9,6 +9,14 @@ export const ReviewButton = styled.button`
     font-weight: bold;
     opacity: 1;
   }
+  &:focus {
+    font-weight: bold;
+    opacity: 1;
+  }
+  &:active {
+    font-weight: bold;
+    opacity: 1;
+  }
 `;
 
 export const ReviewWrapper = styled.div`
