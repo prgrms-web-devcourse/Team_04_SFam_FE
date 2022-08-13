@@ -1,27 +1,21 @@
-import { useEffect } from 'react';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+import { useResetRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
+import { userState } from '@recoil/atoms';
 
 export const useAxiosInterceptor = () => {
-  const responseInterceptor = axiosAuthInstance.interceptors.response.use(
-    (response) => {
-      console.log('response');
-      return response;
-    },
-    (error) => {
-      console.log(error);
-      // if (error.response.status === 0) {
-      //   console.log('로그아웃 돼야 함.');
-      // }
-      console.log('11');
+  const router = useRouter();
+  const resetUser = useResetRecoilState(userState);
+  axiosAuthInstance.interceptors.response.use(
+    (response) => response,
+    (error: AxiosError) => {
+      if (error.response?.status === 401) {
+        resetUser();
+        router.push('/signin');
+      }
       return Promise.reject(error);
     },
   );
-
-  // useEffect(
-  //   () => () => {
-  //     axiosAuthInstance.interceptors.response.eject(responseInterceptor);
-  //   },
-  //   [responseInterceptor],
-  // );
 };
