@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { Heading } from '@components/Heading';
 import { Navigator } from '@components/Navigator';
 import { publicPath } from '@constants/publicPath';
+import { useAxiosInterceptor } from '@hooks/useAxiosInterceptor';
 import { userState } from '@recoil/atoms';
 import { Main } from '@styles/common';
 
@@ -16,6 +17,7 @@ const Layout = ({ children }: Props) => {
   const router = useRouter();
   const user = useRecoilValue(userState);
   const [isLoading, setIsLoading] = React.useState(true);
+  useAxiosInterceptor();
 
   useEffect(() => {
     const userCheck = async () => {
