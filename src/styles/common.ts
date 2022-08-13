@@ -2,8 +2,21 @@ import styled from '@emotion/styled';
 
 import { WrapperProps } from 'interface/styles';
 
+export const MobileLayout = styled('div')(
+  {
+    width: 390,
+    height: 844,
+    position: 'relative',
+  },
+  ({ theme }) => ({
+    border: `1px solid ${theme.color.gray200}`,
+  }),
+);
+
 export const Main = styled.main({
+  height: '100%',
   paddingTop: '64px',
+  overflow: 'auto',
 });
 
 export const Container = styled.div`

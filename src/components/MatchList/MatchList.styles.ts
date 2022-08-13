@@ -9,7 +9,7 @@ export const Container = styled.div`
 `;
 
 export const Category = styled.div`
-  position: fixed;
+  position: absolute;
   width: 100%;
   padding: 8px 16px;
   display: flex;

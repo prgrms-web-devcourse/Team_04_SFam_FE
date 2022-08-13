@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const Container = styled.div`
   width: 100%;
   height: 56px;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   border-top: ${({ theme }) => `1px solid ${theme.color.gray200}`};
   background-color: ${({ theme }) => theme.color.background};
