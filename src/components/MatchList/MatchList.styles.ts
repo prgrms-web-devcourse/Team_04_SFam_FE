@@ -31,3 +31,7 @@ export const ListContainer = styled.div`
   gap: 8px;
   background-color: ${({ theme }) => theme.color.gray200};
 `;
+
+export const DropdownWrapper = styled.div<{ width: string }>`
+  width: ${(props) => props.width};
+`;
