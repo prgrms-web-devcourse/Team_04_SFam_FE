@@ -4,13 +4,12 @@ const regexContent = /^.{2,30}$/;
 
 type Validation = ProposalData & MemberCount;
 
-export const validation = ({ teamId, content, participants, memberCount }: Validation) => {
+export const validation = ({ teamId, content, participants, memberCount, matchType }: Validation) => {
   const errors: ProposalData = {};
-  console.log(participants, memberCount);
 
-  if (!teamId) {
+  if (matchType === 'TEAM_MATCH' && !teamId) {
     errors.teamId = '팀을 선택해주세요.';
-  } else if (participants && memberCount && participants > memberCount) {
+  } else if (matchType === 'TEAM_MATCH' && participants && memberCount && participants > memberCount) {
     errors.teamId = '모집 인원이 팀원 수보다 많습니다.';
   }
 
