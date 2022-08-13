@@ -2,6 +2,7 @@ import * as S from './Badge.styles';
 
 interface Props {
   matchType?: string;
+  matchStatus?: string;
   color?: string;
   width?: string;
   height?: string;
@@ -13,6 +14,7 @@ interface Props {
 
 const Badge = ({
   matchType,
+  matchStatus,
   color = 'primary',
   width = '64px',
   height = '20px',
@@ -23,6 +25,7 @@ const Badge = ({
 }: Props) => (
   <S.Container
     matchType={matchType}
+    matchStatus={matchStatus}
     color={color}
     width={width}
     height={height}

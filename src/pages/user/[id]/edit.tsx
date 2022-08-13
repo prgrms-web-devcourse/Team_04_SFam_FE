@@ -28,6 +28,8 @@ const UserEditPage: NextPage = () => {
     profileImageUrl: user.profileImageUrl,
   });
 
+  const date = new Date().toTimeString();
+
   useEffect(() => {
     if (!router.isReady) return;
     (async () => {
@@ -36,6 +38,9 @@ const UserEditPage: NextPage = () => {
           data: { data },
         } = await axiosAuthInstance.get<Response<UserInfo>>(`/api/users/${id as string}`);
         setUserInfo(() => data);
+        if (data.profileImageUrl) {
+          setEditProfile({ ...editProfile, profileImageUrl: `${data.profileImageUrl}?date=${date}` });
+        }
       } catch (e) {
         // 에러 처리 필요
       }
@@ -59,6 +64,12 @@ const UserEditPage: NextPage = () => {
           });
 
           alert(`${files[0].name} 프로필 이미지가 업로드 되었습니다.`);
+
+          if (editProfile.profileImageUrl) {
+            // TODO: 백엔드에게 요청하기 URL 변경하도록
+            setEditProfile({ ...editProfile, profileImageUrl: `${editProfile.profileImageUrl}?date=${date}` });
+          }
+
           // TODO: API 수정 이후 확인할 것 res에 이미지 URL 요청드림
           // setEditProfile({ ...editProfile, profileFile: res.data.data.profileImageUrl });
         }
@@ -106,9 +117,9 @@ const UserEditPage: NextPage = () => {
         alignItems='center'
         justifyContent='center'
       >
-        {user && userInfo && editProfile.profileImageUrl !== null ? (
+        {user && userInfo && editProfile.profileImageUrl ? (
           <Avatar
-            imgSrc={editProfile.profileImageUrl}
+            imgSrc={`${editProfile.profileImageUrl}?date=${new Date().toTimeString()}`}
             imgSize='100px'
             edit
             user

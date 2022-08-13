@@ -2,12 +2,18 @@ import styled from '@emotion/styled';
 
 export const Container = styled.div`
   padding: 0 20px;
+  height: 100%;
 `;
 
 export const ImageWrapper = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 100px;
+`;
+
+export const ButtonWrapper = styled.div`
+  margin-top: 208px;
+  bottom: 0;
 `;
 
 export const Title = styled.span`

@@ -117,7 +117,11 @@ const UserDetailPage: NextPage = () => {
   return (
     <Container>
       <RowWrapper>
-        {userInfo && userInfo.profileImageUrl ? <Avatar imgSrc={userInfo.profileImageUrl} /> : <Avatar />}
+        {userInfo && userInfo.profileImageUrl ? (
+          <Avatar imgSrc={`${userInfo.profileImageUrl}?date=${new Date().toTimeString()}`} />
+        ) : (
+          <Avatar />
+        )}
         <InnerWrapper
           flexDirection='column'
           justifyContent='center'
@@ -172,6 +176,12 @@ const UserDetailPage: NextPage = () => {
           <Divider />
           <ColWrapper gap='16px'>
             <Label>나의 활동</Label>
+            <Link
+              href='/team/create'
+              passHref
+            >
+              <B2>팀 생성하기</B2>
+            </Link>
             <Link
               href={`/user/${id as string}/location`}
               passHref

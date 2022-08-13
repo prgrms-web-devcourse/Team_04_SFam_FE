@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { FaPencilAlt } from 'react-icons/fa';
+import { FaPen } from 'react-icons/fa';
 import { MdArrowBackIos } from 'react-icons/md';
 import { useRecoilValue } from 'recoil';
 
 import { Address, kakaoMapApi } from '@api/kakaoMapApi';
 import { userState } from '@recoil/atoms';
-import { Anchor, Icon, RowWrapper } from '@styles/common';
+import { Anchor, RowWrapper } from '@styles/common';
 
 import * as S from './Heading.styles';
 import { HeadingTitleProps } from './types';
@@ -99,7 +99,7 @@ const Heading = () => {
         >
           <Anchor>
             <S.HeadingLinkContainer>
-              <FaPencilAlt />
+              <FaPen />
               <span>글쓰기</span>
             </S.HeadingLinkContainer>
           </Anchor>

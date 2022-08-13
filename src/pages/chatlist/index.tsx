@@ -5,29 +5,18 @@ import { useEffect, useState } from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { ChatListItem } from '@components/ChatListItem';
+import { TotalChat } from '@interface/chat';
 import { Response } from '@interface/response';
 import { Anchor, ColWrapper, Container } from '@styles/common';
 
-interface Chat {
-  id: number;
-  content: string;
-  target: {
-    id: number;
-    nickname: string;
-    profileImageUrl: string;
-  };
-  lastChat: {
-    content: string;
-  };
-}
 const ChatListPage: NextPage = () => {
   const router = useRouter();
-  const [chatList, setChatList] = useState<Chat[]>([]);
+  const [chatList, setChatList] = useState<TotalChat[]>([]);
 
   useEffect(() => {
     if (!router.isReady) return;
     const ChatListApi = async () => {
-      await axiosAuthInstance.get<Response<Chat[]>>('/api/matches/proposals').then((res) => {
+      await axiosAuthInstance.get<Response<TotalChat[]>>('/api/matches/proposals').then((res) => {
         if (res.status === 200) {
           setChatList(res.data.data);
         }
@@ -51,6 +40,7 @@ const ChatListPage: NextPage = () => {
                   imgSrc={chat.target.profileImageUrl}
                   nickname={chat.target.nickname}
                   lastChat={chat.lastChat.content}
+                  match={chat.match}
                 />
               </Anchor>
             </Link>
@@ -65,6 +55,7 @@ const ChatListPage: NextPage = () => {
                   imgSrc={chat.target.profileImageUrl}
                   nickname={chat.target.nickname}
                   lastChat={chat.content}
+                  match={chat.match}
                 />
               </Anchor>
             </Link>

@@ -28,6 +28,7 @@ const UserEditPage: NextPage = () => {
     teamName: teamInfo?.name,
     logoImageUrl: teamInfo?.logoImageUrl,
   });
+  const date = new Date().toTimeString();
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -37,6 +38,9 @@ const UserEditPage: NextPage = () => {
       } = await axiosAuthInstance.get<Response<TeamInfo>>(`/api/teams/${id as string}`);
       setTeamInfo(() => data);
       setEditTeamProfile({ ...editTeamProfile, logoImageUrl: data.logoImageUrl });
+      if (data.logoImageUrl) {
+        setEditTeamProfile({ ...editTeamProfile, logoImageUrl: `${data.logoImageUrl}?date=${date}` });
+      }
       if (data.leader.id === user.id) {
         setIsLeader(true);
       }
@@ -62,9 +66,16 @@ const UserEditPage: NextPage = () => {
                 'Content-Type': 'multipart/form-data',
               },
             });
+
             alert(`${files[0].name} 팀 로고 이미지가 업로드 되었습니다.`);
+
+            if (teamInfo.logoImageUrl) {
+              // TODO: 백엔드에게 요청하기 URL 변경하도록
+              setEditTeamProfile({ ...editTeamProfile, logoImageUrl: `${teamInfo.logoImageUrl}?date=${date}` });
+            }
+
             // TODO: API 수정 이후 확인할 것 res에 이미지 URL 요청드림
-            // setEditTeamProfile({ ...editTeamProfile, teamLogoFile: res.data.data.logoImageUrl });
+            // setEditTeamProfile({ ...editTeamProfile, logoImageUrl: res.data.data.logoImageUrl });
           }
         }
       } catch (error) {
@@ -91,6 +102,7 @@ const UserEditPage: NextPage = () => {
           />
         ) : (
           <Avatar
+            imgSize='100px'
             edit
             team
             handleFileChange={handleTeamFileChange}

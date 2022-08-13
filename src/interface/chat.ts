@@ -1,3 +1,5 @@
+import { Match } from './match';
+
 export interface ChatsProps {
   match: MatchChat;
   chats: Chat[];
@@ -30,4 +32,13 @@ export interface MessageReq {
   targetId: number;
   content: string;
   chattedAt: string;
+}
+export interface TotalChat {
+  id: number;
+  content: string;
+  match: Match;
+  target: TargetProfile;
+  lastChat: {
+    content: string;
+  };
 }
