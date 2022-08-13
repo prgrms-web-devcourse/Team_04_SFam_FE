@@ -46,8 +46,8 @@ const Avatar = ({
         imgSrc={imgSrc}
         imgSize={imgSize}
         borderRadius={borderRadius}
-        {...props}
         onClick={handleClick}
+        {...props}
       >
         {user && (
           <input
@@ -73,6 +73,7 @@ const Avatar = ({
             alt={imgAlt}
             width={imgSize}
             height={imgSize}
+            objectFit='cover'
             {...props}
           />
         )}
