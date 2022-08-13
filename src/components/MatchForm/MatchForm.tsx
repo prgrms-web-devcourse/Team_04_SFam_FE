@@ -173,10 +173,10 @@ const PostForm = () => {
             placeholder='제목'
             value={state.title}
             onChange={handleChange}
-            height='50px'
+            height='40px'
           />
           {errors.title && <BoldOrangeB3>{errors.title}</BoldOrangeB3>}
-          <RowWrapper>
+          <InnerWrapper>
             <RadioWrapper>
               <RadioInput
                 type='radio'
@@ -195,7 +195,7 @@ const PostForm = () => {
               />
               <B3>팀전</B3>
             </RadioWrapper>
-          </RowWrapper>
+          </InnerWrapper>
           {errors.matchType && <BoldOrangeB3>{errors.matchType}</BoldOrangeB3>}
           {state.matchType === 'INDIVIDUAL_MATCH' && (
             <>
@@ -272,6 +272,7 @@ const PostForm = () => {
                 placeholder='경기 인원'
                 value={state.participants as string}
                 onChange={handleChange}
+                height='40px'
               />
               {errors.participants && <BoldOrangeB3>{errors.participants}</BoldOrangeB3>}
             </>

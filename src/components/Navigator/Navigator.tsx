@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { FaPencilAlt } from 'react-icons/fa';
+import { FaPen } from 'react-icons/fa';
 import { IoNotificationsSharp, IoChatboxSharp, IoHomeSharp, IoPerson } from 'react-icons/io5';
 import { useRecoilState } from 'recoil';
 
@@ -53,7 +53,7 @@ const Navigator = () => {
           >
             <S.Anchor>
               <span>
-                <FaPencilAlt size='17px' />
+                <FaPen />
               </span>
               <span>글쓰기</span>
             </S.Anchor>
@@ -74,7 +74,7 @@ const Navigator = () => {
         </S.NavItem>
         <S.NavItem>
           <Link
-            href={`/user/${user.id as number}`}
+            href={`/user/${id as number}`}
             passHref
           >
             <S.Anchor>

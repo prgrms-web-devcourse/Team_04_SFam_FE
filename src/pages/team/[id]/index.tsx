@@ -122,8 +122,8 @@ const TeamDetailPage: NextPage = () => {
             >
               <Anchor>
                 <Button
-                  width='32px'
-                  height='32px'
+                  width='24px'
+                  height='24px'
                   round
                 >
                   <FaPlus size='16px' />
