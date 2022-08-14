@@ -39,7 +39,7 @@ const ChatListPage: NextPage = () => {
   }, [id, router.isReady]);
 
   if (proposalList?.length === 0) {
-    return <ErrorForm errorText='대화가 없습니다.' />;
+    return <ErrorForm errorText='대화가 없습니다' />;
   }
   if (loading) {
     return <Container />;
