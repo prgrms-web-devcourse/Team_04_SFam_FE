@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useRecoilState } from 'recoil';
@@ -9,7 +10,7 @@ import { SPORTS_TEXT } from '@constants/text';
 import { Response } from '@interface/response';
 import { TeamInfo } from '@interface/team';
 import { userState } from '@recoil/atoms';
-import { B2, RowWrapper, InnerWrapper, B1, GrayB3, B3, BoldB3, ColWrapper, BoldB2 } from '@styles/common';
+import { B2, RowWrapper, InnerWrapper, B1, GrayB3, B3, BoldB3, ColWrapper, BoldB2, Anchor } from '@styles/common';
 
 const InviteAcceptance = () => {
   const router = useRouter();
@@ -85,26 +86,33 @@ const InviteAcceptance = () => {
       gap='16px'
       padding='16px 32px'
     >
-      <RowWrapper gap='16px'>
-        {teamInfo && teamInfo.logoImageUrl !== null ? (
-          <Avatar
-            imgSrc={teamInfo.logoImageUrl}
-            imgSize='72px'
-          />
-        ) : (
-          <Avatar />
-        )}
-        <InnerWrapper
-          flexDirection='column'
-          justifyContent='center'
-        >
-          <B1>{teamInfo.name}</B1>
-          <GrayB3>{SPORTS_TEXT[teamInfo.sportsCategory]}</GrayB3>
-          <B3>
-            팀원 수 <BoldB3>{teamInfo.members.length}명</BoldB3>
-          </B3>
-        </InnerWrapper>
-      </RowWrapper>
+      <Link
+        href={`/team/${teamId}`}
+        passHref
+      >
+        <Anchor>
+          <RowWrapper gap='16px'>
+            {teamInfo && teamInfo.logoImageUrl !== null ? (
+              <Avatar
+                imgSrc={teamInfo.logoImageUrl}
+                imgSize='72px'
+              />
+            ) : (
+              <Avatar />
+            )}
+            <InnerWrapper
+              flexDirection='column'
+              justifyContent='center'
+            >
+              <B1>{teamInfo.name}</B1>
+              <GrayB3>{SPORTS_TEXT[teamInfo.sportsCategory]}</GrayB3>
+              <B3>
+                팀원 수 <BoldB3>{teamInfo.members.length}명</BoldB3>
+              </B3>
+            </InnerWrapper>
+          </RowWrapper>
+        </Anchor>
+      </Link>
       <ColWrapper gap='8px'>
         <B2>
           <BoldB2>{teamInfo.name}</BoldB2>에서 회원님을 초대했습니다.

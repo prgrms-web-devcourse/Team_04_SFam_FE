@@ -20,7 +20,6 @@ const Welcome = () => (
         alt=''
         src={logo}
       />
-      {/* TODO: 문구 구합니다. */}
       <S.Title>운동 메이트가 필요할땐?</S.Title>
       <S.Paragraph>
         스포츠를 좋아하는 동네 사람들과 <br /> 팀을 이루고 경기를 매칭해보세요!
