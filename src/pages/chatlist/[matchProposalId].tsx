@@ -5,6 +5,7 @@ import { useEffect, useState, KeyboardEvent, useRef, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
+import { Badge } from '@components/Badge';
 import { Button } from '@components/Button';
 import { ChatReceiver } from '@components/ChatReceiver';
 import { ChatSender } from '@components/ChatSender';
@@ -12,7 +13,8 @@ import { Dropdown, Item } from '@components/Dropdown';
 import { Heading } from '@components/Heading';
 import { Message } from '@components/Message';
 import { Navigator } from '@components/Navigator';
-import { Paragraph } from '@components/Paragraph';
+import { MATCH_STATUS_CHAT, MATCH_STATUS_DETAIL } from '@constants/dropdown';
+import { MATCH_STATUS_TEXT, PROPOSAL_STATUS_TEXT } from '@constants/text';
 import { ChatsProps, MessageReq } from '@interface/chat';
 import { ProposalInfo } from '@interface/proposals';
 import { Response } from '@interface/response';
@@ -29,6 +31,7 @@ import {
   DropdownWrapper,
   GrayB3,
   InnerWrapper,
+  NormalParagraph,
 } from '@styles/common';
 
 const dropdownItems = [
@@ -41,27 +44,6 @@ const dropdownMatchDoneItems = [
   { id: 1, text: '모집 완료', value: { status: 'IN_GAME' } },
   { id: 2, text: '경기 완료', value: { status: 'END' } },
 ];
-
-export interface ProposalStatusProps {
-  [key: string]: string;
-}
-
-export interface MatchStatusProps {
-  [key: string]: string;
-}
-
-const proposalStatusToString: ProposalStatusProps = {
-  WAITING: '대기중',
-  APPROVED: '수락',
-  REFUSE: '거절',
-  FIXED: '대상확정',
-};
-
-const matchStatusToString: MatchStatusProps = {
-  WAITING: '모집중',
-  IN_GAME: '모집 완료',
-  END: '경기 완료',
-};
 
 const Chats: NextPage = () => {
   const router = useRouter();
@@ -157,7 +139,7 @@ const Chats: NextPage = () => {
           },
         );
         if (res.status === 200) {
-          alert(`매치 요청이 ${proposalStatusToString[status]}되었습니다.`);
+          alert(`매치 요청이 ${PROPOSAL_STATUS_TEXT[status]}되었습니다.`);
         }
       }
     } catch (error) {
@@ -167,14 +149,10 @@ const Chats: NextPage = () => {
 
   // 경기 모집중 모집완료 API
   const patchMatchesApi = async (status: string) => {
+    // TODO: Toast
     try {
       if (chatsInfo) {
-        const res = await axiosAuthInstance.patch(`/api/matches/${chatsInfo.match.id}`, { status });
-
-        if (res.status === 200) {
-          // TODO: 토스트로 변경
-          alert(`모집 상태가 ${matchStatusToString[status]}로 설정되었습니다. `);
-        }
+        await axiosAuthInstance.patch(`/api/matches/${chatsInfo.match.id}`, { status });
       }
     } catch (error) {
       console.log(error);
@@ -256,25 +234,37 @@ const Chats: NextPage = () => {
               </Anchor>
             </Link>
           </ChatMatchTitleWrapper>
-          <DropdownWrapper>
-            {matchStatus === 'WAITING' ? (
-              <Dropdown
-                items={dropdownItems}
-                disabled={!proposal.isMatchAuthor}
-                onSelect={handleSelect}
-                placeholder='모집 중'
-                round
-              />
-            ) : (
-              <Dropdown
-                items={dropdownMatchDoneItems}
-                disabled={!proposal.isMatchAuthor}
-                onSelect={handleSelect}
-                placeholder={`${matchStatusToString[matchStatus]}`}
-                round
-              />
-            )}
-          </DropdownWrapper>
+          {!proposal.isMatchAuthor ? (
+            <Badge
+              matchStatus={matchStatus}
+              width='auto'
+              height='32px'
+              fontSize='16px'
+              padding
+            >
+              {MATCH_STATUS_TEXT[matchStatus]}
+            </Badge>
+          ) : (
+            <DropdownWrapper>
+              {matchStatus === 'WAITING' ? (
+                <Dropdown
+                  items={MATCH_STATUS_DETAIL}
+                  disabled={!proposal.isMatchAuthor}
+                  onSelect={handleSelect}
+                  placeholder='모집 중'
+                  round
+                />
+              ) : (
+                <Dropdown
+                  items={MATCH_STATUS_CHAT}
+                  disabled={!proposal.isMatchAuthor}
+                  onSelect={handleSelect}
+                  placeholder={`${MATCH_STATUS_TEXT[matchStatus]}`}
+                  round
+                />
+              )}
+            </DropdownWrapper>
+          )}
         </ChatMatchHeader>
         <ColWrapper
           alignItems='center'
@@ -284,11 +274,7 @@ const Chats: NextPage = () => {
         >
           <BoldGrayB2>2022년 4월 20일</BoldGrayB2>
           {proposal && (
-            <InnerWrapper
-              flexDirection='column'
-              alignItems='center'
-              width='100%'
-            >
+            <>
               {proposalStatus === 'WAITING' && !proposal.isMatchAuthor && (
                 <InnerWrapper
                   flexDirection='column'
@@ -300,20 +286,28 @@ const Chats: NextPage = () => {
               )}
               {proposalStatus === 'WAITING' && proposal.isMatchAuthor && (
                 <InnerWrapper
-                  width='100%'
                   flexDirection='column'
+                  width='100%'
                 >
                   <GrayB3>{chatsInfo?.match.targetProfile.nickname}님으로부터 대화 요청이 있습니다.</GrayB3>
                   <GrayB3>수락하시겠습니까?</GrayB3>
-                  <Paragraph width='100%'>{proposal.content}</Paragraph>
-                  <InnerWrapper width='100%'>
+                  <NormalParagraph>{proposal.content}</NormalParagraph>
+                  <InnerWrapper>
                     <Button
                       backgroundColor='primary'
                       onClick={handleRefuse}
+                      fontSize='16px'
+                      height='32px'
                     >
                       거절
                     </Button>
-                    <Button onClick={handleApprove}>수락</Button>
+                    <Button
+                      onClick={handleApprove}
+                      fontSize='16px'
+                      height='32px'
+                    >
+                      수락
+                    </Button>
                   </InnerWrapper>
                 </InnerWrapper>
               )}
@@ -336,7 +330,7 @@ const Chats: NextPage = () => {
                 </InnerWrapper>
               )}
               {proposalStatus === 'REFUSE' && <GrayB3>신청이 거절되었습니다.</GrayB3>}
-            </InnerWrapper>
+            </>
           )}
         </ColWrapper>
         <ColWrapper gap='16px'>

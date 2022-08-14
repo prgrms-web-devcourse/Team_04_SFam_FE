@@ -13,10 +13,6 @@ export const Title = styled.span`
   font-size: 28px;
 `;
 
-export const Detail = styled.div`
-  padding: 8px 0;
-`;
-
 export const DetailItem = styled.span`
   font-size: 16px;
   font-weight: bold;
@@ -24,4 +20,15 @@ export const DetailItem = styled.span`
 
 export const DetailTitle = styled.span`
   font-size: 16px;
+`;
+
+export const Message = styled.div`
+  text-align: center;
+  color: ${(props) => props.theme.color.gray400};
+`;
+
+export const StatusWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
