@@ -163,6 +163,7 @@ const MatchList = () => {
             matchType={item.matchType}
             content={item.content}
             createdAt={item.createdAt}
+            distance={item.distance}
           />
         ))}
       </S.ListContainer>

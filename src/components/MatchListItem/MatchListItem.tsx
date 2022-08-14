@@ -13,9 +13,10 @@ interface Props {
   matchType: string; // 개인전 or 팀전
   content: string;
   createdAt: string; // 글 작성 일자
+  distance: number;
 }
 
-const MatchListItem = ({ id, title, category, matchType, content, createdAt }: Props) => (
+const MatchListItem = ({ id, title, category, matchType, content, createdAt, distance }: Props) => (
   <Link
     href={{
       pathname: `/matches/${id}`,
@@ -29,7 +30,9 @@ const MatchListItem = ({ id, title, category, matchType, content, createdAt }: P
       <S.Description>
         <S.TitleWrapper>
           <S.Title>{title}</S.Title>
+          <GrayB4 style={{ flexShrink: 0 }}>약 {Math.floor(distance)}km</GrayB4>
         </S.TitleWrapper>
+
         <InnerWrapper>
           <S.Content>{content}</S.Content>
         </InnerWrapper>
