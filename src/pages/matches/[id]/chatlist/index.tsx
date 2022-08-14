@@ -15,7 +15,7 @@ import { Anchor, ColWrapper, Container } from '@styles/common';
 const ChatListPage: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>();
   const [proposalList, setProposalList] = useState<ProposalProps[]>();
 
   useEffect(() => {
@@ -31,6 +31,7 @@ const ChatListPage: NextPage = () => {
           const error = e as AxiosError<ServerError>;
           if (error && error.response && error.response.data.message === 'Not found proposal') {
             setProposalList([]);
+            setLoading(false);
           }
         }
       }
@@ -38,11 +39,8 @@ const ChatListPage: NextPage = () => {
     proposalListApi();
   }, [id, router.isReady]);
 
-  if (proposalList?.length === 0) {
+  if (!loading && proposalList?.length === 0) {
     return <ErrorForm errorText='대화가 없습니다' />;
-  }
-  if (loading) {
-    return <Container />;
   }
   return (
     <Container>
