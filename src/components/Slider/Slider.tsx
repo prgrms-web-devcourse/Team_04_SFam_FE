@@ -1,9 +1,9 @@
-import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import { ChangeEvent, useEffect, useRef } from 'react';
 
 import * as S from './Slider.styles';
 
 interface Props {
-  setDistance: Dispatch<SetStateAction<number>>;
+  setDistance: (value: number) => void;
   distance: number;
 }
 
@@ -41,6 +41,7 @@ const Slider = ({ distance, setDistance }: Props) => {
         min={min}
         max={max}
         step={step}
+        onInput={handleChange}
         onChange={handleChange}
       />
       <S.RowWrapper>
