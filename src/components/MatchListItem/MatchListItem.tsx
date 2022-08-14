@@ -13,9 +13,10 @@ interface Props {
   matchType: string; // 개인전 or 팀전
   content: string;
   createdAt: string; // 글 작성 일자
+  distance: number;
 }
 
-const MatchListItem = ({ id, title, category, matchType, content, createdAt }: Props) => (
+const MatchListItem = ({ id, title, category, matchType, content, createdAt, distance }: Props) => (
   <Link
     href={{
       pathname: `/matches/${id}`,
@@ -41,7 +42,10 @@ const MatchListItem = ({ id, title, category, matchType, content, createdAt }: P
             <Badge>{SPORTS_TEXT[category]}</Badge>
             <Badge matchType={matchType}>{MATCH_TYPE_TEXT[matchType]}</Badge>
           </InnerWrapper>
-          <GrayB4>{createdAt.slice(2, 10).split('-').join('.')}</GrayB4>
+        </InnerWrapper>
+        <InnerWrapper justifyContent='space-between'>
+          <GrayB4>작성일 {createdAt.slice(2, 10).split('-').join('.')}</GrayB4>
+          <GrayB4 style={{ flexShrink: 0 }}>약 {Math.floor(distance)}km</GrayB4>
         </InnerWrapper>
       </S.Description>
     </S.Container>
