@@ -13,7 +13,6 @@ export interface Values {
 }
 
 const regexTitle = /^.{2,50}$/;
-const regexContent = /^.{2,100}$/;
 const regexParticipants = /\d/;
 
 const checkDate = ({ year, month, date }: { year: string; month: string; date: string }) => {
@@ -58,7 +57,7 @@ export const validation = ({
     errors.matchDate = '존재하지 않는 날짜입니다.';
   } else {
     const nowDate = new Date();
-    const selectedDate = new Date(`${year }-${month }-${date }`);
+    const selectedDate = new Date(`${year}-${month}-${date}`);
     if (nowDate > selectedDate) {
       errors.matchDate = '날짜를 오늘 이후로 설정해주세요.';
     }
@@ -78,7 +77,7 @@ export const validation = ({
   }
   if (!content) {
     errors.content = '내용을 입력해주세요.';
-  } else if (!regexContent.test(content)) {
+  } else if (content.length < 2 || content.length > 100) {
     errors.content = '내용은 2자 이상 100자 이하입니다.';
   }
   if (matchType === 'TEAM_MATCH' && !teamId) {
