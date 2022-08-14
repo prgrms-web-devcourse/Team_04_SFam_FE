@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { NextPage } from 'next/types';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useGeolocation from 'react-hook-geolocation';
 import { useRecoilState } from 'recoil';
 
@@ -13,7 +13,7 @@ import { B2, B3, BoldB2, ColWrapper, Container, GrayB2, InnerWrapper } from '@st
 
 const LocationSetting: NextPage = () => {
   const [loginUser, setLoginUser] = useRecoilState(userState);
-  const [distance, setDistance] = useState(5);
+  const distance = useRef<number>(5);
   const [kakaoLoading, setKakaoLoading] = useState<boolean>(true);
   const [address, setAddress] = useState<Address>({
     address_name: '',
@@ -27,6 +27,18 @@ const LocationSetting: NextPage = () => {
   const router = useRouter();
   const geolocation = useGeolocation({});
 
+  const setDistance = (value: number) => {
+    if (distance.current) {
+      distance.current = value;
+    }
+  };
+
+  useEffect(() => {
+    if (loginUser.searchDistance) {
+      setDistance(loginUser.searchDistance);
+    }
+  }, []);
+
   useEffect(() => {
     setKakaoLoading(true);
     async function fetchAddress() {
@@ -36,9 +48,6 @@ const LocationSetting: NextPage = () => {
       }
     }
     fetchAddress();
-    if (loginUser.searchDistance) {
-      setDistance(loginUser.searchDistance);
-    }
   }, [geolocation.latitude, geolocation.longitude]);
 
   const handleClick = () => {
@@ -46,7 +55,7 @@ const LocationSetting: NextPage = () => {
       ...loginUser,
       longitude: geolocation.longitude,
       latitude: geolocation.latitude,
-      searchDistance: distance,
+      searchDistance: distance.current,
     });
     axiosAuthInstance({
       method: 'PUT',
@@ -54,7 +63,7 @@ const LocationSetting: NextPage = () => {
       data: {
         latitude: geolocation.latitude,
         longitude: geolocation.longitude,
-        searchDistance: distance,
+        searchDistance: distance.current,
       },
     }).then((res) => {
       if (res.status === 200) {
@@ -85,7 +94,7 @@ const LocationSetting: NextPage = () => {
         </ColWrapper>
         <Slider
           setDistance={setDistance}
-          distance={distance}
+          distance={distance.current}
         />
         <InnerWrapper padding='24px 0'>
           <Button
