@@ -141,7 +141,7 @@ const MatchList = () => {
         >
           내 글
         </FilterButton>
-        <div style={{ border: '1px solid #E9ECEF' }} />
+        <div style={{ borderRight: '1px solid #E9ECEF' }} />
         {SPORTS_CATEGORY.map((item) => (
           <FilterButton
             key={item.id}
