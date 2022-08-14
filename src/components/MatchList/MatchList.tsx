@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
+import { ErrorForm } from '@components/ErrorForm';
 import { FilterButton } from '@components/FilterButton';
 import { MatchListItem } from '@components/MatchListItem';
 import { SPORTS_CATEGORY } from '@constants/dropdown';
 import { userState } from '@recoil/atoms';
+import { Container } from '@styles/common';
 
 import * as S from './MatchList.styles';
 import { Match, Response } from './types';
@@ -81,6 +83,7 @@ const MatchList = () => {
   useEffect(() => {
     const getMatchList = async () => {
       try {
+        setIsLoading(true);
         const res = await axiosAuthInstance.get('/api/matches', {
           params: {
             size: 10,
@@ -153,20 +156,27 @@ const MatchList = () => {
           </FilterButton>
         ))}
       </S.Category>
-      <S.ListContainer ref={observerRef}>
-        {state.values.map((item: Match) => (
-          <MatchListItem
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            category={item.category}
-            matchType={item.matchType}
-            content={item.content}
-            createdAt={item.createdAt}
-            distance={item.distance}
-          />
-        ))}
-      </S.ListContainer>
+      {!isLoading && state.values.length === 0 ? (
+        <ErrorForm
+          errorText='매치 목록이 없습니다'
+          suggestionText='내 거리 설정에서 검색 거리를 늘려보세요!'
+        />
+      ) : (
+        <S.ListContainer ref={observerRef}>
+          {state.values.map((item: Match) => (
+            <MatchListItem
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              category={item.category}
+              matchType={item.matchType}
+              content={item.content}
+              createdAt={item.createdAt}
+              distance={item.distance}
+            />
+          ))}
+        </S.ListContainer>
+      )}{' '}
     </S.Container>
   );
 };

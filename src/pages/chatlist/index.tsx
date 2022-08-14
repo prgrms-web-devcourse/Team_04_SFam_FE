@@ -1,3 +1,4 @@
+import axios, { AxiosError } from 'axios';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -6,27 +7,40 @@ import { useEffect, useState } from 'react';
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { ChatListItem } from '@components/ChatListItem';
 import { ErrorForm } from '@components/ErrorForm';
+import { ServerError } from '@interface/api';
 import { TotalChat } from '@interface/chat';
 import { Response } from '@interface/response';
 import { Anchor, ColWrapper, Container } from '@styles/common';
 
 const ChatListPage: NextPage = () => {
   const router = useRouter();
-  const [chatList, setChatList] = useState<TotalChat[]>([]);
+  const [chatList, setChatList] = useState<TotalChat[]>();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!router.isReady) return;
     const ChatListApi = async () => {
-      await axiosAuthInstance.get<Response<TotalChat[]>>('/api/matches/proposals').then((res) => {
-        if (res.status === 200) {
-          setChatList(res.data.data);
+      setLoading(true);
+      try {
+        await axiosAuthInstance.get<Response<TotalChat[]>>('/api/matches/proposals').then((res) => {
+          if (res.status === 200) {
+            setChatList(res.data.data);
+            setLoading(false);
+          }
+        });
+      } catch (e) {
+        if (axios.isAxiosError(e)) {
+          const error = e as AxiosError<ServerError>;
+          if (error && error.response && error.response.data.message === 'Not found proposal') {
+            setChatList([]);
+          }
         }
-      });
+      }
     };
     ChatListApi();
   }, [router.isReady]);
 
-  if (chatList.length === 0) {
+  if (!loading && chatList?.length === 0) {
     return (
       <ErrorForm
         errorText='대화가 없습니다'
@@ -37,7 +51,7 @@ const ChatListPage: NextPage = () => {
   return (
     <Container>
       <ColWrapper gap='16px'>
-        {chatList.map((chat) =>
+        {chatList?.map((chat) =>
           chat.lastChat.content !== null ? (
             <Link
               href={`/chatlist/${chat.id}`}

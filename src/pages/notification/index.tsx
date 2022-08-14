@@ -38,6 +38,7 @@ const NotificationPage: NextPage = () => {
 
   useEffect(() => {
     const getInvitationList = async () => {
+      setIsLoading(true);
       const res = await axiosAuthInstance.get<Response<Invitation>>('/api/teams/invitations', {
         params: {
           size: 10,
@@ -91,7 +92,7 @@ const NotificationPage: NextPage = () => {
     }
   }, [state.values?.length]);
 
-  if (state.values.length === 0) {
+  if (!isLoading && state.values.length === 0) {
     return (
       <ErrorForm
         errorText='초대 목록이 없습니다'
