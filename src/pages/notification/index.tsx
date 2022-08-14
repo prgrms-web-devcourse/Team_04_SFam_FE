@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import { useEffect, useRef, useState } from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
+import { ErrorForm } from '@components/ErrorForm';
 import { NotificationListItem } from '@components/NotificationListItem';
 import { Response } from '@interface/response';
 import { BoldB1, ColWrapper, Container, InnerWrapper } from '@styles/common';
@@ -90,7 +91,14 @@ const NotificationPage: NextPage = () => {
     }
   }, [state.values?.length]);
 
-  console.log(state.values);
+  if (state.values.length === 0) {
+    return (
+      <ErrorForm
+        errorText='초대 목록이 없습니다'
+        suggestionText='팀에 합류해 팀의 에이스로 성장해보세요!'
+      />
+    );
+  }
 
   return (
     <Container>
