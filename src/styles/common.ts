@@ -24,6 +24,7 @@ export const Container = styled.div`
 `;
 
 export const ColWrapper = styled.div<WrapperProps>`
+  width: ${(props) => props.width};
   display: flex;
   flex-direction: column;
   align-items: ${(props) => props.alignItems};
@@ -35,6 +36,7 @@ export const ColWrapper = styled.div<WrapperProps>`
 `;
 
 export const RowWrapper = styled.div<WrapperProps>`
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: ${(props) => props.alignItems};
@@ -45,6 +47,7 @@ export const RowWrapper = styled.div<WrapperProps>`
 `;
 
 export const InnerWrapper = styled.div<WrapperProps>`
+  width: ${(props) => props.width};
   display: flex;
   flex-direction: ${(props) => props.flexDirection};
   align-items: ${(props) => props.alignItems};
@@ -304,4 +307,15 @@ export const UserList = styled.div``;
 
 export const Icon = styled.div`
   cursor: pointer;
+`;
+
+export const NormalParagraph = styled.p`
+  color: #212529;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 16px;
+  white-space: pre-line;
+  word-break: break-all;
+  border: 1px solid ${(props) => props.theme.color.gray200};
+  border-radius: ${(props) => props.theme.borderRadius};
 `;

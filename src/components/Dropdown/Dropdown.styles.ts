@@ -19,7 +19,7 @@ export const SelectedItem = styled('div')(
   }),
 );
 
-export const RoundSelectedItem = styled(SelectedItem)(
+export const RoundSelectedItem = styled(SelectedItem)<{ text: string }>(
   {
     height: '32px',
     color: '#fff',
@@ -27,9 +27,18 @@ export const RoundSelectedItem = styled(SelectedItem)(
     borderRadius: '8px',
     padding: '0 6px 0 12px',
   },
-  ({ theme }) => ({
-    backgroundColor: theme.color.secondary,
-  }),
+  ({ theme, text }) => {
+    switch (text) {
+      case '모집 중':
+        return { backgroundColor: theme.color.yellow };
+      case '모집 완료':
+        return { backgroundColor: theme.color.secondary };
+      case '경기 완료':
+        return { backgroundColor: theme.color.primary };
+      default:
+        return { backgroundColor: theme.color.background };
+    }
+  },
 );
 
 export const Text = styled('span')(({ theme }) => ({

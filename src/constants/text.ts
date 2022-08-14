@@ -22,3 +22,10 @@ export const MATCH_STATUS_TEXT: Text = {
   IN_GAME: '모집 완료',
   END: '경기 완료',
 };
+
+export const PROPOSAL_STATUS_TEXT: Text = {
+  WAITING: '대기중',
+  APPROVED: '수락',
+  REFUSE: '거절',
+  FIXED: '대상확정',
+};
