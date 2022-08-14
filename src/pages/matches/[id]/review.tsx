@@ -12,7 +12,7 @@ import { ChatsProps } from '@interface/chat';
 import { Match } from '@interface/match';
 import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
-import { Anchor, B2, ColWrapper, Container, H2 } from '@styles/common';
+import { Anchor, B1, B2, BoldB1, BoldB2, ColWrapper, Container, H2 } from '@styles/common';
 
 const Review: NextPage = () => {
   const router = useRouter();
@@ -27,7 +27,7 @@ const Review: NextPage = () => {
   });
 
   React.useEffect(() => {
-    if (!router.isReady) return;
+    if (!router.isReady && review === '') return;
     const getMatch = async () => {
       const res = await axiosAuthInstance.get<Response<Match>>(`/api/matches/${id as string}`);
       if (res.status === 200) {
@@ -61,6 +61,7 @@ const Review: NextPage = () => {
   }, [router.isReady]);
 
   const handleClick = () => {
+    if (review === '') return;
     try {
       const fetch = async () => {
         await axiosAuthInstance({
@@ -84,16 +85,26 @@ const Review: NextPage = () => {
       </ColWrapper>
       <Divider />
       <ColWrapper gap='16px'>
-        {/* TODO: 로그인 후 전역 관리된 유저 정보 상태 처리 */}
-        <B2>{user.nickname} 님,</B2>
-        <B2>{match.name} 님과의 경기는 어떠셨나요?</B2>
-        <ReviewButtonGroup setReview={setReview} />
+        <B1>
+          <BoldB1>{user.nickname}</BoldB1>님
+        </B1>
+        <B2>
+          <BoldB2>{match.name}</BoldB2> 님과의 경기는 어떠셨나요?
+        </B2>
+        <ReviewButtonGroup
+          review={review}
+          setReview={setReview}
+        />
         <Link
           href='/matches'
           passHref
         >
           <Anchor>
-            <Button onClick={handleClick}>제출</Button>
+            {review === '' ? (
+              <Button onClick={handleClick}>다음에 남기기</Button>
+            ) : (
+              <Button onClick={handleClick}>제출하기</Button>
+            )}
           </Anchor>
         </Link>
       </ColWrapper>
