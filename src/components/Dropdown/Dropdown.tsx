@@ -6,7 +6,7 @@ import { Item } from './types';
 
 interface Props<T> {
   items: Item<T>[];
-  placeholder?: string;
+  placeholder: string;
   onSelect: (item: Item<T>) => void;
   round?: boolean;
   disabled?: boolean;
@@ -17,7 +17,7 @@ export const Dropdown = <T,>({ items, placeholder, onSelect, round, disabled }: 
   const toggleRef = React.useRef<HTMLDivElement>(null);
 
   const [isOpen, setIsOpen] = React.useState(false);
-  const [text, setText] = React.useState('');
+  const [text, setText] = React.useState(() => (round ? placeholder : ''));
 
   // FIXME: 드롭다운 닫힌 상태에서 아이콘 클릭 시 작동 안 함
   const handleClickToggle = () => {
@@ -55,8 +55,9 @@ export const Dropdown = <T,>({ items, placeholder, onSelect, round, disabled }: 
         <S.RoundSelectedItem
           onClick={handleClickToggle}
           ref={toggleRef}
+          text={text}
         >
-          {text ? <S.TextWhite>{text}</S.TextWhite> : <S.TextWhite>{placeholder}</S.TextWhite>}
+          <S.TextWhite>{text}</S.TextWhite>
           {isOpen ? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} />}
         </S.RoundSelectedItem>
       ) : (

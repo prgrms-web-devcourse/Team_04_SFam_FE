@@ -4,16 +4,18 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
+import { Avatar } from '@components/Avatar';
 import { Badge } from '@components/Badge';
 import { Button } from '@components/Button';
 import { Dropdown, Item } from '@components/Dropdown';
 import { Paragraph } from '@components/Paragraph';
+import { SportsIcon } from '@components/SportsIcon';
 import { MATCH_STATUS_DETAIL } from '@constants/dropdown';
 import { MATCH_STATUS_TEXT, MATCH_TYPE_TEXT, SPORTS_TEXT } from '@constants/text';
 import { Proposer } from '@interface/match';
 import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
-import { Anchor, ColWrapper, InnerWrapper, RowWrapper } from '@styles/common';
+import { Anchor, B1, B2, B3, B4, BoldGrayB2, ColWrapper, GrayB3, InnerWrapper, RowWrapper } from '@styles/common';
 
 import * as S from './MatchDetail.styles';
 import { MatchDetail } from './types';
@@ -57,44 +59,71 @@ const PostDetail = () => {
         <S.Title>{matchDetail?.title}</S.Title>
       </RowWrapper>
       <RowWrapper justifyContent='space-between'>
-        <ColWrapper>
-          <S.Detail>
+        <ColWrapper
+          gap='16px'
+          width='100%'
+        >
+          <div>
             <S.DetailTitle>작성자 </S.DetailTitle>
             <S.DetailItem> {matchDetail?.author.nickname}</S.DetailItem>
-          </S.Detail>
-          <S.Detail>
+          </div>
+          <div>
             <S.DetailTitle>종목 </S.DetailTitle>
             <S.DetailItem>{SPORTS_TEXT[matchDetail?.sportsCategory as string]} </S.DetailItem>
-          </S.Detail>
-          <S.Detail>
+          </div>
+          <div>
             <S.DetailTitle>개인전/팀전 </S.DetailTitle>
             <S.DetailItem>{MATCH_TYPE_TEXT[matchDetail?.matchType as string]} </S.DetailItem>
-          </S.Detail>
+          </div>
           {matchDetail?.team && (
-            <InnerWrapper
-              alignItems='center'
-              justifyContent='space-between'
-            >
-              <S.Detail>
-                <S.DetailTitle>팀명 </S.DetailTitle>
-                <S.DetailItem>
-                  {matchDetail?.team?.name} / {matchDetail.participants}명
-                </S.DetailItem>
-              </S.Detail>
-              <Link
-                href={`/team/${matchDetail.team.id}`}
-                passHref
+            <InnerWrapper flexDirection='column'>
+              <InnerWrapper
+                gap='16px'
+                justifyContent='space-between'
+                alignItems='center'
               >
-                <Anchor>팀 정보 보러 가기</Anchor>
-              </Link>
+                <InnerWrapper alignItems='center'>
+                  <S.DetailTitle>팀 정보</S.DetailTitle>
+                  {matchDetail.team && matchDetail.team.logoImageUrl ? (
+                    <Avatar
+                      imgSrc={matchDetail.team.logoImageUrl}
+                      imgSize='32px'
+                    />
+                  ) : (
+                    <Avatar imgSize='32px' />
+                  )}
+                  <InnerWrapper
+                    flexDirection='column'
+                    justifyContent='center'
+                  >
+                    <InnerWrapper>
+                      <B2>{matchDetail.team.name}</B2>
+                      <SportsIcon
+                        sportsCategory={matchDetail.team.sportsCategory}
+                        size={18}
+                      />
+                    </InnerWrapper>
+                  </InnerWrapper>
+                </InnerWrapper>
+                <Link
+                  href={`/team/${matchDetail.team.id}`}
+                  passHref
+                >
+                  <Anchor>자세히 보기</Anchor>
+                </Link>
+              </InnerWrapper>
             </InnerWrapper>
           )}
-          <S.Detail>
+          <div>
+            <S.DetailTitle>경기인원 </S.DetailTitle>
+            <S.DetailItem>{matchDetail?.participants}명</S.DetailItem>
+          </div>
+          <div>
             <S.DetailTitle>경기일자 </S.DetailTitle>
             <S.DetailItem>{matchDetail?.matchDate} </S.DetailItem>
-          </S.Detail>
+          </div>
         </ColWrapper>
-        <ColWrapper>
+        <S.StatusWrapper>
           {isAuthor ? (
             <Dropdown
               round
@@ -109,11 +138,12 @@ const PostDetail = () => {
               height='32px'
               color='secondary'
               padding
+              matchStatus={status}
             >
               {MATCH_STATUS_TEXT[status]}
             </Badge>
           )}
-        </ColWrapper>
+        </S.StatusWrapper>
       </RowWrapper>
       <RowWrapper>
         <Paragraph width='100%'>{matchDetail?.content}</Paragraph>
@@ -134,25 +164,28 @@ const PostDetail = () => {
           passHref
         >
           <Anchor>
-            <Button>대결 신청</Button>
+            <Button>대화 신청</Button>
           </Anchor>
         </Link>
       )}
       {!isAuthor && matchDetail?.proposer?.status === 'WAITING' && (
-        <Button
-          noPointer
-          backgroundColor='yellow'
+        <InnerWrapper
+          gap='8px'
+          flexDirection='column'
         >
-          승인 대기
-        </Button>
+          <Button
+            disabled
+            noPointer
+          >
+            채팅
+          </Button>
+          <S.Message>상대가 대화를 원하면 채팅 버튼이 활성화됩니다.</S.Message>
+        </InnerWrapper>
       )}
       {!isAuthor && matchDetail?.proposer?.status === 'REFUSE' && (
-        <Button
-          noPointer
-          backgroundColor='primary'
-        >
-          신청이 거절되었습니다
-        </Button>
+        <div style={{ textAlign: 'center' }}>
+          <BoldGrayB2>대화 신청이 거절되었습니다</BoldGrayB2>
+        </div>
       )}
       {!isAuthor && matchDetail?.proposer?.status === 'APPROVED' && proposer && (
         <Link

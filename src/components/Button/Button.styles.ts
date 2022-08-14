@@ -33,7 +33,7 @@ export const Button = styled('button')<StyleProps>(
     };
 
     const getHoverColor = () => {
-      if (disabled) return theme.color.gray300;
+      if (disabled) return 'none';
       // FIXME: 컬러가 아닌 테마로(불린 값)으로 변경
       if (backgroundColor === 'primary') return theme.color.primaryHover;
       if (backgroundColor === 'yellow') return theme.color.yellow;
@@ -42,7 +42,7 @@ export const Button = styled('button')<StyleProps>(
     };
 
     const getActiveColor = () => {
-      if (disabled) return theme.color.gray400;
+      if (disabled) return 'none';
       // FIXME: 컬러가 아닌 테마로(불린 값)으로 변경
       if (backgroundColor === 'primary') return theme.color.primaryActive;
       if (backgroundColor === 'yellow') return theme.color.yellow;

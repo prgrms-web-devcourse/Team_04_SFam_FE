@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Badge } from '@components/Badge';
 import { MATCH_TYPE_TEXT, SPORTS_TEXT } from '@constants/text';
-import { B3, InnerWrapper } from '@styles/common';
+import { GrayB4, InnerWrapper } from '@styles/common';
 
 import * as S from './MatchListItem.styles';
 
@@ -33,13 +33,16 @@ const MatchListItem = ({ id, title, category, matchType, content, createdAt }: P
         <InnerWrapper>
           <S.Content>{content}</S.Content>
         </InnerWrapper>
-        <S.RowWrapper>
+        <InnerWrapper
+          justifyContent='space-between'
+          alignItems='flex-end'
+        >
           <InnerWrapper>
             <Badge>{SPORTS_TEXT[category]}</Badge>
             <Badge matchType={matchType}>{MATCH_TYPE_TEXT[matchType]}</Badge>
           </InnerWrapper>
-          <B3>{createdAt.slice(0, 10)}</B3>
-        </S.RowWrapper>
+          <GrayB4>{createdAt.slice(2, 10).split('-').join('.')}</GrayB4>
+        </InnerWrapper>
       </S.Description>
     </S.Container>
   </Link>

@@ -10,7 +10,7 @@ import { Input } from '@components/Input';
 import { useForm } from '@hooks/useForm';
 import { Response } from '@interface/response';
 import { User, userState } from '@recoil/atoms';
-import { B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
+import { Anchor, B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
 
 import { ErrorResponse, Values } from './types';
 
@@ -69,7 +69,7 @@ const SignInForm = () => {
             value={values.username}
             onChange={handleChange}
             placeholder='아이디'
-            height='50px'
+            height='40px'
           />
           <Input
             id='password'
@@ -78,7 +78,7 @@ const SignInForm = () => {
             value={values.password}
             onChange={handleChange}
             placeholder='비밀번호'
-            height='50px'
+            height='40px'
           />
           <Button width='100%'>로그인</Button>
         </ColWrapper>
@@ -88,8 +88,13 @@ const SignInForm = () => {
         justifyContent='center'
       >
         <B3>회원이 아니신가요?&nbsp;</B3>
-        <Link href='/signup'>
-          <BoldGreenB3>회원가입하기</BoldGreenB3>
+        <Link
+          href='/signup'
+          passHref
+        >
+          <Anchor>
+            <BoldGreenB3>회원가입하기</BoldGreenB3>
+          </Anchor>
         </Link>
       </InnerWrapper>
     </Container>
