@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  height: 100px;
+  height: 120px;
   background-color: ${({ theme }) => theme.color.background};
   padding: 11px 20px 10px 20px;
   cursor: pointer;
