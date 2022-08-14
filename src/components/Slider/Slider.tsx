@@ -23,7 +23,6 @@ const Slider = ({ distance, setDistance }: Props) => {
   ];
   const ref = useRef<HTMLInputElement>(null);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.valueAsNumber);
     setDistance(e.target.valueAsNumber);
   };
 
