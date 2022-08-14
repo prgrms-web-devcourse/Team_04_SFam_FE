@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
+import { Button } from '@components/Button';
 import { Heading } from '@components/Heading';
 import { Navigator } from '@components/Navigator';
 import { ProposalInfo } from '@interface/proposals';
@@ -11,8 +12,8 @@ import * as S from './MatchResult.styles';
 
 const results = [
   { id: 1, text: '승리', value: 'WIN' },
-  { id: 2, text: '패배', value: 'LOSE' },
-  { id: 3, text: '무승부', value: 'DRAW' },
+  { id: 2, text: '무승부', value: 'DRAW' },
+  { id: 3, text: '패배', value: 'LOSE' },
 ];
 
 const MatchResult = () => {
@@ -93,26 +94,26 @@ const MatchResult = () => {
     <>
       <Heading />
       <S.Container>
-        {results.map((result) => (
-          <S.ButtonContainer
-            width=''
-            height='45px'
-            fontSize='20px'
-            key={result.id}
-            color={select === result.value ? 'select' : ''}
-            onClick={(e) => handleResult(e, result.value)}
-          >
-            {result.text}
-          </S.ButtonContainer>
-        ))}
-        <S.SubmitBtn
+        <S.ButtonContainer>
+          {results.map((result) => (
+            <S.Button
+              result={result.value}
+              key={result.id}
+              selected={select === result.value}
+              onClick={(e) => handleResult(e, result.value)}
+            >
+              {result.text}
+            </S.Button>
+          ))}
+        </S.ButtonContainer>
+        <Button
           onClick={handleSubmit}
           fontSize='20px'
-          width=''
-          height='45px'
+          width='auto'
+          height='40px'
         >
           제출
-        </S.SubmitBtn>
+        </Button>
       </S.Container>
       <Navigator />
     </>

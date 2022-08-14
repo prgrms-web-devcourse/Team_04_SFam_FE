@@ -1,20 +1,57 @@
 import styled from '@emotion/styled';
 
-import { Button } from '@components/Button/Button.styles';
-
 export const Container = styled.div`
-  padding: 50px 20px;
+  padding: 50px 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  gap: 16px;
 `;
 
-export const ButtonContainer = styled(Button)`
-  background-color: ${({ color, theme }) => (color === 'select' ? `${theme.color.primary}` : `${theme.color.gray300}`)};
-  margin-bottom: 15px;
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
-export const SubmitBtn = styled(Button)`
-  background-color: ${({ theme }) => theme.color.secondary};
-  margin-top: 20px;
+export const Button = styled.button<{ result: string; selected: boolean }>`
+  width: 30%;
+  height: 100px;
+  font-size: 20px;
+  background-color: ${({ theme, result, selected }) => {
+    if (selected) {
+      if (result === 'WIN') {
+        return theme.color.secondary;
+      }
+      if (result === 'LOSE') {
+        return theme.color.primary;
+      }
+      if (result === 'DRAW') {
+        return theme.color.gray400;
+      }
+    }
+    return theme.color.background;
+  }};
+  color: ${(props) => (props.selected ? '#fff' : '#000')};
+  border: 1px solid ${(props) => props.theme.color.gray200};
+  border-radius: ${(props) => props.theme.borderRadius};
+  outline: none;
+  transition: ease-in-out 0.2s;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${({ theme, result }) => {
+      if (result === 'WIN') {
+        return theme.color.secondary;
+      }
+      if (result === 'LOSE') {
+        return theme.color.primary;
+      }
+      if (result === 'DRAW') {
+        return theme.color.gray400;
+      }
+      return theme.color.background;
+    }};
+    border: none;
+    color: #fff;
+    transform: scale(1.1);
+  }
 `;
