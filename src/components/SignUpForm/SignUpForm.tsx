@@ -6,7 +6,7 @@ import { axiosDefaultInstance } from '@api/axiosInstances';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { useForm } from '@hooks/useForm';
-import { B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
+import { Anchor, B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
 
 import validation from './helper';
 import { ErrorText } from './SignUpForm.styles';
@@ -205,7 +205,7 @@ const SignUpForm = () => {
               onChange={handleChange}
               type='password'
               placeholder='비밀번호'
-              height='50px'
+              height='40px'
             />
           </InnerWrapper>
           <ErrorText>{errors.password}</ErrorText>
@@ -217,7 +217,7 @@ const SignUpForm = () => {
               onChange={handleChange}
               type='password'
               placeholder='비밀번호 확인'
-              height='50px'
+              height='40px'
             />
           </InnerWrapper>
           <ErrorText>{errors.passwordCheck}</ErrorText>
@@ -229,8 +229,13 @@ const SignUpForm = () => {
         justifyContent='center'
       >
         <B3>이미 계정이 있으신가요?&nbsp;</B3>
-        <Link href='/signin'>
-          <BoldGreenB3>로그인하기</BoldGreenB3>
+        <Link
+          href='/signin'
+          passHref
+        >
+          <Anchor>
+            <BoldGreenB3>로그인하기</BoldGreenB3>
+          </Anchor>
         </Link>
       </InnerWrapper>
     </Container>
