@@ -104,15 +104,16 @@ const UserDetailPage: NextPage = () => {
     })();
   };
   React.useEffect(() => {
-    setKakaoLoading(true);
     async function fetchAddress() {
-      if (user.latitude && user.longitude) {
-        await kakaoMapApi(user.latitude, user.longitude, setAddress);
-        setKakaoLoading(false);
+      if (isMe) {
+        if (user.latitude && user.longitude) {
+          await kakaoMapApi(user.latitude, user.longitude, setAddress);
+          setKakaoLoading(false);
+        }
       }
     }
     fetchAddress();
-  }, []);
+  }, [isMe, userInfo]);
 
   return (
     <Container>
@@ -127,7 +128,7 @@ const UserDetailPage: NextPage = () => {
           justifyContent='center'
         >
           <B1>{userInfo.nickname}</B1>
-          <GrayB3>{address.region_3depth_name}</GrayB3>
+          <GrayB3>{isMe && address.region_3depth_name}</GrayB3>
         </InnerWrapper>
       </RowWrapper>
       {isMe && (
