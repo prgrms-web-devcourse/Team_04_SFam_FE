@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { ChatListItem } from '@components/ChatListItem';
+import { ErrorForm } from '@components/ErrorForm';
 import { TotalChat } from '@interface/chat';
 import { Response } from '@interface/response';
 import { Anchor, ColWrapper, Container } from '@styles/common';
@@ -25,6 +26,14 @@ const ChatListPage: NextPage = () => {
     ChatListApi();
   }, [router.isReady]);
 
+  if (chatList.length === 0) {
+    return (
+      <ErrorForm
+        errorText='대화가 없습니다'
+        suggestionText='사용자들과 활발한 의사소통을 해보세요!'
+      />
+    );
+  }
   return (
     <Container>
       <ColWrapper gap='16px'>
