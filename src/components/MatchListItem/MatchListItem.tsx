@@ -30,9 +30,7 @@ const MatchListItem = ({ id, title, category, matchType, content, createdAt, dis
       <S.Description>
         <S.TitleWrapper>
           <S.Title>{title}</S.Title>
-          <GrayB4 style={{ flexShrink: 0 }}>약 {Math.floor(distance)}km</GrayB4>
         </S.TitleWrapper>
-
         <InnerWrapper>
           <S.Content>{content}</S.Content>
         </InnerWrapper>
@@ -44,7 +42,10 @@ const MatchListItem = ({ id, title, category, matchType, content, createdAt, dis
             <Badge>{SPORTS_TEXT[category]}</Badge>
             <Badge matchType={matchType}>{MATCH_TYPE_TEXT[matchType]}</Badge>
           </InnerWrapper>
-          <GrayB4>{createdAt.slice(2, 10).split('-').join('.')}</GrayB4>
+        </InnerWrapper>
+        <InnerWrapper justifyContent='space-between'>
+          <GrayB4>작성일 {createdAt.slice(2, 10).split('-').join('.')}</GrayB4>
+          <GrayB4 style={{ flexShrink: 0 }}>약 {Math.floor(distance)}km</GrayB4>
         </InnerWrapper>
       </S.Description>
     </S.Container>
