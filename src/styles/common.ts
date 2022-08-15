@@ -79,6 +79,7 @@ export const ContentWrapper = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: ${(props) => props.theme.color.gray400};
 `;
 
 export const DropdownWrapper = styled.div<WrapperProps>`

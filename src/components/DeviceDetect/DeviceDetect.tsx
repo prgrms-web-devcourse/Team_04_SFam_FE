@@ -15,6 +15,7 @@ const OtherView = styled('div')(
     width: 390,
     height: 844,
     position: 'relative',
+    overflow: 'hidden',
   },
   ({ theme }) => ({
     border: `1px solid ${theme.color.gray200}`,
