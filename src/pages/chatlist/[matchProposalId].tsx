@@ -34,17 +34,6 @@ import {
   NormalParagraph,
 } from '@styles/common';
 
-const dropdownItems = [
-  { id: 0, text: '모집 중', value: { status: 'WAITING' } },
-  { id: 1, text: '모집 완료', value: { status: 'IN_GAME' } },
-];
-
-const dropdownMatchDoneItems = [
-  { id: 0, text: '모집 중', value: { status: 'WAITING' } },
-  { id: 1, text: '모집 완료', value: { status: 'IN_GAME' } },
-  { id: 2, text: '경기 완료', value: { status: 'END' } },
-];
-
 const Chats: NextPage = () => {
   const router = useRouter();
   const { matchProposalId } = router.query;
@@ -215,6 +204,8 @@ const Chats: NextPage = () => {
     }
   };
 
+  const nowDate = new Date();
+
   if (loading) return null;
   if (!chatsInfo) {
     return <Container />;
@@ -272,7 +263,7 @@ const Chats: NextPage = () => {
           gap='16px'
           padding='0 16px'
         >
-          <BoldGrayB2>2022년 4월 20일</BoldGrayB2>
+          <BoldGrayB2>{`${nowDate.getFullYear()}년 ${nowDate.getMonth() + 1}월 ${nowDate.getDate()}일`}</BoldGrayB2>
           {proposal && (
             <>
               {proposalStatus === 'WAITING' && !proposal.isMatchAuthor && (
