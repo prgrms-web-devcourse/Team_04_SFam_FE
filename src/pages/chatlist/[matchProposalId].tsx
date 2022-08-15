@@ -64,7 +64,7 @@ const Chats: NextPage = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [chatsInfo]);
+  }, [chatsInfo?.chats.length]);
 
   // 채팅 가져오는 API
   const getChatsApi = async () => {
