@@ -234,7 +234,7 @@ const PostForm = () => {
                 {state.matchType === 'TEAM_MATCH' && errors.teamId && <BoldOrangeB3>{errors.teamId}</BoldOrangeB3>}
                 {teams.length === 0 && (
                   <>
-                    <BoldOrangeB3>내가 속한 팀이 없습니다. 새로운 팀을 만들어보세요.</BoldOrangeB3>
+                    <BoldOrangeB3>내가 운영하는 팀이 없습니다. 새로운 팀을 만들어보세요.</BoldOrangeB3>
                     <Link
                       href='/team/create'
                       passHref

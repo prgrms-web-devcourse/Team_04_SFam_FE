@@ -98,7 +98,6 @@ const TeamForm = () => {
               name='description'
               placeholder='팀 소개'
               onChange={handleChange}
-              onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
             />
             {errors.description && <BoldOrangeB3>{errors.description}</BoldOrangeB3>}
           </InnerWrapper>

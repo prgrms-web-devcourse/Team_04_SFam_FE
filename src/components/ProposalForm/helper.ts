@@ -1,7 +1,5 @@
 import { MemberCount, ProposalData } from './types';
 
-const regexContent = /^.{2,30}$/;
-
 type Validation = ProposalData & MemberCount;
 
 export const validation = ({ teamId, content, participants, memberCount, matchType }: Validation) => {
@@ -15,7 +13,7 @@ export const validation = ({ teamId, content, participants, memberCount, matchTy
 
   if (!content) {
     errors.content = '요청 내용을 입력해주세요.';
-  } else if (!regexContent.test(content)) {
+  } else if (content.length < 2 || content.length > 30) {
     errors.content = '2자 이상 30자 이하로 작성해주세요.';
   }
 
