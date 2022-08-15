@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { ThreeDots } from 'react-loader-spinner';
 import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
@@ -24,7 +25,9 @@ const UserDetailPage: NextPage = () => {
 
   const [user, setUser] = useRecoilState(userState);
 
-  const [kakaoLoading, setKakaoLoading] = React.useState(true);
+  const [kakaoLoading, setKakaoLoading] = React.useState<boolean>(true);
+  const [isUserLoading, setIsUserLoading] = React.useState<boolean>(true);
+  const [isMatchLoading, setIsMatchLoading] = React.useState<boolean>(true);
   const [isMe, setIsMe] = React.useState<boolean>(false);
   const [userInfo, setUserInfo] = React.useState<UserInfo>({
     nickname: '',
@@ -54,14 +57,15 @@ const UserDetailPage: NextPage = () => {
 
   React.useEffect(() => {
     if (!router.isReady) return;
-
     (async () => {
+      setIsUserLoading(true);
       try {
         const {
           data: { data },
         } = await axiosAuthInstance.get<Response<UserInfo>>(`/api/users/${id as string}`);
 
         setUserInfo(() => data);
+        setIsUserLoading(false);
         if (Number(router.query.id) === user.id) {
           setIsMe(true);
         }
@@ -71,6 +75,7 @@ const UserDetailPage: NextPage = () => {
     })();
 
     (async () => {
+      setIsMatchLoading(true);
       try {
         const {
           data: { data },
@@ -79,6 +84,7 @@ const UserDetailPage: NextPage = () => {
         });
 
         setMatchRecord(() => data);
+        setIsMatchLoading(false);
       } catch (e) {
         // 에러 처리
       }
@@ -100,7 +106,9 @@ const UserDetailPage: NextPage = () => {
       }
     })();
   };
+
   React.useEffect(() => {
+    setKakaoLoading(true);
     async function fetchAddress() {
       if (isMe) {
         if (user.latitude && user.longitude) {
@@ -112,10 +120,10 @@ const UserDetailPage: NextPage = () => {
     fetchAddress();
   }, [isMe, userInfo]);
 
-  return (
+  return !isUserLoading && !isMatchLoading && !kakaoLoading && userInfo && matchRecord ? (
     <Container>
       <RowWrapper gap='16px'>
-        {userInfo && userInfo.profileImageUrl ? (
+        {userInfo.profileImageUrl ? (
           <Avatar imgSrc={`${userInfo.profileImageUrl}?date=${new Date().toTimeString()}`} />
         ) : (
           <Avatar />
@@ -201,6 +209,15 @@ const UserDetailPage: NextPage = () => {
         </>
       )}
     </Container>
+  ) : (
+    <ThreeDots
+      height='80'
+      width='80'
+      radius='9'
+      color='#1FAB89'
+      ariaLabel='three-dots-loading'
+      wrapperStyle={{ alignItems: 'center', justifyContent: 'center', padding: '17rem 0 22rem 0' }}
+    />
   );
 };
 
