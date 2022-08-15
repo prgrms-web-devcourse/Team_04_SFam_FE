@@ -215,6 +215,8 @@ const Chats: NextPage = () => {
     }
   };
 
+  const nowDate = new Date();
+
   if (loading) return null;
   if (!chatsInfo) {
     return <Container />;
@@ -272,7 +274,7 @@ const Chats: NextPage = () => {
           gap='16px'
           padding='0 16px'
         >
-          <BoldGrayB2>2022년 4월 20일</BoldGrayB2>
+          <BoldGrayB2>{`${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`}</BoldGrayB2>
           {proposal && (
             <>
               {proposalStatus === 'WAITING' && !proposal.isMatchAuthor && (

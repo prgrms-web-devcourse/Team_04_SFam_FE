@@ -54,9 +54,9 @@ const ChatListPage: NextPage = () => {
               key={chat.id}
             >
               <Anchor>
-                {chat.lastChat !== null && chat.target.profileImageUrl ? (
+                {chat.lastChat !== null ? (
                   <ChatListItem
-                    imgSrc={chat.target.profileImageUrl}
+                    imgSrc={chat.target.profileImageUrl as string}
                     nickname={chat.target.nickname}
                     lastChat={chat.lastChat.content}
                     match={chat.match}
@@ -64,6 +64,7 @@ const ChatListPage: NextPage = () => {
                   />
                 ) : (
                   <ChatListItem
+                    imgSrc={chat.target.profileImageUrl as string}
                     nickname={chat.target.nickname}
                     match={chat.match}
                     lastChat={chat.content}
