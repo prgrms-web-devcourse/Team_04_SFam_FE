@@ -20,6 +20,7 @@
     "react-hook-geolocation": "^1.0.12",
     "react-icons": "^4.4.0",
     "react-kakao-maps-sdk": "^1.1.2",
+    "react-loader-spinner": "^5.1.7-beta.1",
     "recoil": "^0.7.4",
     "recoil-persist": "^4.2.0"
   },

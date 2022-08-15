@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { useEffect, useRef, useState } from 'react';
+import { ThreeDots } from 'react-loader-spinner';
 import { useRecoilValue } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
@@ -8,7 +9,6 @@ import { FilterButton } from '@components/FilterButton';
 import { MatchListItem } from '@components/MatchListItem';
 import { SPORTS_CATEGORY } from '@constants/dropdown';
 import { userState } from '@recoil/atoms';
-import { Container } from '@styles/common';
 
 import * as S from './MatchList.styles';
 import { Match, Response } from './types';
@@ -83,7 +83,7 @@ const MatchList = () => {
   useEffect(() => {
     const getMatchList = async () => {
       try {
-        setIsLoading(true);
+        if (filter === 'WHOLE' && category === '') setIsLoading(true);
         const res = await axiosAuthInstance.get('/api/matches', {
           params: {
             size: 10,
@@ -100,10 +100,10 @@ const MatchList = () => {
           cursor: data.cursor,
           category: state.category,
         });
-
         setIsLoading(false);
       } catch (e) {
-        console.log(e);
+        console.error(e);
+        alert('뭔가 잘못되었습니다!');
       }
     };
     getMatchList();
@@ -156,6 +156,16 @@ const MatchList = () => {
           </FilterButton>
         ))}
       </S.Category>
+      {isLoading && (
+        <ThreeDots
+          height='80'
+          width='80'
+          radius='9'
+          color='#1FAB89'
+          ariaLabel='three-dots-loading'
+          wrapperStyle={{ alignItems: 'center', justifyContent: 'center', padding: '17rem 0 22rem 0' }}
+        />
+      )}
       {!isLoading && state.values.length === 0 ? (
         <div
           style={{ minHeight: 'calc(100vh - 170px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
