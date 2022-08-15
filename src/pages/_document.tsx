@@ -6,6 +6,10 @@ const Document = () => (
     <title>운동 메이트가 필요할 땐 SFAM</title>
     <Head>
       <link
+        rel='shortcut icon'
+        href='/favicon.ico'
+      />
+      <link
         rel='stylesheet'
         as='style'
         // crossOrigin
