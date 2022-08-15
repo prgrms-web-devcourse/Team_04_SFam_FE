@@ -34,10 +34,7 @@ const UserDetailPage: NextPage = () => {
       likeCount: 0,
       dislikeCount: 0,
     },
-    location: {
-      longitude: 0,
-      latitude: 0,
-    },
+    localName: '',
     teams: [],
   });
   const [address, setAddress] = React.useState<Address>({
@@ -128,7 +125,7 @@ const UserDetailPage: NextPage = () => {
           justifyContent='center'
         >
           <B1>{userInfo.nickname}</B1>
-          <GrayB3>{isMe && address.region_3depth_name}</GrayB3>
+          <GrayB3>{isMe ? address.region_3depth_name : userInfo.localName}</GrayB3>
         </InnerWrapper>
       </RowWrapper>
       {isMe && (

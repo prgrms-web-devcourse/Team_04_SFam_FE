@@ -9,10 +9,7 @@ export interface UserInfo {
     likeCount: number;
     dislikeCount: number;
   };
-  location: {
-    longitude: number;
-    latitude: number;
-  };
+  localName: string;
   teams: Team[];
 }
 
