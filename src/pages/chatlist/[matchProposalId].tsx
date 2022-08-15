@@ -15,6 +15,7 @@ import { Message } from '@components/Message';
 import { Navigator } from '@components/Navigator';
 import { MATCH_STATUS_CHAT, MATCH_STATUS_DETAIL } from '@constants/dropdown';
 import { MATCH_STATUS_TEXT, PROPOSAL_STATUS_TEXT } from '@constants/text';
+import { useInterval } from '@hooks/useInterval';
 import { ChatsProps, MessageReq } from '@interface/chat';
 import { ProposalInfo } from '@interface/proposals';
 import { Response } from '@interface/response';
@@ -63,7 +64,7 @@ const Chats: NextPage = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [chatsInfo]);
+  }, [chatsInfo?.chats.length]);
 
   // 채팅 가져오는 API
   const getChatsApi = async () => {
@@ -203,6 +204,13 @@ const Chats: NextPage = () => {
       handleMessage();
     }
   };
+
+  useInterval(() => {
+    const get = async () => {
+      await getChatsApi();
+    };
+    get();
+  }, 3000);
 
   const nowDate = new Date();
 
