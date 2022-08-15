@@ -236,7 +236,7 @@ const Chats: NextPage = () => {
           {!proposal.isMatchAuthor ? (
             <Badge
               matchStatus={matchStatus}
-              width='auto'
+              width='100px'
               height='32px'
               fontSize='16px'
               padding

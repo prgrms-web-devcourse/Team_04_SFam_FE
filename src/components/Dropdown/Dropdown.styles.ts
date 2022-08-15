@@ -26,6 +26,7 @@ export const RoundSelectedItem = styled(SelectedItem)<{ text: string }>(
     border: 'none',
     borderRadius: '8px',
     padding: '0 6px 0 12px',
+    minWidth: '100px',
   },
   ({ theme, text }) => {
     switch (text) {

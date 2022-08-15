@@ -1,7 +1,7 @@
 import { GoSearch } from 'react-icons/go';
 
 import { IconWrapper } from '@components/TeamBadge/TeamBadge.styles';
-import { ColWrapper, Container } from '@styles/common';
+import { ColWrapper } from '@styles/common';
 
 import * as S from './ErrorForm.styles';
 
@@ -11,11 +11,10 @@ interface Props {
 }
 
 const ErrorForm = ({ errorText, suggestionText }: Props) => (
-  <Container>
+  <S.Container>
     <ColWrapper
       alignItems='center'
       justifyContent='center'
-      padding='200px 0 0 0'
       gap='16px'
     >
       <IconWrapper>
@@ -24,7 +23,7 @@ const ErrorForm = ({ errorText, suggestionText }: Props) => (
       <S.ErrorText>{errorText}</S.ErrorText>
       <S.SuggestionText>{suggestionText}</S.SuggestionText>
     </ColWrapper>
-  </Container>
+  </S.Container>
 );
 
 export default ErrorForm;

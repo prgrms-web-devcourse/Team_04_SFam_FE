@@ -157,10 +157,14 @@ const MatchList = () => {
         ))}
       </S.Category>
       {!isLoading && state.values.length === 0 ? (
-        <ErrorForm
-          errorText='매치 목록이 없습니다'
-          suggestionText='내 거리 설정에서 검색 거리를 늘려보세요!'
-        />
+        <div
+          style={{ minHeight: 'calc(100vh - 170px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <ErrorForm
+            errorText='매치 목록이 없습니다'
+            suggestionText='내 거리 설정에서 검색 거리를 늘려보세요!'
+          />
+        </div>
       ) : (
         <S.ListContainer ref={observerRef}>
           {state.values.map((item: Match) => (

@@ -5,4 +5,5 @@ export const ReviewGroupWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 32px;
 `;

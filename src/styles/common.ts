@@ -2,17 +2,6 @@ import styled from '@emotion/styled';
 
 import { WrapperProps } from 'interface/styles';
 
-export const MobileLayout = styled('div')(
-  {
-    width: 390,
-    height: 844,
-    position: 'relative',
-  },
-  ({ theme }) => ({
-    border: `1px solid ${theme.color.gray200}`,
-  }),
-);
-
 export const Main = styled.main({
   height: 'calc(100% - 120px)',
   margin: '64px 0 56px 0',
@@ -83,7 +72,6 @@ export const TitleWrapper = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 262px;
 `;
 
 export const ContentWrapper = styled.div`
@@ -104,15 +92,6 @@ export const BottomFixedWrapper = styled.div<WrapperProps>`
   left: 50%;
   transform: translateX(-50%);
   background-color: #fff;
-`;
-
-export const IconBadgeWrapper = styled.div<WrapperProps>`
-  position: absolute;
-  top: 150px;
-  right: 150px;
-  background: ${(props) => props.theme.color.gray300};
-  border-radius: 50%;
-  padding: 6px;
 `;
 
 export const RadioInput = styled.input`
@@ -279,7 +258,7 @@ export const ChatMatchHeader = styled.div`
 `;
 
 export const ChatMatchTitleWrapper = styled.div`
-  width: 250px;
+  max-width: calc(100% - 32px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

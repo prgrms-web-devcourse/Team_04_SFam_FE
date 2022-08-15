@@ -7,7 +7,7 @@ export const Container = styled.div`
   width: 100%;
   height: 120px;
   background-color: ${({ theme }) => theme.color.background};
-  padding: 11px 20px 10px 20px;
+  padding: 0 16px;
   cursor: pointer;
 `;
 

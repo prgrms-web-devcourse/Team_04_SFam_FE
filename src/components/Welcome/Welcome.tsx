@@ -12,7 +12,6 @@ const Welcome = () => (
     <InnerWrapper
       flexDirection='column'
       alignItems='center'
-      margin='120px 0 16px 0'
     >
       <Image
         width='300px'
@@ -31,7 +30,7 @@ const Welcome = () => (
         passHref
       >
         <Anchor>
-          <Button height='50px'>시작하기</Button>
+          <Button height='48px'>시작하기</Button>
         </Anchor>
       </Link>
     </S.ButtonWrapper>

@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Container = styled.div`
   width: 100%;
-  min-height: 722px;
+  min-height: 100%;
   position: relative;
   background-color: ${({ theme }) => theme.color.gray200};
 `;

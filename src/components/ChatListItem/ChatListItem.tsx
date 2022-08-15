@@ -15,21 +15,20 @@ interface Props {
 
 const ChatListItem = ({ imgSrc, nickname, lastChat, match }: Props) => (
   <S.Container>
-    <div>
-      {imgSrc !== null ? (
-        <Avatar
-          imgSrc={imgSrc}
-          imgSize='70px'
-          borderRadius='50%'
-        />
-      ) : (
-        <Avatar imgSize='70px' />
-      )}
-    </div>
+    {imgSrc !== null ? (
+      <Avatar
+        imgSrc={imgSrc}
+        imgSize='72px'
+        borderRadius='50%'
+      />
+    ) : (
+      <Avatar imgSize='72px' />
+    )}
     <InnerWrapper
       flexDirection='column'
       justifyContent='center'
       flexGrow={1}
+      width='calc(100% - 88px)'
     >
       <TitleWrapper>
         <B1>{match?.title}</B1>

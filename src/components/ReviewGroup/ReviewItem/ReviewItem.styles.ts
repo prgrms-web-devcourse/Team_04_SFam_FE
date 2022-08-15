@@ -5,13 +5,12 @@ export const ReviewItemWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  gap: 8px;
 `;
 
-export const ReviewText = styled.p`
+export const ReviewText = styled.span`
   font-size: 14px;
   color: ${(props) => props.theme.color.gray600};
-  padding: 8px;
 `;
 
 export const ReviewCount = styled.span`

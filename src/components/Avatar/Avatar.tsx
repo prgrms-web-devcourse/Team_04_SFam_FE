@@ -3,7 +3,6 @@ import { ChangeEventHandler, useRef } from 'react';
 import { MdAddAPhoto } from 'react-icons/md';
 
 import defaultLogo from '@assets/logo/default_profile_image.svg';
-import { IconBadgeWrapper } from '@styles/common';
 
 import * as S from './Avatar.styles';
 
@@ -40,33 +39,23 @@ const Avatar = ({
   };
 
   return (
-    <>
+    <S.Container onClick={handleClick}>
+      {(user || team) && (
+        <input
+          type='file'
+          accept='image/jpg, image/jpeg, image/png'
+          ref={selectFile}
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
+        />
+      )}
       <S.ImageWrapper
         block={block}
         imgSrc={imgSrc}
         imgSize={imgSize}
         borderRadius={borderRadius}
-        onClick={handleClick}
         {...props}
       >
-        {user && (
-          <input
-            type='file'
-            accept='image/jpg, image/jpeg, image/png'
-            ref={selectFile}
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-          />
-        )}
-        {team && (
-          <input
-            type='file'
-            accept='image/jpg, image/jpeg, image/png'
-            ref={selectFile}
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-          />
-        )}
         {imgSrc && (
           <Image
             src={imgSrc}
@@ -79,11 +68,11 @@ const Avatar = ({
         )}
       </S.ImageWrapper>
       {edit && (
-        <IconBadgeWrapper width='100px'>
-          <MdAddAPhoto color='#000' />
-        </IconBadgeWrapper>
+        <S.IconBadgeWrapper>
+          <MdAddAPhoto color='#fff' />
+        </S.IconBadgeWrapper>
       )}
-    </>
+    </S.Container>
   );
 };
 
