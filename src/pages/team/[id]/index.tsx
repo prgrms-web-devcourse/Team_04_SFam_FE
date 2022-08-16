@@ -41,8 +41,8 @@ const TeamDetailPage: NextPage = () => {
       setTeamInfo(() => data);
       if (data.leader.id === user.id) {
         setIsLeader(true);
-        setIsLoading(false);
       }
+      setIsLoading(false);
     })();
   }, [router.isReady]);
 
