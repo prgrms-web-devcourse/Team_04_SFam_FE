@@ -163,7 +163,7 @@ const MatchList = () => {
           radius='9'
           color='#1FAB89'
           ariaLabel='three-dots-loading'
-          wrapperStyle={{ alignItems: 'center', justifyContent: 'center', padding: '17rem 0 22rem 0' }}
+          wrapperStyle={{ alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 170px)' }}
         />
       )}
       {!isLoading && state.values.length === 0 ? (

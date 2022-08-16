@@ -209,7 +209,7 @@ const PostDetail = () => {
       radius='9'
       color='#1FAB89'
       ariaLabel='three-dots-loading'
-      wrapperStyle={{ alignItems: 'center', justifyContent: 'center', padding: '17rem 0 22rem 0' }}
+      wrapperStyle={{ alignItems: 'center', justifyContent: 'center', height: '100%' }}
     />
   );
 };
