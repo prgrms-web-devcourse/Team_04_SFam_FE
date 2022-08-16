@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { ThreeDots } from 'react-loader-spinner';
 import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
@@ -15,7 +16,7 @@ import { MATCH_STATUS_TEXT, MATCH_TYPE_TEXT, SPORTS_TEXT } from '@constants/text
 import { Proposer } from '@interface/match';
 import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
-import { Anchor, B1, B2, B3, B4, BoldGrayB2, ColWrapper, GrayB3, InnerWrapper, RowWrapper } from '@styles/common';
+import { Anchor, B2, BoldGrayB2, ColWrapper, InnerWrapper, RowWrapper } from '@styles/common';
 
 import * as S from './MatchDetail.styles';
 import { MatchDetail } from './types';
@@ -29,6 +30,7 @@ const PostDetail = () => {
   const [status, setStatus] = React.useState('');
   const [isAuthor, setIsAuthor] = React.useState(false);
   const [proposer, setProposal] = React.useState<Proposer | null>();
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   const handleSelect = (item: Item<{ status: string }>) => {
     axiosAuthInstance.patch(`/api/matches/${id as string}`, {
@@ -38,6 +40,7 @@ const PostDetail = () => {
 
   React.useEffect(() => {
     if (!router.isReady) return;
+    setIsLoading(true);
     try {
       (async () => {
         const {
@@ -47,13 +50,14 @@ const PostDetail = () => {
         setIsAuthor(data.author.id === user.id);
         setStatus(data.status);
         setProposal(data.proposer);
+        setIsLoading(false);
       })();
     } catch (error) {
       console.log(error);
     }
   }, [router.isReady]);
 
-  return (
+  return !isLoading ? (
     <S.Container>
       <RowWrapper>
         <S.Title>{matchDetail?.title}</S.Title>
@@ -198,6 +202,15 @@ const PostDetail = () => {
         </Link>
       )}
     </S.Container>
+  ) : (
+    <ThreeDots
+      height='80'
+      width='80'
+      radius='9'
+      color='#1FAB89'
+      ariaLabel='three-dots-loading'
+      wrapperStyle={{ alignItems: 'center', justifyContent: 'center', padding: '17rem 0 22rem 0' }}
+    />
   );
 };
 

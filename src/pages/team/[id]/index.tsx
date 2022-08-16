@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FaPlus } from 'react-icons/fa';
+import { ThreeDots } from 'react-loader-spinner';
 import { useRecoilValue } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
@@ -25,30 +26,13 @@ const TeamDetailPage: NextPage = () => {
   const { id } = router.query;
 
   const user = useRecoilValue(userState);
-
-  const [teamInfo, setTeamInfo] = React.useState<TeamInfo>({
-    id: 0,
-    name: '',
-    description: '',
-    sportsCategory: '',
-    members: [],
-    matchRecord: {
-      win: 0,
-      draw: 0,
-      lose: 0,
-    },
-    matchReview: {
-      bestCount: 0,
-      likeCount: 0,
-      dislikeCount: 0,
-    },
-    leader: {},
-    logoImageUrl: '',
-  });
+  const [teamInfo, setTeamInfo] = React.useState<TeamInfo>();
   const [isLeader, setIsLeader] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>();
 
   React.useEffect(() => {
     if (!router.isReady) return;
+    setIsLoading(true);
     (async () => {
       const {
         data: { data },
@@ -57,14 +41,15 @@ const TeamDetailPage: NextPage = () => {
       setTeamInfo(() => data);
       if (data.leader.id === user.id) {
         setIsLeader(true);
+        setIsLoading(false);
       }
     })();
   }, [router.isReady]);
 
-  return (
+  return !isLoading && teamInfo ? (
     <Container>
       <RowWrapper gap='16px'>
-        {teamInfo && teamInfo.logoImageUrl ? <Avatar imgSrc={teamInfo.logoImageUrl} /> : <Avatar />}
+        {teamInfo.logoImageUrl ? <Avatar imgSrc={teamInfo.logoImageUrl} /> : <Avatar />}
         <InnerWrapper
           flexDirection='column'
           justifyContent='center'
@@ -140,6 +125,15 @@ const TeamDetailPage: NextPage = () => {
         </ColWrapper>
       </ColWrapper>
     </Container>
+  ) : (
+    <ThreeDots
+      height='80'
+      width='80'
+      radius='9'
+      color='#1FAB89'
+      ariaLabel='three-dots-loading'
+      wrapperStyle={{ alignItems: 'center', justifyContent: 'center', padding: '17rem 0 22rem 0' }}
+    />
   );
 };
 
