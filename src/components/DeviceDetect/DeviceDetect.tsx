@@ -13,7 +13,7 @@ const MobileView = styled('div')({
 const OtherView = styled('div')(
   {
     width: 390,
-    height: 844,
+    height: '100vh',
     position: 'relative',
     overflow: 'hidden',
   },
