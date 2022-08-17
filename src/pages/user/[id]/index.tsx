@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useId } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 import { useRecoilState } from 'recoil';
 
@@ -113,9 +113,9 @@ const UserDetailPage: NextPage = () => {
       if (isMe) {
         if (user.latitude && user.longitude) {
           await kakaoMapApi(user.latitude, user.longitude, setAddress);
-          setKakaoLoading(false);
         }
       }
+      setKakaoLoading(false);
     }
     fetchAddress();
   }, [isMe, userInfo]);
