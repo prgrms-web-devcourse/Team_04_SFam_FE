@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { Button } from '@components/Button/Button.styles';
+import { Button } from '@components/common/Button/Button.styles';
 
 export const Container = styled.div`
   padding: 30px 20px;

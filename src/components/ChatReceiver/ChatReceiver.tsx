@@ -1,7 +1,7 @@
-import { Avatar } from '@components/Avatar';
 import { hourToString } from '@components/ChatSender/ChatSender';
-import { Chat } from '@interface/chat';
+import { Avatar } from '@components/common/Avatar';
 import { GrayB4 } from '@styles/common';
+import { Chat } from 'types';
 
 import * as S from './ChatReceiver.styles';
 

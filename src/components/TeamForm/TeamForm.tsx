@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Button } from '@components/Button';
-import { Dropdown, Item } from '@components/Dropdown';
-import { Input } from '@components/Input';
+import { Button } from '@components/common/Button';
+import { Dropdown, Item } from '@components/common/Dropdown';
+import { Input } from '@components/common/Input';
 import { SPORTS_CATEGORY } from '@constants/dropdown';
-import { Response } from '@interface/response';
 import { BoldOrangeB3, ColWrapper, Container, InnerWrapper, Label, TextArea } from '@styles/common';
+import { Response } from 'types';
 
 import { validation, Values } from './helper';
 

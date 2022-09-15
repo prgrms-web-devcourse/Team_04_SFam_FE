@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
 
 import { axiosDefaultInstance } from '@api/axiosInstances';
-import { Button } from '@components/Button';
-import { Input } from '@components/Input';
+import { Button } from '@components/common/Button';
+import { Input } from '@components/common/Input';
 import { useForm } from '@hooks/useForm';
 import { Anchor, B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
 

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import logo from '@assets/logo/logo.svg';
-import { Button } from '@components/Button';
+import { Button } from '@components/common/Button';
 import { Anchor, InnerWrapper } from '@styles/common';
 
 import * as S from './Welcome.styles';

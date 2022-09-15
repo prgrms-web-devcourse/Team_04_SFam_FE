@@ -1,23 +1,21 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useId } from 'react';
+import React from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Address, kakaoMapApi } from '@api/kakaoMapApi';
-import { Avatar } from '@components/Avatar';
-import { Button } from '@components/Button';
-import { Divider } from '@components/Divider';
+import { Avatar } from '@components/common/Avatar';
+import { Button } from '@components/common/Button';
+import { Divider } from '@components/common/Divider';
 import { MatchRecordChart } from '@components/MatchRecordChart';
 import { ReviewGroup } from '@components/ReviewGroup';
 import { TeamBadge } from '@components/TeamBadge';
-import { Response } from '@interface/response';
-import { MatchRecord, Team } from '@interface/team';
-import { UserInfo } from '@interface/user';
 import { userState } from '@recoil/atoms';
 import { Anchor, B1, B2, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
+import { UserInfo, MatchRecord, Team, Response } from 'types';
 
 const UserDetailPage: NextPage = () => {
   const router = useRouter();

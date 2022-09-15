@@ -6,8 +6,8 @@ import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { Address, kakaoMapApi } from '@api/kakaoMapApi';
-import { Button } from '@components/Button';
-import { Slider } from '@components/Slider';
+import { Button } from '@components/common/Button';
+import { Slider } from '@components/common/Slider';
 import { userState } from '@recoil/atoms';
 import { B2, B3, BoldB2, ColWrapper, Container, GrayB2, InnerWrapper } from '@styles/common';
 

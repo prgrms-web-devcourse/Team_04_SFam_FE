@@ -5,20 +5,17 @@ import { useEffect, useState, KeyboardEvent, useRef, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Badge } from '@components/Badge';
-import { Button } from '@components/Button';
 import { ChatReceiver } from '@components/ChatReceiver';
 import { ChatSender } from '@components/ChatSender';
-import { Dropdown, Item } from '@components/Dropdown';
+import { Badge } from '@components/common/Badge';
+import { Button } from '@components/common/Button';
+import { Dropdown, Item } from '@components/common/Dropdown';
+import { Navigator } from '@components/common/Navigator';
 import { Heading } from '@components/Heading';
 import { Message } from '@components/Message';
-import { Navigator } from '@components/Navigator';
 import { MATCH_STATUS_CHAT, MATCH_STATUS_DETAIL } from '@constants/dropdown';
 import { MATCH_STATUS_TEXT, PROPOSAL_STATUS_TEXT } from '@constants/text';
 import { useInterval } from '@hooks/useInterval';
-import { ChatsProps, MessageReq } from '@interface/chat';
-import { ProposalInfo } from '@interface/proposals';
-import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
 import {
   Anchor,
@@ -34,6 +31,7 @@ import {
   InnerWrapper,
   NormalParagraph,
 } from '@styles/common';
+import { Response, ProposalInfo, ChatsProps, MessageReq } from 'types';
 
 const Chats: NextPage = () => {
   const router = useRouter();

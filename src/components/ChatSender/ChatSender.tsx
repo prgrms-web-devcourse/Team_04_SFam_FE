@@ -1,5 +1,5 @@
-import { Chat } from '@interface/chat';
 import { GrayB4 } from '@styles/common';
+import { Chat } from 'types';
 
 import * as S from './ChatSender.styles';
 

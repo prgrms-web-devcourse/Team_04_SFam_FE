@@ -3,11 +3,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Button } from '@components/Button';
-import { Dropdown, Item } from '@components/Dropdown';
-import { Input } from '@components/Input';
+import { Button } from '@components/common/Button';
+import { Dropdown, Item } from '@components/common/Dropdown';
+import { Input } from '@components/common/Input';
 import { DATE, MONTH, SPORTS_CATEGORY, YEAR } from '@constants/dropdown';
-import { Response } from '@interface/response';
 import {
   Anchor,
   B3,
@@ -21,6 +20,7 @@ import {
   RadioWrapper,
   TextArea,
 } from '@styles/common';
+import { Response } from 'types';
 
 import { validation } from './helper';
 

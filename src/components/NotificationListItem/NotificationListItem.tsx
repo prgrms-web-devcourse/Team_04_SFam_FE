@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Avatar } from '@components/Avatar';
+import { Avatar } from '@components/common/Avatar';
 import { Anchor, B1, GrayB3, InnerWrapper } from '@styles/common';
 
 interface Props {

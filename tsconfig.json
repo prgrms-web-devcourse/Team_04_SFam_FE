@@ -31,16 +31,14 @@
     "baseUrl": "./src",                                  /* Specify the base directory to resolve non-relative module names. */
     "paths": {                                           /* Specify a set of entries that re-map imports to additional lookup locations. */
       "@api/*": ["api/*"],
+      "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
       "@constants/*": ["constants/*"],
       "@hooks/*": ["hooks/*"],
-      "@interface/*": ["interface/*"],
       "@pages/*": ["pages/*"],
       "@recoil/*": ["recoil/*"],
       "@styles/*": ["styles/*"],
-      "@types/*": ["types/*"],
       "@utils/*": ["utils/*"],
-      "@assets/*": ["assets/*"],
     },                         
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
@@ -113,7 +111,7 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */,
   },
   "include": [
-    "./src/types/custom.d.ts",
+    "src/types/custom.d.ts",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

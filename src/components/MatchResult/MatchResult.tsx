@@ -2,11 +2,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Button } from '@components/Button';
+import { Button } from '@components/common/Button';
+import { Navigator } from '@components/common/Navigator';
 import { Heading } from '@components/Heading';
-import { Navigator } from '@components/Navigator';
-import { ProposalInfo } from '@interface/proposals';
-import { Response } from '@interface/response';
+import { ProposalInfo, Response } from 'types';
 
 import * as S from './MatchResult.styles';
 
