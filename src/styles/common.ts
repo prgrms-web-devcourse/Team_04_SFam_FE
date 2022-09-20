@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { WrapperProps } from 'interface/styles';
+import { WrapperProps } from 'types';
 
 export const Main = styled.main({
   height: 'calc(100% - 120px)',

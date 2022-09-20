@@ -1,8 +1,8 @@
-import { Avatar } from '@components/Avatar';
-import { Badge } from '@components/Badge';
+import { Avatar } from '@components/common/Avatar';
+import { Badge } from '@components/common/Badge';
 import { MATCH_STATUS_TEXT } from '@constants/text';
-import { Match } from '@interface/match';
 import { InnerWrapper, B1, TitleWrapper, ContentWrapper, BadgeWrapper, B4 } from '@styles/common';
+import { Match } from 'types';
 
 import * as S from './ChatListItem.styles';
 

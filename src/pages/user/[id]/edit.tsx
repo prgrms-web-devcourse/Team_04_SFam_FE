@@ -4,13 +4,12 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance, axiosDefaultInstance } from '@api/axiosInstances';
-import { Avatar } from '@components/Avatar';
-import { Button } from '@components/Button';
-import { Input } from '@components/Input';
-import { Response } from '@interface/response';
-import { UserInfo } from '@interface/user';
+import { Avatar } from '@components/common/Avatar';
+import { Button } from '@components/common/Button';
+import { Input } from '@components/common/Input';
 import { userState } from '@recoil/atoms';
 import { BoldB3, ColWrapper, Container, InnerWrapper, RowWrapper } from '@styles/common';
+import { UserInfo, Response } from 'types';
 
 interface EditProfile {
   nickname?: string;

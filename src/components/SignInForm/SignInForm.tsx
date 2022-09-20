@@ -5,12 +5,12 @@ import { FormEvent } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Button } from '@components/Button';
-import { Input } from '@components/Input';
+import { Button } from '@components/common/Button';
+import { Input } from '@components/common/Input';
 import { useForm } from '@hooks/useForm';
-import { Response } from '@interface/response';
 import { User, userState } from '@recoil/atoms';
 import { Anchor, B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
+import { Response } from 'types';
 
 import { ErrorResponse, Values } from './types';
 

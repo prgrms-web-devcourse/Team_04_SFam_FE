@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import React, { ReactNode, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
+import { Navigator } from '@components/common/Navigator';
 import { Heading } from '@components/Heading';
-import { Navigator } from '@components/Navigator';
 import { publicPath } from '@constants/publicPath';
 import { useAxiosInterceptor } from '@hooks/useAxiosInterceptor';
 import { userState } from '@recoil/atoms';

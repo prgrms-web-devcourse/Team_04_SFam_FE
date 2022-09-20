@@ -1,16 +1,13 @@
-import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Button } from '@components/Button';
-import { Dropdown, Item } from '@components/Dropdown';
+import { Button } from '@components/common/Button';
+import { Dropdown, Item } from '@components/common/Dropdown';
 import { SPORTS_TEXT } from '@constants/text';
-import { Match } from '@interface/match';
-import { Response } from '@interface/response';
 import { Container, ColWrapper, TextArea, BoldOrangeB3, Anchor } from '@styles/common';
-import { Team } from 'interface/team';
+import { Team, Match, Response } from 'types';
 
 import { validation } from './helper';
 import { ProposalData } from './types';

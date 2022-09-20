@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Avatar } from '@components/Avatar';
-import { User } from '@interface/user';
+import { Avatar } from '@components/common/Avatar';
 import { B2, InnerWrapper, RowWrapper } from '@styles/common';
+import { User } from 'types';
 
 import * as S from './UserListItem.styles';
 

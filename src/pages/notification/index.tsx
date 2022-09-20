@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { ErrorForm } from '@components/ErrorForm';
 import { NotificationListItem } from '@components/NotificationListItem';
-import { Response } from '@interface/response';
 import { BoldB1, ColWrapper, Container, InnerWrapper } from '@styles/common';
+import { Response } from 'types';
 
 interface Invitation {
   values: [];

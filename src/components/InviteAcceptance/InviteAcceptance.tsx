@@ -4,13 +4,12 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Avatar } from '@components/Avatar';
-import { Button } from '@components/Button';
+import { Avatar } from '@components/common/Avatar';
+import { Button } from '@components/common/Button';
 import { SPORTS_TEXT } from '@constants/text';
-import { Response } from '@interface/response';
-import { TeamInfo } from '@interface/team';
 import { userState } from '@recoil/atoms';
 import { B2, RowWrapper, InnerWrapper, B1, GrayB3, B3, BoldB3, ColWrapper, BoldB2, Anchor } from '@styles/common';
+import { TeamInfo, Response } from 'types';
 
 const InviteAcceptance = () => {
   const router = useRouter();

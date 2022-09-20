@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import { Avatar } from '@components/Avatar';
-import { MemberInfo } from '@interface/team';
+import { Avatar } from '@components/common/Avatar';
 import { B2, InnerWrapper } from '@styles/common';
+import { MemberInfo } from 'types';
 
 import * as S from './TeamMember.styles';
 

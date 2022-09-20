@@ -4,12 +4,11 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Avatar } from '@components/Avatar';
-import { Button } from '@components/Button';
-import { Response } from '@interface/response';
-import { TeamInfo } from '@interface/team';
+import { Avatar } from '@components/common/Avatar';
+import { Button } from '@components/common/Button';
 import { userState } from '@recoil/atoms';
 import { Container, InnerWrapper } from '@styles/common';
+import { TeamInfo, Response } from 'types';
 
 interface EditProfile {
   teamName?: string;

@@ -4,11 +4,10 @@ import React from 'react';
 import { MdSearch } from 'react-icons/md';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Input } from '@components/Input/';
+import { Input } from '@components/common/Input';
 import { UserListItem } from '@components/UserListItem';
-import { Response } from '@interface/response';
-import { User } from '@interface/user';
 import { ColWrapper, Container, InlineWrapper, SearchButton, UserList } from '@styles/common';
+import { User, Response } from 'types';
 
 const TeamInvitationPage: NextPage = () => {
   const router = useRouter();

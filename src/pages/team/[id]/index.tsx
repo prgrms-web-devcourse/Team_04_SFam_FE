@@ -7,19 +7,18 @@ import { ThreeDots } from 'react-loader-spinner';
 import { useRecoilValue } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Avatar } from '@components/Avatar';
-import { Button } from '@components/Button';
-import { Divider } from '@components/Divider';
+import { Avatar } from '@components/common/Avatar';
+import { Button } from '@components/common/Button';
+import { Divider } from '@components/common/Divider';
+import { Paragraph } from '@components/common/Paragraph';
 import { MatchRecordChart } from '@components/MatchRecordChart';
-import { Paragraph } from '@components/Paragraph';
 import { ReviewGroup } from '@components/ReviewGroup';
 import { SportsIcon } from '@components/SportsIcon';
 import { TeamMember } from '@components/TeamMember';
 import { SPORTS_TEXT } from '@constants/text';
-import { Response } from '@interface/response';
-import { TeamInfo } from '@interface/team';
 import { userState } from '@recoil/atoms';
 import { Anchor, B1, B3, ColWrapper, Container, GrayB3, InnerWrapper, Label, RowWrapper } from '@styles/common';
+import { TeamInfo, Response } from 'types';
 
 const TeamDetailPage: NextPage = () => {
   const router = useRouter();

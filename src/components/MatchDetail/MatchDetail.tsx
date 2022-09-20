@@ -5,18 +5,17 @@ import { ThreeDots } from 'react-loader-spinner';
 import { useRecoilState } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Avatar } from '@components/Avatar';
-import { Badge } from '@components/Badge';
-import { Button } from '@components/Button';
-import { Dropdown, Item } from '@components/Dropdown';
-import { Paragraph } from '@components/Paragraph';
+import { Avatar } from '@components/common/Avatar';
+import { Badge } from '@components/common/Badge';
+import { Button } from '@components/common/Button';
+import { Dropdown, Item } from '@components/common/Dropdown';
+import { Paragraph } from '@components/common/Paragraph';
 import { SportsIcon } from '@components/SportsIcon';
 import { MATCH_STATUS_DETAIL } from '@constants/dropdown';
 import { MATCH_STATUS_TEXT, MATCH_TYPE_TEXT, SPORTS_TEXT } from '@constants/text';
-import { Proposer } from '@interface/match';
-import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
 import { Anchor, B2, BoldGrayB2, ColWrapper, InnerWrapper, RowWrapper } from '@styles/common';
+import { Proposer, Response } from 'types';
 
 import * as S from './MatchDetail.styles';
 import { MatchDetail } from './types';

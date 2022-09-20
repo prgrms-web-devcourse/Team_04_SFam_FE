@@ -1,8 +1,8 @@
 import { ChangeEvent, Dispatch, KeyboardEventHandler, MouseEventHandler, SetStateAction, useState } from 'react';
 import { MdSend } from 'react-icons/md';
 
-import { MessageReq } from '@interface/chat';
 import { Container, InnerWrapper, MessageInput, ResetBtn } from '@styles/common';
+import { MessageReq } from 'types';
 
 import * as S from './Message.styles';
 

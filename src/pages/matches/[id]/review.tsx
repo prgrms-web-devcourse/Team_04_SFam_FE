@@ -5,14 +5,12 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
-import { Button } from '@components/Button';
-import { Divider } from '@components/Divider';
+import { Button } from '@components/common/Button';
+import { Divider } from '@components/common/Divider';
 import { ReviewButtonGroup } from '@components/ReviewButtonGroup';
-import { ChatsProps } from '@interface/chat';
-import { Match } from '@interface/match';
-import { Response } from '@interface/response';
 import { userState } from '@recoil/atoms';
 import { Anchor, B1, B2, BoldB1, BoldB2, ColWrapper, Container, H2 } from '@styles/common';
+import { Response, Match, ChatsProps } from 'types';
 
 const Review: NextPage = () => {
   const router = useRouter();

@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-import { MatchRecord } from '@interface/team';
+import { MatchRecord } from 'types';
 
 import * as S from './MatchRecordChart.styles';
 
@@ -8,7 +8,7 @@ interface Props {
   matchRecord: MatchRecord;
 }
 
-const PieChart = dynamic(() => import('../PieChart/PieChart'), {
+const PieChart = dynamic(() => import('../common/PieChart/PieChart'), {
   ssr: false,
 });
 

@@ -7,10 +7,8 @@ import { useEffect, useState } from 'react';
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { ChatListItem } from '@components/ChatListItem';
 import { ErrorForm } from '@components/ErrorForm';
-import { ServerError } from '@interface/api';
-import { ProposalProps } from '@interface/proposals';
-import { Response } from '@interface/response';
 import { Anchor, ColWrapper, Container } from '@styles/common';
+import { ServerError, ProposalProps, Response } from 'types';
 
 const ChatListPage: NextPage = () => {
   const router = useRouter();
