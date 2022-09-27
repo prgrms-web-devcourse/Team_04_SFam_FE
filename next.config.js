@@ -4,8 +4,7 @@
 
 const nextConfig = {
   images: {
-    // TODO: domains 변경 필요
-    domains: ['images.unsplash.com', 'sfam-bucket.s3.ap-northeast-2.amazonaws.com'],
+    domains: ['sfam-bucket.s3.ap-northeast-2.amazonaws.com'],
   },
   webpack(config) {
     config.module.rules.push({
@@ -15,7 +14,7 @@ const nextConfig = {
 
     return config;
   },
-  reactStrictMode: false,
+  reactStrictMode: true,
   env: {
     NEXT_PUBLIC_KAKAO_MAP_REST_API_KEY: process.env.NEXT_PUBLIC_KAKAO_MAP_REST_API_KEY,
     NEXT_PUBLIC_KAKAO_MAP_JAVASCRIPT_KEY: process.env.NEXT_PUBLIC_KAKAO_MAP_JAVASCRIPT_KEY,
