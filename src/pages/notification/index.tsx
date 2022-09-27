@@ -1,5 +1,6 @@
-import { NextPage } from 'next';
 import { useEffect, useRef, useState } from 'react';
+
+import { NextPage } from 'next';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { ErrorForm } from '@components/ErrorForm';

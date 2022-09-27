@@ -1,16 +1,18 @@
+import { useEffect, useState, KeyboardEvent, useRef, useCallback } from 'react';
+
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState, KeyboardEvent, useRef, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { axiosAuthInstance } from '@api/axiosInstances';
-import { ChatReceiver } from '@components/ChatReceiver';
-import { ChatSender } from '@components/ChatSender';
 import { Badge } from '@components/common/Badge';
 import { Button } from '@components/common/Button';
 import { Dropdown, Item } from '@components/common/Dropdown';
 import { Navigator } from '@components/common/Navigator';
+
+import { axiosAuthInstance } from '@api/axiosInstances';
+import { ChatReceiver } from '@components/ChatReceiver';
+import { ChatSender } from '@components/ChatSender';
 import { Heading } from '@components/Heading';
 import { Message } from '@components/Message';
 import { MATCH_STATUS_CHAT, MATCH_STATUS_DETAIL } from '@constants/dropdown';

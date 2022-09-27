@@ -1,5 +1,6 @@
-import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import React from 'react';
+
+import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { axiosDefaultInstance } from '@api/axiosInstances';
 

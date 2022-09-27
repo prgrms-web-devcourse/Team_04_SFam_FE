@@ -1,8 +1,9 @@
+import { useEffect, useState } from 'react';
+
 import axios, { AxiosError } from 'axios';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
 import { axiosAuthInstance } from '@api/axiosInstances';
 import { ChatListItem } from '@components/ChatListItem';

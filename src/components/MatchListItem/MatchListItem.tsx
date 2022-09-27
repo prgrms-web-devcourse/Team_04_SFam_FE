@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { Badge } from '@components/common/Badge';
+
 import { MATCH_TYPE_TEXT, SPORTS_TEXT } from '@constants/text';
 import { GrayB4, InnerWrapper } from '@styles/common';
 

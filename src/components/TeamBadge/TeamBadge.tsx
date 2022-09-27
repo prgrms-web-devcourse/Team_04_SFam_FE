@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { Badge } from '@components/common/Badge';
+
 import { SportsIcon } from '@components/SportsIcon';
 import { Anchor } from '@styles/common';
 import { Team } from 'types';

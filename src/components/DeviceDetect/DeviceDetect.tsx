@@ -1,5 +1,6 @@
-import styled from '@emotion/styled';
 import React from 'react';
+
+import styled from '@emotion/styled';
 import { isMobile } from 'react-device-detect';
 
 const MobileView = styled('div')({

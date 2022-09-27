@@ -1,12 +1,14 @@
+import { FormEvent } from 'react';
+
 import { AxiosError } from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FormEvent } from 'react';
 import { useSetRecoilState } from 'recoil';
 
-import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/common/Button';
 import { Input } from '@components/common/Input';
+
+import { axiosAuthInstance } from '@api/axiosInstances';
 import { useForm } from '@hooks/useForm';
 import { User, userState } from '@recoil/atoms';
 import { Anchor, B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
