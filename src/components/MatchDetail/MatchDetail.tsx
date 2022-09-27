@@ -1,15 +1,17 @@
+import React from 'react';
+
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 import { useRecoilState } from 'recoil';
 
-import { axiosAuthInstance } from '@api/axiosInstances';
-import { Avatar } from '@components/common/Avatar';
+import { OldAvatar } from '@components/common/Avatar';
 import { Badge } from '@components/common/Badge';
 import { Button } from '@components/common/Button';
 import { Dropdown, Item } from '@components/common/Dropdown';
 import { Paragraph } from '@components/common/Paragraph';
+
+import { axiosAuthInstance } from '@api/axiosInstances';
 import { SportsIcon } from '@components/SportsIcon';
 import { MATCH_STATUS_DETAIL } from '@constants/dropdown';
 import { MATCH_STATUS_TEXT, MATCH_TYPE_TEXT, SPORTS_TEXT } from '@constants/text';
@@ -88,12 +90,12 @@ const PostDetail = () => {
                 <InnerWrapper alignItems='center'>
                   <S.DetailTitle>팀 정보</S.DetailTitle>
                   {matchDetail.team && matchDetail.team.logoImageUrl ? (
-                    <Avatar
+                    <OldAvatar
                       imgSrc={matchDetail.team.logoImageUrl}
                       imgSize='32px'
                     />
                   ) : (
-                    <Avatar imgSize='32px' />
+                    <OldAvatar imgSize='32px' />
                   )}
                   <InnerWrapper
                     flexDirection='column'

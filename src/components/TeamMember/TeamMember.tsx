@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
-import { Avatar } from '@components/common/Avatar';
+import { OldAvatar } from '@components/common/Avatar';
+
 import { B2, InnerWrapper } from '@styles/common';
 import { MemberInfo } from 'types';
 
@@ -18,12 +19,12 @@ const TeamMember = ({ info }: Props) => (
     <S.Anchor>
       {/* TODO: 왕관 표시 */}
       {info.profileImageUrl !== null ? (
-        <Avatar
+        <OldAvatar
           imgSrc={info.profileImageUrl}
           imgSize='70px'
         />
       ) : (
-        <Avatar imgSize='70px' />
+        <OldAvatar imgSize='70px' />
       )}
       <InnerWrapper
         margin='0 16px'

@@ -1,15 +1,17 @@
+import React from 'react';
+
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 import { useRecoilState } from 'recoil';
 
-import { axiosAuthInstance } from '@api/axiosInstances';
-import { Address, kakaoMapApi } from '@api/kakaoMapApi';
-import { Avatar } from '@components/common/Avatar';
+import { OldAvatar } from '@components/common/Avatar';
 import { Button } from '@components/common/Button';
 import { Divider } from '@components/common/Divider';
+
+import { axiosAuthInstance } from '@api/axiosInstances';
+import { Address, kakaoMapApi } from '@api/kakaoMapApi';
 import { MatchRecordChart } from '@components/MatchRecordChart';
 import { ReviewGroup } from '@components/ReviewGroup';
 import { TeamBadge } from '@components/TeamBadge';
@@ -122,9 +124,9 @@ const UserDetailPage: NextPage = () => {
     <Container>
       <RowWrapper gap='16px'>
         {userInfo.profileImageUrl ? (
-          <Avatar imgSrc={`${userInfo.profileImageUrl}?date=${new Date().toTimeString()}`} />
+          <OldAvatar imgSrc={`${userInfo.profileImageUrl}?date=${new Date().toTimeString()}`} />
         ) : (
-          <Avatar />
+          <OldAvatar />
         )}
         <InnerWrapper
           flexDirection='column'

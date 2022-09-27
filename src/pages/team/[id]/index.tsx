@@ -1,16 +1,18 @@
+import React from 'react';
+
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { ThreeDots } from 'react-loader-spinner';
 import { useRecoilValue } from 'recoil';
 
-import { axiosAuthInstance } from '@api/axiosInstances';
-import { Avatar } from '@components/common/Avatar';
+import { OldAvatar } from '@components/common/Avatar';
 import { Button } from '@components/common/Button';
 import { Divider } from '@components/common/Divider';
 import { Paragraph } from '@components/common/Paragraph';
+
+import { axiosAuthInstance } from '@api/axiosInstances';
 import { MatchRecordChart } from '@components/MatchRecordChart';
 import { ReviewGroup } from '@components/ReviewGroup';
 import { SportsIcon } from '@components/SportsIcon';
@@ -48,7 +50,7 @@ const TeamDetailPage: NextPage = () => {
   return !isLoading && teamInfo ? (
     <Container>
       <RowWrapper gap='16px'>
-        {teamInfo.logoImageUrl ? <Avatar imgSrc={teamInfo.logoImageUrl} /> : <Avatar />}
+        {teamInfo.logoImageUrl ? <OldAvatar imgSrc={teamInfo.logoImageUrl} /> : <OldAvatar />}
         <InnerWrapper
           flexDirection='column'
           justifyContent='center'
