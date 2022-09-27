@@ -1,8 +1,9 @@
 import { ChangeEventHandler, useRef } from 'react';
 
-import defaultLogo from '@assets/logo/default_profile_image.svg';
 import Image from 'next/image';
 import { MdAddAPhoto } from 'react-icons/md';
+
+import defaultLogo from '@assets/default_avatar.svg';
 
 import * as S from './Avatar.styles';
 
