@@ -1,79 +1,32 @@
+import styled from '@emotion/styled';
 import Image from 'next/image';
-import { ChangeEventHandler, useRef } from 'react';
-import { MdAddAPhoto } from 'react-icons/md';
 
-import defaultLogo from '@assets/logo/default_profile_image.svg';
-
-import * as S from './Avatar.styles';
+import defaultSrc from '@assets/default_avatar.svg';
 
 interface Props {
-  block?: boolean;
-  imgSize?: string;
-  imgSrc?: string;
-  imgAlt?: string;
-  borderRadius?: string;
-  edit?: boolean;
-  user?: boolean;
-  team?: boolean;
-  handleFileChange?: ChangeEventHandler<HTMLInputElement>;
+  src?: string;
+  size?: string;
+  alt?: string;
 }
 
-const Avatar = ({
-  block = true,
-  borderRadius = '50%',
-  imgSize = '80px',
-  imgSrc = defaultLogo,
-  imgAlt = '',
-  edit = false,
-  user = false,
-  team = false,
-  handleFileChange,
-  ...props
-}: Props) => {
-  const selectFile = useRef<HTMLInputElement>(null);
-
-  const handleClick = () => {
-    if (edit && selectFile.current !== null) {
-      selectFile.current.click();
-    }
-  };
-
-  return (
-    <S.Container onClick={handleClick}>
-      {(user || team) && (
-        <input
-          type='file'
-          accept='image/jpg, image/jpeg, image/png'
-          ref={selectFile}
-          onChange={handleFileChange}
-          style={{ display: 'none' }}
-        />
-      )}
-      <S.ImageWrapper
-        block={block}
-        imgSrc={imgSrc}
-        imgSize={imgSize}
-        borderRadius={borderRadius}
-        {...props}
-      >
-        {imgSrc && (
-          <Image
-            src={imgSrc}
-            alt={imgAlt}
-            width={imgSize}
-            height={imgSize}
-            objectFit='cover'
-            {...props}
-          />
-        )}
-      </S.ImageWrapper>
-      {edit && (
-        <S.IconBadgeWrapper>
-          <MdAddAPhoto color='#fff' />
-        </S.IconBadgeWrapper>
-      )}
-    </S.Container>
-  );
-};
+const Avatar = ({ size = '80px', src = defaultSrc, alt = '' }: Props) => (
+  <ImageWrapper size={size}>
+    <Image
+      src={src || defaultSrc}
+      alt={alt}
+      layout='fill'
+      objectFit='cover'
+    />
+  </ImageWrapper>
+);
 
 export default Avatar;
+
+const ImageWrapper = styled.div<Pick<Props, 'size'>>(({ size, theme }) => ({
+  width: size,
+  height: size,
+  position: 'relative',
+  border: `1px solid ${theme.color.gray200}`,
+  borderRadius: '50%',
+  overflow: 'hidden',
+}));
