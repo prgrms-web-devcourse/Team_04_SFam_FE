@@ -12,7 +12,7 @@ interface Props {
   children?: string | JSX.Element;
 }
 
-const Badge = ({
+const OldBadge = ({
   matchType,
   matchStatus,
   color = 'primary',
@@ -37,4 +37,4 @@ const Badge = ({
   </S.Container>
 );
 
-export default Badge;
+export default OldBadge;

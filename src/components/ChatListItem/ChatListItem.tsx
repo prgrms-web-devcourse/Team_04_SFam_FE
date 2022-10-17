@@ -1,5 +1,5 @@
 import { OldAvatar } from '@components/common/Avatar';
-import { Badge } from '@components/common/Badge';
+import { OldBadge } from '@components/common/Badge';
 
 import { MATCH_STATUS_TEXT } from '@constants/text';
 import { InnerWrapper, B1, TitleWrapper, ContentWrapper, BadgeWrapper, B4 } from '@styles/common';
@@ -43,7 +43,7 @@ const ChatListItem = ({ imgSrc, nickname, lastChat, match }: Props) => (
       >
         <B4>{nickname}</B4>
         <BadgeWrapper>
-          {match && <Badge matchStatus={match.status}>{MATCH_STATUS_TEXT[match.status]}</Badge>}
+          {match && <OldBadge matchStatus={match.status}>{MATCH_STATUS_TEXT[match.status]}</OldBadge>}
         </BadgeWrapper>
       </InnerWrapper>
     </InnerWrapper>

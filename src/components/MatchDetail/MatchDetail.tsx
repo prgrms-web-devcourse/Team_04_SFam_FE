@@ -6,7 +6,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import { useRecoilState } from 'recoil';
 
 import { OldAvatar } from '@components/common/Avatar';
-import { Badge } from '@components/common/Badge';
+import { OldBadge } from '@components/common/Badge';
 import { Button } from '@components/common/Button';
 import { Dropdown, Item } from '@components/common/Dropdown';
 import { Paragraph } from '@components/common/Paragraph';
@@ -137,7 +137,7 @@ const PostDetail = () => {
               onSelect={handleSelect}
             />
           ) : (
-            <Badge
+            <OldBadge
               fontSize='16px'
               width='auto'
               height='32px'
@@ -146,7 +146,7 @@ const PostDetail = () => {
               matchStatus={status}
             >
               {MATCH_STATUS_TEXT[status]}
-            </Badge>
+            </OldBadge>
           )}
         </S.StatusWrapper>
       </RowWrapper>
