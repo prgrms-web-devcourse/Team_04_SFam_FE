@@ -34,82 +34,17 @@
 ```
 ┣ src
 ┃ ┣ api
-┃ ┃ ┣ axiosInstances.ts
-┃ ┃ ┗ kakaoMapApi.ts
 ┃ ┣ assets
-┃ ┃ ┣ icons
-┃ ┃ ┃ ┗ ...
-┃ ┃ ┗ logo
-┃ ┃ ┃ ┗ ...
 ┃ ┣ components
-┃ ┃ ┣ Avatar
-┃ ┃ ┣ Badge
-┃ ┃ ┣ Button
-┃ ┃ ┣ ChatListItem
-┃ ┃ ┣ ChatReceiver
-┃ ┃ ┣ ChatSender
-┃ ┃ ┣ Divider
-┃ ┃ ┣ Dropdown
-┃ ┃ ┣ ErrorForm
-┃ ┃ ┣ FilterButton
-┃ ┃ ┣ Heading
-┃ ┃ ┣ Input
-┃ ┃ ┣ InviteAcceptance
-┃ ┃ ┣ Layout
-┃ ┃ ┣ MatchDetail
-┃ ┃ ┣ MatchForm
-┃ ┃ ┣ MatchList
-┃ ┃ ┣ MatchListItem
-┃ ┃ ┣ MatchRecordChart
-┃ ┃ ┣ MatchResult
-┃ ┃ ┣ Message
-┃ ┃ ┣ Navigator
-┃ ┃ ┣ NotificationListItem
-┃ ┃ ┣ Paragraph
-┃ ┃ ┣ PieChart
-┃ ┃ ┣ ProposalForm
-┃ ┃ ┣ ReviewButtonGroup
-┃ ┃ ┣ ReviewGroup
-┃ ┃ ┣ SignInForm
-┃ ┃ ┣ SignUpForm
-┃ ┃ ┣ Slider
-┃ ┃ ┣ SportsIcon
-┃ ┃ ┣ TeamBadge
-┃ ┃ ┣ TeamForm
-┃ ┃ ┣ TeamMember
-┃ ┃ ┣ UserListItem
-┃ ┃ ┗ Welcome
 ┃ ┣ constants
-┃ ┃ ┗ ...
 ┃ ┣ hooks
-┃ ┃ ┗ ...
 ┃ ┣ interface
-┃ ┃ ┗ ...
 ┃ ┣ pages
-┃ ┃ ┣ chatlist
-┃ ┃ ┣ matches
-┃ ┃ ┣ notification
-┃ ┃ ┣ signin
-┃ ┃ ┣ signup
-┃ ┃ ┣ team
-┃ ┃ ┣ user
-┃ ┃ ┣ \_app.tsx
-┃ ┃ ┣ \_document.tsx
-┃ ┃ ┗ index.tsx
 ┃ ┣ public
-┃ ┃ ┗ favicon.ico
 ┃ ┣ recoil
-┃ ┃ ┗ atoms.ts
 ┃ ┣ styles
-┃ ┃ ┣ common.ts
-┃ ┃ ┣ global.ts
-┃ ┃ ┣ reset.ts
-┃ ┃ ┗ theme.ts
 ┃ ┗ types
-┃ ┃ ┣ custom.d.ts
-┃ ┃ ┗ emotion.d.ts
 ```
-
 
 ## UI 및 기능
 
