@@ -1,37 +1,48 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
-  width: 100%;
-  min-height: 100%;
-  position: relative;
-  background-color: ${({ theme }) => theme.color.gray200};
-`;
+export const Container = styled('div')(
+  {
+    width: '100%',
+    minHeight: '100%',
+    position: 'relative',
+  },
+  ({ theme }) => ({
+    backgroundColor: theme.color.gray200,
+  }),
+);
 
-export const Category = styled.div`
-  position: sticky;
-  top: 0;
-  width: 100%;
-  padding: 8px 16px;
-  display: flex;
-  gap: 8px;
-  overflow: auto;
-  white-space: nowrap;
-  background-color: ${({ theme }) => theme.color.background};
-  border-bottom: 1px solid ${({ theme }) => theme.color.gray200};
+export const Category = styled('div')(
+  {
+    position: 'sticky',
+    top: 0,
+    width: '100%',
+    padding: '8px 16px',
+    display: 'flex',
+    gap: '8px',
+    overflow: 'auto',
+    whiteSpace: 'nowrap',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
+  ({ theme }) => ({
+    backgroundColor: theme.color.background,
+    borderBottom: `1px solid ${theme.color.gray200}`,
+  }),
+);
 
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;
+export const ListContainer = styled('div')(
+  {
+    padding: '8px 0',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+  },
+  ({ theme }) => ({
+    backgroundColor: theme.color.gray200,
+  }),
+);
 
-export const ListContainer = styled.div`
-  padding: 8px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  background-color: ${({ theme }) => theme.color.gray200};
-`;
-
-export const DropdownWrapper = styled.div<{ width: string }>`
-  width: ${(props) => props.width};
-`;
+export const DropdownWrapper = styled('div')<{ width: string }>(({ width }) => ({
+  width,
+}));

@@ -11,35 +11,31 @@ interface Props {
   padding?: boolean;
 }
 
-export const Container = styled.div<Props>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: ${({ padding }) => padding && '0 8px'};
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-  font-size: ${({ fontSize }) => fontSize};
-  border-radius: ${({ theme }) => theme.borderRadius};
-  color: ${({ fontColor, theme }) => (fontColor === 'primary' ? `${theme.color.background}` : fontColor)};
-  background-color: ${({ color, theme, matchType, matchStatus }) => {
-    if (matchType) {
-      return matchType === 'TEAM_MATCH' ? theme.color.primary : theme.color.yellow;
-    }
-    if (matchStatus) {
-      switch (matchStatus) {
-        case 'WAITING':
-          return theme.color.yellow;
-        case 'IN_GAME':
-          return theme.color.secondary;
-        case 'END':
-          return theme.color.primary;
-        default:
-          return '#000';
-      }
-    }
-
-    if (color === 'primary') return `${theme.color.green200}`;
-    if (color === 'secondary') return `${theme.color.secondary}`;
-    return color;
-  }};
-`;
+export const Container = styled('div')<Props>(
+  {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ({ width, padding, height, fontSize, theme, color, fontColor, matchType, matchStatus }) => {
+    const getBgColor = () => {
+      if (matchType === 'TEAM_MATCH') return theme.color.primary;
+      if (matchType === 'INDIVIDUAL_MATCH') return theme.color.yellow;
+      if (matchStatus === 'WAITING') return theme.color.yellow;
+      if (matchStatus === 'IN_GAME') return theme.color.secondary;
+      if (matchStatus === 'END') return theme.color.primary;
+      if (color === 'primary') return `${theme.color.green200}`;
+      if (color === 'secondary') return `${theme.color.secondary}`;
+      return color;
+    };
+    return {
+      padding: padding ? padding && '0 8px' : '0px',
+      width,
+      height,
+      fontSize,
+      borderRadius: theme.borderRadius,
+      color: fontColor === 'primary' ? `${theme.color.background}` : fontColor,
+      backgroundColor: getBgColor(),
+    };
+  },
+);

@@ -4,36 +4,48 @@ interface Props {
   review: string;
 }
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
+export const Container = styled('div')({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
 
-export const BestWrapper = styled.div<Props>`
-  opacity: ${(props) => (props.review === 'BEST' ? 1 : 0.5)};
-  font-weight: ${(props) => (props.review === 'BEST' ? 'bold' : 'none')};
-  &:hover {
-    font-weight: bold;
-    opacity: 1;
-  }
-`;
+export const BestWrapper = styled('div')<Props>(
+  {
+    '&:hover': {
+      fontWeight: 'bold',
+      opacity: 1,
+    },
+  },
+  ({ review }) => ({
+    opacity: review === 'BEST' ? 1 : 0.5,
+    fontWeight: review === 'BEST' ? 'bold' : 'none',
+  }),
+);
 
-export const LikeWrapper = styled.div<Props>`
-  opacity: ${(props) => (props.review === 'LIKE' ? 1 : 0.5)};
-  font-weight: ${(props) => (props.review === 'LIKE' ? 'bold' : 'none')};
-  &:hover {
-    font-weight: bold;
-    opacity: 1;
-  }
-`;
+export const LikeWrapper = styled('div')<Props>(
+  {
+    '&:hover': {
+      fontWeight: 'bold',
+      opacity: 1,
+    },
+  },
+  ({ review }) => ({
+    opacity: review === 'LIKE' ? 1 : 0.5,
+    fontWeight: review === 'LIKE' ? 'bold' : 'none',
+  }),
+);
 
-export const DislikeWrapper = styled.div<Props>`
-  opacity: ${(props) => (props.review === 'DISLIKE' ? 1 : 0.5)};
-  font-weight: ${(props) => (props.review === 'DISLIKE' ? 'bold' : 'none')};
-  &:hover {
-    font-weight: bold;
-    opacity: 1;
-  }
-`;
+export const DislikeWrapper = styled('div')<Props>(
+  {
+    '&:hover': {
+      fontWeight: 'bold',
+      opacity: 1,
+    },
+  },
+  ({ review }) => ({
+    opacity: review === 'DISLIKE' ? 1 : 0.5,
+    fontWeight: review === 'DISLIKE' ? 'bold' : 'none',
+  }),
+);

@@ -1,31 +1,43 @@
 import styled from '@emotion/styled';
 
-export const HeadingContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: absolute;
-  height: 64px;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  background-color: ${(props) => props.theme.color.background};
-  border-bottom: 1px solid ${(props) => props.theme.color.gray200};
-  z-index: 1;
-`;
-
 interface Props {
   pointer?: boolean;
 }
 
-export const HeadingTitle = styled.h1<Props>`
-  font-size: ${(props) => props.theme.fontSize.b1};
-  font-weight: bold;
-  cursor: ${(props) => props.pointer && 'pointer'};
-`;
+export const HeadingContainer = styled('div')(
+  {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    position: 'absolute',
+    height: '64px',
+    top: 0,
+    left: 0,
+    right: 0,
+    padding: '1rem',
+    zIndex: 1,
+  },
+  ({ theme }) => ({
+    backgroundColor: theme.color.background,
+    borderBottom: `1px solid ${theme.color.gray200}`,
+  }),
+);
 
-export const MyMatch = styled.div`
-  cursor: pointer;
-  font-size: ${({ theme }) => theme.fontSize.b3};
-`;
+export const HeadingTitle = styled('h1')<Props>(
+  {
+    fontWeight: 'bold',
+  },
+  ({ theme, pointer }) => ({
+    fontSize: theme.fontSize.b1,
+    cursor: pointer ? 'pointer' : 'none',
+  }),
+);
+
+export const MyMatch = styled('div')(
+  {
+    cursor: 'pointer',
+  },
+  ({ theme }) => ({
+    fontSize: theme.fontSize.b3,
+  }),
+);
