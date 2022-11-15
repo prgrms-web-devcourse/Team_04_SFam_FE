@@ -1,13 +1,15 @@
+import { useEffect, useRef, useState } from 'react';
+
 import { useRouter } from 'next/router';
 import { NextPage } from 'next/types';
-import { useEffect, useRef, useState } from 'react';
 import useGeolocation from 'react-hook-geolocation';
 import { useRecoilState } from 'recoil';
 
-import { axiosAuthInstance } from '@api/axiosInstances';
-import { Address, kakaoMapApi } from '@api/kakaoMapApi';
 import { Button } from '@components/common/Button';
 import { Slider } from '@components/common/Slider';
+
+import { axiosAuthInstance } from '@api/axiosInstances';
+import { Address, kakaoMapApi } from '@api/kakaoMapApi';
 import { userState } from '@recoil/atoms';
 import { B2, B3, BoldB2, ColWrapper, Container, GrayB2, InnerWrapper } from '@styles/common';
 

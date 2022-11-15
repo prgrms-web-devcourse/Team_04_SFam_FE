@@ -1,5 +1,6 @@
+import { OldAvatar } from '@components/common/Avatar';
+
 import { hourToString } from '@components/ChatSender/ChatSender';
-import { Avatar } from '@components/common/Avatar';
 import { GrayB4 } from '@styles/common';
 import { Chat } from 'types';
 
@@ -19,12 +20,12 @@ const ChatReceiver = ({ chat, nickname, imgSrc }: Props) => {
       <S.ChatWrapper>
         <S.ProfileWrapper>
           {imgSrc !== null ? (
-            <Avatar
+            <OldAvatar
               imgSrc={imgSrc}
               imgSize='45px'
             />
           ) : (
-            <Avatar imgSize='45px' />
+            <OldAvatar imgSize='45px' />
           )}
         </S.ProfileWrapper>
         <S.MessageContentWrapper>

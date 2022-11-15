@@ -1,5 +1,6 @@
-import Image from 'next/image';
 import { ComponentProps } from 'react';
+
+import Image from 'next/image';
 
 import * as S from './ReviewButtonItem.styles';
 

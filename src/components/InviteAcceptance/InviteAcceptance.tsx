@@ -1,11 +1,13 @@
+import React from 'react';
+
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { useRecoilState } from 'recoil';
 
-import { axiosAuthInstance } from '@api/axiosInstances';
-import { Avatar } from '@components/common/Avatar';
+import { OldAvatar } from '@components/common/Avatar';
 import { Button } from '@components/common/Button';
+
+import { axiosAuthInstance } from '@api/axiosInstances';
 import { SPORTS_TEXT } from '@constants/text';
 import { userState } from '@recoil/atoms';
 import { B2, RowWrapper, InnerWrapper, B1, GrayB3, B3, BoldB3, ColWrapper, BoldB2, Anchor } from '@styles/common';
@@ -92,12 +94,12 @@ const InviteAcceptance = () => {
         <Anchor>
           <RowWrapper gap='16px'>
             {teamInfo && teamInfo.logoImageUrl !== null ? (
-              <Avatar
+              <OldAvatar
                 imgSrc={teamInfo.logoImageUrl}
                 imgSize='72px'
               />
             ) : (
-              <Avatar />
+              <OldAvatar />
             )}
             <InnerWrapper
               flexDirection='column'

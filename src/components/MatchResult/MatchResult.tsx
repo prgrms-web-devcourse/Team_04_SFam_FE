@@ -1,9 +1,11 @@
-import { useRouter } from 'next/router';
 import React from 'react';
 
-import { axiosAuthInstance } from '@api/axiosInstances';
+import { useRouter } from 'next/router';
+
 import { Button } from '@components/common/Button';
 import { Navigator } from '@components/common/Navigator';
+
+import { axiosAuthInstance } from '@api/axiosInstances';
 import { Heading } from '@components/Heading';
 import { ProposalInfo, Response } from 'types';
 

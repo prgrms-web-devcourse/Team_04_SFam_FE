@@ -1,10 +1,12 @@
-import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import { axiosAuthInstance } from '@api/axiosInstances';
+import { useRouter } from 'next/router';
+
 import { Button } from '@components/common/Button';
 import { Dropdown, Item } from '@components/common/Dropdown';
 import { Input } from '@components/common/Input';
+
+import { axiosAuthInstance } from '@api/axiosInstances';
 import { SPORTS_CATEGORY } from '@constants/dropdown';
 import { BoldOrangeB3, ColWrapper, Container, InnerWrapper, Label, TextArea } from '@styles/common';
 import { Response } from 'types';

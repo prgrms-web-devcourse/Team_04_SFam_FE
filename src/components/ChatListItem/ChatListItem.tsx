@@ -1,5 +1,6 @@
-import { Avatar } from '@components/common/Avatar';
+import { OldAvatar } from '@components/common/Avatar';
 import { Badge } from '@components/common/Badge';
+
 import { MATCH_STATUS_TEXT } from '@constants/text';
 import { InnerWrapper, B1, TitleWrapper, ContentWrapper, BadgeWrapper, B4 } from '@styles/common';
 import { Match } from 'types';
@@ -16,13 +17,13 @@ interface Props {
 const ChatListItem = ({ imgSrc, nickname, lastChat, match }: Props) => (
   <S.Container>
     {imgSrc !== null ? (
-      <Avatar
+      <OldAvatar
         imgSrc={imgSrc}
         imgSize='72px'
         borderRadius='50%'
       />
     ) : (
-      <Avatar imgSize='72px' />
+      <OldAvatar imgSize='72px' />
     )}
     <InnerWrapper
       flexDirection='column'

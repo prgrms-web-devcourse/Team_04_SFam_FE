@@ -1,12 +1,14 @@
+import { ChangeEvent, useEffect, useState } from 'react';
+
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { ChangeEvent, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { axiosAuthInstance, axiosDefaultInstance } from '@api/axiosInstances';
-import { Avatar } from '@components/common/Avatar';
+import { OldAvatar } from '@components/common/Avatar';
 import { Button } from '@components/common/Button';
 import { Input } from '@components/common/Input';
+
+import { axiosAuthInstance, axiosDefaultInstance } from '@api/axiosInstances';
 import { userState } from '@recoil/atoms';
 import { BoldB3, ColWrapper, Container, InnerWrapper, RowWrapper } from '@styles/common';
 import { UserInfo, Response } from 'types';
@@ -133,7 +135,7 @@ const UserEditPage: NextPage = () => {
         justifyContent='center'
       >
         {user && userInfo && editProfile.profileImageUrl ? (
-          <Avatar
+          <OldAvatar
             imgSrc={`${editProfile.profileImageUrl}?date=${new Date().toTimeString()}`}
             imgSize='100px'
             edit
@@ -141,7 +143,7 @@ const UserEditPage: NextPage = () => {
             handleFileChange={handleUserFileChange}
           />
         ) : (
-          <Avatar
+          <OldAvatar
             imgSize='100px'
             edit
             user

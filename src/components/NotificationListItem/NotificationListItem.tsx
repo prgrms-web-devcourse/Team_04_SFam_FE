@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
-import { Avatar } from '@components/common/Avatar';
+import { OldAvatar } from '@components/common/Avatar';
+
 import { Anchor, B1, GrayB3, InnerWrapper } from '@styles/common';
 
 interface Props {
@@ -19,9 +20,9 @@ const NotificationListItem = ({ name, invitationId, teamId, imgSrc }: Props) => 
       <InnerWrapper gap='16px'>
         <div>
           {imgSrc === null ? (
-            <Avatar imgSize='64px' />
+            <OldAvatar imgSize='64px' />
           ) : (
-            <Avatar
+            <OldAvatar
               imgSrc={imgSrc as string}
               imgSize='64px'
             />

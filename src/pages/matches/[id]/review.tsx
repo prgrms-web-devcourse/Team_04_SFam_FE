@@ -1,12 +1,14 @@
+import React from 'react';
+
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { axiosAuthInstance } from '@api/axiosInstances';
 import { Button } from '@components/common/Button';
 import { Divider } from '@components/common/Divider';
+
+import { axiosAuthInstance } from '@api/axiosInstances';
 import { ReviewButtonGroup } from '@components/ReviewButtonGroup';
 import { userState } from '@recoil/atoms';
 import { Anchor, B1, B2, BoldB1, BoldB2, ColWrapper, Container, H2 } from '@styles/common';

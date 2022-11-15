@@ -1,15 +1,17 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
 
-import { axiosDefaultInstance } from '@api/axiosInstances';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 import { Button } from '@components/common/Button';
 import { Input } from '@components/common/Input';
+
+import { axiosDefaultInstance } from '@api/axiosInstances';
 import { useForm } from '@hooks/useForm';
 import { Anchor, B3, BoldGreenB3, ColWrapper, Container, InnerWrapper } from '@styles/common';
 
-import validation from './helper';
 import { ErrorText } from './SignUpForm.styles';
+import validation from './helper';
 import { Values } from './types';
 
 const SignUpForm = () => {

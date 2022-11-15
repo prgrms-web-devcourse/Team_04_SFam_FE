@@ -1,10 +1,12 @@
+import React from 'react';
+
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { MdSearch } from 'react-icons/md';
 
-import { axiosAuthInstance } from '@api/axiosInstances';
 import { Input } from '@components/common/Input';
+
+import { axiosAuthInstance } from '@api/axiosInstances';
 import { UserListItem } from '@components/UserListItem';
 import { ColWrapper, Container, InlineWrapper, SearchButton, UserList } from '@styles/common';
 import { User, Response } from 'types';

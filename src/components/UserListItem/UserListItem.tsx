@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Avatar } from '@components/common/Avatar';
+import { OldAvatar } from '@components/common/Avatar';
+
 import { B2, InnerWrapper, RowWrapper } from '@styles/common';
 import { User } from 'types';
 
@@ -23,12 +24,12 @@ const UserListItem = ({ user, onClick }: Props) => {
         alignItems='center'
       >
         {user.profileImageUrl ? (
-          <Avatar
+          <OldAvatar
             imgSize='60px'
             imgSrc={user.profileImageUrl}
           />
         ) : (
-          <Avatar imgSize='60px' />
+          <OldAvatar imgSize='60px' />
         )}
         <InnerWrapper>
           <B2>{user.nickname}</B2>
