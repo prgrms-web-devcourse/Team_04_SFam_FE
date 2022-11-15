@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { ColorType } from '@emotion/react';
 import styled from '@emotion/styled';
-import React from 'react';
 
 interface StyleProps {
   bgColor: ColorType;
