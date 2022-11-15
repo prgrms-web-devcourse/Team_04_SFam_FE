@@ -1,32 +1,38 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
-  padding: 0 20px;
-  height: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
+export const Container = styled('div')({
+  padding: '0 20px',
+  height: '100%',
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+});
 
-export const ImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+export const ImageWrapper = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+});
 
-export const ButtonWrapper = styled.div`
-  padding-top: 80px;
-  width: 100%;
-`;
+export const ButtonWrapper = styled('div')({
+  paddingTop: '80px',
+  width: '100%',
+});
 
-export const Title = styled.span`
-  font-size: ${(props) => props.theme.fontSize.h1};
-  font-weight: bold;
-  line-height: 2.5;
-`;
+export const Title = styled('span')(
+  {
+    fontWeight: 'bold',
+    lineHeight: 2.5,
+  },
+  ({ theme }) => ({ fontSize: theme.fontSize.h1 }),
+);
 
-export const Paragraph = styled.span`
-  font-size: ${(props) => props.theme.fontSize.b2};
-  line-height: 1.5;
-  text-align: center;
-`;
+export const Paragraph = styled('span')(
+  {
+    lineHeight: 1.5,
+    textAlign: 'center',
+  },
+  ({ theme }) => ({
+    fontSize: theme.fontSize.b2,
+  }),
+);

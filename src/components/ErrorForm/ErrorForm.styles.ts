@@ -1,18 +1,26 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+export const Container = styled('div')({
+  height: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+});
 
-export const ErrorText = styled.span`
-  font-size: ${(props) => props.theme.fontSize.h1};
-  font-weight: bold;
-`;
+export const ErrorText = styled('span')(
+  {
+    fontWeight: 'bold',
+  },
+  ({ theme }) => ({
+    fontSize: theme.fontSize.h1,
+  }),
+);
 
-export const SuggestionText = styled.span`
-  font-size: ${(props) => props.theme.fontSize.b2};
-  font-weight: bold;
-`;
+export const SuggestionText = styled('span')(
+  {
+    fontWeight: 'bold',
+  },
+  ({ theme }) => ({
+    fontSize: theme.fontSize.b2,
+  }),
+);
