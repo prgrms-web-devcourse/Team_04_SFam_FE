@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Badge } from '@components/common/Badge';
+import { OldBadge } from '@components/common/Badge';
 
 import { SportsIcon } from '@components/SportsIcon';
 import { Anchor } from '@styles/common';
@@ -25,7 +25,7 @@ const Color: ColorProps = {
 const TeamBadge = ({ team }: Props) => (
   <Link href={`/team/${team.id}`}>
     <Anchor>
-      <Badge
+      <OldBadge
         color={Color[Math.floor(Math.random() * 6 + 1)]}
         width='fit-content'
         height='32px'
@@ -38,7 +38,7 @@ const TeamBadge = ({ team }: Props) => (
           />
           <S.BadgeText>{team.name}</S.BadgeText>
         </S.BadgeInner>
-      </Badge>
+      </OldBadge>
     </Anchor>
   </Link>
 );

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 
-import { Badge } from '@components/common/Badge';
+import { OldBadge } from '@components/common/Badge';
 import { Button } from '@components/common/Button';
 import { Dropdown, Item } from '@components/common/Dropdown';
 import { Navigator } from '@components/common/Navigator';
@@ -234,7 +234,7 @@ const Chats: NextPage = () => {
             </Link>
           </ChatMatchTitleWrapper>
           {!proposal.isMatchAuthor ? (
-            <Badge
+            <OldBadge
               matchStatus={matchStatus}
               width='100px'
               height='32px'
@@ -242,7 +242,7 @@ const Chats: NextPage = () => {
               padding
             >
               {MATCH_STATUS_TEXT[matchStatus]}
-            </Badge>
+            </OldBadge>
           ) : (
             <DropdownWrapper>
               {matchStatus === 'WAITING' ? (

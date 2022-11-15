@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Badge } from '@components/common/Badge';
+import { OldBadge } from '@components/common/Badge';
 
 import { MATCH_TYPE_TEXT, SPORTS_TEXT } from '@constants/text';
 import { GrayB4, InnerWrapper } from '@styles/common';
@@ -40,8 +40,8 @@ const MatchListItem = ({ id, title, category, matchType, content, createdAt, dis
           alignItems='flex-end'
         >
           <InnerWrapper>
-            <Badge>{SPORTS_TEXT[category]}</Badge>
-            <Badge matchType={matchType}>{MATCH_TYPE_TEXT[matchType]}</Badge>
+            <OldBadge>{SPORTS_TEXT[category]}</OldBadge>
+            <OldBadge matchType={matchType}>{MATCH_TYPE_TEXT[matchType]}</OldBadge>
           </InnerWrapper>
         </InnerWrapper>
         <InnerWrapper justifyContent='space-between'>
