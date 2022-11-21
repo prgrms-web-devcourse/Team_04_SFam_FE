@@ -37,7 +37,8 @@ export const useForm = <T>({ initialValue, initialError, initialSuccess, onSubmi
   useEffect(() => {
     if (isLoading) {
       // FIXME: Overload Error => 임시처리
-      if (Object.keys(errors as object).length === 0) {
+      // FIXME: unknown 임시 처리(jkb)
+      if (Object.keys(errors as unknown as object).length === 0) {
         onSubmit(values);
       }
       setIsLoading(false);
