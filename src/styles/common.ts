@@ -61,27 +61,6 @@ export const RadioWrapper = styled.div`
   gap: 8px;
 `;
 
-export const BadgeWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-`;
-
-export const TitleWrapper = styled.div`
-  font-size: 20px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-export const ContentWrapper = styled.div`
-  max-width: 250px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: ${(props) => props.theme.color.gray400};
-`;
-
 export const DropdownWrapper = styled.div<WrapperProps>`
   width: ${(props) => props.width};
 `;
