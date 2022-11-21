@@ -1,4 +1,4 @@
-import { OldAvatar } from '@components/common/Avatar';
+import { Avatar, OldAvatar } from '@components/common/Avatar';
 import { OldBadge } from '@components/common/Badge';
 
 import { MATCH_STATUS_TEXT } from '@constants/text';
@@ -17,19 +17,18 @@ interface Props {
 const ChatListItem = ({ imgSrc, nickname, lastChat, match }: Props) => (
   <S.Container>
     {imgSrc !== null ? (
-      <OldAvatar
-        imgSrc={imgSrc}
-        imgSize='72px'
-        borderRadius='50%'
+      <Avatar
+        src={imgSrc}
+        size='72px'
       />
     ) : (
-      <OldAvatar imgSize='72px' />
+      <Avatar size='72px' />
     )}
     <InnerWrapper
+      width='calc(100% - 88px)'
       flexDirection='column'
       justifyContent='center'
       flexGrow={1}
-      width='calc(100% - 88px)'
     >
       <TitleWrapper>
         <B1>{match?.title}</B1>
